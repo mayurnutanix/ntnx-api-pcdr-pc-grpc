@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+  <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>pc-grpc</artifactId>
+  <name>PC Protection</name>
+
+  <properties>
+    <service-parent.version>16.9.0.2187-RELEASE</service-parent.version>
+    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
+    <platform-tools.version>16.9.0.368-RELEASE</platform-tools.version>
+    <api.defs>pc-protection-grpc-api-definitions</api.defs>
+    <slf4j.test>1.2.0</slf4j.test>
+    <java.version>1.8</java.version>
+    <mockito.version>3.4.0</mockito.version>
+    <lombok.version>1.18.4</lombok.version>
+    <jacoco.version>0.8.5</jacoco.version>
+    <!-- Ask ntnxdb version to be updated in ntnx-api-prism-service-parent -->
+    <slf4j.version>1.7.25</slf4j.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <mockito-inline.version>3.1.0</mockito-inline.version>
+    <swagger-codegen.version>3.0.10</swagger-codegen.version>
+    <python-package.version>1.1.20</python-package.version>
+    <rbac-method-annotator.version>10.0.78-RELEASE</rbac-method-annotator.version>
+
+    <sonar.exclusions>
+      **/config/*,
+      **/constants/*,
+      **/exceptions/*,
+      **/factory/*,
+      **/dto/*,
+      **/services/impl/ApiClientGenerator.java,
+    </sonar.exclusions>
+
+    <expose.internal.api>true</expose.internal.api>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>${NEXUS_ID}</id>
+      <url>${NEXUS_URI}</url>
+    </repository>
+  </distributionManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>spring-boot-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>proto-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <module>pc-protection-grpc-api-definitions</module>
+    <module>pc-protection-grpc-api-codegen</module>
+  </modules>
+
+</project>

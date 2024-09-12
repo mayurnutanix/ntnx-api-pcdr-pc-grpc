@@ -1,0 +1,20 @@
+openapi: 3.0.1
+info:
+  title: "Cluster Management API project"
+  description: "Cluster Management APIs help to retrieve cluster, host, SNMP and RSYSLOG configuration details."
+  version: ${project.version}
+  x-logo:
+    url: 'https://developers.internal.nutanix.com/api/v1/namespaces/clustermgmt/images/clustermgmt-logo-img.svg'
+    altText: Cluster Management logo
+security:
+  - basicAuthScheme: []
+  - apiKeyAuthScheme: []
+components:
+  securitySchemes:
+    basicAuthScheme:
+      type: "http"
+      scheme: "basic"
+    apiKeyAuthScheme:
+      type: apiKey
+      in: header
+      name: X-ntnx-api-key

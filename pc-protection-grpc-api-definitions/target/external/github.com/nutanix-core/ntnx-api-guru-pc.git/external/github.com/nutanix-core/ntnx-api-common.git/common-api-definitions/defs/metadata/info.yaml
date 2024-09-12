@@ -1,0 +1,9 @@
+openapi: 3.0.1
+info:
+  title: "Common API and Schema definitions"
+  version: ${project.version}
+security:
+  - basic: []
+  - oauth :
+      - scope1
+      - scope2

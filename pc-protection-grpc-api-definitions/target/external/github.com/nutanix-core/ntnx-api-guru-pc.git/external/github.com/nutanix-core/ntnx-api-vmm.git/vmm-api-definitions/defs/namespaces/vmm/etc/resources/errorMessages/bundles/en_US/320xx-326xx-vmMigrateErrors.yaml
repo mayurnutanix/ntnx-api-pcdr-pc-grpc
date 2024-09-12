@@ -1,0 +1,1297 @@
+# VM migrate errors - 320XX-326XX.
+# Error codes are informally divided into following parts:
+#  1. [32000-32199] Precheck.
+#  2. [32200-32299] Prepare.
+#  3. [32300-32399] Copy data.
+#  4. [32600-32699] Other (network partition, etc.).
+# 32000-32199: Precheck.
+- code: 32000
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to missing migrate parameters.
+  arguments:
+    - vm_uuid
+- code: 32001
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to missing targetAvailabilityZone
+    parameter.
+  arguments:
+    - vm_uuid
+- code: 32002
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to invalid targetAvailabilityZone
+    UUID parameter '{{{invalid_parameter}}}'.
+  arguments:
+    - vm_uuid
+    - invalid_parameter
+- code: 32003
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to missing targetCluster parameter.
+  arguments:
+    - vm_uuid
+- code: 32004
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to invalid targetCluster UUID
+    parameter '{{{invalid_parameter}}}'.
+  arguments:
+    - vm_uuid
+    - invalid_parameter
+- code: 32005
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to missing isLiveMigration parameter.
+  arguments:
+    - vm_uuid
+- code: 32006
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to non-existent target Availability
+    Zone '{{{az_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - az_uuid
+- code: 32007
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on to target Availability Zone '{{{az_uuid}}}'
+    because of incorrect type '{{{az_type}}}'.
+  arguments:
+    - vm_uuid
+    - az_uuid
+    - az_type
+- code: 32008
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on to target cluster '{{{cluster_uuid}}}'
+    because the cluster is missing on target Availability Zone '{{{az_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - cluster_uuid
+    - az_uuid
+- code: 32009
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to missing overrideNicList parameter.
+  arguments:
+    - vm_uuid
+- code: 32010
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with override NIC with MAC address
+    '{{{mac_address}}}' due to NIC's invalid target network UUID '{{{invalid_parameter}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - invalid_parameter
+- code: 32011
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with override NIC with MAC address
+    '{{{mac_address}}}' due to NIC's non-existent target network '{{{network_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - network_uuid
+- code: 32012
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with override NIC with MAC address
+    '{{{mac_address}}}' due to NIC's target network '{{{network_uuid}}}' being managed.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - network_uuid
+- code: 32013
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with override NIC with MAC address
+    '{{{mac_address}}}' due to IP address being specified for the NIC.
+  arguments:
+    - vm_uuid
+    - mac_address
+- code: 32014
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with source NIC with MAC address
+    '{{{mac_address}}}' due to NIC's non-existent source network '{{{network_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - network_uuid
+- code: 32015
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with source NIC with MAC address
+    '{{{mac_address}}}' due to NIC's source network '{{{network_uuid}}}' being managed.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - network_uuid
+- code: 32016
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to duplicate MAC addresses
+    '{{{mac_addresses}}}' in source NIC list.
+  arguments:
+    - vm_uuid
+    - mac_addresses
+- code: 32017
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to duplicate MAC addresses
+    '{{{mac_addresses}}}' in override NIC list.
+  arguments:
+    - vm_uuid
+    - mac_addresses
+- code: 32018
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to number of source
+    ({{{number_of_source_nics}}}) and override ({{{number_of_override_nics}}}) NICs
+    not being equal.
+  arguments:
+    - vm_uuid
+    - number_of_source_nics
+    - number_of_override_nics
+- code: 32019
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to mismatch in parameters other
+    than network UUID between source and override NIC with MAC address '{{{mac_address}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+- code: 32020
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' due to NICs with following MAC
+    addresses are not being overridden: {{{mac_addresses}}}.
+  arguments:
+    - vm_uuid
+    - mac_addresses
+- code: 32021
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with source NIC with MAC address
+    '{{{mac_address}}}' due to the NIC being connected to an overlay network with UUID
+    '{{{network_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - network_uuid
+- code: 32022
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with override NIC with MAC address
+    '{{{mac_address}}}' due to NIC being connected to an overlay network with UUID
+    '{{{network_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - network_uuid
+- code: 32023
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because it is not a guest VM.
+  arguments:
+    - vm_uuid
+- code: 32024
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because migration of vTPM-enabled VMs is
+    not yet supported.
+  arguments:
+    - vm_uuid
+- code: 32025
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is paused.
+  arguments:
+    - vm_uuid
+- code: 32026
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is powered off.
+  arguments:
+    - vm_uuid
+- code: 32027
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has NUMA node(s)
+    configured.
+  arguments:
+    - vm_uuid
+- code: 32028
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with
+    UUID '{{{source_cluster_uuid}}}' is configured with high availability
+    reserved host which is not supported.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32029
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster
+    with UUID '{{{target_cluster_uuid}}}' is configured with high
+    availability reserved host which is not supported.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32030
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with
+    UUID '{{{source_cluster_uuid}}}' is being upgraded.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32031
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster
+    with UUID '{{{target_cluster_uuid}}}' is being upgraded.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32032
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because the source cluster
+    with UUID '{{{source_cluster_uuid}}}' supports connection tracking migration
+    and the target cluster with UUID '{{{target_cluster_uuid}}}' does not.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+    - target_cluster_uuid
+- code: 32033
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is configured with
+    negative High Availability priority value to not restart.
+  arguments:
+    - vm_uuid
+- code: 32034
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has passthrough GPUs
+    assigned.
+  arguments:
+    - vm_uuid
+- code: 32035
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has CPU passthrough
+    enabled.
+  arguments:
+    - vm_uuid
+- code: 32036
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because it is an agent VM.
+  arguments:
+    - vm_uuid
+- code: 32037
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has PCI passthrough
+    enabled.
+  arguments:
+    - vm_uuid
+- code: 32038
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has hardware virtualization
+    enabled.
+  arguments:
+    - vm_uuid
+- code: 32039
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' is deployed on cloud.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32040
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with
+    UUID '{{{target_cluster_uuid}}}' is deployed on cloud.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32041
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster and
+    target cluster are the same with UUID '{{{cluster_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - cluster_uuid
+# Mapping from Acropolis prechecks status kVmMicrosegmentationError.
+- code: 32042
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is configured with
+    network security rules '{{{network_security_rules_uuids}}}'.
+  arguments:
+    - vm_uuid
+    - network_security_rules_uuids
+# Mapping from Acropolis prechecks status kDestinationAosVgpuVersionError.
+- code: 32043
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' and AOS version '{{{target_aos_version}}}' does
+    not support live migration of VMs with vGPUs across cluster.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - target_aos_version
+# Mapping from Acropolis prechecks status kDestinationAosVersionError.
+- code: 32044
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' and AOS version '{{{target_aos_version}}}' does
+    not support live migration of VMs across cluster.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - target_aos_version
+# Mapping from Acropolis prechecks status kVgsAttachedError.
+- code: 32045
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has volume groups
+    '{{{volume_group_uuids}}}' attached.
+  arguments:
+    - vm_uuid
+    - volume_group_uuids
+# Mapping from Acropolis prechecks status kSharedDiskError.
+- code: 32046
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has a shared disk
+    '{{{disk_uuid}}}' attached.
+  arguments:
+    - vm_uuid
+    - disk_uuid
+# Mapping from Acropolis prechecks status kNonScsiPassthroughDiskError.
+- code: 32047
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has a non-SCSI
+    passthrough disk '{{{disk_uuid}}}' attached.
+  arguments:
+    - vm_uuid
+    - disk_uuid
+# Mapping from Acropolis prechecks status kNetworkFunctionNicError.
+- code: 32048
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and NIC with MAC address
+    '{{{mac_address}}}' because the NIC type is 'Network function'.
+  arguments:
+    - vm_uuid
+    - mac_address
+# Mapping from Acropolis prechecks status kHostAffinityWithSyncRepError
+# and kHostAffinityError.
+- code: 32049
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has host affinity
+    policies configured.
+  arguments:
+    - vm_uuid
+# Mapping from Acropolis prechecks status kPartOfVmGroupError.
+- code: 32050
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is part of a VM
+    group with UUID '{{{vm_group_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - vm_group_uuid
+# Mapping from Acropolis prechecks status kSyncRepVtpmUnsupportedError.
+- code: 32051
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because live migration of
+    VMs with vTPM enabled is not supported.
+  arguments:
+    - vm_uuid
+# Mapping from Acropolis prechecks status kNvmeDisksAttachedError.
+- code: 32052
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has NVMe disk(s)
+    attached.
+  arguments:
+    - vm_uuid
+# kMinimumAhvVersionError when arg kSourceHostUuid given.
+- code: 32053
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source host with UUID
+    '{{{source_host_uuid}}}' and AHV version '{{{ahv_version}}}' because
+    the host does not meet minimum AHV version requirement
+    '{{{minimum_ahv_version}}}'.
+  arguments:
+    - vm_uuid
+    - source_host_uuid
+    - ahv_version
+    - minimum_ahv_version
+# kMinimumAhvVersionError when arg kTargetHostUuid given.
+- code: 32054
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' and with target host with UUID '{{{target_host_uuid}}}'
+    and AHV version '{{{ahv_version}}}' because the host does not meet minimum AHV version
+    requirement '{{{minimum_ahv_version}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - target_host_uuid
+    - ahv_version
+    - minimum_ahv_version
+# kSourceDestinationAhvVersionMismatchError.
+- code: 32055
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source host with AHV version
+    '{{{source_host_ahv_version}}}' to target cluster with UUID '{{{target_cluster_uuid}}}'
+    and AHV version of target hosts '{{{target_cluster_ahv_version}}}' because the AHV versions
+    of source host and target hosts are different.
+  arguments:
+    - vm_uuid
+    - source_host_ahv_version
+    - target_cluster_uuid
+    - target_cluster_ahv_version
+# kDestinationMultipleAhvVersionsError.
+- code: 32056
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because hosts on the target cluster run on multiple AHV
+    versions: '{{{ahv_versions}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - ahv_versions
+# kCpuFeatureSetError.
+- code: 32057
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because there is a difference in CPU feature sets between
+    the VM and hosts on the target cluster: '{{{cpu_features_difference}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - cpu_features_difference
+# kMacAddressAlreadyInUseError
+- code: 32058
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and NIC with MAC address '{{{mac_address}}}'
+    on target cluster with UUID '{{{target_cluster_uuid}}}' because NIC's MAC address is
+    already in use by another VM with UUID '{{{conflicting_vm_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - target_cluster_uuid
+    - conflicting_vm_uuid
+- code: 32059
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support live migration of VMs with vGPUs.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32060
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has memory overcommit enabled.
+  arguments:
+    - vm_uuid
+- code: 32061
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM was created prior to adding support
+    for live migration of VMs with vGPUs.
+  arguments:
+    - vm_uuid
+# AndurilSyncRepIncapableError.
+- code: 32062
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support VM live-migration.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilVnumaIncapableError.
+- code: 32063
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not have required NUMA resources.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilGpuIncapableError.
+- code: 32064
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not have required GPU resources.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilSyncRepUefiIncapableError.
+- code: 32065
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support live-migration of UEFI enabled VMs.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilSecureBootIncapableError.
+- code: 32066
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support secure boot.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilHardwareVirtualizationIncapableError.
+- code: 32067
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support hardware virtualization.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilMemoryOvercommitIncapableError.
+- code: 32068
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support memory overcommit.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilGpuConsoleIncapableError
+- code: 32069
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support GPU console.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilVtpmIncapableError.
+- code: 32070
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support vTPM.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilVtpmSyncRepIncapableError.
+- code: 32071
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support live-migration of vTPM-enabled VMs.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# AndurilHostAffinitySyncRepIncapableError.
+- code: 32072
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support live-migration of VMs that have
+    host affinity policies configured.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# SourceAzDoesNotSupportLiveMigrationError.
+- code: 32073
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source Availability Zone
+    does not support on-demand VM live-migration.
+  arguments:
+    - vm_uuid
+# SourceClusterDoesNotSupportLiveMigrationError.
+- code: 32074
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support on-demand VM live-migration.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+# TargetAzDoesNotSupportLiveMigrationError.
+- code: 32075
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target Availability Zone
+    '{{{az_uuid}}}' does not support on-demand VM live-migration.
+  arguments:
+    - vm_uuid
+    - az_uuid
+- code: 32080
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with override NIC with MAC address
+    '{{{mac_address}}}' due to missing NIC's target network parameter.
+  arguments:
+    - vm_uuid
+    - mac_address
+# Error that Acropolis error kAhvVersionAndCpuFeatureSetMismatchError maps to.
+- code: 32081
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because there is a difference in CPU feature
+    sets between the VM and hosts on the target cluster: '{{{cpu_features_difference}}}'.
+    This might be caused by AHV version mismatch between source host and target hosts.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - cpu_features_difference
+# Error that Magneto error kVMProtectedInProtectionDomain maps to.
+- code: 32083
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is protected by Protection Domain
+    '{{{protection_domain_name}}}'.
+  arguments:
+    - vm_uuid
+    - protection_domain_name
+# Mapping from Acropolis prechecks status kSpanDestinationNicError.
+- code: 32084
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and NIC with MAC address
+    '{{{mac_address}}}' because the NIC type is 'Span Destination'. The NIC might be
+    involved in an active traffic-mirroring session.
+  arguments:
+    - vm_uuid
+    - mac_address
+# Error that Acropolis error kCpuModelUnsupportedError maps to.
+- code: 32085
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with
+    UUID '{{{target_cluster_uuid}}}' doesn't support chosen VM's CPU model.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# Error that Acropolis error kAhvVersionAndCpuModelUnsupportedError maps to.
+- code: 32086
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with
+    UUID '{{{target_cluster_uuid}}}' doesn't support chosen VM's CPU model.
+    This might be caused by AHV version mismatch between source host and
+    target hosts.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# Error that Acropolis error kCrossSubnetUnsupportedError maps to.
+- code: 32087
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because network address
+    of the source network '{{{source_network_uuid}}}' and target network
+    '{{{target_network_uuid}}}' are different.
+  arguments:
+    - vm_uuid
+    - source_network_uuid
+    - target_network_uuid
+# Error that Acropolis error kSubnetTypeMismatchError maps to.
+- code: 32088
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because network type of
+    the source network '{{{source_network_uuid}}}' and target network
+    '{{{target_network_uuid}}}' are different.
+  arguments:
+    - vm_uuid
+    - source_network_uuid
+    - target_network_uuid
+# Error that Acropolis error kSubnetSizeMismatchError maps to.
+- code: 32089
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because network size of
+    the source network '{{{source_network_uuid}}}' and target network
+    '{{{target_network_uuid}}}' are different.
+  arguments:
+    - vm_uuid
+    - source_network_uuid
+    - target_network_uuid
+# Error that Acropolis error kMultipleTargetVpcError maps to.
+- code: 32090
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM cannot exist in
+    multiple target VPCs at the same time.
+  arguments:
+    - vm_uuid
+- code: 32091
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support live migration of VMs in a VPC.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32092
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support live migration of VMs in a VPC.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32093
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source Availability Zone
+    does not support live migration of VMs in a VPC.
+  arguments:
+    - vm_uuid
+- code: 32094
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target Availability Zone
+    with UUID '{{{az_uuid}}}' does not support live migration of VMs in a VPC.
+  arguments:
+    - vm_uuid
+    - az_uuid
+# Error that Acropolis error kAdvancedVlanUnsupportedError maps to.
+- code: 32095
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with source NIC with MAC address
+    '{{{mac_address}}}' because NIC is connected to an advanced VLAN with UUID
+    '{{{source_network_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - mac_address
+    - source_network_uuid
+- code: 32096
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support on-demand live migration of vTPM-enabled VMs.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32097
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support on-demand live migration of vTPM-enabled VMs.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32098
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source Availability Zone
+    does not support on-demand live migration of vTPM-enabled VMs.
+  arguments:
+    - vm_uuid
+- code: 32099
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target Availability Zone
+    with UUID '{{{az_uuid}}}' does not support on-demand live migration of vTPM-enabled VMs.
+  arguments:
+    - vm_uuid
+    - az_uuid
+- code: 32100
+  errorGroup: MIGRATE_VM_ERROR 
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' because advanced network controller is not
+    enabled for the cluster or it does not meet minimum ANC version
+    '{{{anc_version}}}'.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+    - anc_version
+- code: 32101
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because advanced network controller is not
+    enabled for the cluster or it does not meet minimum ANC version
+    '{{{anc_version}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - anc_version
+- code: 32102
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' and flow version '{{{source_flow_version}}}'
+    because it is lower than minimum supported flow version
+    '{{{minimum_flow_version}}}'.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+    - source_flow_version
+    - minimum_flow_version
+- code: 32103
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' and flow version '{{{target_flow_version}}}'
+    because it is lower than minimum supported flow version
+    '{{{minimum_flow_version}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - target_flow_version
+    - minimum_flow_version
+- code: 32104
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because live migration of VMs
+    with flow security policies is not supported across VPCs.
+  arguments:
+    - vm_uuid
+- code: 32105
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM with flow security
+    policies is connected to an advanced VLAN.
+  arguments:
+    - vm_uuid
+- code: 32106
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because live migration of VMs
+    with flow security policies is not supported across Availability Zones.
+  arguments:
+    - vm_uuid
+- code: 32107
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support live migration of VMs with flow
+    security policies.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32108
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support live migration of VMs with flow
+    security policies.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# Error that Acropolis error kVmPciePassthroughError maps to.
+- code: 32109
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has PCIe passthrough
+    enabled.
+  arguments:
+    - vm_uuid
+# Error that Acropolis error kUserProvidedCbrIncapabilityError maps to.
+- code: 32110
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because of a user-provided backup and
+    recovery incapability: '{{{cbr_incapability_reason}}}'.
+  arguments:
+    - vm_uuid
+    - cbr_incapability_reason
+# Error that Acropolis error kVmHasRf1DisksError maps to.
+- code: 32111
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has one or more RF1
+    disks attached.
+  arguments:
+    - vm_uuid
+# Error that Acropolis error kVmHasPassthroughDatasourceDisksError maps to.
+- code: 32112
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has one or more disks
+    backed by a passthrough datasource.
+  arguments:
+    - vm_uuid
+# Error that Acropolis error kExperimentalStorageIoHintsEnabledError maps to.
+- code: 32113
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has experimental
+    storage IO hints enabled.
+  arguments:
+    - vm_uuid
+- code: 32114
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source subnet with UUID
+    '{{{source_network_uuid}}}' is mapped to multiple different subnets on target cluster.
+  arguments:
+    - vm_uuid
+    - source_network_uuid
+# Error that Acropolis error kMultipleNetworkTypeError maps to.
+- code: 32115
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because it has NICs attached to networks
+    of different types.
+  arguments:
+    - vm_uuid
+- code: 32116
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support VM with CPU hotplug disabled.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32117
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support VM with SCSI controller disabled.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+
+# 32200-32299: Prepare.
+# Error that Anduril error kNoHostResourcesError maps to.
+- code: 32200
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because the target cluster doesn't have enough resources.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# Error that Anduril error kNoHostPortsAvailableError maps to.
+- code: 32201
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on scheduled target host with UUID
+    '{{{target_host_uuid}}}' because the host doesn't have a free port in the range
+    between {{{first_port}}} and {{{last_port}}}.
+  arguments:
+    - vm_uuid
+    - target_host_uuid
+    - first_port
+    - last_port
+# Error that Anduril error kIpAddressInUseError maps to.
+- code: 32202
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' because IP address of the VM is in use on target
+    cluster with UUID '{{{target_cluster_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+    - target_cluster_uuid
+# Error that Anduril error kVmHostChangedError maps to.
+- code: 32210
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source host for the VM changed
+    during migration.
+  arguments:
+    - vm_uuid
+# Error that Anduril error kOutOfBandVmUpdateError maps to.
+- code: 32211
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because some updates were applied to this
+    VM before it was ready for migration.
+  arguments:
+    - vm_uuid
+
+# 32300-32399: Copy data.
+# Error that Magneto error kRemoteClusterNetworkLatencyError maps to.
+- code: 32300
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because the Round-trip travel (RTT) to the target cluster is
+    {{{rtt_ms}}} milliseconds and maximum allowed RTT is {{{max_rtt_ms}}} milliseconds.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - rtt_ms
+    - max_rtt_ms
+# Error that Magneto error kUnreachable maps to.
+- code: 32301
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because the target cluster with UUID
+    '{{{target_cluster_uuid}}}' is unreachable.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+# Error that Magneto error kSameContainerNotFound maps to.
+- code: 32305
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because storage container with name '{{{storage_container_name}}}'
+    does not exist on the target cluster.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - storage_container_name
+# Error that Magneto error kSourceContainerMarkedForRemovalWhileTargetExists maps to.
+- code: 32306
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' because storage container with UUID '{{{storage_container_uuid}}}'
+    is marked for removal.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+    - storage_container_uuid
+# Error that Magneto error kTargetContainerMarkedForRemovalWhileSourceExists maps to.
+- code: 32307
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because storage container with UUID '{{{storage_container_uuid}}}'
+    is marked for removal.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - storage_container_uuid
+# Error that Magneto errors {kVMProtectedByECProtection, kVMSyncProtectedToAnotherCluster} map to.
+- code: 32310
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is protected by a conflicting Disaster
+    Recovery protection policy with UUID '{{{protection_policy_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - protection_policy_uuid
+# 32330-32340: Conflicting operations (errors that Magneto errors kPCConflictingOperationsRunning,
+# kPEConflictingOperationsRunning map to). Depending on the conflicting operation set we raise some
+# of the errors below.
+# Error we map to when we receive {kEntityLiveMigrate, kEntityMigrate, kEntityProtectAndWaitForSync,
+# kDRApiPushEntityMigrate}.
+- code: 32330
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because migration of the VM to the same or a
+    different target cluster is already in progress.
+  arguments:
+    - vm_uuid
+# Error we map to when we receive {kRevertVm}.
+- code: 32331
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is being reverted to an older snapshot.
+  arguments:
+    - vm_uuid
+# Error we map to when we receive {kEntityEnableStretch, kEntityProtect}.
+- code: 32332
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is being protected by a Disaster
+    Recovery protection policy.
+  arguments:
+    - vm_uuid
+# Error we map to when we receive {kEntityUnprotect}.
+- code: 32333
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM is being unprotected from a Disaster
+    Recovery protection policy.
+  arguments:
+    - vm_uuid
+# Error we map to when we receive {kChangeStretchState}.
+# This could happen if for e.g. latency has spiked currently between clusters and stretch is being
+# reconciled.
+- code: 32334
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because Disaster Recovery protection policy the VM
+    is protected with is being updated.
+  arguments:
+    - vm_uuid
+# Error we map to when we receive {kEntitySnapshot}.
+- code: 32335
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because a snapshot of the VM is being created.
+  arguments:
+    - vm_uuid
+
+# 32600-32699: Other errors. 
+- code: 32600
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target Availability Zone with UUID
+    '{{{az_uuid}}}' because source and target Availability Zones suffered a network partition.
+  arguments:
+    - vm_uuid
+    - az_uuid

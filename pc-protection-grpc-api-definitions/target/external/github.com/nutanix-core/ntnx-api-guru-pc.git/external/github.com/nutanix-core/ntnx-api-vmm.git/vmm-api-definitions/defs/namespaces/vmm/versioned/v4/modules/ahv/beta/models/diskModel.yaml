@@ -1,0 +1,571 @@
+components:
+  schemas:
+    # Hardware properties of Disk.
+    DiskBusType:
+      description: DocRef(DiskBusTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - SCSI
+            - IDE
+            - PCI
+            - SATA
+            - SPAPR
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: SCSI
+                  index: 2001
+                - value: IDE
+                  index: 2002
+                - value: PCI
+                  index: 2003
+                - value: SATA
+                  index: 2004
+                - value: SPAPR
+                  index: 2005
+          - type: enum
+            properties:
+              descriptions:
+                - name: SCSI
+                  description: DocRef(SCSIDiskBusTypeDescription)
+                - name: IDE
+                  description: DocRef(IDEDiskBusTypeDescription)
+                - name: PCI
+                  description: DocRef(PCIDiskBusTypeDescription)
+                - name: SATA
+                  description: DocRef(SATADiskBusTypeDescription)
+                - name: SPAPR
+                  description: DocRef(SPAPRDiskBusTypeDescription)
+    DiskAddress:
+      type: object
+      description: DocRef(DiskAddressDescription)
+      properties:
+        busType:
+          # LH TODO - ENG-431845 - description is clobbered by $ref
+          description: DocRef(DiskAddressBusTypeDescription)
+          $ref: "ModelRef({./DiskBusType})"
+        index:
+          description: DocRef(DiskAddressIndexDescription)
+          type: integer
+          format: int32
+          minimum: 0
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: busType
+                  index: 2001
+                - name: index
+                  index: 2002
+    CdRomBusType:
+      description: DocRef(CdRomBusTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - IDE
+            - SATA
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: IDE
+                  index: 2001
+                - value: SATA
+                  index: 2002
+          - type: enum
+            properties:
+              descriptions:
+                - name: IDE
+                  description: DocRef(IDECdRomBusTypeDescription)
+                - name: SATA
+                  description: DocRef(SATACdRomBusTypeDescription)
+    CdRomAddress:
+      type: object
+      description: DocRef(DiskDescription)
+      properties:
+        busType:
+          # LH TODO - ENG-431845 - description is clobbered by $ref
+          description: DocRef(DiskAddressBusTypeDescription)
+          $ref: "ModelRef({./CdRomBusType})"
+        index:
+          description: DocRef(DiskAddressIndexDescription)
+          type: integer
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: busType
+                  index: 2001
+                - name: index
+                  index: 2002
+    QosConfig:
+      description: DocRef(QosConfigDescription)
+      type: object
+      properties:
+        throttledIops:
+          description: DocRef(QosConfigThrottledIopsDescription)
+          type: integer
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: throttledIops
+                  index: 2001
+    VmDiskStorageConfig:
+      type: object
+      description: DocRef(VmDiskStorageConfigDescription)
+      properties:
+        isFlashModeEnabled:
+          description: DocRef(FlashModeEnabledDescription)
+          type: boolean
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: isFlashModeEnabled
+                  index: 2001
+    VmDiskContainerReference:
+      description: DocRef(VmDiskContainerReferenceDescription)
+      type: object
+      properties:
+        extId:
+          description: DocRef(VmDiskContainerExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+    VmDiskReference:
+      description: DocRef(VmDiskReferenceDescription)
+      type: object
+      properties:
+        diskExtId:
+          description: DocRef(DiskExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        diskAddress:
+          $ref: "ModelRef({./DiskAddress})"
+        vmReference:
+          $ref: "ModelRef({./VmReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: diskExtId
+                  index: 2001
+                - name: diskAddress
+                  index: 2002
+                - name: vmReference
+                  index: 2003
+    MigrateDiskReference:
+      description: DocRef(MigrateDiskReferenceDescription)
+      type: object
+      properties:
+        diskExtId:
+          description: DocRef(DiskExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: diskExtId
+                  index: 2001
+    ImageReference:
+      description: DocRef(SourceImageReferenceDescription)
+      type: object
+      properties:
+        imageExtId:
+          description: DocRef(ImageExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+          required: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: imageExtId
+                  index: 2001
+    IsoType:
+      description: DocRef(IsoTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - OTHER
+            - GUEST_TOOLS
+            - GUEST_CUSTOMIZATION
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: OTHER
+                  index: 2001
+                - value: GUEST_TOOLS
+                  index: 2002
+                - value: GUEST_CUSTOMIZATION
+                  index: 2003
+          - type: enum
+            properties:
+              descriptions:
+                - name: OTHER
+                  description: DocRef(OtherIsoTypeDescription)
+                - name: GUEST_TOOLS
+                  description: DocRef(GuestToolsIsoTypeDescription)
+                - name: GUEST_CUSTOMIZATION
+                  description: DocRef(GuestCustomizationIsoTypeDescription)
+    VmDisk:
+      description: DocRef(VmDiskDescription)
+      type: object
+      properties:
+        diskExtId:
+          description: DocRef(DiskExtIdDescription)
+          type: string
+          readOnly: true
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        diskSizeBytes:
+          description: DocRef(VmDiskDiskSizeBytesDescription)
+          type: integer
+          format: int64
+          minimum: 1
+        storageContainer:
+          # LH TODO - ENG-431845 - x-constraints is clobbered by $ref
+          x-constraints:
+            $scopes:
+              - name: "update"
+                constraints:
+                  readOnly: true
+          $ref: "ModelRef({./VmDiskContainerReference})"
+        storageConfig:
+          $ref: "ModelRef({./VmDiskStorageConfig})"
+        dataSource:
+          $ref: "ModelRef({./DataSource})"
+        isMigrationInProgress:
+          description: DocRef(DiskMigrationInProgressDescription)
+          type: boolean
+          readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: diskExtId
+                  index: 2001
+                - name: diskSizeBytes
+                  index: 2002
+                - name: storageContainer
+                  index: 2003
+                - name: storageConfig
+                  index: 2004
+                - name: dataSource
+                  index: 2005
+                - name: isMigrationInProgress
+                  index: 2006
+    Disk:
+      description: DocRef(DiskDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          properties:
+            diskAddress:
+              $ref: "ModelRef({./DiskAddress})"
+            backingInfo:
+              description: DocRef(DiskBackingInfoDescription)
+              oneOf:
+                - $ref: "ModelRef({./VmDisk})"
+                - $ref: "ModelRef({./ADSFVolumeGroupReference})"
+              x-codegen-hint:
+                $any:
+                  - type: entity-identifier
+                    properties:
+                      identifiers:
+                        - type: "ModelRef({./VmDisk})"
+                          index: 2001
+                        - type: "ModelRef({./ADSFVolumeGroupReference})"
+                          index: 2002
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2003
+                - name: diskAddress
+                  index: 2004
+                - name: backingInfo
+                  index: 2005
+
+    CdRom:
+      description: DocRef(CdRomDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          properties:
+            diskAddress:
+              $ref: "ModelRef({./CdRomAddress})"
+            backingInfo:
+              $ref: "ModelRef({./VmDisk})"
+            isoType:
+              $ref: "ModelRef({./IsoType})"
+              readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: diskAddress
+                  index: 2002
+                - name: backingInfo
+                  index: 2003
+                - name: isoType
+                  index: 2004
+    CdRomInsertParams:
+      type: object
+      description: DocRef(CdRomDescription)
+      properties:
+        backingInfo:
+          $ref: "ModelRef({./VmDisk})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: backingInfo
+                  index: 2001
+    VmReference:
+      description: DocRef(VmReferenceDescription)
+      type: object
+      properties:
+        extId:
+          type: string
+          description: DocRef(VmExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+    ADSFVolumeGroupReference:
+      type: object
+      description: DocRef(ADSFVolumeGroupReferenceDescription)
+      properties:
+        volumeGroupExtId:
+          type: string
+          description: DocRef(AdsfVolumeGroupExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+          required: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: volumeGroupExtId
+                  index: 2001
+#    DiskDataReadResponse:
+#      type: object
+#      properties:
+#        data:
+#          type: string
+#          format: byte
+#          required: true
+#          description: DocRef(DiskDataDescription)
+#      x-codegen-hint:
+#        $any:
+#          - type: entity-identifier
+#            properties:
+#              identifiers:
+#                - name: data
+#                  index: 2001
+#    DiskData:
+#      type: object
+#      properties:
+#        data:
+#          type: string
+#          format: byte
+#          required: true
+#          description: DocRef(DiskDataDescription)
+#        offset:
+#          type: integer
+#          format: int64
+#          description: DocRef(DiskDataOffsetDescription)
+#          minimum: 0
+#          maximum: ConstantRef(getDataFromDiskMaxOffset)
+#      x-codegen-hint:
+#        $any:
+#          - type: entity-identifier
+#            properties:
+#              identifiers:
+#                - name: data
+#                  index: 2001
+#                - name: offset
+#                  index: 2002
+#    DataWrittenResponse:
+#      type: object
+#      description: DocRef(DataWrittenResponseDescription)
+#      properties:
+#        bytesWritten:
+#          description: DocRef(DataWrittenResponseBytesWrittenDescription)
+#          type: integer
+#          format: int32
+#      x-codegen-hint:
+#        $any:
+#          - type: entity-identifier
+#            properties:
+#              identifiers:
+#                - name: bytesWritten
+#                  index: 2001
+#    DataQueryParams:
+#      type: object
+#      properties:
+#        offset:
+#          type: integer
+#          format: int64
+#          description: DocRef(DiskDataOffsetDescription)
+#          minimum: 0
+#          maximum: ConstantRef(getDataFromDiskMaxOffset)
+#        length:
+#          type: integer
+#          format: int32
+#          description: DocRef(GetDataFromDiskLengthDescription)
+#          minimum: 0
+#          maximum: ConstantRef(getDataFromDiskMaxLength)
+#      x-codegen-hint:
+#        $any:
+#          - type: entity-identifier
+#            properties:
+#              identifiers:
+#                - name: offset
+#                  index: 2001
+#                - name: length
+#                  index: 2002
+    MigrationPlans:
+      type: object
+      description: DocRef(MigrationPlansDescription)
+      properties:
+        plans:
+          type: array
+          minItems: 0
+          maxItems: 1034
+          items:
+            $ref: "ModelRef({./ADSFDiskMigrationPlan})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: plans
+                  index: 2001
+    ADSFDiskMigrationPlan:
+      type: object
+      description: DocRef(ADSFDiskMigrationPlanDescription)
+      properties:
+        storageContainer:
+          $ref: "ModelRef({./VmDiskContainerReference})"
+        vmDisks:
+          description: DocRef(ADSFDiskMigrationPlanDisksDescription)
+          type: array
+          minItems: 0
+          maxItems: 1034
+          items:
+            $ref: "ModelRef({./MigrateDiskReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: storageContainer
+                  index: 2001
+                - name: vmDisks
+                  index: 2002
+    AllDisksMigrationPlan:
+      type: object
+      description: DocRef(AllDisksMigrationPlanDescription)
+      properties:
+        storageContainer:
+          $ref: "ModelRef({./VmDiskContainerReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: storageContainer
+                  index: 2001
+    DiskMigrationParams:
+      type: object
+      description: DocRef(MigrateVmDisksDescription)
+      properties:
+        migrateDisks:
+          description: DocRef(MigrateVmDisksDescription)
+          oneOf:
+            - $ref: "ModelRef({./MigrationPlans})"
+            - $ref: "ModelRef({./AllDisksMigrationPlan})"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./MigrationPlans})"
+                      index: 2001
+                    - type: "ModelRef({./AllDisksMigrationPlan})"
+                      index: 2002
+    DataSource:
+      type: object
+      description: DocRef(DataSourceDescription)
+      properties:
+        reference:
+          description: DocRef(DataSourceDescription)
+          oneOf:
+            - $ref: "ModelRef({./ImageReference})"
+            - $ref: "ModelRef({./VmDiskReference})"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./ImageReference})"
+                      index: 2001
+                    - type: "ModelRef({./VmDiskReference})"
+                      index: 2002
+      x-constraints:
+        $scopes:
+          - name: "update"
+            constraints:
+              readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: reference
+                  index: 2001

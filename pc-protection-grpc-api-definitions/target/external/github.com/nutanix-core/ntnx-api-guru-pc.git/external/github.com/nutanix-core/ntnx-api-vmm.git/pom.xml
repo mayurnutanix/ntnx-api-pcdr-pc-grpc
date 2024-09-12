@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nutanix.nutanix-core.ntnx-api.vmm</groupId>
+  <artifactId>vmm</artifactId>
+  <version>16.9.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Nutanix VMM versioned APIs</name>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <service-parent.version>16.9.0.2115-RELEASE</service-parent.version>
+    <openapi-dev-platform.version>16.9.0.8006-RELEASE</openapi-dev-platform.version>
+    <platform-tools.version>16.9.0.360-RELEASE</platform-tools.version>
+    <swagger-codegen-version>3.0.10</swagger-codegen-version>
+    <rbac-method-annotator.version>10.0.87-RELEASE</rbac-method-annotator.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <api.defs>vmm-api-definitions</api.defs>
+    <expose.internal.api>${expose.internal.api}</expose.internal.api>
+  </properties>
+
+  <modules>
+    <module>vmm-api-definitions</module>
+    <module>vmm-api-codegen</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>spring-boot-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>proto-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>${NEXUS_ID}</id>
+      <url>${NEXUS_URI}</url>
+    </repository>
+  </distributionManagement>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <expose.internal.api>true</expose.internal.api>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <expose.internal.api>false</expose.internal.api>
+      </properties>
+    </profile>
+  </profiles>
+
+</project>

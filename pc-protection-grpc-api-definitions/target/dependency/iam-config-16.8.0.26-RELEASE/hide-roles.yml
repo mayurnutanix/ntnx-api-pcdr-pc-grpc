@@ -1,0 +1,13 @@
+hideRoles:
+  - Internal Super Admin
+  - Task Self Owned
+  - Aiops View Only
+  - Aiops Full Access With Share
+  - Aiops Full Access Without Share
+  - Report Instance Self Owned
+  - View Main Dashboard
+  - View Default Analysis Session
+  - Out Of Box Playbooks Viewer
+  - System Action Template Viewer
+  - Self Executed Play Viewer
+  - Shareable Config Self Owned

@@ -1,0 +1,65 @@
+# VM NGT related errors - 311xx.
+- code: 31100
+  errorGroup: VM_EMPTY_CDROM_NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as an empty
+    CD-ROM was not found.
+  arguments:
+    - vm_uuid
+- code: 31101
+  errorGroup: VM_NGT_NOT_INSTALLED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as Nutanix
+    Guest Tools is not installed on the VM.
+  arguments:
+    - vm_uuid
+- code: 31102
+  errorGroup: VM_NGT_CONFIG_NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as Nutanix
+    Guest Tools configuration is missing.
+  arguments:
+    - vm_uuid
+- code: 31103
+  errorGroup: VM_NGT_NOT_ENABLED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as Nutanix
+    Guest Tools is not enabled.
+  arguments:
+    - vm_uuid
+- code: 31104
+  errorGroup: VM_NGT_ALREADY_MOUNTED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as Nutanix
+    Guest Tools ISO is already mounted.
+  arguments:
+    - vm_uuid
+- code: 31105
+  errorGroup: VM_NGT_ALREADY_INSTALLED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as Nutanix
+    Guest Tools ISO is already installed.
+  arguments:
+    - vm_uuid
+- code: 31106
+  errorGroup: VM_NGT_UPGRADE_TIMEOUT
+  severity: ERROR
+  message: >
+    Performing the Nutanix Guest Tools upgrade on the VM with UUID
+    '{{{vm_uuid}}}' failed because of timeout.
+  arguments:
+    - vm_uuid
+- code: 31107
+  errorGroup: VM_NGT_ALREADY_UPGRADED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}' as Nutanix
+    Guest Tools is already upgraded.
+  arguments:
+    - vm_uuid

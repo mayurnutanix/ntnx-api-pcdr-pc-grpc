@@ -1,0 +1,254 @@
+components:
+  schemas:
+    VmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          properties:
+            name:
+              description: DocRef(VmHostAffinityPolicyNameDescription)
+              type: string
+              x-constraints:
+                maxLength: ConstantRef(vmHostAffinityPolicyNameMaxLength)
+            description:
+              description: DocRef(VmHostAffinityPolicyDescriptionDescription)
+              type: string
+            createTime:
+              description: DocRef(VmHostAffinityPolicyCreateTimeDescription)
+              type: string
+              format: date-time
+              readOnly: true
+            updateTime:
+              description: DocRef(VmHostAffinityPolicyUpdateTimeDescription)
+              type: string
+              format: date-time
+              readOnly: true
+            createdBy:
+              description: DocRef(VmHostAffinityPolicyCreatedByDescription)
+              $ref: "ModelRef({./UserReference})"
+              readOnly: true
+            lastUpdatedBy:
+              description: DocRef(VmHostAffinityPolicyLastUpdatedByDescription)
+              $ref: "ModelRef({./UserReference})"
+              readOnly: true
+            vmCategories:
+              description: DocRef(VmHostAffinityPolicyVmCategoriesDescription)
+              type: array
+              minItems: 1
+              maxItems: 50
+              items:
+                $ref: "ModelRef({./CategoryReference})"
+            hostCategories:
+              description: DocRef(VmHostAffinityPolicyHostCategoriesDescription)
+              type: array
+              minItems: 1
+              maxItems: 50
+              items:
+                $ref: "ModelRef({./CategoryReference})"
+            numVms:
+              description: DocRef(VmHostAffinityPolicyNumVmsDescription)
+              type: integer
+              format: int64
+              readOnly: true
+            numHosts:
+              description: DocRef(VmHostAffinityPolicyNumHostsDescription)
+              type: integer
+              format: int64
+              readOnly: true
+            numCompliantVms:
+              description: DocRef(VmHostAffinityPolicyNumCompliantVmsDescription)
+              type: integer
+              format: int64
+              readOnly: true
+            numNonCompliantVms:
+              description: DocRef(VmHostAffinityPolicyNumNonCompliantVmsDescription)
+              type: integer
+              format: int64
+              readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2003
+                - name: name
+                  index: 2004
+                - name: description
+                  index: 2005
+                - name: createTime
+                  index: 2006
+                - name: updateTime
+                  index: 2007
+                - name: createdBy
+                  index: 2008
+                - name: lastUpdatedBy
+                  index: 2009
+                - name: vmCategories
+                  index: 2010
+                - name: hostCategories
+                  index: 2011
+                - name: numVms
+                  index: 2012
+                - name: numHosts
+                  index: 2013
+                - name: numCompliantVms
+                  index: 2014
+                - name: numNonCompliantVms
+                  index: 2015
+      x-filterable-properties:
+        - name
+      x-property-mapping:
+        - name: "name"
+          value: "name"
+        - name: "updateTime"
+          value: "last_modified_time_usecs"
+      x-sortable-properties:
+        - name
+        - updateTime
+
+    VmHostAffinityPolicyVmComplianceState:
+      description: DocRef(VmHostAffinityPolicyComplianceDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          properties:
+            cluster:
+              description: DocRef(VmHostAffinityPolicyComplianceClusterDescription)
+              $ref: "ModelRef({./ClusterReference})"
+              readOnly: true
+            host:
+              description: DocRef(VmHostAffinityPolicyComplianceHostDescription)
+              $ref: "ModelRef({./HostReference})"
+              readOnly: true
+            associatedCategories:
+              description: DocRef(VmHostAffinityPolicyComplianceVmAssociatedCategoriesDescription)
+              readOnly: true
+              type: array
+              minItems: 1
+              maxItems: 50
+              items:
+                $ref: "ModelRef({./CategoryReference})"
+            complianceStatus:
+              description: DocRef(VmHostAffinityPolicyComplianceComplianceStatusDescription)
+              readOnly: true
+              oneOf:
+                - $ref: "ModelRef({./CompliantVmHostAffinityPolicy})"
+                - $ref: "ModelRef({./NonCompliantVmHostAffinityPolicy})"
+                - $ref: "ModelRef({./PendingVmHostAffinityPolicy})"
+              x-codegen-hint:
+                $any:
+                  - type: entity-identifier
+                    properties:
+                      identifiers:
+                        - type: "ModelRef({./CompliantVmHostAffinityPolicy})"
+                          index: 2001
+                        - type: "ModelRef({./NonCompliantVmHostAffinityPolicy})"
+                          index: 2002
+                        - type: "ModelRef({./PendingVmHostAffinityPolicy})"
+                          index: 2003
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2004
+                - name: cluster
+                  index: 2005
+                - name: host
+                  index: 2006
+                - name: associatedCategories
+                  index: 2007
+
+    CompliantVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyComplianceCompliantDescription)
+      type: object
+    PendingVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyCompliancePendingDescription)
+      type: object
+    NonCompliantVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyComplianceNonCompliantDescription)
+      type: object
+      properties:
+        nonComplianceReason:
+          description: DocRef(VmHostAffinityPolicyComplianceNonComplianceReasonDescription)
+          oneOf:
+            - $ref: "ModelRef({./ConflictingVmHostAffinityPolicy})"
+            - $ref: "ModelRef({./ConflictingLegacyVmHostAffinityPolicy})"
+            - $ref: "ModelRef({./NoHostsForVmHostAffinityPolicy})"
+            - $ref: "ModelRef({./NotEnoughResourcesForVmHostAffinityPolicy})"
+            - $ref: "ModelRef({./PeNotCapableForVmHostAffinityPolicy})"
+            - $ref: "ModelRef({./OtherVmHostAffinityPolicyVmNonComplianceReason})"
+          required: true
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./ConflictingVmHostAffinityPolicy})"
+                      index: 2001
+                    - type: "ModelRef({./ConflictingLegacyVmHostAffinityPolicy})"
+                      index: 2002
+                    - type: "ModelRef({./NoHostsForVmHostAffinityPolicy})"
+                      index: 2003
+                    - type: "ModelRef({./NotEnoughResourcesForVmHostAffinityPolicy})"
+                      index: 2004
+                    - type: "ModelRef({./PeNotCapableForVmHostAffinityPolicy})"
+                      index: 2005
+                    - type: "ModelRef({./OtherVmHostAffinityPolicyVmNonComplianceReason})"
+                      index: 2006
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: nonComplianceReason
+                  index: 2001
+    ConflictingVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyComplianceConflictingPolicyDescription)
+      type: object
+      properties:
+        extId:
+          type: string
+          description: DocRef(VmHostAffinityPolicyComplianceConflictingPolicyExtIdDescription)
+          required: true
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+    ConflictingLegacyVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyComplianceConflictingLegacyVmHostAffinityPolicyDescription)
+      type: object
+    NoHostsForVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyComplianceNoHostsDescription)
+      type: object
+    NotEnoughResourcesForVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyComplianceNotEnoughResourcesDescription)
+      type: object
+    PeNotCapableForVmHostAffinityPolicy:
+      description: DocRef(VmHostAffinityPolicyCompliancePeNotCapableDescription)
+      type: object
+      properties:
+        minimumAosVersionRequired:
+          type: string
+          description: DocRef(VmHostAffinityPolicyComplianceMinimumAosVersionRequiredDescription)
+          required: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: minimumAosVersionRequired
+                  index: 2001
+    OtherVmHostAffinityPolicyVmNonComplianceReason:
+      description: DocRef(OtherVmHostAffinityPolicyVmNonComplianceReasonDescription)
+      type: object

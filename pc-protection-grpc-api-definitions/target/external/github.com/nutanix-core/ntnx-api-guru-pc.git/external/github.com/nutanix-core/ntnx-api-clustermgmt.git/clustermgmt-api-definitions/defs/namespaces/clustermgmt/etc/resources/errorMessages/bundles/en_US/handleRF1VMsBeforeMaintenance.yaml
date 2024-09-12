@@ -1,0 +1,9 @@
+- code: 40301
+  errorGroup: RF1_VMS_POWER_OFF_FAILURE
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the host {{{host_name}}}, because some 
+    RF1 VM(s) could not power off successfully.
+  arguments:
+    - host_name
+

@@ -1,0 +1,174 @@
+components:
+  schemas:
+    CustomKeyValues:
+      description: DocRef(CustomKeyValuesDescription)
+      type: object
+      properties:
+        keyValuePairs:
+          description: DocRef(CustomKeyValuesKeyValuePairsDescription)
+          type: array
+          minItems: 0
+          maxItems: 32
+          items:
+            $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/KVPair})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: keyValuePairs
+                  index: 2001
+    InstallType:
+      description: DocRef(InstallTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - FRESH
+            - PREPARED
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: FRESH
+                  index: 2001
+                - value: PREPARED
+                  index: 2002
+          - type: enum
+            properties:
+              descriptions:
+                - name: FRESH
+                  description: DocRef(FreshInstallTypeDescription)
+                - name: PREPARED
+                  description: DocRef(PreparedInstallTypeDescription)
+    Unattendxml:
+      description: DocRef(SysprepUnattendXmlDescription)
+      type: object
+      properties:
+        value:
+          description: DocRef(SysprepUnattendXmlValueDescription)
+          type: string
+          x-constraints:
+            maxLength: ConstantRef(unattendXmlMaxLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: value
+                  index: 2001
+    Sysprep:
+      type: object
+      description: DocRef(SysprepDescription)
+      properties:
+        installType:
+          $ref: "ModelRef({./InstallType})"
+        sysprepScript:
+          description: DocRef(SysprepScriptDescription)
+          oneOf:
+            - $ref: "ModelRef({./Unattendxml})"
+            - $ref: "ModelRef({./CustomKeyValues})"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./Unattendxml})"
+                      index: 2001
+                    - type: "ModelRef({./CustomKeyValues})"
+                      index: 2002
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: installType
+                  index: 2003
+    CloudInitDataSourceType:
+      description: DocRef(CloudInitDataSourceTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "CONFIG_DRIVE_V2"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: CONFIG_DRIVE_V2
+                  index: 2001
+          - type: enum
+            properties:
+              descriptions:
+                - name: CONFIG_DRIVE_V2
+                  description: DocRef(ConfigDriveV2DataSourceTypeDescription)
+    Userdata:
+      description: DocRef(CloudInitUserdataDescription)
+      type: object
+      properties:
+        value:
+          description: DocRef(UserdataValueDescription)
+          type: string
+          x-constraints:
+            maxLength: ConstantRef(cloudInitUserdataMaxLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: value
+                  index: 2001
+    CloudInit:
+      type: object
+      description: DocRef(CloudInitDescription)
+      properties:
+        datasourceType:
+          $ref: "ModelRef({./CloudInitDataSourceType})"
+        metadata:
+          type: string
+          description: DocRef(CloudInitMetadataDescription)
+          x-constraints:
+            maxLength: ConstantRef(cloudInitMetadataMaxLength)
+        cloudInitScript:
+          description: DocRef(CloudInitCloudInitScriptDescription)
+          oneOf:
+            - $ref: "ModelRef({./Userdata})"
+            - $ref: "ModelRef({./CustomKeyValues})"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./Userdata})"
+                      index: 2001
+                    - type: "ModelRef({./CustomKeyValues})"
+                      index: 2002
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: datasourceType
+                  index: 2003
+                - name: metadata
+                  index: 2004
+    GuestCustomizationParams:
+      type: object
+      description: DocRef(GuestCustomizationDescription)
+      properties:
+        config:
+          description: DocRef(GuestCustomizationConfigDescription)
+          oneOf:
+            - $ref: "ModelRef({./Sysprep})"
+            - $ref: "ModelRef({./CloudInit})"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./Sysprep})"
+                      index: 2001
+                    - type: "ModelRef({./CloudInit})"
+                      index: 2002

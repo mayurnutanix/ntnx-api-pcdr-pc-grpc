@@ -1,0 +1,45 @@
+components:
+  schemas:
+    RootCertificateAddSpec:
+      description: DocRef(RootCertificateAddSpecDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          required:
+          - rootCertificate
+          properties:
+            rootCertificate:
+              type: string
+              x-constraints:
+                maxLength: ConstantRef(CertificateMaxLength)
+                minLength: ConstantRef(CertificateMinLength)
+              description: DocRef(RootCertDescription)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: rootCertificate
+                  index: 2002
+
+    RootCertRemoveSpec:
+      type: "object"
+      description: DocRef(RemoveRootCertSpec)
+      required:
+        - clusterExtId
+      properties:
+        clusterExtId:
+          description: DocRef(ExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: ConstantRef({ext:common:/namespaces/common}, uuidPattern)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: clusterExtId
+                  index: 2001

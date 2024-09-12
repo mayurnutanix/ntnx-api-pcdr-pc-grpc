@@ -1,0 +1,351 @@
+components:
+  schemas:
+    SnmpConfig:
+      type: "object"
+      description: DocRef(SnmpInfo)
+      properties:
+        isEnabled:
+          description: DocRef(SnmpStatusDesc)
+          type: "boolean"
+        users:
+          description: DocRef(SnmpUserDesc)
+          type: array
+          minItems: 0
+          maxItems: 1024
+          items:
+            $ref: ModelRef({./SnmpUser})
+        transports:
+          description: DocRef(SnmpTransportDesc)
+          type: array
+          minItems: 0
+          maxItems: 1024
+          items:
+            $ref: ModelRef({./SnmpTransport})
+        traps:
+          description: DocRef(SnmpTrapDesc)
+          type: array
+          minItems: 0
+          maxItems: 1024
+          items:
+            $ref: ModelRef({./SnmpTrap})
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "isEnabled"
+                  index: 2001
+                - name: "users"
+                  index: 2002
+                - name: "transports"
+                  index: 2003
+                - name: "traps"
+                  index: 2004
+
+    SnmpStatusParam:
+      description: DocRef(SnmpStatusDesc)
+      type: "object"
+      required:
+        - isEnabled
+      properties:
+        isEnabled:
+          description: DocRef(SnmpUserDesc)
+          type: boolean
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "isEnabled"
+                  index: 2001
+
+    SnmpUser:
+      description: DocRef(SnmpUserDesc)
+      allOf:
+        - $ref: ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})
+        - type: "object"
+          required:
+            - username
+            - authType
+            - authKey
+          properties:
+            username:
+              description: DocRef(SnmpUsernameDesc)
+              type: "string"
+              x-constraints:
+                maxLength: ConstantRef(maxSnmpUernameLength)
+            authType:
+              description: DocRef(SnmpAuthTypeDesc)
+              $ref: ModelRef({./SnmpAuthType})
+            authKey:
+              description: DocRef(SnmpAuthKeyDesc)
+              type: "string"
+              x-constraints:
+                pattern: ConstantRef(avoidSingleQuotePattern)
+            privType:
+              description: DocRef(SnmpPrivTypeDesc)
+              $ref: ModelRef({./SnmpPrivType})
+            privKey:
+              description: DocRef(SnmpPrivKeyDesc)
+              type: "string"
+              x-constraints:
+                pattern: ConstantRef(avoidSingleQuotePattern)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: "base"
+                  index: 2001
+                - name: "username"
+                  index: 2002
+                - name: "authType"
+                  index: 2003
+                - name: "authKey"
+                  index: 2004
+                - name: "privType"
+                  index: 2005
+                - name: "privKey"
+                  index: 2006
+
+    SnmpAuthType:
+      description: DocRef(SnmpAuthTypeDesc)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - MD5
+            - SHA
+          x-codegen-hint:
+            $any:
+              - type: enum
+                properties:
+                  descriptions:
+                    - name: 'MD5'
+                      description: DocRef(MdFiveTypeDescription)
+                    - name: 'SHA'
+                      description: DocRef(ShaTypeDescription)
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - value: "MD5"
+                      index: 2001
+                    - value: "SHA"
+                      index: 2002
+
+    SnmpPrivType:
+      description: DocRef(SnmpPrivTypeDesc)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - DES
+            - AES
+          x-codegen-hint:
+            $any:
+              - type: enum
+                properties:
+                  descriptions:
+                    - name: 'DES'
+                      description: DocRef(DesTypeDescription)
+                    - name: 'AES'
+                      description: DocRef(AesTypeDescription)
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - value: "DES"
+                      index: 2001
+                    - value: "AES"
+                      index: 2002
+
+    SnmpUserCredentials:
+      description: DocRef(SnmpUserCredentialsDesc)
+      type: "object"
+      required:
+        - username
+        - authKey
+        - privKey
+      properties:
+        username:
+          description: DocRef(SnmpUsernameDesc)
+          type: "string"
+          x-constraints:
+            maxLength: ConstantRef(maxSnmpUserCredentialsUsernameLength)
+        authKey:
+          description: DocRef(SnmpAuthKeyDesc)
+          type: "string"
+          x-constraints:
+            pattern: ConstantRef(avoidSingleQuotePattern)
+        privKey:
+          description: DocRef(SnmpPrivKeyDesc)
+          type: "string"
+          x-constraints:
+            pattern: ConstantRef(avoidSingleQuotePattern)
+      x-internal: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "username"
+                  index: 2001
+                - name: "authKey"
+                  index: 2002
+                - name: "privKey"
+                  index: 2003
+
+    SnmpTransport:
+      description: DocRef(SnmpTransportDesc)
+      type: "object"
+      required:
+        - protocol
+        - port
+      properties:
+        protocol:
+          description: DocRef(SnmpProtocolDesc)
+          $ref: ModelRef({./SnmpProtocol})
+        port:
+          description: DocRef(SnmpPortDesc)
+          type: "integer"
+          format: int32
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "protocol"
+                  index: 2001
+                - name: "port"
+                  index: 2002
+
+    SnmpTrap:
+      allOf:
+        - $ref: ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})
+        - type: "object"
+          description: DocRef(SnmpTrapDesc)
+          required:
+            - address
+            - version
+          properties:
+            address:
+              description: DocRef(SnmpAddressDesc)
+              $ref: ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/IPAddress})
+            username:
+              description: DocRef(SnmpUsernameDesc)
+              type: "string"
+              x-constraints:
+                maxLength: ConstantRef(maxSnmpTrapUsernameLength)
+            protocol:
+              description: DocRef(SnmpProtocolDesc)
+              $ref: ModelRef({./SnmpProtocol})
+            port:
+              description: DocRef(SnmpPortDesc)
+              type: "integer"
+              format: int32
+            shouldInform:
+              description: DocRef(SnmpInformDesc)
+              type: "boolean"
+            engineId:
+              description: DocRef(SnmpEngineIdDesc)
+              type: "string"
+              x-constraints:
+                pattern: ConstantRef(hexPattern)
+            version:
+              description: DocRef(SnmpVersionDesc)
+              $ref: ModelRef({./SnmpTrapVersion})
+            recieverName:
+              description: DocRef(SnmpRecieverNameDesc)
+              type: "string"
+              x-constraints:
+                maxLength: ConstantRef(maxSnmpRecieverNameLength)
+            communityString:
+              description: DocRef(SnmpCommunityStringDesc)
+              type: "string"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: "address"
+                  index: 2002
+                - name: "username"
+                  index: 2003
+                - name: "protocol"
+                  index: 2004
+                - name: "port"
+                  index: 2005
+                - name: "shouldInform"
+                  index: 2006
+                - name: "engineId"
+                  index: 2007
+                - name: "version"
+                  index: 2008
+                - name: "recieverName"
+                  index: 2009
+                - name: "communityString"
+                  index: 2010
+
+
+    SnmpProtocol:
+      description: DocRef(SnmpProtocolDesc)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - UDP
+            - UDP6
+            - TCP
+            - TCP6
+          x-codegen-hint:
+            $any:
+              - type: enum
+                properties:
+                  descriptions:
+                    - name: 'UDP'
+                      description: DocRef(UdpProtoDescription)
+                    - name: 'UDP6'
+                      description: DocRef(UdpSixProtoDescription)
+                    - name: 'TCP'
+                      description: DocRef(TcpProtoDescription)
+                    - name: 'TCP6'
+                      description: DocRef(TcpSixProtoDescription)
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - value: "UDP"
+                      index: 2001
+                    - value: "UDP6"
+                      index: 2002
+                    - value: "TCP"
+                      index: 2003
+                    - value: "TCP6"
+                      index: 2004
+
+    SnmpTrapVersion:
+      description: DocRef(SnmpVersionDesc)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - V2
+            - V3
+          x-codegen-hint:
+            $any:
+              - type: enum
+                properties:
+                  descriptions:
+                    - name: 'V2'
+                      description: DocRef(VersionTwoDescription)
+                    - name: 'V3'
+                      description: DocRef(VersionThreeDescription)
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - value: "V2"
+                      index: 2001
+                    - value: "V3"
+                      index: 2002

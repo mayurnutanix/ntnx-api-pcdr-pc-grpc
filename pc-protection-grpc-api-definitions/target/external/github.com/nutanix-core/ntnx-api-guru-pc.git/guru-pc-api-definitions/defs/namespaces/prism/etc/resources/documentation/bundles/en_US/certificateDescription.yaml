@@ -1,0 +1,20 @@
+- name: RootCertDescription
+  value: "The root certificate of the cluster."
+- name: RootCertificateAddSpecDescription
+  value: "Payload for the add root certificate endpoint. It contains the root 
+          certificate of the remote cluster."
+- name: AddRootCertificateDescription
+  value: "Internal API to save the root certificate of a given cluster in the local cluster. 
+          This would enable certificate-based authentication between the two clusters.
+          The response from this endpoint contains the URL in the task object location 
+          header that can be used to track the request status."
+- name: AddRootCertificateSummary
+  value: "Adds the given certificate to the local cluster"
+- name: RemoveRootCertDescription
+  value: "Internal API to delete the root certificate of a remote cluster from the local cluster.
+          This would disable certificate-based authentication between the two clusters."
+- name: RemoveRootCertSpec
+  value: "Payload to delete root certificate. It contains the 
+          external identifier of the remote cluster."
+- name: RemoveRootCertSummary
+  value: "Remove the root certificate of a remote cluster from the local cluster"

@@ -1,0 +1,10 @@
+tags:
+  - name: Clusters
+    description: >
+      Represents the Cluster entity. Provides the basic infrastructure for compute, storage and networking. 
+      This includes the operations that can be carried out on cluster and its subresources - host (node), rsyslog servers etc 
+      and actions that can be performed on cluster - add a node, remove a node, attach categories.
+  - name: ClusterProfiles
+    x-displayName: Cluster Profiles
+    description: >
+      Represents the Cluster Profile entity. This includes cluster settings or configurations which will be applied to clusters. 

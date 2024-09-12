@@ -1,0 +1,19 @@
+# VM NIC related errors - 306xx.
+- code: 30600
+  errorGroup: VM_NIC_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as the
+    NIC with UUID '{{{nic_uuid}}}' is not found.
+  arguments:
+    - vm_uuid
+    - nic_uuid
+- code: 30601
+  errorGroup: MIGRATE_NIC_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as
+    '{{{resource}}}' is not defined.
+  arguments:
+    - vm_uuid
+    - resource

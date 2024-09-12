@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>com.nutanix.nutanix-core.ntnx-api.clustermgmt</groupId>
+    <artifactId>clustermgmt</artifactId>
+    <version>16.9.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>clustermgmt-api-codegen</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <name>Nutanix Platform Client and Server SDKs</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nutanix.nutanix-core.ntnx-api.clustermgmt</groupId>
+      <artifactId>${api.defs}</artifactId>
+      <version>${project.version}</version>
+      <type>tgz</type>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-ratelimiter</artifactId>
+    </dependency>
+  </dependencies>
+
+  <modules>
+    <module>clustermgmt-java-dto-definitions</module>
+    <module>clustermgmt-python-client-sdk</module>
+    <module>clustermgmt-springmvc-interfaces</module>
+    <module>clustermgmt-java-client-sdk</module>
+    <module>clustermgmt-java-edm-definitions</module>
+    <module>clustermgmt-javascript-client-sdk</module>
+    <module>clustermgmt-go-client-sdk</module>
+    <module>clustermgmt-csharp-client-sdk</module>
+    <module>clustermgmt-powershell-cli</module>
+    <module>clustermgmt-protobuf-messages</module>
+    <module>clustermgmt-protobuf-services</module>
+    <module>clustermgmt-protobuf-mappers</module>
+    <module>clustermgmt-proto-to-java</module>
+    <module>clustermgmt-grpc-client</module>
+    <module>clustermgmt-go-edm-definitions</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.nutanix-core.ntnx-api.clustermgmt</groupId>
+                  <artifactId>${api.defs}</artifactId>
+                  <version>${project.version}</version>
+                  <type>tgz</type>
+                  <overWrite>false</overWrite>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+</project>

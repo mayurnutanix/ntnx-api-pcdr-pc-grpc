@@ -1,0 +1,101 @@
+# VM migrate warnings - 327xx.
+- code: 32700
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' due to different source and
+    target cluster High Availability configuration.
+  arguments:
+    - vm_uuid
+- code: 32701
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' as one or more VM categories
+    '{{{categories}}}' associated on the source AZ may or may not be present on the target AZ.
+  arguments:
+    - vm_uuid
+    - categories
+- code: 32702
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because the target cluster
+    with UUID '{{{target_cluster_uuid}}}' does not have a compliant host to honor
+    the VM Host affinity policies.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32703
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because the target cluster
+    with UUID '{{{target_cluster_uuid}}}' is not compliant with the storage
+    policies associated with the VM.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32704
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because the data-at-rest
+    encryption property is not honored on the target cluster with UUID
+    '{{{target_cluster_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32705
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because VM is part of a legacy VM
+    group with UUID '{{{vm_group_uuid}}}' meaning that the anti-affinity policies it
+    is part of will not be automatically applied on target cluster after the migration.
+  arguments:
+    - vm_uuid
+    - vm_group_uuid
+# Warning that Magneto warning kRemoteClusterNetworkLatencyWarning maps to.
+- code: 32706
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because the Round-trip travel (RTT) to the target cluster is
+    {{{rtt_ms}}} milliseconds and maximum allowed RTT for optimal migration performance is
+    {{{max_rtt_ms}}} milliseconds.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - rtt_ms
+    - max_rtt_ms
+- code: 32707
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because VM has floating IPs
+    '{{{floating_ips}}}' assigned. Please ensure floating IPs are correctly configured
+    for the VM on target AZ, failure to do so will affect external connectivity for the VM.
+  arguments:
+    - vm_uuid
+    - floating_ips
+- code: 32708
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because VM is part of
+    a PC based anti-affinity policy, which is not supported on target cluster
+    with UUID '{{{target_cluster_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32709
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because VM has NGT mounted or
+    installed but doesn't have an empty CD-ROM drive which is required to mount NGT ISO
+    after migration, meaning VM on target cluster will be created without NGT installed.
+  arguments:
+    - vm_uuid

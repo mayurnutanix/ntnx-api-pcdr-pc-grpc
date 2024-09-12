@@ -1,0 +1,216 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+    - image: cimg/python:3.8.5
+    - image: circleci/mongo:3.0.15  # Remove if not used
+    resource_class: medium+
+    environment:
+      CIRCLE_ARTIFACTS: /home/circleci/artifacts
+      CIRCLE_TEST_REPORTS: /home/circleci/test_reports
+      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+      CANAVERAL_BUILD_SYSTEM: maven
+      CANAVERAL_PACKAGE_TOOLS: maven-jar
+      CANAVERAL_SWITCH_MAVEN_PACKAGER_TREAT_SNAPSHOT_AS_RELEASE: 1
+      CANAVERAL_PACKAGER_MAVEN_NEXUS_ID: maven-releases
+      CANAVERAL_PACKAGER_MAVEN_NEXUS_URI: https://artifactory.dyn.ntnxdpro.com/artifactory/canaveral-legacy-maven
+      CANAVERAL_SWITCH_PACKAGER_PUSH_PUBLIC_ARTIFACT: 1
+      CANAVERAL_PACKAGER_MAVEN_NEXUS_PUBLIC_URI: https://artifactory.dyn.ntnxdpro.com/artifactory/canaveral-legacy-maven-internal
+      CANAVERAL_ARTIFACT_SERVER: http://canaveral-artifacts.corp.nutanix.com:8080
+      CANAVERAL_BUILD_MAVEN_TARGETS: clean install -s settings.xml --no-transfer-progress
+      CANAVERAL_USE_LEGACY_PIPELINE_MODE: 0
+      CANAVERAL_USE_BLUEPRINT_PROXY: 1
+      CANAVERAL_GIT_USER: API-Infra-Build-User
+      CANAVERAL_GIT_EMAIL: svc.canGit@nutanix.com
+      CANAVERAL_PACKAGER_BRANCH: fraser-2024.3-stable-pc-0
+      CANAVERAL_DEPLOY_PACKAGE_NAME: none
+      CANAVERAL_MAVEN_VERISON: 3.6.1
+      CANAVERAL_DEPS: openjdk-8-jdk protobuf-compiler
+      PYPI_SERVER: https://artifactory.dyn.ntnxdpro.com/artifactory/api/pypi/canaveral-legacy-pypi
+      EGG_BUILD_OPTS: sdist bdist_wheel --universal upload -r nutanix
+      NPM_PATH_STORAGE_SDK: /home/circleci/project/vmm-api-codegen/vmm-javascript-client-sdk/target/node
+      API_DOC_REGISTRY: https://developers.internal.nutanix.com/
+    steps:
+    - run:
+        name: Install Dependencies
+        command: |-
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ${CANAVERAL_DEPS}
+    - run:
+        name: GitHub RSA Key Change Workaround
+        command: |-
+          mkdir ~/.ssh
+          echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=' >> ~/.ssh/known_hosts
+    - checkout
+    - run:
+        name: Bootstrap Canaveral Certs
+        command: |-
+          declare -x CANAVERAL_CERT_DOWNLOAD_URL="${CANAVERAL_CERT_DOWNLOAD_URL:-http://canaveral-engine-api.canaveral-corp.us-west-2.aws/ca}"
+          sudo wget -t 5 -v "${CANAVERAL_CERT_DOWNLOAD_URL}/root-ca.crt" -O "/usr/local/share/ca-certificates/canaveral-root-ca.crt"
+          sudo wget -t 5 -v "${CANAVERAL_CERT_DOWNLOAD_URL}/intermediate-ca.crt" -O "/usr/local/share/ca-certificates/canaveral-intermediate-ca.crt"
+          sudo /usr/sbin/update-ca-certificates
+          sudo wget -t 5 -v "${CANAVERAL_CERT_DOWNLOAD_URL}/ca-chain.crt" -O "/tmp/ca-chain.crt"
+          cat "/tmp/ca-chain.crt" >> $(python -m certifi)
+    - run:
+        name: Install canaveral-build-tools
+        command: |-
+          BUILD_TOOLS_VERSION=$(curl -s -L https://canaveral-gatekeeper.canaveral-corp.us-west-2.aws/build_config/build_tools_version | jq -r '.result')
+          echo "Using build tools version '${BUILD_TOOLS_VERSION}'"
+          pyenv virtualenv canaveral_build
+          PYENV_VERSION=canaveral_build pip install --upgrade pip
+          PYENV_VERSION=canaveral_build pip install --extra-index-url "https://${CANAVERAL_ARTIFACTORY_READ_USER}:${CANAVERAL_ARTIFACTORY_READ_PASSWORD}@artifactory.dyn.ntnxdpro.com/artifactory/api/pypi/canaveral-legacy-pypi/simple" --trusted-host artifactory.dyn.ntnxdpro.com nutanix-release-engineering-canaveral-build-tools=="${BUILD_TOOLS_VERSION}"
+    - run:
+        name: Install canaveral backward compatibility layer
+        command: |-
+          python -m canaveral_build_tools.core.backward_compatibility
+          mkdir -p ${CIRCLE_ARTIFACTS}
+          mkdir -p ${CIRCLE_TEST_REPORTS}
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Finalize Canaveral Cert Install
+        command: |-
+          mkdir -p "/tmp/ssl-certs/tmp"
+          sudo -E $(pyenv which python) -m canaveral_build_tools.core.setup_ca_chain
+          sudo chown -R circleci:circleci /tmp/canaveral_logs
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: canaveral/core/scripts/create-workspace.sh
+        command: |-
+          CANAVERAL_TOKEN_VENDING_MACHINE_NONCE=$(head /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+          echo "export CANAVERAL_TOKEN_VENDING_MACHINE_NONCE=${CANAVERAL_TOKEN_VENDING_MACHINE_NONCE}" >> $BASH_ENV
+          echo "NONCE: ${CANAVERAL_TOKEN_VENDING_MACHINE_NONCE}"
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Setup Environment
+        command: python -m canaveral_build_tools.core.setup_environment
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Post Checkout
+        command: python -m canaveral_build_tools.core.post_checkout
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Dependency Setup
+        command: python -m canaveral_build_tools.core.dependency_setup
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:  # Remove if not used
+        name: Setup Build System Deprecated Hooks Only
+        command: python -m canaveral_build_tools.core.setup_build_system
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:  # Remove if not used
+        name: Setup Package Tools Deprecated Hooks Only
+        command: python -m canaveral_build_tools.core.setup_package_tools
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Database Setup
+        command: python -m canaveral_build_tools.core.setup_database
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Push event Build::Started
+        command: python -m canaveral_build_tools.core.push_event Build::Started
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Build
+        command: |
+          if [ ${CIRCLE_BRANCH} == ${CANAVERAL_PACKAGER_BRANCH} ]
+          then
+            echo "Skipping Build on Packager Branch"
+          else
+            python -m canaveral_build_tools.core.build
+          fi
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: '"unit" Tests'
+        command: python -m canaveral_build_tools.core.run_tests "unit"
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Package
+        command: python -m canaveral_build_tools.core.package
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name : Clone release-engineering
+        command: |
+          if [ ${CIRCLE_BRANCH} == ${CANAVERAL_PACKAGER_BRANCH} ]
+          then
+            git clone git@github.com:nutanix-core/ntnx-api-release-engineering.git
+          else
+            echo "Skipping cloning of release-engineering"
+          fi
+    - run:
+        name: Trigger Namespace Merge
+        command: |
+          if [ ${CIRCLE_BRANCH} == ${CANAVERAL_PACKAGER_BRANCH} ]
+          then
+            source /home/circleci/project/.workspace/.canaveralrc
+            echo ${PROJECT_ROOT_FOLDER}
+            git config --global user.name "$CANAVERAL_GIT_USER"
+            git config --global user.email "$CANAVERAL_GIT_EMAIL"
+            python ntnx-api-release-engineering/py/trigger_namespace_merge.py --yaml ${PROJECT_ROOT_FOLDER}/vmm-api-definitions/target/generated-api-artifacts/swagger-vmm-*-all-documentation.yaml
+          else
+            echo "Skipping Trigger Namespace Merge"
+          fi
+        environment:
+          PYENV_VERSION: canaveral_build
+    - run:
+        name: Git Version Tag
+        command: |
+          if [ ${CIRCLE_BRANCH} == ${CANAVERAL_PACKAGER_BRANCH} ]
+          then
+            source /home/circleci/project/.workspace/.canaveralrc
+            #Check if GIT settings are set , and set otherwise
+            if [[ ! $(git config user.name) ]]; then
+              git config --global user.name "$CANAVERAL_GIT_USER"
+            fi
+            if [[ ! $(git config user.email) ]]; then
+              git config --global user.email "$CANAVERAL_GIT_EMAIL"
+            fi
+            python ntnx-api-release-engineering/py/git_version_tag.py --path ${PROJECT_ROOT_FOLDER}
+            git push origin --tags
+          else
+            echo "Skipping git version tagging"
+          fi
+        environment:
+          PYENV_VERSION: canaveral_build
+    - store_test_results:
+        path: test-results
+    - store_artifacts:
+        path: test-results
+    - store_artifacts:
+        path: coverage
+    - store_test_results:
+        path: /home/circleci/test_reports
+    - store_artifacts:
+        path: /home/circleci/artifacts
+    - run:
+        name: Inform Dependencies
+        command: python -m canaveral_build_tools.core.inform_dependencies
+        environment:
+          PYENV_VERSION: canaveral_build
+          BRANCH_FILTER: /.*/
+    - run:
+        name: Push event Build::Finished::Succeeded
+        command: python -m canaveral_build_tools.core.push_event Build::Finished::Succeeded
+        environment:
+          PYENV_VERSION: canaveral_build
+          BRANCH_FILTER: /.*/
+    - run:
+        name: canaveral deploy
+        command: python -m canaveral_build_tools.core.deploy
+        environment:
+          PYENV_VERSION: canaveral_build
+          BRANCH_FILTER: /.*/
+    - store_artifacts:
+        name: Archive build logs
+        path: /tmp/canaveral_logs

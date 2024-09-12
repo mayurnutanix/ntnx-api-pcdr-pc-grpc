@@ -1,0 +1,17 @@
+openapi: 3.0.1
+info:
+  title: "PC Protection PC Client SDK"
+  version: ${project.version}
+  x-repo-name: "pc_protection_pc_client"
+security:
+  - basicAuthScheme: []
+  - apiKeyAuthScheme: []
+components:
+  securitySchemes:
+    basicAuthScheme:
+      type: "http"
+      scheme: "basic"
+    apiKeyAuthScheme:
+      type: apiKey
+      in: header
+      name: X-ntnx-api-key

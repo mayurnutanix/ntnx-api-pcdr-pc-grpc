@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>vmm</artifactId>
+    <groupId>com.nutanix.nutanix-core.ntnx-api.vmm</groupId>
+    <version>16.9.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>vmm-api-codegen</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <name>Nutanix Platform Client and Server SDKs</name>
+
+  <properties>
+    <swagger-codegen.version>3.0.10</swagger-codegen.version>
+  </properties>
+
+  <modules>
+    <module>vmm-java-dto-definitions</module>
+    <module>vmm-springmvc-interfaces</module>
+    <module>vmm-go-dto-definitions</module>
+    <module>vmm-go-server-interfaces</module>
+    <module>vmm-javascript-client-sdk</module>
+    <module>vmm-java-client-sdk</module>
+    <module>vmm-python-client-sdk</module>
+    <module>vmm-protobuf-messages</module>
+    <module>vmm-proto-to-java</module>
+    <module>vmm-protobuf-services</module>
+    <module>vmm-protobuf-mappers</module>
+    <module>vmm-grpc-client</module>
+    <module>vmm-go-client-sdk</module>
+    <module>vmm-go-edm-definitions</module>
+    <module>vmm-csharp-client-sdk</module>
+    <module>vmm-powershell-cli</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nutanix.nutanix-core.ntnx-api.vmm</groupId>
+      <artifactId>${api.defs}</artifactId>
+      <version>${project.version}</version>
+      <type>tgz</type>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars</artifactId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.nutanix-core.ntnx-api.vmm</groupId>
+                  <artifactId>${api.defs}</artifactId>
+                  <version>${project.version}</version>
+                  <type>tgz</type>
+                  <overWrite>false</overWrite>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+</project>

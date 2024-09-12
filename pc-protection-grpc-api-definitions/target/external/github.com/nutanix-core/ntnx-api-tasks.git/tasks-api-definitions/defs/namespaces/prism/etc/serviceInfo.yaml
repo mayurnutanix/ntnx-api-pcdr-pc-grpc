@@ -1,0 +1,10 @@
+port: 8888
+backendServices:
+  - name: ergon
+    environments:
+      - platform: pc
+        port: 2092
+        host: localhost
+      - platform: ncm
+        port: 2092
+        host: ergon.ntnx-ncm-common

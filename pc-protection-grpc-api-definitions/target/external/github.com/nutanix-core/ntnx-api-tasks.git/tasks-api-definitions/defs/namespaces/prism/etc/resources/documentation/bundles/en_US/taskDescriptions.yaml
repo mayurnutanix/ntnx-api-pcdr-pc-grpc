@@ -1,0 +1,124 @@
+- name: TaskGetSummary
+  value: Fetch a task
+- name: TaskGetDescription
+  value: "Fetch an asynchronous operation called a task for the provided extId."
+- name: TaskCancelSummary
+  value: Cancel an ongoing task
+- name: TaskCancelDescription
+  value: "Cancel an ongoing task for the provided taskExtId. This action is supported only if 'isCancelable' is set as True for the task.
+    The task may continue to run for some time after the request has been made, until the backend server deems it is safe to cancel the task.
+    Cancellation requests are idempotent and multiple such requests for the same ongoing task are supported."
+- name: TaskListSummary
+  value: List tasks
+- name: TaskListDescription
+  value: "List tasks in the system. The response can be further filtered / sorted using the filtering and sorting options provided.
+    By default the response would be sorted by 'createdTime' in the descending order."
+- name: TaskExtIdParamDescription
+  value: A globally unique identifier of a task. It consists of a prefix and a UUID separated by ':'.
+    'legacy' prefix can be used with a task UUID provided by previous API families.
+- name: TaskExtIdDescription
+  value: A globally unique identifier of a task.
+- name: TaskGetSuccess
+  value: Task object is returned in response.
+- name: TaskListSuccess
+  value: List of task objects is returned in response.
+- name: TaskCancelSuccess
+  value: Successful submission message is returned in response.
+- name: TaskReferenceDescription
+  value: A reference to a task tracking an asynchronous operation. The status of the task can be queried by making a GET request to the task URI provided in the metadata section of the API response.
+- name: TaskDescription
+  value: The task object tracking an asynchronous operation.
+- name: TaskOperationDescription
+  value: The operation name being tracked by the task.
+- name: TaskOperationDescDescription
+  value: Description of the operation being tracked by the task.
+- name: TaskParentDescription
+  value: Reference to the task that is the parent of the current task.
+- name: TaskCreateTimeDescription
+  value: UTC date and time in RFC-3339 format when the task was created.
+- name: TaskStartTimeDescription
+  value: UTC date and time in RFC-3339 format when the task was started.
+- name: TaskCompleteTimeDescription
+  value: UTC date and time in RFC-3339 format when the task was completed.
+- name: TaskLastUpdatedTimeDescription
+  value: UTC date and time in RFC-3339 format when the task was last updated.
+- name: TaskProgressPercentageDescription
+  value: Task progress expressed as a percentage.
+- name: TaskEntitiesDescription
+  value: Reference to entities associated with the task.
+- name: TaskSubtasksDescription
+  value: Reference to tasks spawned as children of the current task. The task get response
+    would contain a limited number of subtask references. To get the entire
+    list of subtasks for a task, use the parent task filter in the task list API.
+- name: TaskSubstepsDescription
+  value: List of steps completed as part of the task.
+- name: TaskCancelableDescription
+  value: Signifies if the task can be cancelled.
+- name: TaskStatusDescription
+  value: Status of the task.
+- name: TaskEntityReferenceDescription
+  value: Details of the entity.
+- name: TaskEntityExtIdDescription
+  value: A globally unique identifier of the entity.
+- name: TaskEntityRelDescription
+  value: Entity type identified as 'namespace:module[:submodule]:entityType'. For example - vmm:ahv:vm,
+    where vmm is the namepsace, ahv is the module and vm is the entitytype.
+- name: TaskEntityNameDescription
+  value: Name of the entity.
+- name: AssociatedTaskDescription
+  value: Reference to the parent task associated with the current task.
+- name: AssociatedTaskExtIdDescription
+  value: A globally unique identifier of the task.
+- name: TaskOwnerDescription
+  value: Reference to the owner of the task.
+- name: TaskOwnerExtIdDescription
+  value: A globally unique identifier of the task owner.
+- name: TaskOwnerNameDescription
+  value: Username of the task owner.
+- name: TaskStepDescription
+  value: A single step in the task.
+- name: TaskStepMessageDescription
+  value: Message describing the completed steps for the task.
+- name: TaskCompletionDetailsDescription
+  value: Additional details on the task to aid the user with further actions post completion of the task.
+- name: TaskErrorMessagesDescription
+  value: Error details explaining a task failure. These would be populated only in the case of task failures.
+- name: TaskLegacyErrorDescription
+  value: Provides an error message in the absence of a well-defined error message for the tasks created through legacy APIs.
+- name: TaskWarningMessagesDescription
+  value: Warning messages to alert the user of issues which did not directly cause task failure.
+    These can be populated for any task.
+- name: TaskClusterExtIdsDescription
+  value: List of globally unique identifiers for clusters associated with the task or any of its subtasks.
+- name: TaskStatusQueuedDescription
+  value: Status indicating that the task is queued for execution.
+- name: TaskStatusRunningDescription
+  value: Status indicating that the task is currently being executed.
+- name: TaskStatusCancelingDescription
+  value: Status indicating that the task is marked for cancellation.
+- name: TaskStatusSucceededDescription
+  value: Status indicating that the task has been executed successfully.
+- name: TaskStatusFailedDescription
+  value: Status indicating that the task has failed.
+- name: TaskStatusCanceledDescription
+  value: Status indicating that the task has been cancelled.
+- name: TaskStatusSuspendedDescription
+  value: Status indicating that the task is currently suspended.
+- name: ViewTaskPermissionDescription
+  value: "Allows the user to fetch and view tasks on the system. A user is 
+    allowed to fetch and view a particular task if the user has permission to 
+    fetch and view tasks on atleast one of the clusters affected by the task."
+- name: CancelTaskPermissionDescription
+  value: "Allows the user to cancel/abort ongoing tasks on the system. A user 
+    is allowed to cancel or abort a particular task if the user has permission 
+    to cancel or abort tasks on all the clusters affected by the task."
+- name: TaskRootDescription
+  value: Reference to the task that is the earliest ancestor of the current task.
+- name: TaskBackgroundDescription
+  value: Signifies if the task is a background task or not.
+- name: AssociatedRootTaskDescription
+  value: Reference to the root task associated with the current task.
+- name: TaskNumberOfSubtasksDescription
+  value: Number of tasks spawned as children of the current task.
+- name: TaskNumberOfEntitiesAffectedDescription
+  value: Number of entities associated with the task.

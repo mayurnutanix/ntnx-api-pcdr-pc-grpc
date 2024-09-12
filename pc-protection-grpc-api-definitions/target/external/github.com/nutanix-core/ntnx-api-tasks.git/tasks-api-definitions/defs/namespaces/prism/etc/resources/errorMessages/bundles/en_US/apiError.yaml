@@ -1,0 +1,50 @@
+- code: 20001
+  errorGroup: TASK_NOT_FOUND_ERROR
+  severity: ERROR
+  message: Failed to find the task as it might be deleted or not yet created
+- code: 20101
+  errorGroup: TASK_OPERATION_NOT_AUTHORIZED_ERROR
+  severity: ERROR
+  message: Failed to perform the operation on the task as the user is not authorized
+- code: 20201
+  errorGroup: INTERNAL_TASK_OPERATION_DISALLOWED_ERROR
+  severity: ERROR
+  message: Failed to perform the operation on the task as it is an internal task
+- code: 20301
+  errorGroup: TASK_CANCELLATION_NOT_SUPPORTED_ERROR
+  severity: ERROR
+  message: Failed to cancel the task as the action is not supported on the current task
+- code: 20401
+  errorGroup: TASK_CANCELLATION_INVALID_STATE_ERROR
+  severity: ERROR
+  message: Failed to cancel the task because the task is already in a completed state
+- code: 20501
+  errorGroup: TASK_INTERNAL_ERROR
+  severity: ERROR
+  message: Failed to perform the operation on the task due to an internal error
+- code: 20601
+  errorGroup: TASK_SERVICE_UNAVAILABLE_ERROR
+  severity: ERROR
+  message: Failed to perform the operation on the task as the service is currently unavailable
+- code: 20701
+  errorGroup: TASK_INVALID_ARGUMENT
+  severity: ERROR
+  message: Failed to find the task as the 'taskExtId' has invalid prefix '{{{prefix}}}'
+  arguments:
+    - prefix
+- code: 20702
+  errorGroup: TASK_INVALID_ARGUMENT
+  severity: ERROR
+  message: Failed to find the task as the 'taskExtId' does not match the expected format
+- code: 20703
+  errorGroup: TASK_INVALID_ARGUMENT
+  severity: ERROR
+  message: Failed to parse the provided query due to an an invalid request
+- code: 20801
+  errorGroup: LEGACY_ERROR
+  severity: ERROR
+  message: Operation failed due to legacy error and 'legacyErrorMessage' should be referred to for details
+- code: 20901
+  errorGroup: TASK_CANCELLATION_SUCCESS
+  severity: INFO
+  message: Task cancellation issued successfully as requested

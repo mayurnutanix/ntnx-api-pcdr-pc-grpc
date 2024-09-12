@@ -1,0 +1,24 @@
+- code: 40701
+  errorGroup: INSUFFICIENT_RESOURCES_WARNING
+  severity: WARNING
+  message: >
+    Failed to recover high availability on cluster {{{cluster_name}}} because
+    not enough resources are available.
+  arguments:
+    - cluster_name
+- code: 40702
+  errorGroup: INSUFFICIENT_RESOURCES_WARNING
+  severity: WARNING
+  message: >
+    Failed to reduce resource hotspots on cluster {{{cluster_name}}} because
+    not enough resources are available.
+  arguments:
+    - cluster_name
+- code: 40703
+  errorGroup: INSUFFICIENT_RESOURCES_WARNING
+  severity: WARNING
+  message: >
+    Failed to fix affinity violations on cluster {{{cluster_name}}} because
+    not enough resources are available.
+  arguments:
+    - cluster_name

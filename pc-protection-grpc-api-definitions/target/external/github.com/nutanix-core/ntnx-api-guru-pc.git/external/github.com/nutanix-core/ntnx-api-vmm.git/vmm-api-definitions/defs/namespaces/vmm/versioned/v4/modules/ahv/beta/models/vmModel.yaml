@@ -1,0 +1,906 @@
+components:
+  schemas:
+    Vm:
+      description: DocRef(VmDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          properties:
+            name:
+              description: DocRef(VmNameDescription)
+              type: string
+              x-constraints:
+                maxLength: ConstantRef(vmNameMaxLength)
+            description:
+              description: DocRef(VmDescriptionDescription)
+              type: string
+            createTime:
+              description: DocRef(VmCreateTimeDescription)
+              type: string
+              format: date-time
+              readOnly: true
+            updateTime:
+              description: DocRef(VmUpdateTimeDescription)
+              type: string
+              format: date-time
+              readOnly: true
+            source:
+              description: DocRef(VmSourceTimeDescription)
+              readOnly: true
+              $ref: "ModelRef({./VmSourceReference})"
+            # Section: Compute Config
+            numSockets:
+              description: DocRef(VmNumSocketsDescription)
+              type: integer
+              format: int32
+              x-constraints:
+                minimum: ConstantRef(computeConfigMinimumInt)
+            numCoresPerSocket:
+              description: DocRef(VmNumCoresPerSocketDescription)
+              type: integer
+              format: int32
+              x-constraints:
+                minimum: ConstantRef(computeConfigMinimumInt)
+            numThreadsPerCore:
+              description: DocRef(VmNumThreadsPerCoreDescription)
+              type: integer
+              format: int32
+              x-constraints:
+                minimum: ConstantRef(computeConfigMinimumInt)
+            numNumaNodes:
+              description: DocRef(VmNumNumaNodesDescription)
+              type: integer
+              format: int32
+            memorySizeBytes:
+              description: DocRef(VmMemorySizeBytesDescription)
+              type: integer
+              format: int64
+              x-constraints:
+                minimum: ConstantRef(computeConfigMinimumInt)
+            isVcpuHardPinningEnabled:
+              description: DocRef(VmVcpuHardPinningDescription)
+              type: boolean
+            isCpuPassthroughEnabled:
+              description: DocRef(VmCpuPassthroughEnabledDescription)
+              type: boolean
+            enabledCpuFeatures:
+              description: DocRef(VmCpuFeaturesDescription)
+              type: array
+              minItems: 0
+              maxItems: 256
+              items:
+                $ref: "ModelRef({./CpuFeature})"
+              uniqueItems: true
+            isMemoryOvercommitEnabled:
+              description: DocRef(VmMemoryOvercommitEnabledDescription)
+              type: boolean
+            isGpuConsoleEnabled:
+              description: DocRef(VmGpuConsoleEnabledDescription)
+              type: boolean
+            isCpuHotplugEnabled:
+              description: DocRef(VmCpuHotPlugEnabledDescription)
+              type: boolean
+            isScsiControllerEnabled:
+              description: DocRef(VmScsiControllerEnableDescription)
+              type: boolean
+            generationUuid:
+              description: DocRef(GenerationUuidDescription)
+              type: string
+              x-constraints:
+                pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+            biosUuid:
+              description: DocRef(BiosUuidDescription)
+              type: string
+              x-constraints:
+                pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+            # Section: PC Config
+            categories:
+              description: DocRef(VmCategoriesDescription)
+              type: array
+              minItems: 0
+              maxItems: 256
+              items:
+                $ref: "ModelRef({./CategoryReference})"
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+            ownershipInfo:
+              # LH TODO - ENG-431845 - $ref clobbers x-constraints and description
+              description: DocRef(VmOwnershipInfoDescription)
+              $ref: "ModelRef({./OwnershipInfo})"
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+            host:
+              readOnly: true
+              $ref: "ModelRef({./HostReference})"
+            cluster:
+              # LH TODO - ENG-431845 - $ref clobbers x-constraints
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              $ref: "ModelRef({./ClusterReference})"
+            availabilityZone:
+              $ref: "ModelRef({./AvailabilityZoneReference})"
+              readOnly: true
+            # Section: Guest Config
+            guestCustomization:
+              # LH TODO - ENG-431845 - $ref clobbers x-constraints
+              $ref: "ModelRef({./GuestCustomizationParams})"
+              x-constraints:
+                $scopes:
+                  - name: "create"
+                    constraints:
+                      writeOnly: true
+            guestTools:
+              # LH TODO - ENG-431845 - $ref clobbers x-constraints
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              $ref: "ModelRef({./GuestTools})"
+            # Section: Hardware Config
+            hardwareClockTimezone:
+              description: DocRef(VmHardwareClockTimezoneDescription)
+              type: string
+              x-constraints:
+                maxLength: ConstantRef(vmHardwareClockTimezoneMaxLength)
+              default: "UTC"
+            isBrandingEnabled:
+              description: DocRef(VmBrandingDisabledDescription)
+              type: boolean
+            bootConfig:
+              # TODO: Object type shouldn't be mutable after creation.
+              description: DocRef(BootDeviceOrderDescription)
+              oneOf:
+                - $ref: "ModelRef({./LegacyBoot})"
+                - $ref: "ModelRef({./UefiBoot})"
+              x-codegen-hint:
+                $any:
+                  - type: entity-identifier
+                    properties:
+                      identifiers:
+                        - type: "ModelRef({./LegacyBoot})"
+                          index: 2001
+                        - type: "ModelRef({./UefiBoot})"
+                          index: 2002
+            isVgaConsoleEnabled:
+              description: DocRef(VmVgaConsoleDisabledDescription)
+              type: boolean
+            machineType:
+              # LH TODO - ENG-431845 - $ref clobbers x-constraints
+              $ref: "ModelRef({./MachineType})"
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+            powerState:
+              $ref: "ModelRef({./PowerState})"
+              readOnly: true
+            vtpmConfig:
+              # LH TODO - ENG-431845 - $ref clobbers description
+              description: DocRef(VtpmConfigDescription)
+              $ref: "ModelRef({./VtpmConfig})"
+            isAgentVm:
+              description: DocRef(VmIsAgentVmDescription)
+              type: boolean
+            apcConfig:
+              description: DocRef(ApcConfigDescription)
+              $ref: "ModelRef({./ApcConfig})"
+            # Section: Scheduler Config
+            isLiveMigrateCapable:
+              description: DocRef(VmLiveMigrateCapableDescription)
+              type: boolean
+              readOnly: true
+            isCrossClusterMigrationInProgress:
+              description: DocRef(VmIsCrossClusterMigrationInProgress)
+              type: boolean
+              readOnly: true
+            # Section: Storage Policy
+            storageConfig:
+              $ref: "ModelRef({./ADSFVmStorageConfig})"
+            # Section: Sub resources
+            disks:
+              description: DocRef(DisksDescription)
+              type: array
+              minItems: 0
+              maxItems: 1024
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              items:
+                $ref: "ModelRef({./Disk})"
+            cdRoms:
+              description: DocRef(VmCdRomsDescription)
+              type: array
+              minItems: 0
+              maxItems: 10
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              items:
+                $ref: "ModelRef({./CdRom})"
+            nics:
+              description: DocRef(NicsDescription)
+              type: array
+              minItems: 0
+              maxItems: 64
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              items:
+                $ref: "ModelRef({./Nic})"
+            gpus:
+              description: DocRef(GpusDescription)
+              type: array
+              minItems: 0
+              maxItems: 16
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              items:
+                $ref: "ModelRef({./Gpu})"
+            serialPorts:
+              description: DocRef(SerialPortsDescription)
+              type: array
+              minItems: 0
+              maxItems: 4
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              items:
+                $ref: "ModelRef({./SerialPort})"
+            # Section: Dr Config
+            protectionType:
+              readOnly: true
+              $ref: "ModelRef({./ProtectionType})"
+            protectionPolicyState:
+              readOnly: true
+              $ref: "ModelRef({./ProtectionPolicyState})"
+            # Section: PCIe Devices.
+            pcieDevices:
+              description: DocRef(PcieDevicesDescription)
+              type: array
+              minItems: 0
+              maxItems: 64
+              x-constraints:
+                $scopes:
+                  - name: "update"
+                    constraints:
+                      readOnly: true
+              items:
+                $ref: "ModelRef({./PcieDevice})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2003
+                - name: name
+                  index: 2004
+                - name: description
+                  index: 2005
+                - name: createTime
+                  index: 2006
+                - name: updateTime
+                  index: 2007
+                - name: source
+                  index: 2008
+                - name: numSockets
+                  index: 2009
+                - name: numCoresPerSocket
+                  index: 2010
+                - name: numThreadsPerCore
+                  index: 2011
+                - name: numNumaNodes
+                  index: 2012
+                - name: memorySizeBytes
+                  index: 2013
+                - name: isVcpuHardPinningEnabled
+                  index: 2014
+                - name: isCpuPassthroughEnabled
+                  index: 2015
+                - name: enabledCpuFeatures
+                  index: 2016
+                - name: categories
+                  index: 2017
+                - name: ownershipInfo
+                  index: 2018
+                - name: host
+                  index: 2019
+                - name: cluster
+                  index: 2020
+                - name: availabilityZone
+                  index: 2021
+                - name: guestCustomization
+                  index: 2022
+                - name: guestTools
+                  index: 2023
+                - name: hardwareClockTimezone
+                  index: 2024
+                - name: isBrandingEnabled
+                  index: 2025
+                - name: isVgaConsoleEnabled
+                  index: 2026
+                - name: machineType
+                  index: 2027
+                - name: powerState
+                  index: 2028
+                - name: isAgentVm
+                  index: 2029
+                - name: isLiveMigrateCapable
+                  index: 2030
+                - name: storageConfig
+                  index: 2031
+                - name: disks
+                  index: 2032
+                - name: cdRoms
+                  index: 2033
+                - name: nics
+                  index: 2034
+                - name: gpus
+                  index: 2035
+                - name: serialPorts
+                  index: 2036
+                - name: protectionType
+                  index: 2037
+                - name: protectionPolicyState
+                  index: 2038
+              # - name: recoveryPlanStates
+              #   index: 2039
+                - name: isMemoryOvercommitEnabled
+                  index: 2040
+                - name: isGpuConsoleEnabled
+                  index: 2041
+                - name: vtpmConfig
+                  index: 2042
+                - name: generationUuid
+                  index: 2043
+                - name: biosUuid
+                  index: 2044
+                - name: isCrossClusterMigrationInProgress
+                  index: 2045
+                - name: apcConfig
+                  index: 2046
+                - name: pcieDevices
+                  index: 2047
+                - name: isCpuHotplugEnabled
+                  index: 2048
+                - name: isScsiControllerEnabled
+                  index: 2049
+      x-filterable-properties:
+        - extId
+        - name
+        - numSockets
+        - numCoresPerSocket
+        - numThreadsPerCore
+        - numNumaNodes
+        - isVcpuHardPinningEnabled
+        - isCpuPassthroughEnabled
+        - isMemoryOvercommitEnabled
+        - isGpuConsoleEnabled
+        - isCpuHotplugEnabled
+        - isScsiControllerEnabled
+        - hardwareClockTimezone
+        - isVgaConsoleEnabled
+        - isAgentVm
+        - isLiveMigrateCapable
+        - machineType
+        - powerState
+        - nics
+        - gpus
+        - memorySizeBytes
+        - cluster
+        - host
+        - apcConfig
+      x-property-mapping:
+        - name: "extId"
+          value: "_entity_id_"
+        - name: "name"
+          value: "vm_name"
+        - name: "numSockets"
+          value: "num_vcpus"
+        - name: "numCoresPerSocket"
+          value: "num_cores_per_vcpus"
+        - name: "numThreadsPerCore"
+          value: "num_threads_per_core"
+        - name: "numNumaNodes"
+          value: "num_numa_nodes"
+        - name: "isVcpuHardPinningEnabled"
+          value: "vcpu_hard_pin"
+        - name: "isCpuPassthroughEnabled"
+          value: "cpu_passthrough"
+        - name: "isMemoryOvercommitEnabled"
+          value: "memory_overcommit"
+        - name: "isGpuConsoleEnabled"
+          value: "gpu_console"
+        - name: "isCpuHotplugEnabled"
+          value: "cpu_hotplug_enabled"
+        - name: "isScsiControllerEnabled"
+          value: "scsi_controller_enabled"
+        - name: "hardwareClockTimezone"
+          value: "hwclock_timezone"
+        - name: "isVgaConsoleEnabled"
+          value: "vga_console"
+        - name: "isAgentVm"
+          value: "agent_vm"
+        - name: "isLiveMigrateCapable"
+          value: "allow_live_migrate"
+        - name: "memorySizeBytes"
+          value: "memory_mb"
+        - name: "machineType"
+          value: "machine_type"
+        - name: "powerState"
+          value: "power_state"
+        - name: "generationUuid"
+          value: "generation_uuid"
+        - name: "biosUuid"
+          value: "bios_uuid"
+      x-sortable-properties:
+        - name
+        - numSockets
+        - numCoresPerSocket
+        - numThreadsPerCore
+        - numNumaNodes
+        - memorySizeBytes
+
+    CpuFeature:
+      description: DocRef(VmCpuFeaturesDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "HARDWARE_VIRTUALIZATION"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: HARDWARE_VIRTUALIZATION
+                  index: 2001
+          - type: enum
+            properties:
+              descriptions:
+                - name: HARDWARE_VIRTUALIZATION
+                  description: DocRef(HardwareVirtualizationCpuFeatureDescription)
+    MachineType:
+      description: DocRef(VmMachineTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "PC"
+            - "PSERIES"
+            - "Q35"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: PC
+                  index: 2001
+                - value: PSERIES
+                  index: 2002
+                - value: Q35
+                  index: 2003
+          - type: enum
+            properties:
+              descriptions:
+                - name: PC
+                  description: DocRef(PcVmMachineTypeDescription)
+                - name: PSERIES
+                  description: DocRef(PSeriesVmMachineTypeDescription)
+                - name: Q35
+                  description: DocRef(Q35VmMachineTypeDescription)
+      x-property-mapping:
+        - name: PC
+          value: pc
+        - name: PSERIES
+          value: pseries
+        - name: Q35
+          value: q35
+    PowerState:
+      description: DocRef(VmPowerStateDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "ON"
+            - "OFF"
+            - "PAUSED"
+            - "UNDETERMINED"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: "ON"
+                  index: 2001
+                - value: "OFF"
+                  index: 2002
+                - value: "PAUSED"
+                  index: 2003
+                - value: "UNDETERMINED"
+                  index: 2004
+          - type: enum
+            properties:
+              descriptions:
+                - name: "ON"
+                  description: DocRef(OnPowerStateDescription)
+                - name: "OFF"
+                  description: DocRef(OffPowerStateDescription)
+                - name: "PAUSED"
+                  description: DocRef(PausedPowerStateDescription)
+                - name: "UNDETERMINED"
+                  description: DocRef(UndeterminedPowerStateDescription)
+      x-property-mapping:
+        - name: "ON"
+          value: 4
+        - name: "OFF"
+          value: 2
+        - name: "PAUSED"
+          value: 8
+        - name: "UNDETERMINED"
+          value: 1
+      x-type-mapping: int64
+    OwnershipInfo:
+      description: DocRef(OwnershipInfoDescription)
+      type: object
+      properties:
+        owner:
+          $ref: "ModelRef({./OwnerReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: owner
+                  index: 2001
+    OwnerReference:
+      description: DocRef(OwnerReferenceDescription)
+      type: object
+      properties:
+        extId:
+          type: string
+          description: DocRef(OwnerExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+    CategoryReference:
+      description: DocRef(CategoryReferenceDescription)
+      type: object
+      properties:
+        extId:
+          type: string
+          description: DocRef(CategoryExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+    AssociateVmCategoriesParams:
+      description: DocRef(AssociateVmCategoriesParamsDescription)
+      type: object
+      properties:
+        categories:
+          type: array
+          minItems: 1
+          maxItems: 256
+          items:
+            $ref: "ModelRef({./CategoryReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: categories
+                  index: 2001
+    DisassociateVmCategoriesParams:
+      description: DocRef(DisassociateVmCategoriesParamsDescription)
+      type: object
+      properties:
+        categories:
+          type: array
+          minItems: 1
+          maxItems: 256
+          items:
+            $ref: "ModelRef({./CategoryReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: categories
+                  index: 2001
+    AvailabilityZoneReference:
+      description: DocRef(AvailabilityZoneReferenceDescription)
+      type: object
+      properties:
+        extId:
+          type: string
+          description: DocRef(AvailabilityZoneExtIdDescription)
+          readOnly: true
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+    ClusterReference:
+      description: DocRef(ClusterReferenceDescription)
+      type: "object"
+      properties:
+        extId:
+          type: string
+          description: DocRef(ClusterExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+      x-property-mapping:
+        - name: "extId"
+          value: "_master_cluster_uuid_"
+    HostReference:
+      description: DocRef(HostReferenceDescription)
+      type: "object"
+      properties:
+        extId:
+          type: string
+          description: DocRef(HostExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+      x-property-mapping:
+        - name: "extId"
+          value: "host_uuid"
+    GuestPowerStateTransitionConfig:
+      type: object
+      description: DocRef(VmGuestPowerStateTransitionConfigDescription)
+      properties:
+        shouldEnableScriptExec:
+          description: DocRef(GuestPowerStateTransitionConfigEnableScriptExecDescription)
+          type: boolean
+        shouldFailOnScriptFailure:
+          description: DocRef(GuestPowerStateTransitionConfigShouldFailOnScriptFailureDescription)
+          type: boolean
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: shouldEnableScriptExec
+                  index: 2001
+                - name: shouldFailOnScriptFailure
+                  index: 2002
+    VmSourceReferenceEntityType: # LH TODO - ENG-431845 - no EntityType objects!
+      description: DocRef(VmSourceReferenceDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - VM
+            - VM_RECOVERY_POINT
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: VM
+                  index: 2001
+                - value: VM_RECOVERY_POINT
+                  index: 2002
+          - type: enum
+            properties:
+              descriptions:
+                - name: VM
+                  description: DocRef(VmSourceReferenceDescription)
+                - name: VM_RECOVERY_POINT
+                  description: DocRef(VmRecoveryPointSourceReferenceEntityTypeDescription)
+    VmSourceReference:
+      type: object
+      description: DocRef(VmSourceReferenceDescription)
+      properties:
+        entityType: # LH TODO - ENG-431845 - no EntityType objects!
+          $ref: "ModelRef({./VmSourceReferenceEntityType})"
+          readOnly: true
+        extId:
+          type: string
+          description: DocRef(VmExtIdDescription)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+            readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: entityType
+                  index: 2001
+                - name: extId
+                  index: 2002
+    GuestPowerOptions:
+      type: object
+      description: DocRef(GuestPowerOptionsDescription)
+      properties:
+        guestPowerStateTransitionConfig:
+          $ref: "ModelRef({./GuestPowerStateTransitionConfig})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: guestPowerStateTransitionConfig
+                  index: 2001
+    ADSFVmStorageConfig:
+      type: object
+      description: DocRef(ADSFVmStorageConfigDescription)
+      properties:
+        isFlashModeEnabled:
+          description: DocRef(FlashModeEnabledDescription)
+          type: boolean
+        qosConfig:
+          $ref: "ModelRef({./QosConfig})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: isFlashModeEnabled
+                  index: 2001
+                - name: qosConfig
+                  index: 2002
+    VtpmConfig:
+      type: object
+      description: DocRef(VtpmConfigDescription)
+      properties:
+        isVtpmEnabled:
+          description: DocRef(VtpmConfigVtpmEnabledDescription)
+          type: boolean
+        version:
+          description: DocRef(VtpmConfigVersionDescription)
+          type: string
+          readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "isVtpmEnabled"
+                  index: 2001
+                - name: "version"
+                  index: 2002
+    ApcConfig:
+      type: object
+      description: DocRef(ApcConfigDescription)
+      properties:
+        isApcEnabled:
+          description: DocRef(ApcEnabledDescription)
+          type: boolean
+        cpuModel:
+          description: DocRef(VmCpuModelDescription)
+          $ref: "ModelRef({./CpuModelReference})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "isApcEnabled"
+                  index: 2001
+                - name: "cpuModel"
+                  index: 2002
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - isApcEnabled
+        - cpuModel
+      x-property-mapping:
+        - name: "isApcEnabled"
+          value: "apc_enabled"
+    CpuModelReference:
+      type: object
+      description: DocRef(VmCpuModelReferenceDescription)
+      properties:
+        extId:
+          description: DocRef(VmCpuModelExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        name:
+          description: DocRef(VmCpuModelNameDescription)
+          type: string
+          x-constraints:
+            maxLength: ConstantRef(vmCpuModelNameMaxLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "name"
+                  index: 2002
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+        - name
+      x-property-mapping:
+        - name: "extId"
+          value: "apc_cpu_model_uuid"
+        - name: "name"
+          value: "apc_cpu_model_name"
+    RevertParams:
+      title: DocRef(VmRevertTitle)
+      description: DocRef(VmRevertDesc)
+      type: object
+      required:
+        - vmRecoveryPointExtId
+      properties:
+        vmRecoveryPointExtId:
+          type: "string"
+          description: DocRef(VmRecoveryPointExtIdDesc)
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: vmRecoveryPointExtId
+                  index: 2001

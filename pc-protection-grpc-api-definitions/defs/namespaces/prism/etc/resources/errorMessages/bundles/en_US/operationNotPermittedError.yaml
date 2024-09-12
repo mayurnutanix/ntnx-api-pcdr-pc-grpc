@@ -1,0 +1,20 @@
+- code: 40601
+  errorGroup: PCBR_OPERATION_NOT_PERMITTED
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central recovery is not supported on HyperV.
+  arguments:
+    - op
+
+- code: 40602
+  errorGroup: PCBR_OPERATION_NOT_PERMITTED
+  severity: ERROR
+  message: Failed to {{{op}}} as this api is implemented on cluster and is not accessible on prism central.
+  arguments:
+    - op
+
+- code: 40603
+  errorGroup: PCBR_OPERATION_NOT_PERMITTED
+  severity: ERROR
+  message: Failed to {{{op}}} as this api is implemented on prism central and is not accessible on cluster.
+  arguments:
+    - op

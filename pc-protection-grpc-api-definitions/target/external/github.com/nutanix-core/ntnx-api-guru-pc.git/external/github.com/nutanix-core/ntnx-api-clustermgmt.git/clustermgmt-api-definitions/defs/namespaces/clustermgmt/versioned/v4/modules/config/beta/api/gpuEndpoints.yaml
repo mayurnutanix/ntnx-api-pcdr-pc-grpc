@@ -1,0 +1,192 @@
+paths:
+  /clusters/{extId}/virtual-gpu-profiles:
+    get:
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(ListVirtualGpuProfilesDescription)
+      summary: DocRef(ListVirtualGpuProfilesDescription)
+      operationId: "listVirtualGpuProfiles"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.7
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: small
+            count: 10
+            timeUnit: seconds
+          - type: large
+            count: 10
+            timeUnit: seconds
+          - type: xlarge
+            count: 10
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Cluster_Vgpu_Profiles
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Cluster Viewer
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "extId"
+                  index: 2002
+                - name: "$page"
+                  index: 2003
+                - name: "$limit"
+                  index: 2004
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      responses:
+        200:
+          description: DocRef(ListVirtualGpuProfilesApiResponseDesc)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/VirtualGpuProfile})"
+        x-api-responses:
+          responseModelName: "ListVirtualGpuProfilesApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/VirtualGpuProfile})"
+                    container: "array"
+                    index: 2001
+
+  /clusters/{extId}/physical-gpu-profiles:
+    get:
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(ListPhysicalGpuProfilesDescription)
+      summary: DocRef(ListPhysicalGpuProfilesDescription)
+      operationId: "listPhysicalGpuProfiles"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.7
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: small
+            count: 10
+            timeUnit: seconds
+          - type: large
+            count: 10
+            timeUnit: seconds
+          - type: xlarge
+            count: 10
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Cluster_Pgpu_Profiles
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Cluster Viewer
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "extId"
+                  index: 2002
+                - name: "$page"
+                  index: 2003
+                - name: "$limit"
+                  index: 2004
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      responses:
+        200:
+          description: DocRef(ListPhysicalGpuProfilesApiResponseDesc)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/PhysicalGpuProfile})"
+        x-api-responses:
+          responseModelName: "ListPhysicalGpuProfilesApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/PhysicalGpuProfile})"
+                    container: "array"
+                    index: 2001

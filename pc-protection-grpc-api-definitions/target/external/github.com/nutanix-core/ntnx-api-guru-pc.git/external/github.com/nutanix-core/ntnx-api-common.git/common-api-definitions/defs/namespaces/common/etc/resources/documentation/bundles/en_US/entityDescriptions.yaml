@@ -1,0 +1,90 @@
+- name: "clusterEntityTypeDescription"
+  value: >
+    Entity representing a Nutanix managed cluster.
+- name: "vmEntityTypeDescription"
+  value: >
+    Entity representing an AHV or ESX Virtual Machine.
+- name: "storageContainerEntityTypeDescription"
+  value: >
+    Entity representing a storage container.
+- name: "volumeGroupEntityTypeDescription"
+  value: >
+    Entity representing a volume group.
+- name: "taskEntityTypeDescription"
+  value: >
+    Entity representing a task.
+- name: "imageEntityTypeDescription"
+  value: >
+    Entity representing an image that can be used for creating VM disks etc.
+- name: "categoryEntityTypeDescription"
+  value: >
+    Entity representing a category in the form of a Key Value pair.
+- name: "nodeEntityTypeDescription"
+  value: >
+    Entity representing a node in a Nutanix managed cluster.
+- name: "vpcEntityTypeDescription"
+  value: >
+    Entity representing a Virtual Private Cloud.
+- name: "subnetEntityTypeDescription"
+  value: >
+    Entity representing a Subnet.
+- name: "routingPolicyEntityTypeDescription"
+  value: >
+    Entity representing a Routing Policy.
+- name: "floatingIPEntityTypeDescription"
+  value: >
+    Entity representing a Floating IP.
+- name: "vpnGatewayEntityTypeDescription"
+  value: >
+    Entity representing a VPN Gateway.
+- name: "vpnConnectionEntityTypeDescription"
+  value: >
+    Entity representing a VPN Connection.
+- name: "directConnectEntityTypeDescription"
+  value: >
+    Entity representing a Direct Connect.
+- name: "directConnectVifEntityTypeDescription"
+  value: >
+    Entity representing a Direct Connect Virtual Interface.
+- name: "virtualNicEntityTypeDescription"
+  value: >
+    Entity representing a Virtual Network Interface Card.
+- name: "virtualSwitchEntityTypeDescription"
+  value: >
+    Entity representing a Virtual Switch.
+- name: "vmDiskEntityTypeDescription"
+  value: >
+    Entity representing a VM Disk.
+- name: "volumeDiskEntityTypeDescription"
+  value: >
+    Entity representing a Volume Disk.
+- name: "diskRecoveryPointEntityTypeDescription"
+  value: >
+    Entity representing the recovery point of a protected Disk.
+- name: "vtepGatewayEntityTypeDescription"
+  value: >
+    Entity representing a Virtual Tunnel End Point.
+- name: "recoveryPlanEntityTypeDescription"
+  value: >
+    Entity representing a Disaster Recovery Plan.
+- name: "availabilityZoneEntityTypeDescription"
+  value: >
+    Entity representing an Availability Zone.
+- name: "virtualNetworkEntityTypeDescription"
+  value: >
+    Entity representing a Virtual Network.
+- name: "consistencyGroupEntityTypeDescription"
+  value: >
+    Entity representing a Consistency Group.
+- name: "subnetExtensionEntityTypeDescription"
+  value: >
+    Entity representing a Subnet Extension.
+- name: "entityTypeDescription"
+  value: >
+    Type of entity that's represented by this reference. eg: VPC
+- name: "entityNameDescription"
+  value: >
+    Name of entity that's represented by this reference.
+- name: "entityUriDescription"
+  value: >
+    URI of entities that's represented by this reference.

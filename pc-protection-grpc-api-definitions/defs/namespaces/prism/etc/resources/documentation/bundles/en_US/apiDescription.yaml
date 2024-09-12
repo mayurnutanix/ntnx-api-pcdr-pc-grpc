@@ -1,0 +1,58 @@
+- name: "eligibleClusterListAPIDesc"
+  value: |
+    Get eligible PE(cluster) list to store PC backup. This list is returned to
+    see what all PE's are eligible for the backup. Here eligible means that
+    the version is greater than minimum required version. It is registered to
+    the prism central.
+- name: "addReplicasAPIDesc"
+  value: |
+    Adds a list of PE as part of replicas on which the backup is required to be
+    taken. The maximum allowed replicas at a given moment is 3.
+    If any one of the PE does not qualify for backup, then the API will fail.
+- name: "removeReplicasAPIDesc"
+  value: |
+    Removes PE / ObjectStore from replicas. This will stop backup from being
+    taken on PE / ObjectStore.
+- name: "recoverPCApiDesc"
+  value: |
+    This is a task driven API. See the recovery sequence diagram in the design
+    doc for the high level list of tasks. The work that this API is expected to
+    do is listed below:
+    1. getClusterExternalStateTrust from PE3. This should also get
+    userrepository.
+    2. restoreIDFData invocation from PC’ to PE3
+    3. Wait for above restore task to complete
+    4. Restore Zk, filesystem data from IDF pc_zk_data table and
+        pc_backup_specs table.
+    5. Set reconcile services Zk flag /appliance/logical/prism/pcdr/recovery
+    6. Start all processes on PC.
+    7. Wait for 5 minutes - This is time given to services to recover. Fixed to
+        5 mins.
+- name: "getReplicasAPIDesc"
+  value: |
+    Retrieves the replica PE's from pc_backup_metadata table. Returns the
+    uuid, name and lastSyncTimestamp to the user.
+- name: "getRecoveryStatusAPIDesc"
+  value: |
+    Get status of recovery task. The object is returned which contains
+    recoveryState and overallCompletionPercentage
+- name: "restoreFilesApiDesc"
+  value: |
+    Restore files to the PC SVMs after the IDF data has been restored to the PC.
+    This API will be called as part of recover task.
+- name: "stopServicesApiDesc"
+  value: |
+    Stop services Api to stop some services using genesis on all the PC SVM Ip's
+    This API will be called as part of recover task and will create a thread for
+    stopping services on every SVM and will return a 202 response.
+- name: "updateCredentialsAPIDesc"
+  value: |
+    Update Endpoint credentials API. This will update the corresponding access keys and
+    secret access keys for a given entityId.
+- name: "updateRpoAPIDesc"
+  value: |
+    Update RPO API will update the rpo value passed in seconds for a given entityId.
+- name: "getFailedRecoveryPointsStatsAPIDesc"
+  value: |
+    Failed recovery stats api to list total failed recovery points in last 30 days and failure
+    details i.e timestamp ,rpo and failure reason.

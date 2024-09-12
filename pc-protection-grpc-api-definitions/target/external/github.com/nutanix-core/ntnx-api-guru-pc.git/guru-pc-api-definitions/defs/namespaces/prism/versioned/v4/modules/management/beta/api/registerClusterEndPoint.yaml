@@ -1,0 +1,184 @@
+paths:
+  /domain-managers/{extId}/$actions/register:
+    post:
+      tags:
+        - "ApiEndpoint(DomainManager)"
+      summary: DocRef(RegisterSummary)
+      description: DocRef(RegisterDescription)
+      operationId: register
+      x-internal-api: false
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      requestBody:
+        description: DocRef(RegistrationSpec)
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/management/beta/models/ClusterRegistrationSpec})"
+        required: true
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-permissions:
+        displayName: Register a cluster with Domain manager
+        entityType: prism_central
+        operationName: Register_Domain_Manager
+        serviceName: Prism
+        roleList:
+          - Super Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Cluster Admin
+          - Domain Manager Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+          - type: rbac
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 2
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 5
+            timeUnit: seconds
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      responses:
+        202:
+          description: DocRef({ext:common:/namespaces/common}, 202AcceptedDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "RegisterApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /domain-managers/{extId}/$actions/unregister:
+    post:
+      tags:
+        - "ApiEndpoint(DomainManager)"
+      summary: DocRef(UnregisterSummary)
+      description: DocRef(UnregisterDescription)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      operationId: unregister
+      x-internal-api: false
+      requestBody:
+        description: DocRef(ClusterUnregistrationSpecDescription)
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/management/beta/models/ClusterUnregistrationSpec})"
+        required: true
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-permissions:
+        displayName: Unregister a cluster with Domain Manager
+        entityType: prism_central
+        operationName: Unregister_Domain_Manager
+        serviceName: Prism
+        roleList:
+          - Super Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Cluster Admin
+          - Domain Manager Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+          - type: rbac
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 2
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 5
+            timeUnit: seconds
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      responses:
+        202:
+          description: DocRef({ext:common:/namespaces/common}, 202AcceptedDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UnregisterApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

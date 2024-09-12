@@ -1,0 +1,61 @@
+# Do not use the INTERNAL_ERROR group for any other error definition apart from error code 10000.
+- code: 10000
+  errorGroup: INTERNAL_ERROR
+  severity: ERROR
+  message: Failed to perform the operation due to an internal error.
+- code: 10001
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}', as it is not supported.
+  arguments:
+    - operation
+- code: 10002
+  errorGroup: VM_SERVICE_UNAVAILABLE_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation because the VM service is currently
+    unavailable.
+- code: 10003
+  errorGroup: OPERATION_TIME_OUT_ERROR
+  severity: ERROR
+  message: Failed to perform the operation '{{{operation}}}', as it timed out.
+  arguments:
+    - operation
+- code: 10004
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}' and the cluster with UUID '{{{cluster_uuid}}}' because the
+    cluster does not support the minimum VMM API version
+    '{{{minimum_version}}}'. Upgrade the cluster to a supported version.
+  arguments:
+    - operation
+    - vm_uuid
+    - cluster_uuid
+    - minimum_version
+- code: 10005
+  errorGroup: API_NOT_ENABLED
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the V4 VM Management API has not been fully deployed yet and will be enabled
+    upon successful completion of the upgrade.
+- code: 10006
+  errorGroup: API_VERSION_NOT_SUPPORTED
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the version of the API request is not supported. Make sure that the paired
+    clusters runs on a compatible versions. Failure is due to the version not
+    being supported.
+- code: 10007
+  errorGroup: API_VERSION_NOT_SUPPORTED
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the version of the VMM API request '{{{client_version}}}'
+    and the currently supported version is '{{{server_version}}}' do not match. Make sure the
+    paired clusters runs on a compatible versions. Failure is due to the version
+    mismatch.
+  arguments:
+    - client_version
+    - server_version

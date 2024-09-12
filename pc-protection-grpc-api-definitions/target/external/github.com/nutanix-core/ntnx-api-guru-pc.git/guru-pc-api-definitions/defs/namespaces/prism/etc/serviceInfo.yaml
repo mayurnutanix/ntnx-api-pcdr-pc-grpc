@@ -1,0 +1,7 @@
+port: 8888
+backendServices:
+  - name: guru
+    environments:
+      - platform: pc
+        port: 8422
+        host: localhost

@@ -1,0 +1,10 @@
+- code: 40401
+  errorGroup: HA_CRITICAL_ERROR
+  severity: ERROR
+  message: >
+    HA is critical on cluster '{{{cluster_name}}}' as one or more VMs could not 
+    be restored to their original host '{{{host_name}}}'.
+  arguments:
+    - cluster_name
+    - host_name
+    

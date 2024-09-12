@@ -1,0 +1,239 @@
+- code: 40101
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as incorrect clusterExtId provided.
+  arguments:
+    - op
+
+- code: 40102
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central is already protected on the provided backup target.
+  arguments:
+    - op
+
+- code: 40103
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as provided cluster with extId {{{clusterExtId}}} is not eligible for becoming backup target.
+  arguments:
+    - op
+    - clusterExtId
+
+- code: 40104
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as we can only add {{{possibleEntities}}} more cluster entries and {{{alreadyPresentEntities}}} entities are already present.
+  arguments:
+    - op
+    - alreadyPresentEntities
+    - possibleEntities
+
+- code: 40105
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as we can only add {{{possibleEntities}}} more object store entries and {{{alreadyPresentEntities}}} entities are already present.
+  arguments:
+    - op
+    - alreadyPresentEntities
+    - possibleEntities
+
+- code: 40106
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid odata params provided.
+  arguments:
+    - op
+
+- code: 40107
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as incorrect object store details provided.
+  arguments:
+    - op
+
+- code: 40108
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as incorrect object store provider provided.
+  arguments:
+    - op
+
+- code: 40109
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as provided cluster is not registered to prism central.
+  arguments:
+    - op
+
+- code: 40110
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid bucket details provided, access key or secret access key cannot be empty.
+  arguments:
+    - op
+
+- code: 40111
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid bucket details provided, please check the details provided for {{{missingArgs}}}.
+  arguments:
+    - op
+    - missingArgs
+
+- code: 40112
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid/empty object store endpoint flavour provided.
+  arguments:
+    - op
+
+- code: 40113
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid rpo details provided - {{{error}}}.
+  arguments:
+    - op
+    - error
+
+- code: 40114
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as backup target identifier does not match the other inputs provided.
+  arguments:
+    - op
+
+- code: 40115
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as cluster details provided instead object store details needed.
+  arguments:
+    - op
+
+- code: 40116
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as more than one recovery source provided, please provide one recovery source.
+  arguments:
+    - op
+
+- code: 40117
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as no cluster ipAddress/clusterUuid/objectStoreEndpoint provided, please provide valid payload to contact backup target for restoring data.
+  arguments:
+    - op
+
+- code: 40118
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid backup target payload provided - {{{error}}}.
+  arguments:
+    - op
+    - error
+
+- code: 40119
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as incorrect datetime provided in recovery query param.
+  arguments:
+    - op
+
+- code: 40120
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as incorrect/malformed query params provided in url.
+  arguments:
+    - op
+
+- code: 40121
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as input prism central cluster uuid does not match with the cluster uuid present in database.
+  arguments:
+    - op
+
+- code: 40122
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central is already connected.
+  arguments:
+    - op
+
+- code: 40123
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service is unable to generate endpoint address for the object store from the details provided.
+  arguments:
+    - op
+
+- code: 40124
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as recovery point not provided while recovering from object store.
+  arguments:
+    - op
+
+- code: 40125
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as restore point not provided while recovering from object store.
+  arguments:
+    - op
+
+- code: 40126
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as incorrect/malformed endpoint address url provided.
+  arguments:
+    - op
+
+- code: 40127
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as no recovery source options provided, please provide one recovery source.
+  arguments:
+    - op
+
+- code: 40128
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid data found in recover prism central request for deployment of prism central.
+  arguments:
+    - op
+
+- code: 40129
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as endpoint flavour is not provided or is empty.
+  arguments:
+    - op
+
+- code: 40130
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as endpoint address is not provided or is empty.
+  arguments:
+    - op
+
+- code: 40131
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central cluster uuid is not provided or is empty.
+  arguments:
+    - op
+
+- code: 40132
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as restore point uuid is not provided or is empty.
+  arguments:
+    - op
+
+- code: 40133
+  errorGroup: PCBR_INVALID_INPUT
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central backup information was not found on cluster with extId {{{extId}}}.
+  arguments:
+    - op
+    - extId

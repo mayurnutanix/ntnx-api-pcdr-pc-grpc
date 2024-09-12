@@ -1,0 +1,368 @@
+paths:
+  /clusters/{clusterExtId}/$actions/associate-categories:
+    post:
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(AssociateCategoryDesc)
+      summary: DocRef(AssociateCategorySummary)
+      operationId: "associateCategoriesToCluster"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Associate_Cluster_Categories
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+      parameters:
+        - name: clusterExtId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(CategoryBodyDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/CategoryEntityReferences})"
+      responses:
+        202:
+          description: DocRef(AssociateCategoryResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "AssociateCategoriesToClusterApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /clusters/{clusterExtId}/$actions/disassociate-categories:
+    post:
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(DissociateCategoryDesc)
+      summary: DocRef(DissociateCategorySummary)
+      operationId: "disassociateCategoriesFromCluster"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Disassociate_Cluster_Categories
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+      parameters:
+        - name: clusterExtId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(CategoryBodyDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/CategoryEntityReferences})"
+      responses:
+        202:
+          description: DocRef(DissociateCategoryResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "DisassociateCategoriesFromClusterApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /clusters/{clusterExtId}/hosts/{hostExtId}/host-nics/{extId}/$actions/associate-categories:
+    post:
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(AssociateCategoriesToHostNicDesc)
+      summary: DocRef(AssociateCategoriesToHostNicSummary)
+      operationId: "associateCategoriesToHostNic"
+      x-internal-api: true
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-permissions:
+        operationName: Associate_Host_Nic_Categories
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "hostExtId"
+                  index: 2002
+                - name: "extId"
+                  index: 2003
+                - name: "body"
+                  index: 2004
+      parameters:
+        - name: clusterExtId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: hostExtId
+          in: path
+          description: DocRef(HostExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: extId
+          in: path
+          description: DocRef(HostNicExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(CategoryBodyDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/CategoryEntityReferences})"
+      responses:
+        202:
+          description: DocRef(AssociateCategoriesToHostNicResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "AssociateCategoriesToHostNicApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /clusters/{clusterExtId}/hosts/{hostExtId}/host-nics/{extId}/$actions/disassociate-categories:
+    post:
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(DisassociateCategoriesFromHostNicDesc)
+      summary: DocRef(DisassociateCategoriesFromHostNicSummary)
+      operationId: "disassociateCategoriesFromHostNic"
+      x-internal-api: true
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-permissions:
+        operationName: Disassociate_Host_Nic_Categories
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "hostExtId"
+                  index: 2002
+                - name: "extId"
+                  index: 2003
+                - name: "body"
+                  index: 2004
+      parameters:
+        - name: clusterExtId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: hostExtId
+          in: path
+          description: DocRef(HostExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: extId
+          in: path
+          description: DocRef(HostNicExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(CategoryBodyDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/CategoryEntityReferences})"
+      responses:
+        202:
+          description: DocRef(DisassociateCategoriesFromHostNicResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "DisassociateCategoriesFromHostNicApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

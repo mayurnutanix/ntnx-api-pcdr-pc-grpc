@@ -1,0 +1,274 @@
+# VM errors - 301xx.
+- code: 30100
+  errorGroup: VM_NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}', because
+    it is not found.
+  arguments:
+    - vm_uuid
+- code: 30101
+  errorGroup: VM_ALREADY_EXISTS
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' because
+    it already exists.
+  arguments:
+    - vm_uuid
+- code: 30102
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}', due to
+    an invalid argument with key '{{{argument_key}}}' and value
+    '{{{argument_value}}}'.
+  arguments:
+    - vm_uuid
+    - argument_key
+    - argument_value
+- code: 30103
+  errorGroup: VM_INVALID_VM_UUID
+  severity: ERROR
+  message: >
+    Failed to perform the operation due to invalid VM UUID '{{{vm_uuid}}}' in
+    the request.
+  arguments:
+    - vm_uuid
+- code: 30104
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}', as it is not supported.
+  arguments:
+    - operation
+    - vm_uuid
+- code: 30105
+  errorGroup: VM_INVALID_POWER_STATE_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}', because
+    the current power state of the VM is '{{{power_state}}}'.
+  arguments:
+    - vm_uuid
+    - power_state
+- code: 30106
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}', as the cluster with UUID '{{{cluster_uuid}}}' is not
+    registered to PC.
+  arguments:
+    - operation
+    - vm_uuid
+    - cluster_uuid
+- code: 30107
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}', as specifying the argument '{{{argument_name}}}' is not
+    allowed.
+  arguments:
+    - operation
+    - vm_uuid
+    - argument_name
+- code: 30108
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}', as enforcement of Calm quota check failed.
+  arguments:
+    - operation
+    - vm_uuid
+- code: 30109
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Cannot specify power state as {{{power_state}}} during VM creation.
+    Please use the VM power action endpoints instead.
+  arguments:
+    - power_state
+# Error when user tries to update read-only value
+- code: 30110
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}', due to
+    an invalid argument with key '{{{argument_key}}}' which is not matching
+    its existing value.
+  arguments:
+    - vm_uuid
+    - argument_key
+# Failed to create VM
+- code: 30111
+  errorGroup: CREATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Failed to create VM, due to an invalid argument with key
+    '{{{argument_key}}}' and value '{{{argument_value}}}'.
+  arguments:
+    - argument_key
+    - argument_value
+#Failed Operation due to duplicate values.
+- code: 30112
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' and at
+    the key '{{{argument_key}}}', due to duplicate values '{{{argument_value}}}'.
+  arguments:
+    - vm_uuid
+    - argument_key
+    - argument_value
+# Failed operation due to non-existing values.
+- code: 30113
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' and at
+    the key '{{{argument_key}}}' because the value '{{{argument_value}}}' was not found.
+  arguments:
+    - vm_uuid
+    - argument_key
+    - argument_value
+# Failed operation due to both arguments present
+- code: 30114
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' because
+    specifying both '{{{first_argument}}}' and '{{{second_argument}}}' is not allowed.
+  arguments:
+    - vm_uuid
+    - first_argument
+    - second_argument
+- code: 30115
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}', as
+    memory overcommit feature is not supported for a vNUMA VM.
+  arguments:
+    - vm_uuid
+- code: 30116
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as APC
+    setting cannot be enabled for CPU passthrough enabled VMs.
+  arguments:
+    - vm_uuid
+- code: 30117
+  errorGroup: FILE_FAULT_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    '{{{vm_uuid}}}' because there was an issue accessing the VM on file system.
+  arguments:
+    - operation
+    - vm_uuid
+- code: 30118
+  errorGroup: INSUFFICIENT_RESOURCES_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    '{{{vm_uuid}}}' because it violated the resource usage policy.
+  arguments:
+    - operation
+    - vm_uuid
+- code: 30119
+  errorGroup: INVALID_CONFIGURATION_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    '{{{vm_uuid}}}' as configuration of the VM is invalid.
+  arguments:
+    - operation
+    - vm_uuid
+- code: 30120
+  errorGroup: ESXI_GUEST_TOOLS_UNAVAILABLE_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    '{{{vm_uuid}}}' because ESXi guest tools are not available. 
+    Please mount esxi tools and retry.
+  arguments:
+    - operation 
+    - vm_uuid
+# Failed to create VM due to invalid memory argument.
+- code: 30121
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}', as requested memory is '{{{memory_mb_requested}}}'mb
+    and it is less than the minimum allowed memory of '{{{minimum_required_memory_mb}}}'mb.
+  arguments:
+    - operation
+    - vm_uuid
+    - memory_mb_requested
+    - minimum_required_memory_mb
+
+- code: 30122
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as the cluster is not capable of supporting VM attribute '{{{attribute}}}'.
+  arguments:
+    - operation
+    - vm_uuid
+    - attribute
+
+- code: 30123
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as GPU console can only be enabled for a VM with exactly one virtual GPU.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 30124
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as virtual GPUs cannot be created along with non-virtual GPU types.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 30125
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as virtual GPUs with different types cannot be added to the same VM.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 30126
+  errorGroup: VM_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as configuring memory overcommit along with GPUs is not supported.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 30127
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as disabling SCSI controller is not supported for VMs with SCSI disks.
+  arguments:
+    - operation
+    - vm_uuid

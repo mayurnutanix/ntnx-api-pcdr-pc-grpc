@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nutanix.nutanix-core.ntnx-api.tasks</groupId>
+  <artifactId>tasks</artifactId>
+  <version>16.9.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Tasks Versioned APIs</name>
+
+  <properties>
+    <service-parent.version>16.9.0.2187-RELEASE</service-parent.version>
+    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
+    <swagger-codegen.version>3.0.10</swagger-codegen.version>
+    <platform-tools.version>16.9.0.368-RELEASE</platform-tools.version>
+    <api.defs>tasks-api-definitions</api.defs>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <modules>
+    <module>tasks-api-definitions</module>
+    <module>tasks-api-codegen</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>spring-boot-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>proto-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <distributionManagement>
+    <repository>
+      <id>${NEXUS_ID}</id>
+      <url>${NEXUS_URI}</url>
+    </repository>
+  </distributionManagement>
+
+</project>

@@ -1,0 +1,232 @@
+# Model Description for eligible-cluster-list API.
+- name: "EligibleClusterListModelDesc"
+  value: |
+    An object containing a list of eligible cluster object. These are the
+    eligible cluster for which PC backup is possible.
+- name: "EligibleClusterModelDesc"
+  value: |
+    Eligible cluster object for PC backup. Containing some basic properties like
+    cluster_uuid, cluster_name, remainingStorage, totalStorage
+- name: "clusterUuidPropertyDesc"
+  value: |
+    Uuid of the eligible PE(cluster).
+- name: "clusterNamePropertyDesc"
+  value: |
+    Name of the eligible PE(cluster).
+- name: "remainingStoragePropertyDesc"
+  value: |
+    Remaining storage of the eligible PE(cluster).
+- name: "totalStoragePropertyDesc"
+  value: |
+    Total storage of the candidate PE.
+- name: "isHostingPePropertyDesc"
+  value: |
+    Whether the candidate PE was hosting PC.
+- name: "backedUpEntitiesCountSupportedDesc"
+  value: |
+    The amount of entities which can be backed up to the PE from PC.
+
+# Model Description for add-replicas API
+- name: "BackupTargetsModelDesc"
+  value: |
+    List of pe cluster uuid or object store endpoints which needs to be
+    provided while making a post request, to add a PE or object store as a
+    backup for the PC data.
+- name: "clusterUuidListDesc"
+  value: |
+    List of PE cluster uuid.
+
+# Model Description for get-recovery-status API
+- name: "RecoveryStatusModelDesc"
+  value: |
+    An object containing Recovery state and overall completion percentage
+    of recovery task.
+- name: "recoveryStateDesc"
+  value: |
+    Recovery state of recovery task. Possible values could be IDFDataRestore,
+    WaitForProcessesToReconcile.
+- name: "recoveryStateTitleDesc"
+  value: |
+    Recovery state title, the message that appears to the user.
+- name: "overallCompletionPercentageDesc"
+  value: |
+    Overall completion percentage of task.
+
+
+# ApiError Model description
+- name: "ApiErrorDesc"
+  value: |
+    The error response that we want to return to the user.
+- name: "ErrorMessageDesc"
+  value:
+    The error message field where the error response will be put.
+- name: "ErrorTypeDesc"
+  value:
+    The type of error, like INVALID_INPUT, INTERNAL_SERVER_ERROR, etc.
+
+# ApiSuccess Model description
+- name: "ApiSuccessDesc"
+  value: |
+    The success response that we want to return to the user.
+- name: "SuccessMessageDesc"
+  value:
+    The success message field where the success response message will be put.
+
+# PEInfo Description
+- name: "PEIpInfoDesc"
+  value: |
+    Contains all the IPs of the Replica PEs and PE cluster uuid which is
+    required to make request on the PE3. Recovered PC will try to call all
+    of them sequentially if it does not work.
+- name: "peClusterIpDesc"
+  value: |
+    Ip of the PE3 from which the backup trust data is required to be restored.
+
+# Model description for get-replicas API
+- name: "BackupTargetsInfoModelDesc"
+  value:
+    Model to contain information regarding PE's which are already added as
+    replicas. It is a list of PEInfo model.
+- name: "PEInfoModelDesc"
+  value:
+    Model to contain the information of the replica PE. It contains
+    information like PE clusterUuid, PE name, and lastSyncTimestamp.
+- name: "peClusterIdDesc"
+  value:
+    PE cluster uuid. A unique id corresponding to the cluster.
+- name: "objectStoreEntityIdDesc"
+  value:
+     A unique id corresponding to the object store.
+- name: "peNameDesc"
+  value:
+    A human redable name of the PE cluster.
+- name: "lastSyncTimestampDesc"
+  value:
+    The last sync time signifies the time at which the backup was last synced
+    to PE. This time will be updated every 30min.
+- name: "isBackupPausedDesc"
+  value:
+    Tells whether the backup is paused on the given PE or not.
+- name: "pauseBackupMessageDesc"
+  value:
+    Tells the reason why the backup might be paused. Will be empty if
+    isBackupPaused field is false.
+- name: "ObjectStoreEndpointInfoModelDesc"
+  value:
+    Model to contain the information of the replica ObjectStoreEndpoints.
+    It contains information like ObjectStore endpointAddress, endpointFlavour,
+    and lastSyncTimestamp.
+# Model for recover api
+- name: "PcRestoreRootTaskModelDesc"
+  value:
+    Model to return the root task uuid created at PC for the recovery flow.
+    As success this uuid will be returned telling that the task has been
+    initiated and now the PE have to wait until the tasks finishes.
+- name: "taskUuidDesc"
+  value:
+    Task uuid of the root PC restore task.
+
+- name: "PcvmRestoreFilesDesc"
+  value: |
+    List of files to be restored in new PC.
+
+- name: "PcvmRestoreFileDesc"
+  value: |
+    File object containing file path and content.
+
+- name: "FilePathDesc"
+  value: |
+    Path of the file to be restored.
+
+- name: "FileContentDesc"
+  value: |
+    Contents of the file to be restored.
+
+- name: "FileEncryptionDesc"
+  value: |
+    Whether the file is encrypted.
+
+- name: "servicesBodyDesc"
+  value: |
+    A service name which is required to be stopped.
+
+- name: "ObjectStoreEndpointDesc"
+  value: |
+    The endpoint of the object store where backup data of Prism Central is
+    present.
+
+- name: "EndpointAddressDesc"
+  value: |
+    The endpoint address of the object store where backup data of Prism Central
+    is present.
+- name: "PcEndpointCredentialsDesc"
+  value: |
+    This object consists of accessKey, secretAccessKey for a given entityId.
+- name: "accessKeyDesc"
+  value: |
+    AccessKey for the endpoint flavor
+- name: "secretAccessKeyDesc"
+  value: |
+    SecretAccessKey for the endpoint flavor.
+
+- name: "RpoConfigDesc"
+  value: |
+    Object consisting of rpo value to be configured for the given entityId.
+
+- name: "RpoSecsDesc"
+  value: |
+    A RPO value in seconds to be configured.
+
+- name: "FailedRecoveryPointsStatsModelDesc"
+  value: |
+    Contains the total failed recovery counts and stats details list.
+
+- name: "TotalFailedRecoveryPointsDesc"
+  value: |
+    Count of failed recovery points in last 30 days.
+
+- name: "FailedRecoveryPointDetailsDesc"
+  value: |
+    Failed recovery stats details i.e timestamp, rpo and failure message.
+
+- name: "RecoveryPointTimestampDesc"
+  value: |
+    Timestamp at which backup failed for defined object store.
+
+- name: "MessageDesc"
+  value: |
+    Failure reason because of which backup failed for that particular timestamp.
+
+- name: "BackupUuidDesc"
+  value: |
+    BackupUuid for the particular backup for which recovery is triggered.
+
+- name: "IpAddressOrDomain"
+  value: |
+    The ip address or domain of the object store endpoint where backup data of Prism Central
+    is stored.
+
+- name: "Port"
+  value: |
+    The port of the object store endpoint where backup data of Prism Central
+    is stored.
+
+- name: "Bucket"
+  value: |
+    The bucket name of the object store endpoint where backup data of Prism Central
+    is stored.
+
+- name: "Region"
+  value: |
+    The region name of the object store endpoint where backup data of Prism Central
+    is stored.
+
+- name: "SkipTLS"
+  value: |
+    Skip the verification of TLS certificates during communication with object
+    store endpoint.
+
+- name: "BackupRetentionDays"
+  value: |
+    Retention days configured for backup in Object Store.    
+    

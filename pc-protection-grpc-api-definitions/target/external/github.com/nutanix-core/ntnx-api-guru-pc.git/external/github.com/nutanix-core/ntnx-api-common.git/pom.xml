@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nutanix.nutanix-core.ntnx-api.common</groupId>
+  <artifactId>common</artifactId>
+  <version>16.9.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
+    <swagger-codegen-version>3.0.10</swagger-codegen-version>
+    <swagger-parser-version>2.0.12</swagger-parser-version>
+    <api.defs>common-api-definitions</api.defs>
+    <common-defs-version>${project.version}</common-defs-version>
+    <org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <jackson-core.version>2.13.5</jackson-core.version>
+    <protobuf-java-util.version>3.11.1</protobuf-java-util.version>
+  </properties>
+
+  <name>Common API and Schema definitions</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.4</version>
+    </dependency>
+  </dependencies>
+
+  <modules>
+    <module>common-api-definitions</module>
+    <module>common-api-codegen</module>
+  </modules>
+
+  <distributionManagement>
+    <repository>
+      <id>${NEXUS_ID}</id>
+      <url>${NEXUS_URI}</url>
+    </repository>
+  </distributionManagement>
+</project>

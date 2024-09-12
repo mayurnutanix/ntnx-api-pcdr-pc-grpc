@@ -1,0 +1,35 @@
+{
+  "name": "vmm-js-client",
+  "description": "Nutanix JavaScript client SDK",
+  "main": "ntnx-api-client-sdk.js",
+  "scripts": {
+    "babel:cjs": "BABEL_ENV=commonjs babel target/generated-sources/swagger/src --out-dir target/npm/dist/lib",
+    "babel:es": "babel target/generated-sources/swagger/src --out-dir target/npm/dist/es",
+    "build:cjs": "npm run babel:cjs && npm run tsc:cjs",
+    "build:es": "npm run babel:es && npm run tsc:es",
+    "build": "rimraf target/npm/dist && npm run build:cjs && npm run build:es && npm run webpack:dev && npm run webpack:prod",
+    "documentation": "documentation build target/generated-sources/swagger/src/index.js -f html -o target/transpile-output/docs",
+    "tsc:cjs": "tsc --module commonjs --outDir target/npm/dist/lib",
+    "tsc:es": "tsc --module es2015 --moduleResolution node --outDir target/npm/dist/es",
+    "webpack:dev": "webpack --config target/generated-sources/swagger/webpack.config.js -o target/npm/dist",
+    "webpack:prod": "webpack --config target/generated-sources/swagger/webpack.config.prod.js -o target/npm/dist"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "babel-loader": "^8.2.5",
+    "documentation": "^13.2.5",
+    "gulp-documentation": "^3.2.1",
+    "path": "^0.12.7",
+    "querystring": "^0.2.0",
+    "rimraf": "^3.0.2",
+    "superagent": "^5.2.2",
+    "superagent-retry-delay": "^2.6.2",
+    "typescript": "^4.3.5",
+    "uuid": "^8.3.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "path-browserify": "^1.0.1"
+  }
+}

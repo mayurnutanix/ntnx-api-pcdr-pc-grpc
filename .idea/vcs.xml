@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-clustermgmt.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-clustermgmt.git/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-clustermgmt.git/external/github.com/nutanix-core/ntnx-api-vcenter" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-clustermgmt.git/external/github.com/nutanix-core/ntnx-api-vcenter/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-vmm.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-vmm.git/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-vmm.git/external/github.com/nutanix-core/ntnx-api-data-protection-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-guru-pc.git/external/github.com/nutanix-core/ntnx-api-vmm.git/external/github.com/nutanix-core/ntnx-api-data-protection-common.git/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-tasks.git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pc-protection-grpc-api-definitions/target/external/github.com/nutanix-core/ntnx-api-tasks.git/external/github.com/nutanix-core/ntnx-api-common.git" vcs="Git" />
+  </component>
+</project>

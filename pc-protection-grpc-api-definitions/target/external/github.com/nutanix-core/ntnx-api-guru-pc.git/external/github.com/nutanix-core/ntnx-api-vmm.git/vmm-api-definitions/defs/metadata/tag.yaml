@@ -1,0 +1,25 @@
+tags:
+  - name: Vm
+    x-displayName: VMs
+    description: >
+      APIs for creating and managing Virtual Machines on AHV.
+  - name: EsxiVm
+    x-displayName: ESXi VMs
+    description: >
+      APIs for managing Virtual Machines on ESXi.
+  - name: Stats
+    x-displayName: Stats
+    description: >
+      APIs to fetch stats for AHV Virtual Machines.
+  - name: EsxiStats
+    x-displayName: ESXi Stats
+    description: >
+      APIs to fetch stats for ESXi Virtual Machines.
+  - name: VmAntiAffinityPolicies
+    x-displayName: VM-VM Anti-Affinity Policies
+    description: >
+      APIs for managing VM-VM Anti-Affinity Policies.
+  - name: VmHostAffinityPolicies
+    x-displayName: VM-Host Affinity Policies
+    description: >
+      APIs for managing VM-Host Affinity Policies.

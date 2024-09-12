@@ -1,0 +1,4 @@
+
+- language: "java"
+  packageName: "com.nutanix.apis.messages"
+  revision: 1

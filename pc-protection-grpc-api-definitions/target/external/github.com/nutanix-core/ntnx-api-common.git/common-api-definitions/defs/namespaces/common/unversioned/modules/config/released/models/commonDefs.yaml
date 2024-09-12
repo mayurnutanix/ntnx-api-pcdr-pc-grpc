@@ -1,0 +1,23 @@
+
+components:
+  schemas:
+    AnyMap:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+          required: true
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        value:
+          type: "object"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1002

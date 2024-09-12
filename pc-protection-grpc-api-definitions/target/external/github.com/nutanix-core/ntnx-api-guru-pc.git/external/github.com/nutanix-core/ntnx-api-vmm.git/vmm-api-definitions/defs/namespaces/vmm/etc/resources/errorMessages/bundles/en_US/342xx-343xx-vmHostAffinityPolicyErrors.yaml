@@ -1,0 +1,10 @@
+# VM-Host Affinity Policy errors - 342xx-343xx.
+- code: 34200
+  errorGroup: VM_HOST_AFFINITY_POLICY_ENFORCEMENT_ERROR
+  severity: ERROR
+  message: >
+    Failed to enforce the VM-Host Affinity Policy with UUID '{{{policy_uuid}}}' on
+    some of the VMs associated with the policy because application of the VM-Host
+    Affinity Policy on those VMs failed.
+  arguments:
+    - policy_uuid

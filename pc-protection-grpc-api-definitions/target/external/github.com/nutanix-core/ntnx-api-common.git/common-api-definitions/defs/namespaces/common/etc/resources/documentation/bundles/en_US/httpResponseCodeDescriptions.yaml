@@ -1,0 +1,33 @@
+- name: "404NotFoundDesc"
+  value: >
+    This error is only returned when the request is for a single entity and indicates that the resource with
+    the specified id does not exist on the server
+- name: "403ForbiddenDesc"
+  value: >
+    The requesting entity does not have access to the resource being requested.
+- name: "400BadRequestDesc"
+  value: >
+    One or more parameters specified in the request are invalid.  The error messages should indicate the exact
+    nature of the errors.
+- name : "200SuccessDesc"
+  value: >
+    HTTP status code when request is successful.
+
+- name : "201CreatedDesc"
+  value: >
+    HTTP Status code when the requested resource has been created by the server. The Location Header contains
+    the URL of the newly created resource.
+
+- name : "202AcceptedDesc"
+  value: >
+    Http Status code when the request has been accepted by the server but has not been completed yet. The
+    Location Header contains the URL of the Task object that can be used to track the status of the request.
+
+- name : "204NoContentDesc"
+  value: >
+    Http Status code when the request is successfully executed on the server. In this case, the response
+    contains no content.
+
+- name : "404NotFoundDesc"
+  value: >
+    Http Status code when the requested resource doesn't exist.

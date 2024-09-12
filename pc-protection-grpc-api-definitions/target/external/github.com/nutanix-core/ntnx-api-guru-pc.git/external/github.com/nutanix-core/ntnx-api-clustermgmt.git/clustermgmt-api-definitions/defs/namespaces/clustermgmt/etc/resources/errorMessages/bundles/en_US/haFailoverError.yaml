@@ -1,0 +1,9 @@
+- code: 40251
+  errorGroup: RESTART_VMS_FAILURE
+  severity: ERROR
+  message: >
+    HA failover failed for {{{host_name}}} because one or more VMs could not be 
+    restarted.
+  arguments:
+    - host_name
+    

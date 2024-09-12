@@ -1,0 +1,19 @@
+openapi: 3.0.1
+info:
+  title: "Tasks Versioned APIs"
+  version: ${project.version}
+  x-logo:
+    url: 'https://developers.internal.nutanix.com/api/v1/namespaces/prism/images/prism-logo-img.svg'
+    altText: Tasks logo
+security:
+  - basicAuthScheme: []
+  - apiKeyAuthScheme: []
+components:
+  securitySchemes:
+    basicAuthScheme:
+      type: "http"
+      scheme: "basic"
+    apiKeyAuthScheme:
+      type: apiKey
+      in: header
+      name: X-ntnx-api-key

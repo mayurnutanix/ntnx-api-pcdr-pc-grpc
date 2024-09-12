@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: "Guru - The new GoLang grpc service which hosts API endpoints for PC management."
+  version: 16.8.0-SNAPSHOT
+  x-project-info:
+    prefix: 'gurupc'
+  x-logo:
+    url: "https://www.nutanix.com/content/dam/nutanix/logos/nutanix/nutanix-neg.png"
+    backgroundColor: "#FFFFFF"
+    altText: "guru-pc Logo"
+security:
+  - basicAuthScheme: []
+  - apiKeyAuthScheme: []
+components:
+  securitySchemes:
+    basicAuthScheme:
+      type: "http"
+      scheme: "basic"
+    apiKeyAuthScheme:
+      type: apiKey
+      in: header
+      name: X-ntnx-api-key

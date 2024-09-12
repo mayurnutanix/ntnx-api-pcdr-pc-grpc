@@ -1,0 +1,113 @@
+components:
+  schemas:
+    EnvironmentInfo:
+      type: object
+      description: DocRef(EnvironmentInfoDescription)
+      properties:
+        type:
+          $ref: "ModelRef({./EnvironmentType})"
+        providerType:
+          $ref: "ModelRef({./ProviderType})"
+        provisioningType:
+          $ref: "ModelRef({./ProvisioningType})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "type"
+                  index: 2001
+                - name: "providerType"
+                  index: 2002
+                - name: "provisioningType"
+                  index: 2003
+
+    EnvironmentType:
+      description: DocRef(EnvironmentTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "ONPREM"
+            - "NTNX_CLOUD"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: ONPREM
+                  index: 2001
+                - value: NTNX_CLOUD
+                  index: 2002
+          - type: enum
+            properties:
+              descriptions:
+                - name: ONPREM
+                  description: DocRef(OnPremEnvironmentTypeDescription)
+                - name: NTNX_CLOUD
+                  description: DocRef(NtnxCloudEnvironmentTypeDescription)
+
+    ProviderType:
+      description: DocRef(ProviderTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - NTNX
+            - AZURE
+            - AWS
+            - GCP
+            - VSPHERE
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: NTNX
+                  index: 2004
+                - value: AZURE
+                  index: 2005
+                - value: AWS
+                  index: 2006
+                - value: GCP
+                  index: 2007
+                - value: VSPHERE
+                  index: 2008
+          - type: enum
+            properties:
+              descriptions:
+                - name: NTNX
+                  description: DocRef(NtnxProviderTypeDescription)
+                - name: AZURE
+                  description: DocRef(AzureProviderTypeDescription)
+                - name: AWS
+                  description: DocRef(AwsProviderTypeDescription)
+                - name: GCP
+                  description: DocRef(GcpProviderTypeDescription)
+                - name: VSPHERE
+                  description: DocRef(VsphereProviderTypeDescription)
+
+    ProvisioningType:
+      description: DocRef(InstanceTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "NTNX"
+            - "NATIVE"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: NTNX
+                  index: 3001
+                - value: NATIVE
+                  index: 3002
+          - type: enum
+            properties:
+              descriptions:
+                - name: NTNX
+                  description: DocRef(NtnxInstanceTypeDescription)
+                - name: NATIVE
+                  description: DocRef(NativeInstanceTypeDescription)

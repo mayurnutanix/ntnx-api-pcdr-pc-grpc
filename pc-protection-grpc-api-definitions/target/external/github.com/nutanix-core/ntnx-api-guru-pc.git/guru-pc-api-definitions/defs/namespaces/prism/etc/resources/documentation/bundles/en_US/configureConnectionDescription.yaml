@@ -1,0 +1,22 @@
+- name: ConfigureConnectionDescription
+  value: "Internal API to configure the connection between two clusters. It 
+          creates or updates required entities to facilitate seamless working of the
+          connection established between the two clusters."
+- name: ConnectionConfigSpec
+  value: "Payload to configure connection endpoint. It contains the details of the 
+          remote cluster you are connecting to."
+- name: ConfigureConnectionSummary
+  value: "Create/update a connection between two clusters"
+- name: UnconfigureConnectSpec
+  value: "Payload to unconfigure connection endpoint. It contains the details of 
+          the remote cluster to be disconnected."
+- name: UnconfigureConnectionDescription
+  value: "Internal API to unconfigure the connection between two clusters. It 
+          removes the entities created during the configure connection API."
+- name: UnconfigureConnectionSummary
+  value: "Remove a connection between two clusters"
+- name: RemoteClusterDetailsDescription
+  value: "This includes the attributes of a remote cluster, such as the cluster name, cluster type,
+          and address details. The address details comprise the external address 
+          (either a virtual IP or FQDN), the port for incoming connections, and the
+          internal addresses (node IP addresses)."

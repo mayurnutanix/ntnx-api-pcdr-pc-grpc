@@ -1,0 +1,17 @@
+clusters:
+  - type: pc
+    uberRateLimits:
+      - type: default
+        limit: 30
+      - type: xsmall
+        limit: 30
+      - type: small
+        limit: 40
+      - type: large
+        limit: 60
+      - type: xlarge
+        limit: 80
+  - type: pe
+    uberRateLimits:
+      - type: default
+        limit: 30

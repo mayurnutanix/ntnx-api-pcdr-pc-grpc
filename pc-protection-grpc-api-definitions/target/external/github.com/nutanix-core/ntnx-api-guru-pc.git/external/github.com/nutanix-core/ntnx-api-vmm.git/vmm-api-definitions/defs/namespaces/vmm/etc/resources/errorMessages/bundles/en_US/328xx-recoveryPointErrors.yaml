@@ -1,0 +1,31 @@
+# VM recovery point errors - 328xx.
+- code: 32801
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to revert the VM with UUID '{{{vm_uuid}}}' because Nutanix Guest
+    Tools is installed on the VM but missing in the VM recovery point with UUID
+    '{{{vm_recovery_point_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - vm_recovery_point_uuid
+- code: 32802
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to revert the VM with UUID '{{{vm_uuid}}}' because Nutanix Guest
+    Tools installation state differs between the VM configuration and that of
+    the VM recovery point with UUID '{{{vm_recovery_point_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - vm_recovery_point_uuid
+- code: 32803
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to revert the VM with UUID '{{{vm_uuid}}}' because Nutanix Guest
+    Tools version differs between the VM configuration and that of
+    the VM recovery point with UUID '{{{vm_recovery_point_uuid}}}'.
+  arguments:
+    - vm_uuid
+    - vm_recovery_point_uuid

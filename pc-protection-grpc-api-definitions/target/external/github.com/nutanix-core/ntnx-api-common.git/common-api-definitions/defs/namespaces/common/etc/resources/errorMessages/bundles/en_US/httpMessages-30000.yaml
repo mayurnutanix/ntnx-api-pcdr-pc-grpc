@@ -1,0 +1,7 @@
+- code: 30000
+  severity: WARNING
+  errorGroup: NOT_FOUND
+  message: >
+    Error due to no {{{entities}}} found that match the given request uri
+  arguments:
+    - "entities"

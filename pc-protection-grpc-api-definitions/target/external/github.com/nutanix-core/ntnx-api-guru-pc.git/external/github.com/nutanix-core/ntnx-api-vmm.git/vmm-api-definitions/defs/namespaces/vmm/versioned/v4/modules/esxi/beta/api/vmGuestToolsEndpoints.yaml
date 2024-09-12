@@ -1,0 +1,613 @@
+paths:
+  /vms/{extId}/nutanix-guest-tools:
+    x-backend-service-name: pcVmmEsxiSvc
+    get:
+      tags:
+        - "ApiEndpoint(EsxiVm)"
+      description: DocRef(GetVmGuestToolsDescription)
+      summary: DocRef(GetVmGuestToolsSummary)
+      operationId: "getNutanixGuestToolsById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 6
+            timeUnit: seconds
+          - type: Small
+            count: 12
+            timeUnit: seconds
+          - type: Large
+            count: 20
+            timeUnit: seconds
+          - type: XLarge
+            count: 20
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_ESXi_Virtual_Machine_NGT
+        description: "Allows to view Nutanix Guest Tools configuration of an ESXi Virtual Machine."
+        serviceName: VMM
+        entityType: esxi_vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+            - Internal Super Admin
+            - Prism Admin
+            - Prism Viewer
+            - Self-Service Admin
+            - Super Admin
+            - Storage Admin
+        legacyOperationList:
+          - Prism:View_ESXi_Virtual_Machine_NGT
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: ESXi VMs
+          - type: operationId
+            properties:
+              value: getNutanixGuestTools
+          - type: responseModelName
+            properties:
+              value: GetNutanixGuestToolsResponse
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.7
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/esxi/beta/models/NutanixGuestTools})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "GetNutanixGuestToolsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/esxi/beta/models/NutanixGuestTools})"
+                    index: 2001
+
+    put:
+      tags:
+        - "ApiEndpoint(EsxiVm)"
+      description: DocRef(UpdateVmGuestToolsDescription)
+      summary: DocRef(UpdateVmGuestToolsSummary)
+      operationId: "updateNutanixGuestToolsById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 8
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Update_ESXi_Virtual_Machine_NGT
+        description: "Allows to update Nutanix Guest Tools configuration of an ESXi Virtual Machine."
+        serviceName: VMM
+        entityType: esxi_vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+            - Internal Super Admin
+            - Prism Admin
+            - Self-Service Admin
+            - Super Admin
+        relatedOperationList:
+          - VMM:View_ESXi_Virtual_Machine_NGT
+        legacyOperationList:
+          - Prism:Update_ESXi_Virtual_Machine_NGT
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/esxi/beta/models/NutanixGuestTools})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: ESXi VMs
+          - type: operationId
+            properties:
+              value: updateNutanixGuestTools
+          - type: responseModelName
+            properties:
+              value: UpdateNutanixGuestToolsResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.7
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UpdateNutanixGuestToolsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/nutanix-guest-tools/$actions/install:
+    x-backend-service-name: pcVmmEsxiSvc
+    post:
+      tags:
+        - "ApiEndpoint(EsxiVm)"
+      description: DocRef(InstallVmGuestToolsDescription)
+      summary: DocRef(InstallVmGuestToolsSummary)
+      operationId: "installNutanixGuestTools"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Install_ESXi_Virtual_Machine_NGT
+        description: "Allows to install Nutanix Guest Tools on an ESXi Virtual Machine."
+        serviceName: VMM
+        entityType: esxi_vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+            - Internal Super Admin
+            - Prism Admin
+            - Self-Service Admin
+            - Super Admin
+        relatedOperationList:
+          - VMM:View_ESXi_Virtual_Machine_NGT
+        legacyOperationList:
+          - Prism:Install_ESXi_Virtual_Machine_NGT
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/esxi/beta/models/NutanixGuestToolsInstallConfig})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: ESXi VMs
+          - type: operationId
+            properties:
+              value: installNutanixVmGuestTools
+          - type: responseModelName
+            properties:
+              value: InstallNutanixVmGuestToolsResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.7
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "InstallNutanixGuestToolsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/nutanix-guest-tools/$actions/upgrade:
+    x-backend-service-name: pcVmmEsxiSvc
+    post:
+      tags:
+        - "ApiEndpoint(EsxiVm)"
+      description: DocRef(UpgradeVmGuestToolsDescription)
+      summary: DocRef(UpgradeVmGuestToolsSummary)
+      operationId: "upgradeNutanixGuestTools"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Upgrade_ESXi_Virtual_Machine_NGT
+        description: "Allows to upgrade Nutanix Guest Tools on an ESXi Virtual Machine."
+        serviceName: VMM
+        entityType: esxi_vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+            - Internal Super Admin
+            - Prism Admin
+            - Self-Service Admin
+            - Super Admin
+        relatedOperationList:
+          - VMM:View_ESXi_Virtual_Machine_NGT
+        legacyOperationList:
+          - Prism:Upgrade_ESXi_Virtual_Machine_NGT
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/esxi/beta/models/NutanixGuestToolsUpgradeConfig})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: ESXi VMs
+          - type: operationId
+            properties:
+              value: upgradeNutanixVmGuestTools
+          - type: responseModelName
+            properties:
+              value: UpgradeNutanixVmGuestToolsResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.7
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UpgradeNutanixGuestToolsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/nutanix-guest-tools/$actions/insert-iso:
+    x-backend-service-name: pcVmmEsxiSvc
+    post:
+      tags:
+        - "ApiEndpoint(EsxiVm)"
+      description: DocRef(InsertVmGuestToolsDescription)
+      summary: DocRef(InsertVmGuestToolsSummary)
+      operationId: "insertNutanixGuestTools"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Insert_ESXi_Virtual_Machine_NGT_ISO
+        description: "Allows to insert Nutanix Guest Tools ISO on an ESXi Virtual Machine."
+        serviceName: VMM
+        entityType: esxi_vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+            - Internal Super Admin
+            - Prism Admin
+            - Self-Service Admin
+            - Super Admin
+        relatedOperationList:
+          - VMM:View_ESXi_Virtual_Machine_NGT
+        legacyOperationList:
+          - Prism:Insert_ESXi_Virtual_Machine_NGT_ISO
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/esxi/beta/models/NutanixGuestToolsInsertConfig})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: ESXi VMs
+          - type: operationId
+            properties:
+              value: insertNutanixVmGuestTools
+          - type: responseModelName
+            properties:
+              value: InsertNutanixVmGuestToolsResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.7
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "InsertNutanixGuestToolsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/nutanix-guest-tools/$actions/uninstall:
+    x-backend-service-name: pcVmmEsxiSvc
+    post:
+      tags:
+        - "ApiEndpoint(EsxiVm)"
+      description: DocRef(UninstallVmGuestToolsDescription)
+      summary: DocRef(UninstallVmGuestToolsSummary)
+      operationId: "uninstallNutanixGuestTools"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Uninstall_ESXi_Virtual_Machine_NGT
+        description: "Allows to uninstall Nutanix Guest Tools from an ESXi Virtual Machine."
+        serviceName: VMM
+        entityType: esxi_vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+            - Internal Super Admin
+            - Prism Admin
+            - Self-Service Admin
+            - Super Admin
+        relatedOperationList:
+          - VMM:View_ESXi_Virtual_Machine_NGT
+        legacyOperationList:
+          - Prism:Uninstall_ESXi_Virtual_Machine_NGT
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: ESXi VMs
+          - type: operationId
+            properties:
+              value: uninstallNutanixVmGuestTools
+          - type: responseModelName
+            properties:
+              value: UninstallNutanixVmGuestToolsResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.7
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UninstallNutanixGuestToolsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

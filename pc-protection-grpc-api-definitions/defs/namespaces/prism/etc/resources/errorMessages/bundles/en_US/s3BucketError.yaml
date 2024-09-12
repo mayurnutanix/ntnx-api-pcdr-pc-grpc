@@ -1,0 +1,90 @@
+- code: 40251
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as lifecycle policy is incorrectly configured for bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - bucketName
+    - region
+
+- code: 40252
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as lifecycle rule is incorrectly configured for bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - bucketName
+    - region
+
+- code: 40253
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as bucket lifecycle rule default retention incorrectly configured, please add a policy with default retention of {{{retentionDays}}} days for bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - retentionDays
+    - bucketName
+    - region
+
+- code: 40254
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} due to s3 bucket lifecycle policy validation failure for bucket {{{bucketName}}} and region {{{region}}} and error {{{error}}}.
+  arguments:
+    - op
+    - bucketName
+    - error
+    - region
+
+- code: 40255
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} due to validation issue with s3 bucket object lock config for bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - bucketName
+    - region
+
+- code: 40256
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as s3 bucket object lock not enabled for bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - bucketName
+    - region
+
+- code: 40257
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as s3 bucket not found, please ensure bucket {{{bucketName}}} and region {{{region}}} exists.
+  arguments:
+    - op
+    - bucketName
+    - region
+
+- code: 40258
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as no backup with provided entity exists in s3 bucket - entity {{{entity}}} and bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - entity
+    - bucketName
+    - region
+
+- code: 40259
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid bucket object lock config rule default retention policy found, please add a policy with default retention of {{{retentionDays}}} days.
+  arguments:
+    - op
+    - retentionDays
+
+- code: 40260
+  errorGroup: PCBR_S3_BUCKET_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} due to s3 bucket object lock validation failure - {{{error}}}.
+  arguments:
+    - op
+    - error

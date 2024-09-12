@@ -1,0 +1,9 @@
+- code: 40501
+  errorGroup: INSUFFICIENT_RESOURCES_ERROR
+  severity: ERROR
+  message: >
+    Failed to schedule VM {{{vm_name}}} on cluster {{{cluster_name}}} because
+    not enough resources are available.
+  arguments:
+    - vm_name
+    - cluster_name

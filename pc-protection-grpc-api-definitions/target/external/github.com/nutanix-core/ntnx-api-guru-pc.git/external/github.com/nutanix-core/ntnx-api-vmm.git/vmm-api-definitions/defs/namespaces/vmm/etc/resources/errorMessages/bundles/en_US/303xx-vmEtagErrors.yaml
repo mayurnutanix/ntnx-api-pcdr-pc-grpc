@@ -1,0 +1,36 @@
+# VM ETag errors - 303xx.
+- code: 30300
+  errorGroup: VM_ETAG_MISSING
+  severity: ERROR
+  message: >
+    Failed to perform the operation because of the missing If-Match header in
+    the request.
+- code: 30301
+  errorGroup: VM_ETAG_INVALID
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the If-Match header value passed
+    '{{{request_etag}}}' is invalid.
+  arguments:
+    - request_etag
+- code: 30302
+  errorGroup: VM_ETAG_NOT_MODIFIED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as the
+    If-None-Match header value passed '{{{request_etag}}}' matches the
+    current value in the server.
+  arguments:
+    - vm_uuid
+    - request_etag
+- code: 30303
+  errorGroup: VM_ETAG_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' and
+    If-Match header value passed '{{{request_etag}}}' because it doesn't match
+    the current value in the server '{{{current_etag}}}'.
+  arguments:
+    - vm_uuid
+    - request_etag
+    - current_etag

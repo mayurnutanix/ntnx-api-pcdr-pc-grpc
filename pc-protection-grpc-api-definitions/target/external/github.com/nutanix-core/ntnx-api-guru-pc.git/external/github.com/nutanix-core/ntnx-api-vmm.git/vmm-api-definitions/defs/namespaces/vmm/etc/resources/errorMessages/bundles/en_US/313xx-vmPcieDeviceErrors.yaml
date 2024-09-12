@@ -1,0 +1,55 @@
+# VM PCIe device related errors - 313xx.
+- code: 31300
+  errorGroup: VM_PCIE_DEVICE_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the VM with UUID
+    {{{vm_uuid}}} as the PCIe device with UUID {{{pcie_device_config_uuid}}} is
+    not found.
+  arguments:
+    - operation
+    - vm_uuid
+    - pcie_device_config_uuid
+
+- code: 31301
+  errorGroup: VM_PCIE_UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the VM with UUID
+    {{{vm_uuid}}}, because the current power state of the VM is power ON.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 31302
+  errorGroup: VM_PCIE_UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the VM with UUID
+    {{{vm_uuid}}}, as memory overcommit feature is not supported for a VM with
+    PCIe devices attached.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 31303
+  errorGroup: VM_PCIE_UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the VM with UUID
+    {{{vm_uuid}}} due to the PCIe device not being supported yet, which could be
+    because AOS or AHV have not been upgraded yet, or feature is not enabled.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 31304
+  errorGroup: VM_PCIE_INSUFFICIENT_RESOURCES_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the VM with UUID
+    {{{vm_uuid}}} due to insufficient available PCIe devices or because they are
+    already being used by other VMs.
+  arguments:
+    - operation
+    - vm_uuid

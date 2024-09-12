@@ -1,0 +1,743 @@
+paths:
+  /vm-anti-affinity-policies/{extId}:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(GetAntiAffinityPolicyDescription)
+      summary: DocRef(GetAntiAffinityPolicyDescription)
+      operationId: "getVmAntiAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: Small
+            count: 15
+            timeUnit: seconds
+          - type: Large
+            count: 20
+            timeUnit: seconds
+          - type: XLarge
+            count: 20
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_VM_Anti_Affinity_Policy
+        description: "Allows to view a VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+        relatedOperationList:
+          - Prism:View_Category
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(AntiAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicy})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "GetVmAntiAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicy})"
+                    index: 2001
+
+    put:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(UpdateAntiAffinityPolicyDescription)
+      summary: DocRef(UpdateAntiAffinityPolicyDescription)
+      operationId: "updateVmAntiAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 5
+            timeUnit: seconds
+          - type: Large
+            count: 5
+            timeUnit: seconds
+          - type: XLarge
+            count: 5
+            timeUnit: seconds
+      x-permissions:
+        operationName: Update_VM_Anti_Affinity_Policy
+        description: "Allows to update a VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        relatedOperationList:
+          - Prism:View_Category
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_VM_Anti_Affinity_Policy
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(AntiAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicy})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UpdateVmAntiAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+    delete:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(DeleteAntiAffinityPolicyDescription)
+      summary: DocRef(DeleteAntiAffinityPolicyDescription)
+      operationId: "deleteVmAntiAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 5
+            timeUnit: seconds
+          - type: Large
+            count: 5
+            timeUnit: seconds
+          - type: XLarge
+            count: 5
+            timeUnit: seconds
+      x-permissions:
+        operationName: Delete_VM_Anti_Affinity_Policy
+        description: "Allows to delete a VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        relatedOperationList:
+          - VMM:View_VM_Anti_Affinity_Policy
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(AntiAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "DeleteVmAntiAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vm-anti-affinity-policies:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(ListAntiAffinityPoliciesDescription)
+      summary: DocRef(ListAntiAffinityPoliciesDescription)
+      operationId: "listVmAntiAffinityPolicies"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_VM_Anti_Affinity_Policy
+        description: "Allows to view a VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+        relatedOperationList:
+          - Prism:View_Category
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "$page"
+                  index: 2001
+                - name: "$limit"
+                  index: 2002
+                - name: "$filter"
+                  index: 2003
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicy})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListVmAntiAffinityPoliciesApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicy})"
+                    container: "array"
+                    index: 2001
+
+    post:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(CreateAntiAffinityPolicyDescription)
+      summary: DocRef(CreateAntiAffinityPolicyDescription)
+      operationId: "createVmAntiAffinityPolicy"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 5
+            timeUnit: seconds
+          - type: Large
+            count: 5
+            timeUnit: seconds
+          - type: XLarge
+            count: 5
+            timeUnit: seconds
+      x-permissions:
+        operationName: Create_VM_Anti_Affinity_Policy
+        description: "Allows to create a VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        relatedOperationList:
+          - Prism:View_Category
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicy})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "body"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "CreateVmAntiAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vm-anti-affinity-policies/{vmAntiAffinityPolicyExtId}/vm-compliance-states:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(ListCompliancesInAntiAffinityPolicyDescription)
+      summary: DocRef(ListCompliancesInAntiAffinityPolicyDescription)
+      operationId: "listVmAntiAffinityPolicyVmComplianceStates"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_VM_Anti_Affinity_Policy_VM_Compliance_States
+        description: "Allows to view VM-VM Anti-affinity policy VM compliance states."
+        serviceName: VMM
+        entityType: vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+        relatedOperationList:
+          - Prism:View_Category
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+          - VMM:View_VM_Anti_Affinity_Policy
+      parameters:
+        - name: vmAntiAffinityPolicyExtId
+          in: path
+          description: DocRef(AntiAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmAntiAffinityPolicyExtId"
+                  index: 2001
+                - name: "$page"
+                  index: 2002
+                - name: "$limit"
+                  index: 2003
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicyVmComplianceState})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListVmAntiAffinityPolicyVmComplianceStatesApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmAntiAffinityPolicyVmComplianceState})"
+                    container: "array"
+                    index: 2001
+
+  /legacy-vm-anti-affinity-policies:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(ListLegacyVmAntiAffinityPoliciesDescription)
+      summary: DocRef(ListLegacyVmAntiAffinityPoliciesDescription)
+      operationId: "listLegacyVmAntiAffinityPolicies"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Legacy_VM_Anti_Affinity_Policy
+        description: "Allows to view a legacy VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: legacy_vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+        relatedOperationList:
+          - VMM:View_Virtual_Machine
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "$page"
+                  index: 2001
+                - name: "$limit"
+                  index: 2002
+                - name: "$filter"
+                  index: 2003
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/LegacyVmAntiAffinityPolicy})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListLegacyVmAntiAffinityPoliciesApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/LegacyVmAntiAffinityPolicy})"
+                    container: "array"
+                    index: 2001
+
+  /legacy-vm-anti-affinity-policies/{extId}:
+    x-backend-service-name: pcVmmSvc
+    delete:
+      tags:
+        - "ApiEndpoint(VmAntiAffinityPolicies)"
+      description: DocRef(DeleteLegacyVmAntiAffinityPolicyDescription)
+      summary: DocRef(DeleteLegacyVmAntiAffinityPolicyDescription)
+      operationId: "deleteLegacyVmAntiAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 5
+            timeUnit: seconds
+          - type: Large
+            count: 5
+            timeUnit: seconds
+          - type: XLarge
+            count: 5
+            timeUnit: seconds
+      x-permissions:
+        operationName: Delete_Legacy_VM_Anti_Affinity_Policy
+        description: "Allows to delete a legacy VM-VM Anti-Affinity Policy."
+        serviceName: VMM
+        entityType: legacy_vm_anti_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        relatedOperationList:
+          - VMM:View_Legacy_VM_Anti_Affinity_Policy
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(LegacyVmAntiAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmAntiAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "DeleteLegacyVmAntiAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

@@ -1,0 +1,6 @@
+- code: 40401
+  errorGroup: PCBR_ETAG_MISMATCH_FAILURE
+  severity: ERROR
+  message: Failed to {{{op}}} due to version mismatch, please perform a GET request first and then try again.
+  arguments:
+    - op

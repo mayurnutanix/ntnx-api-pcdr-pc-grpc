@@ -1,0 +1,45 @@
+- name: "EnvironmentInfoDescription"
+  value: |
+    An object denoting the environment information of the PC. It contains the following fields:<br>
+    - type: Enums denoting the environment type of the PC.<br>
+    - providerType: Enums denoting the provider of the cloud PC.<br>
+    - instanceObj: Enums denoting the instance type of the cloud PC.<br>
+- name: "EnvironmentTypeDescription"
+  value: |
+    Enums denoting the environment type of the PC, that is, on-prem PC or cloud PC.<br>
+    Following are the supported entity types:
+    - ONPREM
+    - NTNX_CLOUD
+- name: "OnPremEnvironmentTypeDescription"
+  value: "On-prem environment."
+- name: "NtnxCloudEnvironmentTypeDescription"
+  value: "Nutanix cloud environment."
+- name: "ProviderTypeDescription"
+  value: |
+    Enums denoting the provider of the cloud, in case of environment type a cloud PC.<br>
+    The service currently supports the following providers:
+    - NTNX
+    - AZURE
+    - AWS
+    - GCP
+    - VSPHERE
+- name: "NtnxProviderTypeDescription"
+  value: "Nutanix cloud provider."
+- name: "AzureProviderTypeDescription"
+  value: "Azure cloud provider."
+- name: "AwsProviderTypeDescription"
+  value: "AWS cloud provider."
+- name: "GcpProviderTypeDescription"
+  value: "GCP cloud provider."
+- name: "VsphereProviderTypeDescription"
+  value: "Vsphere cloud provider."
+- name: "InstanceTypeDescription"
+  value: |
+    Enums denoting the instance type of the cloud PC. It indicates whether the PC is created on bare-metal
+    or on a cloud-provisioned VM. Hence, it supports two possible values:
+    - NTNX
+    - NATIVE
+- name: "NtnxInstanceTypeDescription"
+  value: "Nutanix instance."
+- name: "NativeInstanceTypeDescription"
+  value: "Native instance."

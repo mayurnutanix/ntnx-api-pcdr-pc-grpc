@@ -1,0 +1,13 @@
+- code: 40501
+  errorGroup: PCBR_IDEMPOTENCY_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as http header NTNX-Request-Id is not found in the request.
+  arguments:
+    - op
+
+- code: 40502
+  errorGroup: PCBR_IDEMPOTENCY_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as User ID is not found in request.
+  arguments:
+    - op

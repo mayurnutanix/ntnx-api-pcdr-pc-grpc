@@ -1,0 +1,584 @@
+paths:
+  /vms/{vmExtId}/serial-ports/{extId}:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(GetSerialPortDescription)
+      summary: DocRef(GetSerialPortSummary)
+      operationId: "getSerialPortById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: Small
+            count: 20
+            timeUnit: seconds
+          - type: Large
+            count: 25
+            timeUnit: seconds
+          - type: XLarge
+            count: 25
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Virtual_Machine_Serial_Port
+        description: "Allows to view a Virtual Machine Serial Port."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - VPC Admin
+          - Storage Admin
+          - Network Infra Admin
+          - Virtual Machine Admin
+          - Virtual Machine Operator
+          - Virtual Machine Viewer
+        legacyParentOperationList:
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:View_Virtual_Machine_Serial_Port
+      parameters:
+        - name: vmExtId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: extId
+          in: path
+          description: DocRef(SerialPortExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmExtId"
+                  index: 2001
+                - name: "extId"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: getSerialPortByExtId
+          - type: responseModelName
+            properties:
+              value: GetSerialPortResponse
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/SerialPort})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "GetSerialPortApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/SerialPort})"
+                    index: 2001
+
+    put:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(UpdateSerialPortDescription)
+      summary: DocRef(UpdateSerialPortSummary)
+      operationId: "updateSerialPortById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 8
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Update_Virtual_Machine_Serial_Port
+        description: "Allows to update a Virtual Machine Serial Port."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Virtual_Machine_Serial_Port
+        legacyOperationList:
+          - Prism:Update_Virtual_Machine_Serial_Port
+      parameters:
+        - name: vmExtId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: extId
+          in: path
+          description: DocRef(SerialPortExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/SerialPort})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmExtId"
+                  index: 2001
+                - name: "extId"
+                  index: 2002
+                - name: "body"
+                  index: 2003
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: updateSerialPort
+          - type: responseModelName
+            properties:
+              value: UpdateSerialPortResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UpdateSerialPortApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+    delete:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(DeleteSerialPortDescription)
+      summary: DocRef(DeleteSerialPortSummary)
+      operationId: "deleteSerialPortById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Delete_Virtual_Machine_Serial_Port
+        description: "Allows to delete a Virtual Machine Serial Port."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Virtual_Machine_Serial_Port
+        legacyOperationList:
+          - Prism:Delete_Virtual_Machine_Serial_Port
+      parameters:
+        - name: vmExtId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: extId
+          in: path
+          description: DocRef(SerialPortExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmExtId"
+                  index: 2001
+                - name: "extId"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: deleteSerialPort
+          - type: responseModelName
+            properties:
+              value: DeleteSerialPortResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "DeleteSerialPortApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{vmExtId}/serial-ports:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(ListSerialPortsDescription)
+      summary: DocRef(ListSerialPortsSummary)
+      operationId: "listSerialPortsByVmId"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 3
+            timeUnit: seconds
+          - type: Large
+            count: 5
+            timeUnit: seconds
+          - type: XLarge
+            count: 7
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Virtual_Machine_Serial_Port
+        description: "Allows to view a Virtual Machine Serial Port."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - VPC Admin
+          - Storage Admin
+          - Network Infra Admin
+          - Virtual Machine Admin
+          - Virtual Machine Operator
+          - Virtual Machine Viewer
+        legacyParentOperationList:
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:View_Virtual_Machine_Serial_Port
+      parameters:
+        - name: vmExtId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmExtId"
+                  index: 2001
+                - name: "$page"
+                  index: 2002
+                - name: "$limit"
+                  index: 2003
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: listSerialPorts
+          - type: responseModelName
+            properties:
+              value: ListSerialPortsResponse
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/SerialPort})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListSerialPortsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/SerialPort})"
+                    container: "array"
+                    index: 2001
+
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(CreateSerialPortDescription)
+      summary: DocRef(CreateSerialPortSummary)
+      operationId: "createSerialPort"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 8
+            timeUnit: seconds
+          - type: Large
+            count: 20
+            timeUnit: seconds
+          - type: XLarge
+            count: 20
+            timeUnit: seconds
+      x-permissions:
+        operationName: Create_Virtual_Machine_Serial_Port
+        description: "Allows to create a Virtual Machine Serial Port."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Virtual_Machine_Serial_Port
+        legacyOperationList:
+          - Prism:Create_Virtual_Machine_Serial_Port
+      parameters:
+        - name: vmExtId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/SerialPort})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmExtId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: responseModelName
+            properties:
+              value: CreateSerialPortResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "CreateSerialPortApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

@@ -1,0 +1,1 @@
+This folder contains any namespace wide resources such as error message bundles etc.

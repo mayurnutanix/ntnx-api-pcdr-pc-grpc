@@ -1,0 +1,114 @@
+# Response code description for eligible-cluster-list API.
+- name: "getElgibleClusterList200Desc"
+  value: |
+    Successfully returned the eligible clusters(PE) for PC Backup.
+- name: "getEligibleClusterListDefault"
+  value: |
+    Some error encountered while querying for eligible
+    cluster list. This is the default error message that will be sent.
+- name: "addReplicas200Desc"
+  value: |
+    When the add replica call is successful send the success message back to
+    the user.
+- name: "addReplicasDefaultDesc"
+  value: |
+    While adding replicas there are multiple scenario on the basis of which the
+    addReplicas API can fail. Returning the error message corresponding to each.
+    There can be database error, null pointer exception, etc. This is the
+    default message for that.
+- name: "addReplicas400Desc"
+  value: |
+    When the recovery password is wrong or invalid UUID of the PE is
+    provided, or the number of uuid's might be more than what is allowed.
+    Handling those scenarios.
+
+- name: "removeReplica204Desc"
+  value: |
+    Replica is successfully removed.
+
+- name: "removeReplica404Desc"
+  value: |
+    Given PE Uuid is not part of eligible cluster list.
+
+- name: "removeReplicaDefaultDesc"
+  value: |
+    While removing replica there are multiple scenario on the basis of which
+    the removeReplica API can fail. Returning the error message corresponding
+    to each. There can be database error, null pointer exception, etc.
+- name: "recoverAPI202Desc"
+  value: |
+    Successfully return that the task for recovering data on PC has been
+    accepted. Now polling can be done to know the status of the given task.
+- name: "recoverAPI400Desc"
+  value: |
+    Bad payload provided. No value of PE3 ips provided. It is necessary for
+    them to be present to get basic trust data and add entry of restore in PE3.
+- name: "recoverAPIDefaultDesc"
+  value: |
+    Internal server error encountered while accepting the request for
+    recovering PC. This error can occur due to various scenarios and
+    corresponding error message will be returned in API response.
+- name: "getReplicas200Desc"
+  value: |
+    When the getReplica call is success return the list of replica PE's which
+    are already added for backup.
+- name: "getReplicasDefaultDesc"
+  value: |
+    While retrieving getReplicas there can be IDF error while retrieving list
+    of replica PE. Default error message object.
+- name: "recoveryStatus200Desc"
+  value: |
+    Successfully returned the recovery status
+- name: "recoveryStatusDefaultDesc"
+  value: |
+    Internal Server Error. Error occured while querying the status of recovery
+    task. This could be because some of the required services like Ergon are
+    down. Please contact Nutanix support for further assistance. If replica PE
+    Ip's are not reachable throw error.
+- name: "restoreFiles204Desc"
+  value: |
+    Restore files to the PC SVM and when it is done return a 204 status code
+    for success.
+- name: "restoreFiles4XXDesc"
+  value: |
+    Restore files 4XX error.
+- name: "restoreFilesDefaultDesc"
+  value: |
+    Restore files default error object.
+
+- name: "stopServicesStatus202Desc"
+  value: |
+    On creating the task it returns the success with 202 response.
+- name: "stopServicesStatusDefaultDesc"
+  value: |
+    In case the task is not created throw a default response specifying the
+    reason and internal server error.
+
+- name: "updateCredential200Desc"
+  value: |
+    When the update credential call is successful send the success message back to
+    the user.
+- name: "updateCredentialDefaultDesc"
+  value: |
+    A default message when update credentials API can fail. Returning the error message corresponding to each failure.
+    There can be database error, null pointer exception, network connection issue etc.
+- name: "updateCredential400Desc"
+  value: |
+    When the endpoint credentials are incorrect. Handling scenarios where either one of the access key 
+    or secret access key is not provided or is null.
+
+- name: "updateRpo200Desc"
+  value: |
+    When the update rpo call is successful send the success message back to the user.
+- name: "updateRpoDefaultDesc"
+  value: |
+    A default message when update RPO API can fail. Returning the error message corresponding to each failure.
+    There can be database error, null pointer exception, network connection issue etc.
+- name: "updateRpo400Desc"
+  value: |
+    When the rpo value to be updated is incorrect. Handling scenarios where RPO value is invalid or less than 60seconds
+    etc.
+
+- name: "failedRecoveryPointsStats200Desc"
+  value: |
+    Failed Recovery Stats list returned Successfully.

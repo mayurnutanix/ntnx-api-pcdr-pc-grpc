@@ -1,0 +1,16 @@
+- code: 40101
+  errorGroup: HA_FAILOVER_IN_PROGRESS_ERROR
+  severity: ERROR
+  message: >
+    Failed to exit maintenance mode on host '{{{host_name}}}' because failover 
+    is in progress.
+  arguments:
+    - host_name
+- code: 40102
+  errorGroup: HOST_REMOVED_ERROR
+  severity: ERROR
+  message: >
+    Failed to exit maintenance mode on host '{{{host_name}}}' because host is 
+    marked for removal.
+  arguments:
+    - host_name

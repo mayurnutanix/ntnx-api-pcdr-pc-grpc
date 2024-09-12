@@ -1,0 +1,38 @@
+- code: 40351
+  errorGroup: PCBR_RESOURCE_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} as backup target with extId {{{backupTargetExtId}}} not found.
+  arguments:
+    - op
+    - backupTargetExtId
+
+- code: 40352
+  errorGroup: PCBR_RESOURCE_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} as restore source with extId {{{extId}}} not found.
+  arguments:
+    - op
+    - extId
+
+- code: 40353
+  errorGroup: PCBR_RESOURCE_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central recovery points information not found in object store.
+  arguments:
+    - op
+
+- code: 40354
+  errorGroup: PCBR_RESOURCE_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} as restore point with extId {{{extId}}} not found.
+  arguments:
+    - op
+    - extId
+
+- code: 40355
+  errorGroup: PCBR_RESOURCE_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central with extId {{{extId}}} not found.
+  arguments:
+    - op
+    - extId

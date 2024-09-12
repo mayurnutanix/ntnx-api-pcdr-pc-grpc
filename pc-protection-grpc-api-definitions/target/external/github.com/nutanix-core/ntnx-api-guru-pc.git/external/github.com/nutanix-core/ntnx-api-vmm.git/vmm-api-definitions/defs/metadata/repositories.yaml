@@ -1,0 +1,20 @@
+- name: "common"
+  type: "git"
+  uri: "https://github.com/nutanix-core/ntnx-api-common.git"
+  ref: "refs/tags/16.9.0.1029-RELEASE"
+  baseDir: "common-api-definitions/defs"
+  authRequired: false
+
+- name: "tasks"
+  type: "git"
+  uri: "https://github.com/nutanix-core/ntnx-api-tasks.git"
+  ref: "refs/tags/16.9.0.877-RELEASE"
+  baseDir: "tasks-api-definitions/defs"
+  authRequired: false
+
+- name: "dpcommon"
+  type: "git"
+  uri: "https://github.com/nutanix-core/ntnx-api-data-protection-common.git"
+  ref: "refs/tags/16.9.0.139-RELEASE"
+  baseDir: "data-protection-common-api-definitions/defs"
+  authRequired: false

@@ -1,0 +1,67 @@
+
+- name: "apiMetadataDesc"
+  value: >
+    The metadata associated with an API response. This value is always present and minimally contains the self-link for
+    the API request that produced this response. It also contains pagination data for the paginated requests.
+- name: "apiLinkDesc"
+  value: >
+    A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address
+    for retrieving the particular resource.
+- name: "hasErrorDesc"
+  value: >
+    A flag that indicates if the returned response is an error response or not.
+- name: "isPaginatedDesc"
+  value: >
+    A flag that indicates if the returned response is paginated or not.  If true, the links attribute will contain the
+    HATEOAS links for the pages (first, next, previous and last).
+- name: "totalResultCountDesc"
+  value: >
+    The total number of documents available for this query.  Guaranteed to be greater than or equal to the number of
+    documents returned by the API.
+- name: "hateoasHref"
+  value: >
+    The URL at which the entity described by the link can be accessed.
+- name: "hateoasRel"
+  value: >
+    A name that identifies the relationship of the link to the object that is returned by the URL.  The
+    unique value of "self" identifies the URL for the object.
+- name: "pageableDesc"
+  value: >
+    This object represents the results of a pageable request.  In addition to containing the page number ($page value)
+    and the number of records in the page ($limit value), it also contains the total number of pages available in the
+    result set.
+- name: "totalPagesDesc"
+  value: >
+    The total number of pages available in the result set.
+- name: "timestamp"
+  value: >
+    The timestamp at which the response was generated.
+- name: "status"
+  value: >
+    The HTTP status code of the response.
+- name: "error"
+  value: >
+    The generic error message for the response.
+- name: "path"
+  value: >
+    The API path on which the request was made.
+- name: "downloadFileDesc"
+  value: >
+    This object represents the response to a request to download a file as an octet stream or in pdf format.
+- name: "extraInfoDesc"
+  value: >
+    An array of entity-specific metadata
+- name: "flagsDesc"
+  value: >
+    An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and
+    value 'false', indicates that the response is not paginated.
+- name: "linksDesc"
+  value: >
+    An array of HATEOAS style links for the response that may also include pagination links for list operations.
+- name: "totalResultsDesc"
+  value: >
+    The total number of entities that are available on the server for this type.
+- name: "messageArrayDesc"
+  value: >
+    Information, Warning or Error messages that might provide additional contextual information related to the operation.
+

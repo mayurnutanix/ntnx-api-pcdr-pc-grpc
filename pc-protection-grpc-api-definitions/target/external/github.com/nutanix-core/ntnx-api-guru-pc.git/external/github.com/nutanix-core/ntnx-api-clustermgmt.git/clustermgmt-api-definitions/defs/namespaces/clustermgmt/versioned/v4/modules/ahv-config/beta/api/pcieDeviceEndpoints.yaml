@@ -1,0 +1,68 @@
+paths:
+  /pcie-devices:
+    x-backend-service-name: ahvclustermgmt
+    get:
+      tags:
+        - "ApiEndpoint(PcieDevices)"
+      description: DocRef(ListPcieDevicesDesc)
+      summary: DocRef(ListPcieDevicesDesc)
+      operationId: "listPcieDevices"
+      x-permissions:
+        operationName: View_Pcie_Device
+        serviceName: Clustermgmt
+        entityType: pcie_device
+        isListCall: true
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Cluster Viewer
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+      x-support-projection: true
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+              - name: "$page"
+                index: 2001
+              - name: "$limit"
+                index: 2002
+              - name: "$filter"
+                index: 2003
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      responses:
+        200:
+          description: DocRef(ListPcieDevicesResponseDesc)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/ahv-config/beta/models/PcieDevice})"
+        x-api-responses:
+          responseModelName: "ListPcieDevicesApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/ahv-config/beta/models/PcieDevice})"
+                    container: "array"
+                    index: 2001

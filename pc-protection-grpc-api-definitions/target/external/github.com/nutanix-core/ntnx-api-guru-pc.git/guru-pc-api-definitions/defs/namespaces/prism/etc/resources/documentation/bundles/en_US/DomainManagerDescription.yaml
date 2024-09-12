@@ -1,0 +1,67 @@
+- name: DomainManagerDescription
+  value: "Domain manager (Prism Central) details."
+- name: DomainManagerClusterConfigDescription
+  value: "Domain manager (Prism Central) cluster configuration details."
+- name: IsRegisteredToHostingClusterDescription
+  value: "Boolean value indicating if the domain manager (Prism Central) is registered with the hosting cluster, that is, Prism Element."
+- name: DomainManagerSizeDescription
+  value: "Domain manager (Prism Central) size is an enumeration of starter, small, large, or extra large starter values."
+- name: StarterDomainManagerDescription
+  value: "Domain manager (Prism Central) of size starter."
+- name: SmallDomainManagerDescription
+  value: "Domain manager (Prism Central) of size small."
+- name: LargeDomainManagerDescription
+  value: "Domain manager (Prism Central) of size large."
+- name: ExtraLargeDomainManagerDescription
+  value: "Domain manager (Prism Central) of size extra large."
+- name: CredentialsDescription
+  value: "The credentials consist of a username and password for a 
+          particular user like admin. Users can pass the credentials
+          of admin users currently which will be configured in the create domain 
+          manager operation."
+- name: BootstrapConfigDescription
+  value: "Bootstrap configuration details for the domain manager (Prism Central)."
+- name: CloudInitConfigDescription
+  value: "List of cloud-init commands required to bootstrap the domain manager (Prism Central) cluster on a startup."
+- name: DomainManagerNameDescription
+  value: "Name of the domain manager (Prism Central)."
+- name: DomainManagerNetworkDescription
+  value: "Domain manager (Prism Central) network configuration details."
+- name: NetworkExtIdDescription
+  value: "The network external identifier to which Domain Manager (Prism Central) is to be deployed or is already configured."
+- name: DefaultGatewayDescription
+  value: "Domain manager (Prism Central) Default Gateway in which the domain manager (Prism Central) has to be deployed or is configured with already."
+- name: SubnetMaskDescription
+  value: "Domain manager (Prism Central) Subnet Mask in which the domain manager (Prism Central) has to be deployed or is configured with already."
+- name: ContainerExtIdDescription
+  value: "The external identifier of the container that will be used to create the domain manager (Prism Central) cluster."
+- name: HostingClusterExtIdDescription
+  value: "The external identifier of the cluster hosting the domain manager (Prism Central) instance."
+- name: ShouldEnableHighAvailabilityDescription
+  value: "This configuration enables Prism Central to be deployed in scale-out mode."
+- name: ResourceConfigDescription
+  value: "This configuration is used to provide the resource-related details 
+          like container external identifiers, number of VCPUs, memory size, data disk size 
+          of the domain manager (Prism Central). In the case of a multi-node setup, the sum of 
+          resources like number of VCPUs, memory size and data disk size are provided."
+- name: InternalNetworkDescription
+  value: "This configuration is used to internally manage Prism Central network."
+- name: ExternalNetworkDescription
+  value: "This configuration is used to manage Prism Central."
+- name: BaseNetworkDescription
+  value: "This model would abstract away the common attributes as part of 
+          internal and external networks."
+- name: NumVcpusDescription
+  value: "This property is used for readOnly purposes to display Prism Central
+          number of VCPUs allocation."
+- name: MemorySizeBytesDescription
+  value: "This property is used for readOnly purposes to display Prism Central 
+          RAM allocation at the cluster level."
+- name: DataDiskSizeBytesDescription
+  value: "This property is used for readOnly purposes to display Prism Central 
+          data disk size allocation at a cluster level."
+- name: IpRangesDescription
+  value: "Range of IPs used for Prism Central network setup."
+- name: NodeExtIdsDescription
+  value: "Domain manager (Prism Central) nodes external identifier."
+

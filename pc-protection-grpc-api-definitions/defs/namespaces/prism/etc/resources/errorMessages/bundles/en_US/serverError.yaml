@@ -1,0 +1,243 @@
+- code: 40001
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch information about registered clusters.
+  arguments:
+    - op
+
+- code: 40002
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service encountered an internal server error.
+  arguments:
+    - op
+
+- code: 40003
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as restore of prism central is in progress.
+  arguments:
+    - op
+
+- code: 40004
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch details for hosting cluster.
+  arguments:
+    - op
+
+- code: 40005
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as upgrade in progress.
+  arguments:
+    - op
+
+- code: 40006
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch prism central metadata.
+  arguments:
+    - op
+
+- code: 40007
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as the server was interrupted, please try again after some time.
+  arguments:
+    - op
+
+- code: 40008
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as recovery task is already in progress.
+  arguments:
+    - op
+
+- code: 40009
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to update credentials for bucket {{{bucketName}}}.
+  arguments:
+    - op
+    - bucketName
+
+- code: 40010
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central recovery points information not found in objectStore.
+  arguments:
+    - op
+
+- code: 40011
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch information about cluster with extId {{{clusterExtId}}}.
+  arguments:
+    - op
+    - clusterExtId
+
+- code: 40012
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as more than one recovery task found in progress.
+  arguments:
+    - op
+
+- code: 40013
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to check whether hosting cluster is hyperv or not.
+  arguments:
+    - op
+
+- code: 40014
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as hosting cluster is not connected to the prism central.
+  arguments:
+    - op
+
+- code: 40015
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch display version of prism central.
+  arguments:
+    - op
+
+- code: 40016
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to restore files on the svmips {{{svmIps}}}.
+  arguments:
+    - op
+    - svmIps
+
+- code: 40017
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to stop services on the svmips {{{svmIps}}}.
+  arguments:
+    - op
+    - svmIps
+
+- code: 40018
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch prism central virtual network information.
+  arguments:
+    - op
+
+- code: 40019
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to acquire mutual trust info from the cluster with extId {{{clusterExtId}}}.
+  arguments:
+    - op
+    - clusterExtId
+
+- code: 40020
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to restart services.
+  arguments:
+    - op
+
+- code: 40021
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to start cluster services on prism central within specified time.
+  arguments:
+    - op
+
+- code: 40022
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to recover iam data within specified time.
+  arguments:
+    - op
+
+- code: 40023
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch credentials from credential store.
+  arguments:
+    - op
+
+- code: 40024
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to initiate restore on prism central due to timeout.
+  arguments:
+    - op
+
+- code: 40025
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as timeout occurred while waiting for restore to complete on prism central.
+  arguments:
+    - op
+
+- code: 40026
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as missing data found within prism central backup fetched from object store.
+  arguments:
+    - op
+
+- code: 40027
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as provided cluster is never registered to a prism central instance or some manual clean up of registration has been done.
+  arguments:
+    - op
+
+- code: 40028
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as  backup and restore service failed to fetch details of backup cluster on which old prism central data is stored.
+  arguments:
+    - op
+
+- code: 40029
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central backup information retrieved from backup cluster is empty.
+  arguments:
+    - op
+
+- code: 40030
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central version received from backup data is empty.
+  arguments:
+    - op
+
+- code: 40031
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch prism central version from backup data.
+  arguments:
+    - op
+
+- code: 40032
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch existing software availability of version {{{version}}} from cluster.
+  arguments:
+    - op
+    - version
+
+- code: 40033
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as prism central deployment rpc failed.
+  arguments:
+    - op
+
+- code: 40034
+  errorGroup: PCBR_SERVICE_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{op}}} as backup and restore service failed to fetch prism central recovery task status.
+  arguments:
+    - op

@@ -1,0 +1,1 @@
+This folder contains any references to external namespace files.

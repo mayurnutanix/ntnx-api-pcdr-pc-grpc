@@ -1,0 +1,7 @@
+- code: 40551
+  errorGroup: PCBR_REQUEST_VALIDATION_FAILURE
+  severity: ERROR
+  message: Failed to {{{op}}} as recover prism central request failed in validation - {{{error}}}.
+  arguments:
+    - op
+    - error

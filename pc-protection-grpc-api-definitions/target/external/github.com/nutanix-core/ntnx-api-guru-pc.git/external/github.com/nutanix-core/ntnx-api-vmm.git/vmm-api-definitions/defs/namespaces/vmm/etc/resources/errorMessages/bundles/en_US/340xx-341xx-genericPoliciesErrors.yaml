@@ -1,0 +1,107 @@
+# Policy authorization errors- 3400x-3401x.
+- code: 34000
+  errorGroup: POLICY_UNAUTHORIZED_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the policy with UUID '{{{policy_uuid}}}' as it is
+    not authorized.
+  arguments:
+    - policy_uuid
+
+# Policy ETag errors- 3402x-3403x.
+- code: 34020
+  errorGroup: POLICY_ETAG_MISSING
+  severity: ERROR
+  message: >
+    Failed to perform the operation because of the missing If-Match header in
+    the request.
+- code: 34021
+  errorGroup: POLICY_ETAG_INVALID
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the If-Match header value passed
+    '{{{request_etag}}}' is invalid.
+  arguments:
+    - request_etag
+- code: 34022
+  errorGroup: POLICY_ETAG_NOT_MODIFIED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the policy with UUID '{{{policy_uuid}}}' as the
+    If-None-Match header value passed '{{{request_etag}}}' matches the
+    current value in the server.
+  arguments:
+    - policy_uuid
+    - request_etag
+- code: 34023
+  errorGroup: POLICY_ETAG_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the policy with UUID '{{{policy_uuid}}}' and
+    If-Match header value passed '{{{request_etag}}}' because it doesn't match
+    the current value in the server '{{{current_etag}}}'.
+  arguments:
+    - policy_uuid
+    - request_etag
+    - current_etag
+
+# Policy request ID errors - 3404x-3405x.
+- code: 34040
+  errorGroup: POLICY_MISSING_REQUEST_ID_HEADER
+  severity: ERROR
+  message: >
+    Failed to perform the operation because of the missing request Id header.
+- code: 34041
+  errorGroup: POLICY_INVALID_REQUEST_ID_HEADER
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the request Id header value passed
+    '{{{request_id}}}' is invalid.
+  arguments:
+    - request_id
+
+# Policy errors - 3406x.
+- code: 34060
+  errorGroup: POLICY_NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the policy with UUID '{{{policy_uuid}}}', because
+    it is not found.
+  arguments:
+    - policy_uuid
+- code: 34061
+  errorGroup: POLICY_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the policy with UUID '{{{policy_uuid}}}', due to
+    an invalid argument with key '{{{argument_key}}}' and value
+    '{{{argument_value}}}'.
+  arguments:
+    - policy_uuid
+    - argument_key
+    - argument_value
+- code: 34063
+  errorGroup: POLICY_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to create the policy due to an invalid argument with key
+    '{{{argument_key}}}' and value '{{{argument_value}}}'.
+  arguments:
+    - argument_key
+    - argument_value
+- code: 34064
+  errorGroup: POLICY_INVALID_POLICY_UUID
+  severity: ERROR
+  message: >
+    Failed to perform the operation due to invalid policy UUID '{{{policy_uuid}}}' in
+    the request.
+  arguments:
+    - policy_uuid
+- code: 34065
+  errorGroup: POLICY_INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation because VM categories with UUIDs
+    '{{{category_uuids}}}' are already in use by some other policies.
+  arguments:
+    - category_uuids

@@ -1,0 +1,64 @@
+components:
+  schemas:
+    HostMaintenanceCommonSpec:
+      description: DocRef(HostMaintenanceCommonBodyDesc)
+      type: "object"
+      properties:
+        vcenterInfo:
+          description: DocRef(VcenterInfoDesc)
+          $ref: ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/VcenterInfo})
+        timeoutSeconds:
+          description: DocRef(TimeoutDesc)
+          type: "integer"
+          format: int64
+          x-constraints:
+            minimum: ConstantRef(maintenanceModeTimeoutMinimumInt)
+        clientKey:
+          x-internal: true
+          description: DocRef(ClientKeyDesc)
+          type: "string"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vcenterInfo"
+                  index: 2001
+                - name: "timeoutSeconds"
+                  index: 2002
+                - name: "clientKey"
+                  index: 2003
+
+    EnterHostMaintenanceSpec:
+      description: DocRef(EnterHostMaintenanceBodyDesc)
+      allOf:
+        - $ref: ModelRef({./HostMaintenanceCommonSpec})
+        - type: "object"
+          properties:
+            shouldAcquireShutdownToken:
+              x-internal: true
+              description: DocRef(ShouldAcquireShutdownTokenDesc)
+              type: "boolean"
+              default: true
+            shouldRollbackOnFailure:
+              description: DocRef(ShouldRollbackOnFailureDesc)
+              type: "boolean"
+              default: true
+            shouldShutdownNonMigratableUvms:
+              description: DocRef(ShouldShutdownNonMigratableUvmsDesc)
+              type: "boolean"
+              default: false
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({./HostMaintenanceCommonSpec})"
+                  name: base
+                  index: 2001
+                - name: "shouldAcquireShutdownToken"
+                  index: 2002
+                - name: "shouldRollbackOnFailure"
+                  index: 2003
+                - name: "shouldShutdownNonMigratableUvms"
+                  index: 2004

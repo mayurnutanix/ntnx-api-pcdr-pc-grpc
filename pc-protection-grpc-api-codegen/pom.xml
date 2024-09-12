@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>pc-grpc</artifactId>
+  </parent>
+
+  <artifactId>pc-protection-grpc-api-codegen</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <name>PC Protection Client and Server SDKs</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
+      <artifactId>${api.defs}</artifactId>
+      <version>${project.version}</version>
+      <type>tgz</type>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+  </dependencies>
+
+  <modules>
+
+    <module>pc-protection-grpc-java-dto-definitions</module>
+    <module>pc-protection-grpc-springmvc-interfaces</module>
+    <module>pc-protection-grpc-protobuf-messages</module>
+    <module>pc-protection-grpc-protobuf-services</module>
+    <module>pc-protection-grpc-proto-to-java</module>
+    <module>pc-protection-grpc-java-client-sdk</module>
+    <module>pc-protection-grpc-protobuf-mappers</module>
+    <module>pc-protection-grpc-client</module>
+    <module>pc-protection-grpc-java-server</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
+                  <artifactId>${api.defs}</artifactId>
+                  <version>${project.version}</version>
+                  <type>tgz</type>
+                  <overWrite>false</overWrite>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+</project>

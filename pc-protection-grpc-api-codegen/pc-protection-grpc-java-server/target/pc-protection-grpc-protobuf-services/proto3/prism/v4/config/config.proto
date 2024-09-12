@@ -1,0 +1,29 @@
+/*
+ * Generated file proto3/prism/v4/config/config.proto.
+ *
+ * Product version: 0.0.1-SNAPSHOT
+ *
+ * Part of the PC Protection PC Client SDK
+ *
+ * (c) 2024 Nutanix Inc.  All rights reserved
+ *
+ */
+
+syntax = "proto3";
+
+package proto3.prism.v4.config;
+
+option java_multiple_files = true;
+option java_package = "proto3.prism.v4.config";
+option go_package = "proto3/prism/v4/config";
+
+
+/*
+ * A reference to a task tracking an asynchronous operation. The status of the task can be queried by making a GET request to the task URI provided in the metadata section of the API response.
+ */
+message TaskReference {
+  /*
+   * A globally unique identifier of a task.
+   */
+  string ext_id = 2001;
+}

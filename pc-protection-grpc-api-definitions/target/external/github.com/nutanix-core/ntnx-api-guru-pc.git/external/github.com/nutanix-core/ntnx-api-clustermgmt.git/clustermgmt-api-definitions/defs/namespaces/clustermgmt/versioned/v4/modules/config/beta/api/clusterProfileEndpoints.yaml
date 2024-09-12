@@ -1,0 +1,593 @@
+paths:
+  /cluster-profiles:
+    x-backend-service-name: mitra
+    x-supported-versions:
+      - product: PC
+        version: 2024.3
+    post:
+      tags:
+        - "ApiEndpoint(Cluster Profiles)"
+      description: DocRef(CreateClusterProfileDesc)
+      summary: DocRef(CreateClusterProfileSummaryDesc)
+      operationId: "createClusterProfile"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Create_Cluster_Profile
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: true
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+          - Cluster Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.ListCallMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "body"
+                  index: 2001
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      requestBody:
+        description: DocRef(CreateClusterProfileBodyDesc)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterProfile})"
+      responses:
+        202:
+          description: DocRef(CreateClusterProfileResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "CreateClusterProfileApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+    get:
+      tags:
+        - "ApiEndpoint(ClusterProfiles)"
+      description: DocRef(GetClusterProfilesDescription)
+      summary: DocRef(GetClusterProfilesSummaryDescription)
+      operationId: "listClusterProfiles"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: small
+            count: 10
+            timeUnit: seconds
+          - type: large
+            count: 10
+            timeUnit: seconds
+          - type: xlarge
+            count: 10
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Cluster_Profile
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: true
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+          - Cluster Admin
+          - Cluster Viewer
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.ListCallMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "$page"
+                  index: 2001
+                - name: "$limit"
+                  index: 2002
+                - name: "$filter"
+                  index: 2003
+                - name: "$orderby"
+                  index: 2004
+      responses:
+        200:
+          description: DocRef(GetClusterProfilesResponseDesc)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterProfile})"
+        x-api-responses:
+          responseModelName: "ListClusterProfilesApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterProfile})"
+                    container: "array"
+                    index: 2001
+      x-support-projection: true
+
+  /cluster-profiles/{extId}:
+    x-backend-service-name: mitra
+    x-supported-versions:
+      - product: PC
+        version: 2024.3
+    parameters:
+      - name: extId
+        in: path
+        description: DocRef(ClusterProfileExtIdDescription)
+        required: true
+        schema:
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+    get:
+      tags:
+        - "ApiEndpoint(ClusterProfiles)"
+      description: DocRef(GetClusterProfileDescription)
+      summary: DocRef(GetClusterProfileSummaryDescription)
+      operationId: "getClusterProfileById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: small
+            count: 10
+            timeUnit: seconds
+          - type: large
+            count: 10
+            timeUnit: seconds
+          - type: xlarge
+            count: 10
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Cluster_Profile
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+          - Cluster Admin
+          - Cluster Viewer
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterProfileEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+      responses:
+        200:
+          description: DocRef(GetClusterProfileResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterProfile})"
+        x-api-responses:
+          responseModelName: "GetClusterProfileApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterProfile})"
+                    index: 2001
+    put:
+      tags:
+        - "ApiEndpoint(ClusterProfiles)"
+      description: DocRef(UpdateClusterProfileDesc)
+      summary: DocRef(UpdateClusterProfileSummaryDesc)
+      operationId: "updateClusterProfileById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Update_Cluster_Profile
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+          - Cluster Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterProfileEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "$dryrun"
+                  index: 2002
+                - name: "body"
+                  index: 2003
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-dry-run-response:
+        paramsModelRef: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/DryRun})"
+        insertSchemaInResponse: false
+      requestBody:
+        description: DocRef(UpdateClusterProfileBodyDesc)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterProfile})"
+      responses:
+        202:
+          description: DocRef(UpdateClusterProfileResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "UpdateClusterProfileApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+    delete:
+      tags:
+        - "ApiEndpoint(ClusterProfiles)"
+      description: DocRef(DeleteClusterProfileDesc)
+      summary: DocRef(DeleteClusterProfileSummaryDesc)
+      operationId: "deleteClusterProfileById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Delete_Cluster_Profile
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+          - Cluster Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterProfileEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      responses:
+        202:
+          description: DocRef(DeleteClusterProfileResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "DeleteClusterProfileApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /cluster-profiles/{extId}/$actions/disassociate-cluster:
+    x-backend-service-name: mitra
+    post:
+      tags:
+        - "ApiEndpoint(ClusterProfiles)"
+      description: DocRef(DisassociateClusterDesc)
+      summary: DocRef(DisassociateClusterSummaryDesc)
+      operationId: "disassociateClusterFromClusterProfile"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Disassociate_Cluster_Profile_Cluster
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+          - Cluster Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterProfileEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ClusterProfileExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(DisassociateClusterBodyDesc)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterReferenceListSpec})"
+      responses:
+        202:
+          description: DocRef(DisassociateClusterResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "DisassociateClusterFromClusterProfileApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /cluster-profiles/{extId}/$actions/apply:
+    x-backend-service-name: mitra
+    post:
+      tags:
+        - "ApiEndpoint(ClusterProfiles)"
+      description: DocRef(ApplyClusterProfileDesc)
+      summary: DocRef(ApplyClusterProfileSummaryDesc)
+      operationId: "applyClusterProfile"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      x-permissions:
+        operationName: Apply_Cluster_Profile
+        serviceName: Clustermgmt
+        entityType: cluster_profile
+        isListCall: false
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Prism Admin
+          - Super Admin
+          - Cluster Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterProfileEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "$dryrun"
+                  index: 2002
+                - name: "body"
+                  index: 2003
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-dry-run-response:
+        paramsModelRef: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/DryRun})"
+        insertSchemaInResponse: false
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ClusterProfileExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(ApplyProfileBodyDesc)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/config/beta/models/ClusterReferenceListSpec})"
+      responses:
+        202:
+          description: DocRef(ApplyClusterProfileResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          responseModelName: "ApplyClusterProfileApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

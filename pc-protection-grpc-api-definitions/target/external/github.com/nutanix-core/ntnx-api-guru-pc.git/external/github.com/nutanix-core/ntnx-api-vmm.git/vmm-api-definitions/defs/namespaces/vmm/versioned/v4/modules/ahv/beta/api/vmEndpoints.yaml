@@ -1,0 +1,1141 @@
+paths:
+  /vms/{extId}:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(GetVmDescription)
+      summary: DocRef(GetVmSummary)
+      operationId: "getVmById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: Small
+            count: 20
+            timeUnit: seconds
+          - type: Large
+            count: 25
+            timeUnit: seconds
+          - type: XLarge
+            count: 25
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Existing_Virtual_Machine
+        description: "Allows to view a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - VPC Admin
+          - Storage Admin
+          - Network Infra Admin
+          - Virtual Machine Admin
+          - Virtual Machine Operator
+          - Virtual Machine Viewer
+          - Disaster Recovery Admin
+          - Disaster Recovery Viewer
+        legacyParentOperationList:
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:View_Existing_Virtual_Machine
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: getVmByExtId
+          - type: responseModelName
+            properties:
+              value: GetVmResponse
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/Vm})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "GetVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/Vm})"
+                    index: 2001
+
+    put:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(UpdateVmDescription)
+      summary: DocRef(UpdateVmSummary)
+      operationId: "updateVmById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 8
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Update_Virtual_Machine_Basic_Config
+        description: "Allows to update a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+          - Networking:View_Subnet
+          - Networking:View_VPC
+          - Prism:View_Category
+        legacyOperationList:
+          - Prism:Update_Virtual_Machine_Basic_Config
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/Vm})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: updateVm
+          - type: responseModelName
+            properties:
+              value: UpdateVmResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UpdateVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+    delete:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(DeleteVmDescription)
+      summary: DocRef(DeleteVmSummary)
+      operationId: "deleteVmById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Delete_Existing_Virtual_Machine
+        description: "Allows to delete a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Delete_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+          - Volumes:Detach_Volume_Group_From_AHV_VM
+        legacyOperationList:
+          - Prism:Delete_Existing_Virtual_Machine
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: deleteVm
+          - type: responseModelName
+            properties:
+              value: DeleteVmResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "DeleteVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(ListVmsDescription)
+      summary: DocRef(ListVmsSummary)
+      operationId: "listVms"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 3
+            timeUnit: seconds
+          - type: Large
+            count: 5
+            timeUnit: seconds
+          - type: XLarge
+            count: 7
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Existing_Virtual_Machine
+        description: "Allows to view a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Prism Viewer
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - VPC Admin
+          - Storage Admin
+          - Network Infra Admin
+          - Virtual Machine Admin
+          - Virtual Machine Operator
+          - Virtual Machine Viewer
+        legacyParentOperationList:
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:View_Existing_Virtual_Machine
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "$page"
+                  index: 2001
+                - name: "$limit"
+                  index: 2002
+                - name: "$filter"
+                  index: 2003
+                - name: "$orderby"
+                  index: 2004
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: responseModelName
+            properties:
+              value: ListVmsResponse
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/Vm})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListVmsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/Vm})"
+                    container: "array"
+                    index: 2001
+      x-support-projection: true
+
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(CreateVmDescription)
+      summary: DocRef(CreateVmSummary)
+      operationId: "createVm"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 8
+            timeUnit: seconds
+          - type: Large
+            count: 20
+            timeUnit: seconds
+          - type: XLarge
+            count: 20
+            timeUnit: seconds
+      x-permissions:
+        operationName: Create_New_Virtual_Machine
+        description: "Allows to create a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Create_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+          - Volumes:Attach_Volume_Group_To_AHV_VM
+          - Networking:View_Subnet
+          - Networking:View_VPC
+          - Prism:View_Category
+          - Clustermgmt:View_Cluster
+          - Prism:View_Marketplace_Item
+          - Prism:View_Project
+          - VMM:View_Image
+          - Clustermgmt:View_Storage_Container
+        legacyOperationList:
+          - Prism:Create_New_Virtual_Machine
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/Vm})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "body"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: responseModelName
+            properties:
+              value: CreateVmResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "CreateVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/$actions/customize-guest:
+    x-backend-service-name: pcVmmSvc
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(GuestCustomizationDescription)
+      summary: DocRef(GuestCustomizationSummary)
+      operationId: "customizeGuestVm"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Customise_Virtual_Machine_Guest
+        description: "Allows to customise guest of a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+        legacyOperationList:
+          - Prism:Customise_Virtual_Machine_Guest
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/GuestCustomizationParams})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: customizeGuest
+          - type: responseModelName
+            properties:
+              value: CustomizeGuestVmResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "CustomizeGuestVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/$actions/migrate-vm-disks:
+    x-backend-service-name: pcVmmSvc
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(MigrateVmDisksDescription)
+      summary: DocRef(MigrateVmDisksSummary)
+      operationId: "migrateVmDisks"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-permissions:
+        operationName: Migrate_Virtual_Machine_Disk
+        description: "Allows to migrate disks of a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Initiate_Virtual_Machine_Disk_Migration
+          - VMM:Update_Virtual_Machine_Disk_List
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+        legacyOperationList:
+          - Prism:Migrate_Virtual_Machine_Disk
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/DiskMigrationParams})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: responseModelName
+            properties:
+              value: MigrateDisksResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-internal-api: false
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "MigrateVmDisksApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/$actions/revert:
+    x-backend-service-name: pcVmmSvc
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(RevertVmDescription)
+      summary: DocRef(RevertAhvVm)
+      operationId: "revertVm"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      x-permissions:
+        operationName: Revert_Existing_Virtual_Machine
+        description: "Allows to revert of a Virtual Machine."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Consumer
+          - Developer
+          - Operator
+          - Internal Super Admin
+          - Project Admin
+          - Prism Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Operator
+          - Disaster Recovery Admin
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+          - DataProtection:View_Recovery_Point
+          - DataProtection:View_VM_Recovery_Point
+          - Clustermgmt:View_Cluster
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:Revert_Existing_Virtual_Machine
+        isListCall: false
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/RevertParams})"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 30
+            timeUnit: seconds
+          - type: Small
+            count: 40
+            timeUnit: seconds
+          - type: Large
+            count: 60
+            timeUnit: seconds
+          - type: XLarge
+            count: 80
+            timeUnit: seconds
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: responseModelName
+            properties:
+              value: RevertVmResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      responses:
+        202:
+          description: DocRef(revertVmAhvResponseDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "RevertVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/$actions/migrate:
+    x-backend-service-name: pcVmmSvc
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(CrossClusterMigrateVmDescription)
+      summary: DocRef(CrossClusterMigrateVmSummary)
+      operationId: "crossClusterMigrateVm"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Allow_Cross_Cluster_VM_Migration
+        description: "Allows to migrate a Virtual Machine to another cluster."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+          - Prism:View_Availability_Zone
+          - Clustermgmt:View_Cluster
+          - Networking:View_Subnet
+          - Networking:View_VPC
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:Allow_Cross_Cluster_VM_Migration
+      x-dry-run-response:
+        paramsModelRef: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/DryRun})"
+        insertSchemaInResponse: false
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(CrossClusterMigrateParamsDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/VmCrossClusterMigrateParams})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+                - name: "$dryrun"
+                  index: 2003
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: responseModelName
+            properties:
+              value: CrossClusterMigrateVmResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-internal-api: false
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "CrossClusterMigrateVmApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vms/{extId}/$actions/migrate-to-host:
+    x-backend-service-name: pcVmmSvc
+    post:
+      tags:
+        - "ApiEndpoint(Vm)"
+      description: DocRef(VmMigrateToHostDescription)
+      summary: DocRef(VmMigrateToHostSummary)
+      operationId: "migrateVmToHost"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: Small
+            count: 10
+            timeUnit: seconds
+          - type: Large
+            count: 15
+            timeUnit: seconds
+          - type: XLarge
+            count: 15
+            timeUnit: seconds
+      x-permissions:
+        operationName: Migrate_Virtual_Machine_To_Host
+        description: "Allows to migrate a Virtual Machine to another host."
+        serviceName: VMM
+        entityType: vm
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Account Owner
+          - Administrator
+          - User
+          - Consumer
+          - Developer
+          - Internal Super Admin
+          - Operator
+          - Prism Admin
+          - Project Admin
+          - Self-Service Admin
+          - Super Admin
+          - Virtual Machine Admin
+        legacyParentOperationList:
+          - VMM:Update_Virtual_Machine
+        relatedOperationList:
+          - VMM:View_Existing_Virtual_Machine
+        legacyOperationList:
+          - Prism:Migrate_Virtual_Machine_To_Host
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        description: DocRef(VmMigrateToHostRequestDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv/beta/models/VmMigrateToHostParams})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VMs
+          - type: operationId
+            properties:
+              value: vmMigrateToHost
+          - type: responseModelName
+            properties:
+              value: VmMigrateToHostResponse
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      x-internal-api: false
+      x-supported-versions:
+        - product: PC
+          version: 2024.1
+        - product: PE
+          version: 6.8
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "MigrateVmToHostApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001

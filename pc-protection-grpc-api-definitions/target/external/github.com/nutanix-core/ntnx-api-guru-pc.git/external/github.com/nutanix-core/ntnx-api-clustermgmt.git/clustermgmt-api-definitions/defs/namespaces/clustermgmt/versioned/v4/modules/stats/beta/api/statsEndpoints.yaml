@@ -1,0 +1,207 @@
+# define all end points for the stats for entities
+paths:
+  clusters/{extId}:
+    get:
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/stats/beta/models/Stats})
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(GetClusterStatsDescription)
+      summary: DocRef(GetClusterStatsSummary)
+      operationId: "getClusterStats"
+      x-supported-versions:
+        - product: PC
+          version: 2023.3
+        - product: PE
+          version: 6.7
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: small
+            count: 10
+            timeUnit: seconds
+          - type: large
+            count: 10
+            timeUnit: seconds
+          - type: xlarge
+            count: 10
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Cluster_Stats
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        legacyOperationList:
+          - Prism:View_Cluster_Stats
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Cluster Viewer
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "$startTime"
+                  index: 2002
+                - name: "$endTime"
+                  index: 2003
+                - name: "$samplingInterval"
+                  index: 2004
+                - name: "$statType"
+                  index: 2005
+      responses:
+        200:
+          description: DocRef(GetClusterStatsResponse)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/stats/beta/models/ClusterStats})"
+        x-api-responses:
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+          responseModelName: "ClusterStatsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/stats/beta/models/ClusterStats})"
+                    index: 2001
+      x-support-projection: true
+
+  clusters/{clusterExtId}/hosts/{extId}:
+    get:
+      parameters:
+        - name: clusterExtId
+          in: path
+          description: DocRef(ClusterExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        - name: extId
+          in: path
+          description: DocRef(HostExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/stats/beta/models/Stats})
+      tags:
+        - "ApiEndpoint(Clusters)"
+      description: DocRef(GetHostStatsDescription)
+      summary: DocRef(GetHostStatsSummary)
+      operationId: "getHostStats"
+      x-supported-versions:
+        - product: PC
+          version: 2023.3
+        - product: PE
+          version: 6.7
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: small
+            count: 10
+            timeUnit: seconds
+          - type: large
+            count: 10
+            timeUnit: seconds
+          - type: xlarge
+            count: 10
+            timeUnit: seconds
+      x-permissions:
+        operationName: View_Host_Stats
+        serviceName: Clustermgmt
+        entityType: cluster
+        isListCall: false
+        legacyOperationList:
+          - Prism:View_Host_Stats
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Cluster Admin
+          - Cluster Viewer
+          - Internal Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Self-Service Admin
+          - Super Admin
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: false
+          - type: "rbac"
+            properties:
+              basedInIDF: true
+              metadataProvider: com.nutanix.clustermgmtserver.rbac.metadata.provider.ClusterEntitySpecificMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "clusterExtId"
+                  index: 2001
+                - name: "extId"
+                  index: 2002
+                - name: "$startTime"
+                  index: 2003
+                - name: "$endTime"
+                  index: 2004
+                - name: "$samplingInterval"
+                  index: 2005
+                - name: "$statType"
+                  index: 2006
+      responses:
+        200:
+          description: DocRef(GetHostStatsResponse)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/stats/beta/models/HostStats})"
+        x-api-responses:
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+          responseModelName: "HostStatsApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/clustermgmt/versioned/v4/modules/stats/beta/models/HostStats})"
+                    index: 2001
+      x-support-projection: true

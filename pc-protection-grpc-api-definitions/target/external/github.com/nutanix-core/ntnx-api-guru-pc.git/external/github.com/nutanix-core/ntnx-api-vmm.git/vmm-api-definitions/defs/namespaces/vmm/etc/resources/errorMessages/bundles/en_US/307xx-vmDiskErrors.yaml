@@ -1,0 +1,88 @@
+# VM Disk related errors - 307xx.
+- code: 30700
+  errorGroup: VM_DISK_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as the
+    disk with UUID '{{{disk_device_uuid}}}' is not found.
+  arguments:
+    - vm_uuid
+    - disk_device_uuid
+- code: 30701
+  errorGroup: VM_DISK_STORAGE_CONTAINER_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as the
+    storage container with UUID '{{{storage_container_uuid}}}' is not found.
+  arguments:
+    - vm_uuid
+    - storage_container_uuid
+- code: 30702
+  errorGroup: INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}'
+    as the maximum number of '{{{bus_type}}}' disks are already assigned.
+  arguments:
+    - vm_uuid
+    - bus_type
+- code: 30703
+  errorGroup: INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}'
+    as the disk bus with type '{{{bus_type}}}' and index '{{{bus_index}}}'
+    is already in use.
+  arguments:
+    - vm_uuid
+    - bus_type
+    - bus_index
+- code: 30704
+  errorGroup: INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on VM with UUID '{{{vm_uuid}}}'
+    as the disk bus with type '{{{bus_type}}}' and index '{{{bus_index}}}'
+    is not valid. Try using index '{{{bus_index_available}}}'.
+  arguments:
+    - vm_uuid
+    - bus_type
+    - bus_index
+    - bus_index_available
+- code: 30705
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as it
+    has volume group(s) attached to it.
+  arguments:
+    - vm_uuid
+
+- code: 30706
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as configuring disk flash mode is not allowed when VM flash mode is disabled.
+  arguments:
+    - operation
+    - vm_uuid    
+- code: 30707
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as bus type '{{{bus_type}}}' is not supported.
+  arguments:
+    - operation
+    - vm_uuid
+    - bus_type
+- code: 30708
+  errorGroup: UNSUPPORTED_OPERATION
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as SCSI disks cannot be added to a VM which has SCSI controller disabled.
+  arguments:
+    - operation
+    - vm_uuid

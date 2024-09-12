@@ -1,0 +1,150 @@
+- name: "CreateBackupTargetDescription"
+  value: |
+    Creates a cluster or object store as backup target on which the backup is required to be
+    stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
+    If any one of the cluster/object store does not qualify for backup, then the API will fail.
+- name: "CreateBackupTargetResponseDescription"
+  value: |
+    Task Id corresponding to the create backup target api
+- name: "ListBackupTargetsDescription"
+  value: |
+    Lists backup targets (cluster or object store) configured for a given domain manager.
+- name: "ListBackupTargetsSummary"
+  value: |
+    List Backup Targets
+- name: "ListBackupTargetsResponseDescription"
+  value: |
+    List of backup clusters/object store backing up the domain manager configurations.
+- name: "GetBackupTargetDescription"
+  value: |
+    Retrieves the backup targets (cluster or object store) from domain manager. Returns the
+    backup config and lastSyncTimestamp to the user
+- name: "GetBackupTargetSummary"
+  value: |
+    Fetch backup target
+- name: "GetBackupTargetResponseDescription"
+  value: |
+    Backup target details corresponding to the cluster/object store configuration.
+- name: "UpdateBackupTargetDescription"
+  value: |
+    Updates the credentials and/or rpo of the given objectstore
+- name: "UpdateBackupTargetResponseDescription"
+  value: |
+    Task Id corresponding to the update backup target api.
+- name: "DeleteBackupTargetDescription"
+  value: |
+    Removes cluster/object store from backup targets. This will stop backup from being
+    taken on cluster/object store.
+- name: "DeleteBackupTargetResponseDescription"
+  value: |
+    Task Id corresponding to the delete backup target api.
+- name: "RestoreDomainManagerDescription"
+  value: |
+    A task driven API to restore a domain manager from a cluster or object store backup location based on the 
+    selected restore point.
+- name: "RestoreDomainManagerResponseDescription"
+  value: |
+    A TaskReference object specifying a unique taskExtId corresponding to the restore operation.
+- name: "GetRestoreInfoResponseDescription"
+  value: |
+    Details of restore point queried.
+- name: "DomainManagerExtIdDescription"
+  value: |
+    The unique identifier for the domain manager that is to be restored.
+- name: "ClusterExtIdDescription"
+  value: |
+    Cluster identifier
+- name: "ManagementServerExtId"
+  value: |
+    Management server identifier
+- name: "RegionNameDescription"
+  value: |
+    The region name of the object store endpoint where backup data of domain manager
+    is stored.
+- name: "ListRecoveryPointsDescription"
+  value: |
+    List all recovery points stats of a domain manager backed up at object store.
+- name: "ListRestorePointsSummary"
+  value: |
+    List restore points
+- name: "ListRestorePointsDescription"
+  value: |
+    API provides a mechanism to retrieve a list of available restore points. Restore points are snapshots of the
+    domain manager at various times, which can be used to restore the domain manager to a previous
+    state. List response contains creation time and identifier id for config data.
+    1.For cluster based backups, only the latest restore point is available as backup is continuous.
+    2.For object store based backups, multiple restore points can be available, depending on the defined Recovery 
+    Point Objective (RPO) and retention period configured on the s3 bucket.
+- name: "ObjectStoreProviderDescription"
+  value: |
+    Object store provider represents the object store used to store backup and trigger recovery.
+- name: "DeleteBackupTargetSummary"
+  value: |
+    Delete backup target
+- name: "UpdateBackupTargetSummary"
+  value: |
+    Update backup target
+- name: "CreateBackupTargetSummary"
+  value: |
+    Create backup target
+- name: "GetRestorePointDetailsSummary"
+  value: |
+    Get restore point details
+- name: "RestoreDomainManagerDescription"
+  value: |
+    This is a task driven API. It restores the domain manager from cluster/object store.
+- name: "GetRestorePointDetailsDescription"
+  value: |
+    Retrieves the detailed information about a specific recovery point. It provides essential domain manager info
+    stored in the backup, required for the restoration process.
+- name: "RestoreDomainManagerSummary"
+  value: |
+    Restore domain manager
+- name: "RestoreSourceExtIdDescription"
+  value: |
+    The unique identifier obtained from restore source API corresponding to restore source details provided.
+- name: "ListRestorableDomainManagersDescription"
+  value: |
+    Restorable domain manager response with domain manager, last sync time and hosting cluster info.
+- name: "ListRestorableDomainManagersInfo"
+  value: |
+    List all domain manager backed up at object store/cluster.
+- name: "ListRestorableDomainManagersSummary"
+  value: |
+    List restorable domain managers
+- name: "CreateRestoreSourceDescription"
+  value: |
+    Create restore source on cluster to restore domain manager.
+- name: "CreateRestoreSourceSummary"
+  value: |
+    Create restore source.
+- name: "LocationHeaderDesc"
+  value: |
+    Response header specifying the location of a newly created resource.
+- name: "CreateRestoreSourceResponseDescription"
+  value: |
+    Restore source response for cluster identified by external identifier.
+- name: "DeleteRestoreSourceDescription"
+  value: |
+    Delete restore source on cluster.
+- name: "DeleteRestoreSourceSummary"
+  value: |
+    Delete restore source.
+- name: "DeleteRestoreSourceResponseDescription"
+  value: |
+    Delete restore source request is accepted.
+- name: "GetRestoreSourceDescription"
+  value: |
+    Retrieve the restore source from PE cache store. Returns the
+    backup config and extId to the user.
+- name: "GetRestoreSourceSummary"
+  value: |
+    Fetch restore source
+- name: "GetRestoreSourceResponseDescription"
+  value: |
+    Restore source corresponding to source extId from cluster cache store.
+    Returns the restore source config and extId to the user.
+- name: "ListRestorePointsResponseDescription"
+  value: |
+    Paginated list of restore points.
+

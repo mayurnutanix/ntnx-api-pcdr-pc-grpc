@@ -1,0 +1,77 @@
+
+components:
+  schemas:
+    {{packageName}}.{{generatedResponseModelType}}:
+      type: "object"
+      properties:
+        validationResult:
+          $ref: "ModelRef({./DryRunValidationResult})"
+        status:
+          $ref: "ModelRef({./DryRunStatus})"
+        description: "Dry Run Response for {{responseModelWrappedEntityName}} object"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "validationResult"
+                  index: 1001
+                - name: "summary"
+                  index: 1002
+                - name: "status"
+                  index: 1003
+    {{packageName}}.DryRunValidationResult:
+      type: "object"
+      properties:
+        checks:
+          type: array
+          items:
+            $ref: "ModelRef({./DryRunCheck})"
+          x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1001
+      description: "Validation Result Object for {{generatedResponseModelType}}"
+    {{packageName}}.DryRunCheck:
+      type: "object"
+      properties:
+        name:
+          type: string
+        result:
+          $ref: "{{appMessageModelRef}}"
+      description: "Validation Check Object for {{generatedResponseModelType}}"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "name"
+                  index: 1001
+                - name: "result"
+                  index: 1002
+    {{packageName}}.DryRunStatus:
+      description: The overall status of dry run.
+      allOf:
+        - $ref: "ModelRef({/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - SUCCESS
+            - FAILURE
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: "SUCCESS"
+                  index: 1001
+                - value: "FAILURE"
+                  index: 1002
+          - type: enum
+            properties:
+              descriptions:
+                - name: SUCCESS
+                  description: Dry Run Successful.
+                - name: FAILURE
+                  description: Dry Run Failed.

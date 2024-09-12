@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>tasks</artifactId>
+    <groupId>com.nutanix.nutanix-core.ntnx-api.tasks</groupId>
+    <version>16.9.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>tasks-api-codegen</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <name>Nutanix Platform Client and Server SDKs</name>
+
+  <properties>
+    <swagger-codegen-version>3.0.10</swagger-codegen-version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nutanix.nutanix-core.ntnx-api.tasks</groupId>
+      <artifactId>${api.defs}</artifactId>
+      <version>${project.version}</version>
+      <type>tgz</type>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    </dependency>
+  </dependencies>
+
+  <modules>
+    <module>tasks-go-dto-definitions</module>
+    <module>tasks-go-server-interfaces</module>
+    <module>tasks-javascript-client-sdk</module>
+    <module>tasks-java-dto-definitions</module>
+    <module>tasks-springmvc-interfaces</module>
+    <module>tasks-java-client-sdk</module>
+    <module>tasks-python-client-sdk</module>
+    <module>tasks-version-three-protobuf-messages</module>
+    <module>tasks-version-three-proto-to-java</module>
+    <module>tasks-version-three-protobuf-services</module>
+    <module>tasks-protobuf-mappers</module>
+    <module>tasks-grpc-client</module>
+    <module>tasks-go-client-sdk</module>
+    <module>tasks-csharp-client-sdk</module>
+    <module>tasks-powershell-cli</module>
+    <module>tasks-go-edm-definitions</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.nutanix-core.ntnx-api.tasks</groupId>
+                  <artifactId>${api.defs}</artifactId>
+                  <version>${project.version}</version>
+                  <type>tgz</type>
+                  <overWrite>false</overWrite>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+</project>

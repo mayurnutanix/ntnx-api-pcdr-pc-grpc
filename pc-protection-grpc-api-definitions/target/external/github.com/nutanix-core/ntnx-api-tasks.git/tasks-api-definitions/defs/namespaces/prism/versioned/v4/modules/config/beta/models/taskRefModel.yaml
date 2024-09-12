@@ -1,0 +1,18 @@
+components:
+  schemas:
+    TaskReference:
+      type: "object"
+      description: DocRef(TaskReferenceDescription)
+      properties:
+        extId:
+          description: DocRef(TaskExtIdDescription)
+          type: string
+          x-constraints:
+            pattern: ConstantRef(taskExtIdPattern)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001

@@ -1,0 +1,6 @@
+tags:
+  - name: DomainManagerBackups
+    x-displayName: Domain Manager Backup And Restore
+    description: >
+      Provides an ability to backup and restore the Domain Manager. Backup can be configured to 
+      cluster or s3 compatible objectstore.

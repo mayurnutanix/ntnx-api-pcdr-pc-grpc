@@ -1,0 +1,68 @@
+[ {
+  "displayName" : "View_Domain_Manager_Backup_Target",
+  "description" : "Allows to list backup targets of the Prism Central",
+  "objectType" : "prism_central",
+  "roleList" : [ "Internal Super Admin", "Super Admin", "Prism Admin", "Prism Viewer", "Domain Manager Admin", "Domain Manager Viewer" ],
+  "serviceName" : "Prism",
+  "associatedEndpointList" : [ {
+    "APIVersion" : "V4",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets",
+    "HttpMethod" : "GET"
+  }, {
+    "APIVersion" : "V4",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+    "HttpMethod" : "GET"
+  } ],
+  "isInternal" : false,
+  "legacyOperation" : "",
+  "deploymentList" : [ "onPrem", "cloud" ],
+  "tenantType" : "infra"
+}, {
+  "displayName" : "Create_Domain_Manager_Backup_Target",
+  "description" : "Allows to create a backup target for the Prism Central",
+  "objectType" : "prism_central",
+  "roleList" : [ "Internal Super Admin", "Super Admin", "Prism Admin", "Domain Manager Admin" ],
+  "serviceName" : "Prism",
+  "associatedEndpointList" : [ {
+    "APIVersion" : "V4",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets",
+    "HttpMethod" : "POST"
+  } ],
+  "relatedOperationList" : [ "Clustermgmt:View_Cluster" ],
+  "isInternal" : false,
+  "legacyOperation" : "",
+  "deploymentList" : [ "onPrem", "cloud" ],
+  "tenantType" : "infra"
+}, {
+  "displayName" : "Update_Domain_Manager_Backup_Target",
+  "description" : "Allows to update properties of a backup target such as RPO and credentials",
+  "objectType" : "prism_central",
+  "roleList" : [ "Internal Super Admin", "Super Admin", "Prism Admin", "Domain Manager Admin" ],
+  "serviceName" : "Prism",
+  "associatedEndpointList" : [ {
+    "APIVersion" : "V4",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+    "HttpMethod" : "PUT"
+  } ],
+  "relatedOperationList" : [ "Prism:View_Domain_Manager_Backup_Target" ],
+  "isInternal" : false,
+  "legacyOperation" : "",
+  "deploymentList" : [ "onPrem", "cloud" ],
+  "tenantType" : "infra"
+}, {
+  "displayName" : "Delete_Domain_Manager_Backup_Target",
+  "description" : "Allows to delete a backup target",
+  "objectType" : "prism_central",
+  "roleList" : [ "Internal Super Admin", "Super Admin", "Prism Admin", "Domain Manager Admin" ],
+  "serviceName" : "Prism",
+  "associatedEndpointList" : [ {
+    "APIVersion" : "V4",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+    "HttpMethod" : "DELETE"
+  } ],
+  "relatedOperationList" : [ "Prism:View_Domain_Manager_Backup_Target" ],
+  "isInternal" : false,
+  "legacyOperation" : "",
+  "deploymentList" : [ "onPrem", "cloud" ],
+  "tenantType" : "infra"
+} ]

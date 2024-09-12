@@ -1,0 +1,26 @@
+- code: 40201
+  errorGroup: PCBR_ACCESS_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} due to bucket access failure for bucket {{{bucketName}}} and region {{{region}}} and s3 exception {{{error}}}.
+  arguments:
+    - op
+    - bucketName
+    - region
+    - error
+
+- code: 40202
+  errorGroup: PCBR_ACCESS_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} as unable to access bucket {{{bucketName}}} , please check if the bucket is present in the object store and the credentials are correct.
+  arguments:
+    - op
+    - bucketName
+
+- code: 40203
+  errorGroup: PCBR_ACCESS_NOT_FOUND
+  severity: ERROR
+  message: Failed to {{{op}}} due to internal server error while accessing bucket {{{bucketName}}} and region {{{region}}}.
+  arguments:
+    - op
+    - bucketName
+    - region

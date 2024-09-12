@@ -1,0 +1,37 @@
+components:
+  schemas:
+    SBDF:
+      # https://wiki.xen.org/wiki/Bus:Device.Function_(BDF)_Notation
+      description: DocRef(SBDFDescription)
+      type: object
+      properties:
+        segment:
+          description: DocRef(SBDFSegmentDescription)
+          readOnly: true
+          type: integer
+        bus:
+          description: DocRef(SBDFBusDescription)
+          readOnly: true
+          type: integer
+        device:
+          description: DocRef(SBDFDeviceDescription)
+          readOnly: true
+          type: integer
+        func:
+          description: DocRef(SBDFFunctionDescription)
+          readOnly: true
+          type: integer
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: segment
+                  index: 2001
+                - name: bus
+                  index: 2002
+                - name: device
+                  index: 2003
+                - name: func
+                  index: 2004
+

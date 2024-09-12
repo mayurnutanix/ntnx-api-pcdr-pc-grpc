@@ -1,0 +1,41 @@
+- code: 90001
+  errorGroup: PRODUCT_ENABLEMENT_INVALID_PRODUCT_ID
+  severity: ERROR
+  message: Failed to {{{operation}}} due to an Invalid path parameter "id" in request.
+  arguments:
+    - operation
+- code: 90002
+  errorGroup: PRODUCT_ENABLEMENT_INVALID_PAYLOAD
+  severity: ERROR
+  message: Failed to update {{{product}}} because invalid payload in request. {{{reason}}}
+  arguments:
+    - reason
+    - product
+- code: 90003
+  errorGroup: PRODUCT_ENABLEMENT_SERVICE_UNAVAILABLE
+  severity: ERROR
+  message: Failed to GET {{{product}}} state because backend server call failed because of {{{reason}}}.
+  arguments:
+    - reason
+    - product
+- code: 90004
+  errorGroup: PRODUCT_ENABLEMENT_INTERNAL_SERVER_ERROR
+  severity: ERROR
+  message: Failed to {{{operation}}} because Internal server error. {{{reason}}}
+  arguments:
+    - operation
+    - reason
+- code: 90005
+  errorGroup: PRODUCT_ENABLEMENT_ENABLE_PRECHECK_ERROR
+  severity: ERROR
+  message: Precheck to enable service {{{service}}} failed due to {{{reason}}}
+  arguments:
+    - service
+    - reason
+- code: 90006
+  errorGroup: PRODUCT_ENABLEMENT_ERROR
+  severity: ERROR
+  message: Failed to enable service {{{service}}} due to {{{reason}}}
+  arguments:
+    - service
+    - reason

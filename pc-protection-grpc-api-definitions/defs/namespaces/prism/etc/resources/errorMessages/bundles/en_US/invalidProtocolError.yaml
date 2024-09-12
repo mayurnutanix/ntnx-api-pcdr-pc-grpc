@@ -1,0 +1,6 @@
+- code: 40451
+  errorGroup: PCBR_INVALID_PROTOCOL
+  severity: ERROR
+  message: Failed to {{{op}}} as invalid protocol provided for endpointAddress, please provide endpointAddress with https protocol.
+  arguments:
+    - op

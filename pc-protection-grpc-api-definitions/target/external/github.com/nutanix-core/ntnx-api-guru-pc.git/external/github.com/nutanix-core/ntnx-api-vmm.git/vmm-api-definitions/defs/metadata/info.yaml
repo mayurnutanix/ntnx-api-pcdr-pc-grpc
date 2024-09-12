@@ -1,0 +1,24 @@
+openapi: 3.0.1
+info:
+  title: "Nutanix VMM Versioned APIs"
+  description: >
+    "Nutanix APIs for managing VMs, including create, update, delete, get, or
+    list of virtual machines and various policies applicable on virtual machines."
+  version: ${project.version}
+  x-logo:
+    url: 'https://developers.internal.nutanix.com/api/v1/namespaces/vmm/images/vmm-logo-img.svg'
+    altText: Vmm logo
+  x-project-info:
+    prefix: vmmroot
+security:
+  - basicAuthScheme: []
+  - apiKeyAuthScheme: []
+components:
+  securitySchemes:
+    basicAuthScheme:
+      type: "http"
+      scheme: "basic"
+    apiKeyAuthScheme:
+      type: apiKey
+      in: header
+      name: X-ntnx-api-key

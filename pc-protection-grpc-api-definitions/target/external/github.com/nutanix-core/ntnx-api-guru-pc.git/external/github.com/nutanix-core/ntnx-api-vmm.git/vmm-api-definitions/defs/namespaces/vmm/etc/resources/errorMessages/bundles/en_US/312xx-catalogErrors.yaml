@@ -1,0 +1,10 @@
+# VM Catalog related errors - 312xx.
+- code: 31200
+  errorGroup: IMAGE_CHECKOUT_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}', as the
+    image with UUID '{{{image_uuid}}}' could not be checked out.
+  arguments:
+    - vm_uuid
+    - image_uuid

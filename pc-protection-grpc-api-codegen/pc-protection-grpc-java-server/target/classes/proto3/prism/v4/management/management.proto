@@ -1,0 +1,319 @@
+/*
+ * Generated file proto3/prism/v4/management/management.proto.
+ *
+ * Product version: 0.0.1-SNAPSHOT
+ *
+ * Part of the PC Protection PC Client SDK
+ *
+ * (c) 2024 Nutanix Inc.  All rights reserved
+ *
+ */
+
+syntax = "proto3";
+
+package proto3.prism.v4.management;
+
+option java_multiple_files = true;
+option java_package = "proto3.prism.v4.management";
+option go_package = "proto3/prism/v4/management";
+
+import "google/protobuf/timestamp.proto";
+import "proto3/common/v1/response/response.proto";
+import "proto3/prism/v4/config/config.proto";
+import "proto3/prism/v4/error/error.proto";
+
+/*
+ * OneOf item wrapper message
+ */
+message AccessKeyCredentialsWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  proto3.prism.v4.management.AccessKeyCredentials value = 1000;
+}
+/*
+ * 
+ */
+message AWSS3Config {
+  /*
+   * 
+   */
+  oneof credentials {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.AccessKeyCredentialsWrapper access_key_credentials_credentials = 12001;
+  }
+  /*
+   * 
+   */
+  proto3.prism.v4.management.S3Config s3_config = 1000;
+}
+/*
+ * Secret credentials model for the object store containing access key ID and secret access key.
+ */
+message AccessKeyCredentials {
+  /*
+   * Access key for the object store provided for backup target.
+   */
+  string access_key_id = 1000;
+  /*
+   * Secret access key ID for the object store provided for backup target. 
+   */
+  string secret_access_key = 1001;
+}
+/*
+ * Backup policy for the object store provided defining the rpo etc.
+ */
+message BackupPolicy {
+  /*
+   * RPO interval in minutes at which the backup will be taken 
+   */
+  int32 rpo_in_minutes = 1000;
+}
+/*
+ * OneOf item wrapper message
+ */
+message ClusterLocationWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  proto3.prism.v4.management.ClusterLocation value = 1000;
+}
+/*
+ * OneOf item wrapper message
+ */
+message ObjectStoreLocationWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  proto3.prism.v4.management.ObjectStoreLocation value = 1000;
+}
+/*
+ * 
+ */
+message BackupTarget {
+  /*
+   * 
+   */
+  oneof location {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ClusterLocationWrapper cluster_location_location = 12001;
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ObjectStoreLocationWrapper object_store_location_location = 12002;
+  }
+  /*
+   * 
+   */
+  proto3.common.v1.response.ExternalizableAbstractModel externalizable_abstract_model = 1000;
+  /*
+   * Represents the time when the domain manager was last synchronized or copied its  configuration data to the backup target. This field is updated every 30 minutes. 
+   */
+  google.protobuf.Timestamp last_sync_time = 1002;
+  /*
+   * Whether the backup is paused on the given cluster or not. 
+   */
+  bool is_backup_paused = 1003;
+  /*
+   * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+   */
+  string backup_pause_reason = 1004;
+}
+/*
+ * Model which contains the information of backup cluster 
+ */
+message ClusterLocation {
+  /*
+   * 
+   */
+  proto3.prism.v4.management.ClusterReference config = 1000;
+}
+/*
+ * Cluster reference of the remote cluster to be connected.
+ */
+message ClusterReference {
+  /*
+   * Cluster UUID of a remote cluster.
+   */
+  string ext_id = 2001;
+  /*
+   * Name of the cluster.
+   */
+  string name = 2002;
+}
+/*
+ * OneOf item wrapper message
+ */
+message TaskReferenceWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  proto3.prism.v4.config.TaskReference value = 1000;
+}
+/*
+ * OneOf item wrapper message
+ */
+message ErrorResponseWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  proto3.prism.v4.error.ErrorResponse value = 1000;
+}
+/*
+ * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets Post operation
+ */
+message CreateBackupTargetApiResponse {
+  /*
+   * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets Post operation
+   */
+  oneof data {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.TaskReferenceWrapper task_reference_data = 31007;
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ErrorResponseWrapper error_response_data = 400;
+  }
+  /*
+   * 
+   */
+  proto3.common.v1.response.ApiResponseMetadata metadata = 1001;
+}
+/*
+ * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Delete operation
+ */
+message DeleteBackupTargetApiResponse {
+  /*
+   * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Delete operation
+   */
+  oneof data {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.TaskReferenceWrapper task_reference_data = 31007;
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ErrorResponseWrapper error_response_data = 400;
+  }
+  /*
+   * 
+   */
+  proto3.common.v1.response.ApiResponseMetadata metadata = 1001;
+}
+/*
+ * OneOf item wrapper message
+ */
+message BackupTargetWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  proto3.prism.v4.management.BackupTarget value = 1000;
+}
+/*
+ * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Get operation
+ */
+message GetBackupTargetApiResponse {
+  /*
+   * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Get operation
+   */
+  oneof data {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.BackupTargetWrapper backup_target_data = 31007;
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ErrorResponseWrapper error_response_data = 400;
+  }
+  /*
+   * 
+   */
+  proto3.common.v1.response.ApiResponseMetadata metadata = 1001;
+}
+/*
+ * OneOf item wrapper message
+ */
+message BackupTargetArrayWrapper {
+  /*
+   * Value field in oneOf item wrapper message
+   */
+  repeated proto3.prism.v4.management.BackupTarget value = 1000;
+}
+/*
+ * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets Get operation
+ */
+message ListBackupTargetsApiResponse {
+  /*
+   * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets Get operation
+   */
+  oneof data {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.BackupTargetArrayWrapper backup_target_array_data = 31007;
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ErrorResponseWrapper error_response_data = 400;
+  }
+  /*
+   * 
+   */
+  proto3.common.v1.response.ApiResponseMetadata metadata = 1001;
+}
+/*
+ * Model which contains the information of the object store endpoint where  backup is present. It contains information like objectstore  endpoint address, endpoint flavour and last sync timestamp. 
+ */
+message ObjectStoreLocation {
+  /*
+   * 
+   */
+  proto3.prism.v4.management.AWSS3Config provider_config = 1000;
+  /*
+   * 
+   */
+  proto3.prism.v4.management.BackupPolicy backup_policy = 1001;
+}
+/*
+ * The endpoint of the object store s3 where domain manager is backed up. 
+ */
+message S3Config {
+  /*
+   * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+   */
+  string bucket_name = 1000;
+  /*
+   * The region name of the object store endpoint where backup data of domain manager is stored. 
+   */
+  string region = 1001;
+}
+/*
+ * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Put operation
+ */
+message UpdateBackupTargetApiResponse {
+  /*
+   * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Put operation
+   */
+  oneof data {
+    /*
+     * 
+     */
+    proto3.prism.v4.management.TaskReferenceWrapper task_reference_data = 31007;
+    /*
+     * 
+     */
+    proto3.prism.v4.management.ErrorResponseWrapper error_response_data = 400;
+  }
+  /*
+   * 
+   */
+  proto3.common.v1.response.ApiResponseMetadata metadata = 1001;
+}

@@ -1,0 +1,221 @@
+- name: "objectTypeDesc"
+  value: >
+    A version compatible name of the object represented by this entity.  The name reflects the namespace, version family, and module
+    that the entity belongs to.  The field value is also reflected in the generated DTOs.
+- name: "tenantAwareModelDesc"
+  value: >
+    A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class
+    that it extends and is automatically set by the server.
+- name: "tenantIdDesc"
+  value: >
+    A globally unique identifier that represents the tenant that owns this entity. The system automatically assigns it, and it
+    and is immutable from an API consumer perspective (some use cases may cause this Id to change - For instance, a
+    use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+- name: "extModelDesc"
+  value: >
+    A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an
+    extId field that contains the globally unique identifier for that instance.  Externally accessible instances are
+    always tenant aware and, therefore, extend the TenantAwareModel
+- name: "extIdDesc"
+  value: >
+    A globally unique identifier of an instance that is suitable for external consumption.
+- name: "messageCodeDesc"
+  value: >
+    A code that uniquely identifies a message.
+- name: "messageDesc"
+  value: >
+    The description of the message.
+- name: "messageLocaleDesc"
+  value: >
+    The locale for the message description.
+- name: "messageSeverityDesc"
+  value: >
+    The message severity.
+- name: "reservedFieldDesc"
+  value: >
+    This is an opaque read-only reserved field that can contain arbitrary information for use by Nutanix SDK clients.
+- name: "$pageDesc"
+  value: >
+    A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and
+    the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+- name: "$limitDesc"
+  value: >
+    A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive
+    integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default
+    value of 50 records will be returned in the result set.
+- name: "flagDesc"
+  value: >
+    Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with
+    that entity through this object.  The field that hosts this type of object must have an
+    attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+- name: "flagNameDesc"
+  value: >
+    Name of the flag.
+- name: "flagValueDesc"
+  value: >
+    Value of the flag.
+- name: "location"
+  value: >
+    The part of the request that failed validation. Validation can fail for path, query parameters, and request body.
+- name: "message"
+  value: >
+    The detailed message for the validation error.
+- name: "path"
+  value: >
+    The path of the attribute that failed validation in the schema.
+- name: "ipv4AddressValueDesc"
+  value: >
+    The IPv4 address of the host.
+- name: "ipv4AddressPrefixLengthDesc"
+  value: >
+    The prefix length of the network to which this host IPv4 address belongs.
+- name: "ipv6AddressValueDesc"
+  value: >
+    The IPv6 address of the host.
+- name: "ipv6AddressPrefixLengthDesc"
+  value: >
+    The prefix length of the network to which this host IPv6 address belongs.
+- name: "fqdnValueDesc"
+  value: >
+    The fully qualified domain name of the host.
+- name: "metadataDesc"
+  value: >
+    Metadata associated with this resource.
+- name: "ownerReferenceIdDesc"
+  value: >
+    A globally unique identifier that represents the owner of this resource.
+- name: "ownerUserNameDesc"
+  value: >
+    The userName of the owner of this resource.
+- name: "projectReferenceIdDesc"
+  value: >
+    A globally unique identifier that represents the project this resource belongs to.
+- name: "projectNameDesc"
+  value: >
+    The name of the project this resource belongs to.
+- name: "categoriesDesc"
+  value: >
+    A list of globally unique identifiers that represent all the categories the resource is associated with.
+- name: "kvPairDesc"
+  value: >
+    A map describing a set of keys and their corresponding values.
+- name: "kvPairKeyDesc"
+  value: >
+    The key of the key-value pair.
+- name: "kvPairStringValueDesc"
+  value: >
+    A string value in a key-value pair.
+- name: "kvPairIntegerValueDesc"
+  value: >
+    An integer value in a key-value pair.
+- name: "kvPairBooleanValueDesc"
+  value: >
+    An boolean value in a key-value pair.
+- name: "kvPairStringArrayValueDesc"
+  value: >
+    A value in a key-value pair that represents a list of strings.
+- name: "kvPairIntegerArrayValueDesc"
+  value: >
+    A value in a key-value pair that represents a list of integers.
+- name: "kvPairMapValueDesc"
+  value: >
+    A value in a key-value pair that represents a map of string keys and values.
+- name: "kvPairArrayMapsValueDesc"
+  value: >
+    A value in a key-value pair that represents an array of maps of string keys and values.
+- name: "mapOfStringWrapperDesc"
+  value: >
+    A wrapper schema containing a map with string keys and values.
+- name: "mapOfStringDesc"
+  value: >
+    A map with string keys and values.
+- name: "ipAddressDesc"
+  value: >
+    An unique address that identifies a device on the internet or a local network in IPv4 or IPv6 format.
+- name: "fqdnDesc"
+  value: >
+    A fully qualified domain name that specifies its exact location in the tree hierarchy of the Domain Name System.
+- name: "fqdnValueDesc"
+  value: >
+    The FQDN of the host.
+- name: "ipAddressOrFQDNDesc"
+  value: >
+    An unique address that identifies a device on the internet or a local network in IPv4/IPv6 format or a Fully Qualified Domain Name.
+- name: "ipv4AddressDesc"
+  value: >
+    An unique address that identifies a device on the internet or a local network in IPv4 format.
+- name: "ipv6AddressDesc"
+  value: >
+    An unique address that identifies a device on the internet or a local network in IPv6 format.
+- name: "requestIdHeaderDesc"
+  value: >
+    A unique identifier that is associated with each request. The provided value must be opaque and preferably
+    in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely
+    retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request
+    identifier to each request.
+- name: "ifMatchHeaderDesc"
+  value: >
+    The If-Match request header makes the request conditional. When not provided the server will respond with an
+    HTTP 428 (Precondition Required) response code indicating that the server requires the request to be conditional. The server will
+    allow successful completion of PUT and PATCH operations, if the resource matches the ETag value returned to the
+    response of a GET operation. If the conditional does not match, then an HTTP 412 (Precondition Failed) response
+- name: "ipRangeDesc"
+  value: >
+    Range of consecutive IP addresses that can be assigned to a specific Subnet.The size of the IP range is determined by the subnet mask.
+- name: "ipRangeBeginDesc"
+  value: >
+    Starting IP address in the range of IP addresses.
+- name: "ipRangeEndDesc"
+  value: >
+    Ending IP address in the range of IP addresses.
+
+  # Enum Descriptions
+- name: "enum$UnknownDesc"
+  value: >
+    Unknown value.
+- name: "enum$RedactedDesc"
+  value: >
+    Redacted value.
+- name: "infoSeverityDesc"
+  value: >
+    Information about successful completion.
+- name: "warningSeverityDesc"
+  value: >
+    Warning indicating future error.
+- name: "errorSeverityDesc"
+  value: >
+    Error indicating failed completion.
+
+- name: "sumOperatorDesc"
+  value: >
+    Aggregation with sum of all values.
+- name: "minOperatorDesc"
+  value: >
+    Aggregation containing lowest of all values.
+- name: "maxOperatorDesc"
+  value: >
+    Aggregation containing highest of all values.
+- name: "avgOperatorDesc"
+  value: >
+    Aggregation indicating mean or average of all values.
+- name: "countOperatorDesc"
+  value: >
+    Aggregation containing total count of values.
+- name: "lastOperatorDesc"
+  value: >
+    Aggregation containing only the last recorded value.
+- name: "dryRunDesc"
+  value: >
+    A URL query parameter that allows long running operations to execute in a dry-run mode providing ability to identify trouble spots and system failures
+    without performing the actual operation. Additionally this mode also offers a summary snapshot of the resultant system in order to better understand
+    how things fit together. The operation runs in dry-run mode only if the provided value is true.
+- name: "basicAuthDescription"
+  value: >
+    An authentication scheme that requires the client to present a username and password. The server will service the request only if it can validate
+    the user-ID and password for the protection space of the Request-URI.
+- name: "usernameDescription"
+  value: >
+    Username required for the basic auth scheme. As per [RFC 2617](https://datatracker.ietf.org/doc/html/rfc2617) usernames might be case sensitive.
+- name: "passwordDescription"
+  value: >
+    Password required for the basic auth scheme.

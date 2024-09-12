@@ -1,0 +1,170 @@
+components:
+  schemas:
+    NicBackingInfo:
+      description: DocRef(NicBackingInfoDescription)
+      type: object
+      properties:
+        macAddress:
+          description: DocRef(NicBackingInfoMacAddressDescription)
+          type: string
+          readOnly: true
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, macPattern)"
+        isConnected:
+          description: DocRef(NicBackingInfoConnectedDescription)
+          type: boolean
+          readOnly: true
+          default: true
+        adapterType:
+          $ref: "ModelRef({./AdapterType})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: macAddress
+                  index: 2001
+                - name: isConnected
+                  index: 2002
+                - name: adapterType
+                  index: 2003
+      x-complex-type-edm: true
+    AdapterType:
+      description: DocRef(NicAdapterTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: "string"
+          enum:
+            - E1000
+            - PCNET32
+            - VMXNET
+            - VMXNET2
+            - VMXNET3
+            - E1000E
+            - SRIOV
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: E1000
+                  index: 2001
+                - value: PCNET32
+                  index: 2002
+                - value: VMXNET
+                  index: 2003
+                - value: VMXNET2
+                  index: 2004
+                - value: VMXNET3
+                  index: 2005
+                - value: E1000E
+                  index: 2006
+                - value: SRIOV
+                  index: 2007
+          - type: enum
+            properties:
+              descriptions:
+                - name: E1000
+                  description: DocRef(E1000NicModelDescription)
+                - name: PCNET32
+                  description: DocRef(PCNet32NicModelDescription)
+                - name: VMXNET
+                  description: DocRef(VmxnetNicModelDescription)
+                - name: VMXNET2
+                  description: DocRef(Vmxnet2NicModelDescription)
+                - name: VMXNET3
+                  description: DocRef(Vmxnet3NicModelDescription)
+                - name: E1000E
+                  description: DocRef(E1000eNicModelDescription)
+                - name: SRIOV
+                  description: DocRef(SriovNicModelDescription)
+      x-complex-type-edm: true
+    IpAddressInfo:
+      description: DocRef(IpAddressInfoDescription)
+      type: "object"
+      properties:
+        ipv4Addresses:
+          description: DocRef(Ipv4ConfigIpAddressListDescription)
+          readOnly: true
+          type: array
+          items:
+            $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/IPv4Address})"
+          minItems: 0
+          maxItems: 128
+        ipv6Addresses:
+          description: DocRef(Ipv6IpAddressListDescription)
+          readOnly: true
+          type: array
+          items:
+            type: string
+          minItems: 0
+          maxItems: 128
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: ipv4Addresses
+                  index: 2001
+                - name: ipv6Addresses
+                  index: 2002
+      x-complex-type-edm: true
+    PortGroupInfo:
+      type: object
+      description: DocRef(PortGroupInfoDescription)
+      properties:
+          name:
+            description: DocRef(PortGroupNameDescription)
+            type: string
+            x-constraints:
+              maxLength: ConstantRef(vmPortGroupInfoNameMaxLength)
+            readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: name
+                  index: 2001
+      x-complex-type-edm: true
+    NicNetworkInfo:
+      type: object
+      description: DocRef(NicNetworkInfoDescription)
+      properties:
+        portGroupInfo:
+          $ref: "ModelRef({./PortGroupInfo})"
+        ipAddressInfo:
+          $ref: "ModelRef({./IpAddressInfo})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: portGroupInfo
+                  index: 2001
+                - name: ipAddressInfo
+                  index: 2002
+      x-complex-type-edm: true
+    Nic:
+      description: DocRef(NicDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: object
+          properties:
+            backingInfo:
+              $ref: "ModelRef({./NicBackingInfo})"
+            networkInfo:
+              $ref: "ModelRef({./NicNetworkInfo})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: backingInfo
+                  index: 2002
+                - name: networkInfo
+                  index: 2003
+      x-complex-type-edm: true

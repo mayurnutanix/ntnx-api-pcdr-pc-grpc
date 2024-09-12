@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nutanix.nutanix-core.ntnx-api.guru-pc</groupId>
+  <artifactId>guru-pc</artifactId>
+  <version>16.9.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Guru API Service</name>
+  <description>Guru - The new GoLang service which hosts API endpoints for Prism Central. This is Guru PC, specific to PC.</description>
+
+  <properties>
+    <service-parent.version>16.9.0.2187-RELEASE</service-parent.version>
+    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
+    <swagger-codegen.version>3.0.10</swagger-codegen.version>
+    <platform-tools.version>16.9.0.368-RELEASE</platform-tools.version>
+    <swagger-codegen-version>3.0.10</swagger-codegen-version>
+    <api.defs>guru-pc-api-definitions</api.defs>
+    <exec-maven-plugin-version>1.5.0</exec-maven-plugin-version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <mapstruct-version>1.4.1.Final</mapstruct-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <expose.internal.api>false</expose.internal.api>
+  </properties>
+
+  <modules>
+    <module>guru-pc-api-definitions</module>
+    <module>guru-pc-api-codegen</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>spring-boot-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.prism-service-parent</groupId>
+        <artifactId>proto-service-parent</artifactId>
+        <version>${service-parent.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>${NEXUS_ID}</id>
+      <url>${NEXUS_URI}</url>
+    </repository>
+  </distributionManagement>
+
+</project>

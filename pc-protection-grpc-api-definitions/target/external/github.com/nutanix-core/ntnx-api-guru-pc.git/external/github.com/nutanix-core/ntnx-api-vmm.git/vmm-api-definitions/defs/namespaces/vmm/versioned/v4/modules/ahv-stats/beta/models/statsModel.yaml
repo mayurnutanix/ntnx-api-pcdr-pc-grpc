@@ -1,0 +1,1198 @@
+components:
+  schemas:
+    VmStats:
+      description: DocRef(VmStatsDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: "object"
+          properties:
+            stats:
+              description: DocRef(VmStatsTimestampDescription)
+              type: array
+              items:
+                $ref: "ModelRef({./VmStatsTuple})"
+      x-filterable-properties:
+        - stats
+      x-sortable-properties:
+        - stats
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: stats
+                  index: 2002
+
+    VmStatsTuple:
+      description: DocRef(VmStatsDescription)
+      type: "object"
+      properties:
+        timestamp:
+          description: DocRef(VmStatsTimestampDescription)
+          type: string
+          format: date-time
+        controllerAvgIoLatencyMicros:
+          description: DocRef(VmStatsControllerAvgIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        controllerAvgReadIoLatencyMicros:
+          description: DocRef(VmStatsControllerAvgReadIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        controllerAvgReadIoSizeKb:
+          description: DocRef(VmStatsControllerAvgReadIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerAvgWriteIoLatencyMicros:
+          description: DocRef(VmStatsControllerAvgWriteIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        controllerAvgWriteIoSizeKb:
+          description: DocRef(VmStatsControllerAvgWriteIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerIoBandwidthKbps:
+          description: DocRef(VmStatsControllerIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        controllerNumIo:
+          description: DocRef(VmStatsControllerNumIoDescription)
+          type: integer
+          format: int64
+        controllerNumIops:
+          description: DocRef(VmStatsControllerNumIopsDescription)
+          type: integer
+          format: int64
+        controllerNumRandomIo:
+          description: DocRef(VmStatsControllerNumRandomIoDescription)
+          type: integer
+          format: int64
+        controllerNumReadIo:
+          description: DocRef(VmStatsControllerNumReadIoDescription)
+          type: integer
+          format: int64
+        controllerNumReadIops:
+          description: DocRef(VmStatsControllerNumReadIopsDescription)
+          type: integer
+          format: int64
+        controllerNumSeqIo:
+          description: DocRef(VmStatsControllerNumSeqIoDescription)
+          type: integer
+          format: int64
+        controllerNumWriteIo:
+          description: DocRef(VmStatsControllerNumWriteIoDescription)
+          type: integer
+          format: int64
+        controllerNumWriteIops:
+          description: DocRef(VmStatsControllerNumWriteIopsDescription)
+          type: integer
+          format: int64
+        controllerOplogDrainDestHddBytes:
+          description: DocRef(VmStatsControllerOplogDrainDestHddBytesDescription)
+          type: integer
+          format: int64
+        controllerOplogDrainDestSsdBytes:
+          description: DocRef(VmStatsControllerOplogDrainDestSsdBytesDescription)
+          type: integer
+          format: int64
+        controllerRandomIoPpm:
+          description: DocRef(VmStatsControllerRandomIoPpmDescription)
+          type: integer
+          format: int64
+        controllerReadIoBandwidthKbps:
+          description: DocRef(VmStatsControllerReadIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        controllerReadIoPpm:
+          description: DocRef(VmStatsControllerReadIoPpmDescription)
+          type: integer
+          format: int64
+        controllerReadSourceEstoreHddLocalBytes:
+          description: DocRef(VmStatsControllerReadSourceEstoreHddLocalBytesDescription)
+          type: integer
+          format: int64
+        controllerReadSourceEstoreSsdLocalBytes:
+          description: DocRef(VmStatsControllerReadSourceEstoreSsdLocalBytesDescription)
+          type: integer
+          format: int64
+        controllerReadSourceEstoreHddRemoteBytes:
+          description: DocRef(VmStatsControllerReadSourceEstoreHddRemoteBytesDescription)
+          type: integer
+          format: int64
+        controllerReadSourceEstoreSsdRemoteBytes:
+          description: DocRef(VmStatsControllerReadSourceEstoreSsdRemoteBytesDescription)
+          type: integer
+          format: int64
+        controllerReadSourceOplogBytes:
+          description: DocRef(VmStatsControllerReadSourceOplogBytesDescription)
+          type: integer
+          format: int64
+        controllerSeqIoPpm:
+          description: DocRef(VmStatsControllerSeqIoPpmDescription)
+          type: integer
+          format: int64
+        controllerSharedUsageBytes:
+          description: DocRef(VmStatsControllerSharedUsageBytesDescription)
+          type: integer
+          format: int64
+        controllerSnapshotUsageBytes:
+          description: DocRef(VmStatsControllerSnapshotUsageBytesDescription)
+          type: integer
+          format: int64
+        controllerStorageTierSsdUsageBytes:
+          description: DocRef(VmStatsControllerStorageTierSsdUsageBytesDescription)
+          type: integer
+          format: int64
+        controllerTimespanMicros:
+          description: DocRef(VmStatsControllerTimespanMicrosDescription)
+          type: integer
+          format: int64
+        controllerTotalIoSizeKb:
+          description: DocRef(VmStatsControllerTotalIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerTotalIoTimeMicros:
+          description: DocRef(VmStatsControllerTotalIoTimeMicrosDescription)
+          type: integer
+          format: int64
+        controllerTotalReadIoSizeKb:
+          description: DocRef(VmStatsControllerTotalReadIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerTotalReadIoTimeMicros:
+          description: DocRef(VmStatsControllerTotalReadIoTimeMicrosDescription)
+          type: integer
+          format: int64
+        controllerTotalTransformedUsageBytes:
+          description: DocRef(VmStatsControllerTotalTransformedUsageBytesDescription)
+          type: integer
+          format: int64
+        controllerUserBytes:
+          description: DocRef(VmStatsControllerUserBytesDescription)
+          type: integer
+          format: int64
+        controllerWriteDestEstoreSsdBytes:
+          description: DocRef(VmStatsControllerWriteDestEstoreSsdBytesDescription)
+          type: integer
+          format: int64
+        controllerWriteDestEstoreHddBytes:
+          description: DocRef(VmStatsControllerWriteDestEstoreHddBytesDescription)
+          type: integer
+          format: int64
+        controllerWriteIoBandwidthKbps:
+          description: DocRef(VmStatsControllerWriteIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        controllerWriteIoPpm:
+          description: DocRef(VmStatsControllerWriteIoPpmDescription)
+          type: integer
+          format: int64
+        controllerWss120SecondUnionMb:
+          description: DocRef(VmStatsControllerWss120SecondUnionMbDescription)
+          type: integer
+          format: int64
+        controllerWss120SecondReadMb:
+          description: DocRef(VmStatsControllerWss120SecondReadMbDescription)
+          type: integer
+          format: int64
+        controllerWss120SecondWriteMb:
+          description: DocRef(VmStatsControllerWss120SecondWriteMbDescription)
+          type: integer
+          format: int64
+        controllerWss3600SecondUnionMb:
+          description: DocRef(VmStatsControllerWss3600SecondUnionMbDescription)
+          type: integer
+          format: int64
+        controllerWss3600SecondReadMb:
+          description: DocRef(VmStatsControllerWss3600SecondReadMbDescription)
+          type: integer
+          format: int64
+        controllerWss3600SecondWriteMb:
+          description: DocRef(VmStatsControllerWss3600SecondWriteMbDescription)
+          type: integer
+          format: int64
+        frameBufferUsagePpm:
+          description: DocRef(VmStatsFramebufferUsagePpmDescription)
+          type: integer
+          format: int64
+        gpuUsagePpm:
+          description: DocRef(VmStatsGpuUsagePpmDescription)
+          type: integer
+          format: int64
+        guestMemoryUsagePpm:
+          description: DocRef(VmStatsGuestMemoryUsagePpmDescription)
+          type: integer
+          format: int64
+        hypervisorAvgIoLatencyMicros:
+          description: DocRef(VmStatsHypervisorAvgIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        hypervisorCpuReadyTimePpm:
+          description: DocRef(VmStatsHypervisorCpuReadyTimePpmDescription)
+          type: integer
+          format: int64
+        hypervisorCpuUsagePpm:
+          description: DocRef(VmStatsHypervisorCpuUsagePpmDescription)
+          type: integer
+          format: int64
+        hypervisorIoBandwidthKbps:
+          description: DocRef(VmStatsHypervisorIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        hypervisorMemoryBalloonReclaimedBytes:
+          description: DocRef(VmStatsHypervisorMemoryBalloonReclaimedBytesDescription)
+          type: integer
+          format: int64
+        hypervisorMemoryBalloonReclaimTargetBytes:
+          description: DocRef(VmStatsHypervisorMemoryBalloonReclaimTargetBytesDescription)
+          type: integer
+          format: int64
+        hypervisorMemoryUsagePpm:
+          description: DocRef(VmStatsHypervisorMemoryUsagePpmDescription)
+          type: integer
+          format: int64
+        hypervisorNumIo:
+          description: DocRef(VmStatsHypervisorNumIoDescription)
+          type: integer
+          format: int64
+        hypervisorNumIops:
+          description: DocRef(VmStatsHypervisorNumIopsDescription)
+          type: integer
+          format: int64
+        hypervisorNumReadIops:
+          description: DocRef(VmStatsHypervisorNumReadIopsDescription)
+          type: integer
+          format: int64
+        hypervisorNumReadIo:
+          description: DocRef(VmStatsHypervisorNumReadIoDescription)
+          type: integer
+          format: int64
+        hypervisorNumReceivedBytes:
+          description: DocRef(VmStatsHypervisorNumReceivedBytesDescription)
+          type: integer
+          format: int64
+        hypervisorNumReceivePacketsDropped:
+          description: DocRef(VmStatsHypervisorNumReceivePacketsDroppedDescription)
+          type: integer
+          format: int64
+        hypervisorNumTransmittedBytes:
+          description: DocRef(VmStatsHypervisorNumTransmittedBytesDescription)
+          type: integer
+          format: int64
+        hypervisorNumTransmitPacketsDropped:
+          description: DocRef(VmStatsHypervisorNumTransmitPacketsDroppedDescription)
+          type: integer
+          format: int64
+        hypervisorNumWriteIo:
+          description: DocRef(VmStatsHypervisorNumWriteIoDescription)
+          type: integer
+          format: int64
+        hypervisorNumWriteIops:
+          description: DocRef(VmStatsHypervisorNumWriteIopsDescription)
+          type: integer
+          format: int64
+        hypervisorReadIoBandwidthKbps:
+          description: DocRef(VmStatsHypervisorReadIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        hypervisorTimespanMicros:
+          description: DocRef(VmStatsHypervisorTimespanMicrosDescription)
+          type: integer
+          format: int64
+        hypervisorTotalIoSizeKb:
+          description: DocRef(VmStatsHypervisorTotalIoSizeKbDescription)
+          type: integer
+          format: int64
+        hypervisorTotalIoTimeMicros:
+          description: DocRef(VmStatsHypervisorTotalIoTimeMicrosDescription)
+          type: integer
+          format: int64
+        hypervisorTotalReadIoSizeKb:
+          description: DocRef(VmStatsHypervisorTotalReadIoSizeKbDescription)
+          type: integer
+          format: int64
+        hypervisorVmRunningTimeUsecs:
+          description: DocRef(VmStatsHypervisorVmRunningTimeUsecsDescription)
+          type: integer
+          format: int64
+        hypervisorWriteIoBandwidthKbps:
+          description: DocRef(VmStatsHypervisorWriteIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        memoryUsageBytes:
+          description: DocRef(VmStatsMemoryUsageBytesDescription)
+          type: integer
+          format: int64
+        memoryUsagePpm:
+          description: DocRef(VmStatsMemoryUsagePpmDescription)
+          type: integer
+          format: int64
+        numVcpusUsedPpm:
+          description: DocRef(VmStatsNumVcpusUsedPpmDescription)
+          type: integer
+          format: int64
+        checkScore:
+          description: DocRef(VmStatsCheckScoreDescription)
+          type: integer
+          format: int64
+        cluster:
+          description: DocRef(VmStatsClusterDescription)
+          type: string
+        hypervisorType:
+          description: DocRef(VmStatsHypervisorTypeDescription)
+          type: string
+        diskUsagePpm:
+          description: DocRef(VmStatsDiskUsagePpmDescription)
+          type: integer
+          format: int64
+        diskCapacityBytes:
+          description: DocRef(VmStatsDiskCapacityBytesDescription)
+          type: integer
+          format: int64
+        hypervisorSwapInRateKbps:
+          description: DocRef(VmStatsHypervisorSwapInRateKbpsDescription)
+          type: integer
+          format: int64
+        hypervisorSwapOutRateKbps:
+          description: DocRef(VmStatsHypervisorSwapOutRateKbpsDescription)
+          type: integer
+          format: int64
+        memoryReservedBytes:
+          description: DocRef(VmStatsMemoryReservedBytesDescription)
+          type: integer
+          format: int64
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: timestamp
+                  index: 2001
+                - name: controllerAvgIoLatencyMicros
+                  index: 2002
+                - name: controllerAvgReadIoLatencyMicros
+                  index: 2003
+                - name: controllerAvgReadIoSizeKb
+                  index: 2004
+                - name: controllerAvgWriteIoLatencyMicros
+                  index: 2005
+                - name: controllerAvgWriteIoSizeKb
+                  index: 2006
+                - name: controllerIoBandwidthKbps
+                  index: 2007
+                - name: controllerNumIo
+                  index: 2008
+                - name: controllerNumIops
+                  index: 2009
+                - name: controllerNumRandomIo
+                  index: 2010
+                - name: controllerNumReadIo
+                  index: 2011
+                - name: controllerNumReadIops
+                  index: 2012
+                - name: controllerNumSeqIo
+                  index: 2013
+                - name: controllerNumWriteIo
+                  index: 2014
+                - name: controllerNumWriteIops
+                  index: 2015
+                - name: controllerOplogDrainDestHddBytes
+                  index: 2016
+                - name: controllerOplogDrainDestSsdBytes
+                  index: 2017
+                - name: controllerRandomIoPpm
+                  index: 2018
+                - name: controllerReadIoBandwidthKbps
+                  index: 2019
+                - name: controllerReadIoPpm
+                  index: 2020
+                - name: controllerReadSourceEstoreHddLocalBytes
+                  index: 2021
+                - name: controllerReadSourceEstoreSsdLocalBytes
+                  index: 2022
+                - name: controllerReadSourceEstoreHddRemoteBytes
+                  index: 2023
+                - name: controllerReadSourceEstoreSsdRemoteBytes
+                  index: 2024
+                - name: controllerReadSourceOplogBytes
+                  index: 2025
+                - name: controllerSeqIoPpm
+                  index: 2026
+                - name: controllerSharedUsageBytes
+                  index: 2027
+                - name: controllerSnapshotUsageBytes
+                  index: 2028
+                - name: controllerStorageTierSsdUsageBytes
+                  index: 2029
+                - name: controllerTimespanMicros
+                  index: 2030
+                - name: controllerTotalIoSizeKb
+                  index: 2031
+                - name: controllerTotalIoTimeMicros
+                  index: 2032
+                - name: controllerTotalReadIoSizeKb
+                  index: 2033
+                - name: controllerTotalReadIoTimeMicros
+                  index: 2034
+                - name: controllerTotalTransformedUsageBytes
+                  index: 2035
+                - name: controllerUserBytes
+                  index: 2036
+                - name: controllerWriteDestEstoreSsdBytes
+                  index: 2037
+                - name: controllerWriteDestEstoreHddBytes
+                  index: 2038
+                - name: controllerWriteIoBandwidthKbps
+                  index: 2039
+                - name: controllerWriteIoPpm
+                  index: 2040
+                - name: controllerWss120SecondUnionMb
+                  index: 2041
+                - name: controllerWss120SecondReadMb
+                  index: 2042
+                - name: controllerWss120SecondWriteMb
+                  index: 2043
+                - name: controllerWss3600SecondUnionMb
+                  index: 2044
+                - name: controllerWss3600SecondReadMb
+                  index: 2045
+                - name: controllerWss3600SecondWriteMb
+                  index: 2046
+                - name: frameBufferUsagePpm
+                  index: 2047
+                - name: gpuUsagePpm
+                  index: 2048
+                - name: guestMemoryUsagePpm
+                  index: 2049
+                - name: hypervisorAvgIoLatencyMicros
+                  index: 2050
+                - name: hypervisorCpuReadyTimePpm
+                  index: 2051
+                - name: hypervisorCpuUsagePpm
+                  index: 2052
+                - name: hypervisorIoBandwidthKbps
+                  index: 2053
+                - name: hypervisorMemoryBalloonReclaimedBytes
+                  index: 2054
+                - name: hypervisorMemoryBalloonReclaimTargetBytes
+                  index: 2055
+                - name: hypervisorMemoryUsagePpm
+                  index: 2056
+                - name: hypervisorNumIo
+                  index: 2057
+                - name: hypervisorNumIops
+                  index: 2058
+                - name: hypervisorNumReadIo
+                  index: 2059
+                - name: hypervisorNumReadIops
+                  index: 2060
+                - name: hypervisorNumReceivedBytes
+                  index: 2061
+                - name: hypervisorNumReceivePacketsDropped
+                  index: 2062
+                - name: hypervisorNumTransmittedBytes
+                  index: 2063
+                - name: hypervisorNumTransmitPacketsDropped
+                  index: 2064
+                - name: hypervisorNumWriteIo
+                  index: 2065
+                - name: hypervisorNumWriteIops
+                  index: 2066
+                - name: hypervisorReadIoBandwidthKbps
+                  index: 2067
+                - name: hypervisorTimespanMicros
+                  index: 2068
+                - name: hypervisorTotalIoSizeKb
+                  index: 2069
+                - name: hypervisorTotalIoTimeMicros
+                  index: 2070
+                - name: hypervisorTotalReadIoSizeKb
+                  index: 2071
+                - name: hypervisorVmRunningTimeUsecs
+                  index: 2072
+                - name: hypervisorWriteIoBandwidthKbps
+                  index: 2073
+                - name: memoryUsageBytes
+                  index: 2074
+                - name: memoryUsagePpm
+                  index: 2075
+                - name: numVcpusUsedPpm
+                  index: 2076
+                - name: checkScore
+                  index: 2077
+                - name: cluster
+                  index: 2078
+                - name: hypervisorType
+                  index: 2079
+                - name: diskUsagePpm
+                  index: 2080
+                - name: diskCapacityBytes
+                  index: 2081
+                - name: hypervisorSwapInRateKbps
+                  index: 2082
+                - name: hypervisorSwapOutRateKbps
+                  index: 2083
+                - name: memoryReservedBytes
+                  index: 2084
+      x-complex-type-edm: true
+      x-property-mapping:
+        - name: controllerAvgIoLatencyMicros
+          value: "controller_avg_io_latency_usecs"
+        - name: controllerAvgWriteIoLatencyMicros
+          value: "controller_avg_write_io_latency_usecs"
+        - name: controllerAvgReadIoLatencyMicros
+          value: "controller_avg_read_io_latency_usecs"
+        - name: controllerAvgReadIoSizeKb
+          value: "controller_avg_read_io_size_kbytes"
+        - name: controllerAvgWriteIoSizeKb
+          value: "controller_avg_write_io_size_kbytes"
+        - name: controllerIoBandwidthKbps
+          value: "controller_io_bandwidth_kBps"
+        - name: controllerNumIo
+          value: "controller_num_io"
+        - name: controllerNumIops
+          value: "controller_num_iops"
+        - name: controllerNumRandomIo
+          value: "controller_num_random_io"
+        - name: controllerNumReadIo
+          value: "controller_num_read_io"
+        - name: controllerNumReadIops
+          value: "controller_num_read_iops"
+        - name: controllerNumSeqIo
+          value: "controller_num_seq_io"
+        - name: controllerNumWriteIo
+          value: "controller_num_write_io"
+        - name: controllerNumWriteIops
+          value: "controller_num_write_iops"
+        - name: controllerOplogDrainDestHddBytes
+          value: "controller.oplog_drain_dest_hdd_bytes"
+        - name: controllerOplogDrainDestSsdBytes
+          value: "controller.oplog_drain_dest_ssd_bytes"
+        - name: controllerRandomIoPpm
+          value: "controller_random_io_ppm"
+        - name: controllerReadIoBandwidthKbps
+          value: "controller_read_io_bandwidth_kBps"
+        - name: controllerReadIoPpm
+          value: "controller_read_io_ppm"
+        - name: controllerReadSourceEstoreHddLocalBytes
+          value: "controller.read_source_estore_hdd_local_bytes"
+        - name: controllerReadSourceEstoreSsdLocalBytes
+          value: "controller.read_source_estore_ssd_local_bytes"
+        - name: controllerReadSourceEstoreHddRemoteBytes
+          value: "controller.read_source_estore_hdd_remote_bytes"
+        - name: controllerReadSourceEstoreSsdRemoteBytes
+          value: "controller.read_source_estore_ssd_remote_bytes"
+        - name: controllerReadSourceOplogBytes
+          value: "controller.read_source_oplog_bytes"
+        - name: controllerSeqIoPpm
+          value: "controller_seq_io_ppm"
+        - name: controllerSharedUsageBytes
+          value: "controller.shared_usage_bytes"
+        - name: controllerSnapshotUsageBytes
+          value: "controller.snapshot_usage_bytes"
+        - name: controllerStorageTierSsdUsageBytes
+          value: "controller.storage_tier.ssd.usage_bytes"
+        - name: controllerTimespanMicros
+          value: "controller_timespan_usecs"
+        - name: controllerTotalIoSizeKb
+          value: "controller_total_io_size_kbytes"
+        - name: controllerTotalIoTimeMicros
+          value: "controller_total_io_time_usecs"
+        - name: controllerTotalReadIoSizeKb
+          value: "controller_total_read_io_size_kbytes"
+        - name: controllerTotalReadIoTimeMicros
+          value: "controller_total_read_io_time_usecs"
+        - name: controllerTotalTransformedUsageBytes
+          value: "controller_total_transformed_usage_bytes"
+        - name: controllerUserBytes
+          value: "controller_user_bytes"
+        - name: controllerWriteDestEstoreSsdBytes
+          value: "controller.write_dest_estore_ssd_bytes"
+        - name: controllerWriteDestEstoreHddBytes
+          value: "controller.write_dest_estore_hdd_bytes"
+        - name: controllerWriteIoBandwidthKbps
+          value: "controller_write_io_bandwidth_kBps"
+        - name: controllerWriteIoPpm
+          value: "controller_write_io_ppm"
+        - name: controllerWss120SecondUnionMb
+          value: "controller.wss_120s_union_MB"
+        - name: controllerWss120SecondReadMb
+          value: "controller.wss_120s_read_MB"
+        - name: controllerWss120SecondWriteMb
+          value: "controller.wss_120s_write_MB"
+        - name: controllerWss3600SecondUnionMb
+          value: "controller.wss_3600s_union_MB"
+        - name: controllerWss3600SecondReadMb
+          value: "controller.wss_3600s_read_MB"
+        - name: controllerWss3600SecondWriteMb
+          value: "controller.wss_3600s_write_MB"
+        - name: frameBufferUsagePpm
+          value: "framebuffer_usage_ppm"
+        - name: gpuUsagePpm
+          value: "gpu_usage_ppm"
+        - name: guestMemoryUsagePpm
+          value: "guest.memory_usage_ppm"
+        - name: hypervisorAvgIoLatencyMicros
+          value: "hypervisor_avg_io_latency_usecs"
+        - name: hypervisorCpuReadyTimePpm
+          value: "hypervisor.cpu_ready_time_ppm"
+        - name: hypervisorCpuUsagePpm
+          value: "hypervisor_cpu_usage_ppm"
+        - name: hypervisorIoBandwidthKbps
+          value: "hypervisor_io_bandwidth_kBps"
+        - name: hypervisorMemoryBalloonReclaimedBytes
+          value: "hypervisor_memory_balloon_reclaimed_bytes"
+        - name: hypervisorMemoryBalloonReclaimTargetBytes
+          value: "hypervisor_memory_balloon_reclaim_target_bytes"
+        - name: hypervisorMemoryUsagePpm
+          value: "hypervisor_memory_usage_ppm"
+        - name: hypervisorNumIo
+          value: "hypervisor_num_io"
+        - name: hypervisorNumIops
+          value: "hypervisor_num_iops"
+        - name: hypervisorNumReadIo
+          value: "hypervisor_num_read_io"
+        - name: "hypervisorNumReadIops"
+          value: "hypervisor_num_read_iops"
+        - name: hypervisorNumReceivedBytes
+          value: "hypervisor_num_received_bytes"
+        - name: hypervisorNumReceivePacketsDropped
+          value: "hypervisor_num_receive_packets_dropped"
+        - name: hypervisorNumTransmittedBytes
+          value: "hypervisor_num_transmitted_bytes"
+        - name: hypervisorNumTransmitPacketsDropped
+          value: "hypervisor_num_transmit_packets_dropped"
+        - name: hypervisorNumWriteIo
+          value: "hypervisor_num_write_io"
+        - name: hypervisorNumWriteIops
+          value: "hypervisor_num_write_iops"
+        - name: hypervisorReadIoBandwidthKbps
+          value: "hypervisor_read_io_bandwidth_kBps"
+        - name: hypervisorTimespanMicros
+          value: "hypervisor_timespan_usecs"
+        - name: hypervisorTotalIoSizeKb
+          value: "hypervisor_total_io_size_kbytes"
+        - name: hypervisorTotalIoTimeMicros
+          value: "hypervisor_total_io_time_usecs"
+        - name: hypervisorTotalReadIoSizeKb
+          value: "hypervisor_total_read_io_size_kbytes"
+        - name: hypervisorVmRunningTimeUsecs
+          value: "hypervisor.vm_running_time_usecs"
+        - name: hypervisorWriteIoBandwidthKbps
+          value: "hypervisor_write_io_bandwidth_kBps"
+        - name: memoryUsageBytes
+          value: "memory_usage_bytes"
+        - name: memoryUsagePpm
+          value: "memory_usage_ppm"
+        - name: numVcpusUsedPpm
+          value: "num_vcpus_used_ppm"
+        - name: checkScore
+          value: "check.score"
+        - name: cluster
+          value: "cluster"
+        - name: hypervisorType
+          value: "hypervisor_type"
+        - name: diskUsagePpm
+          value: "disk_usage_ppm"
+        - name: diskCapacityBytes
+          value: "disk_capacity_bytes"
+        - name: hypervisorSwapInRateKbps
+          value: "hypervisor_swap_in_rate_kBps"
+        - name: hypervisorSwapOutRateKbps
+          value: "hypervisor_swap_out_rate_kBps"
+        - name: memoryReservedBytes
+          value: "memory_reserved_bytes"
+      x-filterable-properties:
+        - controllerAvgIoLatencyMicros
+        - controllerAvgReadIoLatencyMicros
+        - controllerAvgReadIoSizeKb
+        - controllerAvgWriteIoLatencyMicros
+        - controllerAvgWriteIoSizeKb
+        - controllerIoBandwidthKbps
+        - controllerNumIo
+        - controllerNumIops
+        - controllerNumRandomIo
+        - controllerNumReadIo
+        - controllerNumReadIops
+        - controllerNumSeqIo
+        - controllerNumWriteIo
+        - controllerNumWriteIops
+        - controllerOplogDrainDestHddBytes
+        - controllerOplogDrainDestSsdBytes
+        - controllerRandomIoPpm
+        - controllerReadIoBandwidthKbps
+        - controllerReadIoPpm
+        - controllerReadSourceEstoreHddLocalBytes
+        - controllerReadSourceEstoreSsdLocalBytes
+        - controllerReadSourceEstoreHddRemoteBytes
+        - controllerReadSourceEstoreSsdRemoteBytes
+        - controllerReadSourceOplogBytes
+        - controllerSeqIoPpm
+        - controllerSharedUsageBytes
+        - controllerSnapshotUsageBytes
+        - controllerStorageTierSsdUsageBytes
+        - controllerTimespanMicros
+        - controllerTotalIoSizeKb
+        - controllerTotalIoTimeMicros
+        - controllerTotalReadIoSizeKb
+        - controllerTotalReadIoTimeMicros
+        - controllerTotalTransformedUsageBytes
+        - controllerUserBytes
+        - controllerWriteDestEstoreSsdBytes
+        - controllerWriteDestEstoreHddBytes
+        - controllerWriteIoBandwidthKbps
+        - controllerWriteIoPpm
+        - controllerWss120SecondUnionMb
+        - controllerWss120SecondReadMb
+        - controllerWss120SecondWriteMb
+        - controllerWss3600SecondUnionMb
+        - controllerWss3600SecondReadMb
+        - controllerWss3600SecondWriteMb
+        - frameBufferUsagePpm
+        - gpuUsagePpm
+        - guestMemoryUsagePpm
+        - hypervisorAvgIoLatencyMicros
+        - hypervisorCpuReadyTimePpm
+        - hypervisorCpuUsagePpm
+        - hypervisorIoBandwidthKbps
+        - hypervisorMemoryBalloonReclaimedBytes
+        - hypervisorMemoryBalloonReclaimTargetBytes
+        - hypervisorMemoryUsagePpm
+        - hypervisorNumIo
+        - hypervisorNumIops
+        - hypervisorNumReadIo
+        - hypervisorNumReadIops
+        - hypervisorNumReceivedBytes
+        - hypervisorNumReceivePacketsDropped
+        - hypervisorNumTransmittedBytes
+        - hypervisorNumTransmitPacketsDropped
+        - hypervisorNumWriteIo
+        - hypervisorNumWriteIops
+        - hypervisorReadIoBandwidthKbps
+        - hypervisorTimespanMicros
+        - hypervisorTotalIoSizeKb
+        - hypervisorTotalIoTimeMicros
+        - hypervisorTotalReadIoSizeKb
+        - hypervisorVmRunningTimeUsecs
+        - hypervisorWriteIoBandwidthKbps
+        - memoryUsageBytes
+        - memoryUsagePpm
+        - numVcpusUsedPpm
+        - checkScore
+        - cluster
+        - hypervisorType
+        - diskUsagePpm
+        - diskCapacityBytes
+        - hypervisorSwapInRateKbps
+        - hypervisorSwapOutRateKbps
+        - memoryReservedBytes
+      x-sortable-properties:
+        - controllerAvgIoLatencyMicros
+        - controllerAvgReadIoLatencyMicros
+        - controllerAvgReadIoSizeKb
+        - controllerAvgWriteIoLatencyMicros
+        - controllerAvgWriteIoSizeKb
+        - controllerIoBandwidthKbps
+        - controllerNumIo
+        - controllerNumIops
+        - controllerNumRandomIo
+        - controllerNumReadIo
+        - controllerNumReadIops
+        - controllerNumSeqIo
+        - controllerNumWriteIo
+        - controllerNumWriteIops
+        - controllerOplogDrainDestHddBytes
+        - controllerOplogDrainDestSsdBytes
+        - controllerRandomIoPpm
+        - controllerReadIoBandwidthKbps
+        - controllerReadIoPpm
+        - controllerReadSourceEstoreHddLocalBytes
+        - controllerReadSourceEstoreSsdLocalBytes
+        - controllerReadSourceEstoreHddRemoteBytes
+        - controllerReadSourceEstoreSsdRemoteBytes
+        - controllerReadSourceOplogBytes
+        - controllerSeqIoPpm
+        - controllerSharedUsageBytes
+        - controllerSnapshotUsageBytes
+        - controllerStorageTierSsdUsageBytes
+        - controllerTimespanMicros
+        - controllerTotalIoSizeKb
+        - controllerTotalIoTimeMicros
+        - controllerTotalReadIoSizeKb
+        - controllerTotalReadIoTimeMicros
+        - controllerTotalTransformedUsageBytes
+        - controllerUserBytes
+        - controllerWriteDestEstoreSsdBytes
+        - controllerWriteDestEstoreHddBytes
+        - controllerWriteIoBandwidthKbps
+        - controllerWriteIoPpm
+        - controllerWss120SecondUnionMb
+        - controllerWss120SecondReadMb
+        - controllerWss120SecondWriteMb
+        - controllerWss3600SecondUnionMb
+        - controllerWss3600SecondReadMb
+        - controllerWss3600SecondWriteMb
+        - frameBufferUsagePpm
+        - gpuUsagePpm
+        - guestMemoryUsagePpm
+        - hypervisorAvgIoLatencyMicros
+        - hypervisorCpuReadyTimePpm
+        - hypervisorCpuUsagePpm
+        - hypervisorIoBandwidthKbps
+        - hypervisorMemoryBalloonReclaimedBytes
+        - hypervisorMemoryBalloonReclaimTargetBytes
+        - hypervisorMemoryUsagePpm
+        - hypervisorNumIo
+        - hypervisorNumIops
+        - hypervisorNumReadIo
+        - hypervisorNumReadIops
+        - hypervisorNumReceivedBytes
+        - hypervisorNumReceivePacketsDropped
+        - hypervisorNumTransmittedBytes
+        - hypervisorNumTransmitPacketsDropped
+        - hypervisorNumWriteIo
+        - hypervisorNumWriteIops
+        - hypervisorReadIoBandwidthKbps
+        - hypervisorTimespanMicros
+        - hypervisorTotalIoSizeKb
+        - hypervisorTotalIoTimeMicros
+        - hypervisorTotalReadIoSizeKb
+        - hypervisorVmRunningTimeUsecs
+        - hypervisorWriteIoBandwidthKbps
+        - memoryUsageBytes
+        - memoryUsagePpm
+        - numVcpusUsedPpm
+        - checkScore
+        - diskUsagePpm
+        - diskCapacityBytes
+        - hypervisorSwapInRateKbps
+        - hypervisorSwapOutRateKbps
+        - memoryReservedBytes
+    VmDiskStats:
+      description: DocRef(VmDiskStatsDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: "object"
+          properties:
+            vmExtId:
+              description: DocRef(VmDiskStatsVmExtIdDescription)
+              type: string
+              x-constraints:
+                pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+            stats:
+              description: DocRef(VmStatsTimestampDescription)
+              type: array
+              items:
+                $ref: "ModelRef({./VmDiskStatsTuple})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: vmExtId
+                  index: 2002
+                - name: stats
+                  index: 2003
+
+    VmDiskStatsTuple:
+      description: DocRef(VmDiskStatsDescription)
+      type: "object"
+      properties:
+        timestamp:
+          description: DocRef(VmStatsTimestampDescription)
+          type: string
+          format: date-time
+        controllerAvgIoLatencyMicros:
+          description: DocRef(VmDiskStatsControllerAvgIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        controllerAvgReadIoLatencyMicros:
+          description: DocRef(VmDiskStatsControllerAvgReadIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        controllerAvgReadIoSizeKb:
+          description: DocRef(VmDiskStatsControllerAvgReadIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerNumReadIops:
+          description: DocRef(VmDiskStatsControllerNumReadIopsDescription)
+          type: integer
+          format: int64
+        controllerReadIoPpm:
+          description: DocRef(VmDiskStatsControllerReadIoPpmDescription)
+          type: integer
+          format: int64
+        controllerNumWriteIo:
+          description: DocRef(VmDiskStatsControllerNumWriteIoDescription)
+          type: integer
+          format: int64
+        controllerAvgWriteIoLatencyMicros:
+          description: DocRef(VmDiskStatsControllerAvgWriteIoLatencyMicrosDescription)
+          type: integer
+          format: int64
+        controllerAvgWriteIoSizeKb:
+          description: DocRef(VmDiskStatsControllerAvgWriteIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerIoBandwidthKbps:
+          description: DocRef(VmDiskStatsControllerIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        controllerFrontendReadOps:
+          description: DocRef(VmDiskStatsControllerFrontendReadOpsDescription)
+          type: integer
+          format: int64
+        controllerFrontendWriteOps:
+          description: DocRef(VmDiskStatsControllerFrontendWriteOpsDescription)
+          type: integer
+          format: int64
+        controllerNumIo:
+          description: DocRef(VmDiskStatsControllerNumIoDescription)
+          type: integer
+          format: int64
+        controllerNumIops:
+          description: DocRef(VmDiskStatsControllerNumIopsDescription)
+          type: integer
+          format: int64
+        controllerNumReadIo:
+          description: DocRef(VmDiskStatsControllerNumReadIoDescription)
+          type: integer
+          format: int64
+        controllerRandomReadOps:
+          description: DocRef(VmDiskStatsControllerRandomReadOpsDescription)
+          type: integer
+          format: int64
+        controllerRandomWriteOps:
+          description: DocRef(VmDiskStatsControllerRandomWriteOpsDescription)
+          type: integer
+          format: int64
+        controllerReadIoBandwidthKbps:
+          description: DocRef(VmDiskStatsControllerReadIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        controllerSeqIoPpm:
+          description: DocRef(VmDiskStatsControllerSeqIoPpmDescription)
+          type: integer
+          format: int64
+        controllerTimespanMicros:
+          description: DocRef(VmDiskStatsControllerTimespanMicrosDescription)
+          type: integer
+          format: int64
+        controllerTotalIoSizeKb:
+          description: DocRef(VmDiskStatsControllerTotalIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerTotalIoTimeMicros:
+          description: DocRef(VmDiskStatsControllerTotalIoTimeMicrosDescription)
+          type: integer
+          format: int64
+        controllerTotalReadIoSizeKb:
+          description: DocRef(VmDiskStatsControllerTotalReadIoSizeKbDescription)
+          type: integer
+          format: int64
+        controllerTotalReadIoTimeMicros:
+          description: DocRef(VmDiskStatsControllerTotalReadIoTimeMicrosDescription)
+          type: integer
+          format: int64
+        controllerUserBytes:
+          description: DocRef(VmDiskStatsControllerUserBytesDescription)
+          type: integer
+          format: int64
+        controllerVdiskCpuTimeMicros:
+          description: DocRef(VmDiskStatsControllerVdiskCpuTimeMicrosDescription)
+          type: integer
+          format: int64
+        controllerWriteIoBandwidthKbps:
+          description: DocRef(VmDiskStatsControllerWriteIoBandwidthKbpsDescription)
+          type: integer
+          format: int64
+        controllerWriteIoPpm:
+          description: DocRef(VmDiskStatsControllerWriteIoPpmDescription)
+          type: integer
+          format: int64
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: timestamp
+                  index: 2001
+                - name: controllerAvgIoLatencyMicros
+                  index: 2002
+                - name: controllerAvgReadIoLatencyMicros
+                  index: 2003
+                - name: controllerAvgReadIoSizeKb
+                  index: 2004
+                - name: controllerAvgWriteIoLatencyMicros
+                  index: 2005
+                - name: controllerAvgWriteIoSizeKb
+                  index: 2006
+                - name: controllerIoBandwidthKbps
+                  index: 2007
+                - name: controllerFrontendReadOps
+                  index: 2008
+                - name: controllerFrontendWriteOps
+                  index: 2009
+                - name: controllerNumIo
+                  index: 2010
+                - name: controllerNumIops
+                  index: 2011
+                - name: controllerNumReadIo
+                  index: 2012
+                - name: controllerNumReadIops
+                  index: 2013
+                - name: controllerNumWriteIo
+                  index: 2014
+                - name: controllerRandomReadOps
+                  index: 2015
+                - name: controllerRandomWriteOps
+                  index: 2016
+                - name: controllerReadIoBandwidthKbps
+                  index: 2017
+                - name: controllerReadIoPpm
+                  index: 2018
+                - name: controllerSeqIoPpm
+                  index: 2019
+                - name: controllerTimespanMicros
+                  index: 2020
+                - name: controllerTotalIoSizeKb
+                  index: 2021
+                - name: controllerTotalIoTimeMicros
+                  index: 2022
+                - name: controllerTotalReadIoSizeKb
+                  index: 2023
+                - name: controllerTotalReadIoTimeMicros
+                  index: 2024
+                - name: controllerUserBytes
+                  index: 2025
+                - name: controllerVdiskCpuTimeMicros
+                  index: 2026
+                - name: controllerWriteIoBandwidthKbps
+                  index: 2027
+                - name: controllerWriteIoPpm
+                  index: 2028
+      x-complex-type-edm: true
+      x-property-mapping:
+        - name: controllerAvgIoLatencyMicros
+          value: "controller_avg_io_latency_usecs"
+        - name: controllerAvgReadIoLatencyMicros
+          value: "controller_avg_read_io_latency_usecs"
+        - name: controllerAvgReadIoSizeKb
+          value: "controller_avg_read_io_size_kbytes"
+        - name: controllerAvgWriteIoLatencyMicros
+          value: "controller_avg_write_io_latency_usecs"
+        - name: controllerAvgWriteIoSizeKb
+          value: "controller_avg_write_io_size_kbytes"
+        - name: controllerFrontendReadOps
+          value: "controller.frontend_read_ops"
+        - name: controllerFrontendWriteOps
+          value: "controller.frontend_write_ops"
+        - name: controllerIoBandwidthKbps
+          value: "controller_io_bandwidth_kBps"
+        - name: controllerNumIo
+          value: "controller_num_io"
+        - name: controllerNumIops
+          value: "controller_num_iops"
+        - name: controllerNumReadIo
+          value: "controller_num_read_io"
+        - name: controllerNumReadIops
+          value: "controller_num_read_iops"
+        - name: controllerNumWriteIo
+          value: "controller_num_write_io"
+        - name: controllerRandomReadOps
+          value: "controller.random_read_ops"
+        - name: controllerRandomWriteOps
+          value: "controller.random_write_ops"
+        - name: controllerReadIoBandwidthKbps
+          value: "controller_read_io_bandwidth_kBps"
+        - name: controllerReadIoPpm
+          value: "controller_read_io_ppm"
+        - name: controllerSeqIoPpm
+          value: "controller_seq_io_ppm"
+        - name: controllerTimespanMicros
+          value: "controller_timespan_usecs"
+        - name: controllerTotalIoSizeKb
+          value: "controller_total_io_size_kbytes"
+        - name: controllerTotalIoTimeMicros
+          value: "controller_total_io_time_usecs"
+        - name: controllerTotalReadIoSizeKb
+          value: "controller_total_read_io_size_kbytes"
+        - name: controllerTotalReadIoTimeMicros
+          value: "controller_total_read_io_time_usecs"
+        - name: controllerUserBytes
+          value: "controller_user_bytes"
+        - name: controllerWriteIoBandwidthKbps
+          value: "controller_write_io_bandwidth_kBps"
+        - name: controllerVdiskCpuTimeMicros
+          value: "controller.vdisk_cpu_time_usecs"
+        - name: controllerWriteIoPpm
+          value: "controller_write_io_ppm"
+
+    VmNicStats:
+      description: DocRef(VmNicStatsDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+        - type: "object"
+          properties:
+            vmExtId:
+              description: DocRef(VmNicStatsVmExtIdDescription)
+              type: string
+              x-constraints:
+                pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+            stats:
+              description: DocRef(VmStatsTimestampDescription)
+              type: array
+              items:
+                $ref: "ModelRef({./VmNicStatsTuple})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ExternalizableAbstractModel})"
+                  name: base
+                  index: 2001
+                - name: vmExtId
+                  index: 2002
+                - name: stats
+                  index: 2003
+
+    VmNicStatsTuple:
+      description: DocRef(VmNicStatsDescription)
+      type: "object"
+      properties:
+        timestamp:
+          description: DocRef(VmStatsTimestampDescription)
+          type: string
+          format: date-time
+        networkDroppedReceivedPackets:
+          description: DocRef(VmNicStatsNetworkDroppedReceivedPacketsDescription)
+          type: integer
+          format: int64
+        networkDroppedTransmittedPackets:
+          description: DocRef(VmNicStatsNetworkDroppedTransmittedPacketsDescription)
+          type: integer
+          format: int64
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: timestamp
+                  index: 2001
+                - name: networkDroppedReceivedPackets
+                  index: 2002
+                - name: networkDroppedTransmittedPackets
+                  index: 2003
+      x-complex-type-edm: true
+      x-property-mapping:
+        - name: "networkDroppedReceivedPackets"
+          value: "network.dropped_received_pkts"
+        - name: "networkDroppedTransmittedPackets"
+          value: "network.dropped_transmitted_pkts"

@@ -1,0 +1,26 @@
+{
+  "version" : "0.0.1-SNAPSHOT",
+  "projectPrefix" : "pri",
+  "packagePrefix" : "dp1.pri",
+  "namespaces" : [ {
+    "family" : 4,
+    "version" : "v4.r0",
+    "prefix" : "PRI",
+    "name" : "prism",
+    "versionType" : "b1",
+    "extId" : "1534ed6f-665c-4858-853b-6a2e10939137",
+    "modelDependencies" : [ "dp1.pri.common.v1.r0.b1.response.ExternalizableAbstractModel", "dp1.pri.common.v1.r0.b1.config.BaseEnum", "dp1.pri.common.v1.r0.b1.config.MessageSeverity", "dp1.pri.common.v1.r0.b1.config.Message", "dp1.pri.common.v1.r0.b1.response.ApiLink", "dp1.pri.common.v1.r0.b1.config.MapOfStringWrapper", "dp1.pri.common.v1.r0.b1.config.KVPair", "dp1.pri.common.v1.r0.b1.response.ApiResponseMetadata", "dp1.pri.common.v1.r0.b1.config.TenantAwareModel", "dp1.pri.common.v1.r0.b1.config.Flag" ],
+    "alphaPaths" : [ ],
+    "betaPaths" : [ "/prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets", "/prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}" ],
+    "releasedPaths" : [ ],
+    "alphaModels" : [ ],
+    "betaModels" : [ "dp1.pri.prism.v4.r0.b1.management.DeleteBackupTargetApiResponse", "dp1.pri.prism.v4.r0.b1.error.ErrorResponse", "dp1.pri.prism.v4.r0.b1.management.CreateBackupTargetApiResponse", "dp1.pri.prism.v4.r0.b1.management.ObjectStoreLocation", "dp1.pri.prism.v4.r0.b1.management.UpdateBackupTargetApiResponse", "dp1.pri.prism.v4.r0.b1.management.AWSS3Config", "dp1.pri.prism.v4.r0.b1.management.BackupPolicy", "dp1.pri.prism.v4.r0.b1.management.ClusterLocation", "dp1.pri.prism.v4.r0.b1.error.SchemaValidationError", "dp1.pri.prism.v4.r0.b1.error.MessageSeverity", "dp1.pri.prism.v4.r0.b1.management.GetBackupTargetApiResponse", "dp1.pri.prism.v4.r0.b1.error.SchemaValidationErrorMessage", "dp1.pri.prism.v4.r0.b1.management.ClusterReference", "dp1.pri.prism.v4.r0.b1.config.TaskReference", "dp1.pri.prism.v4.r0.b1.management.BackupTarget", "dp1.pri.prism.v4.r0.b1.error.AppMessage", "dp1.pri.prism.v4.r0.b1.management.S3Config", "dp1.pri.prism.v4.r0.b1.management.AccessKeyCredentials", "dp1.pri.prism.v4.r0.b1.management.ListBackupTargetsApiResponse" ],
+    "releasedModels" : [ ],
+    "profiles" : [ {
+      "name" : "all",
+      "priority" : 2147483647,
+      "expression" : "true",
+      "description" : "default profile"
+    } ]
+  } ]
+}

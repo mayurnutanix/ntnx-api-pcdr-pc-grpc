@@ -1,0 +1,71 @@
+---
+CLU-10001:
+  code: 10001
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_SERVICE_RPC_ERROR"
+  arguments:
+    - "reason"
+CLU-10002:
+  code: 10002
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_SERVICE_RPC_ERROR"
+  arguments: null
+CLU-10003:
+  code: 10003
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_IDEMPOTENCY_ERROR"
+  arguments:
+    - "reason"
+CLU-10004:
+  code: 10004
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  arguments: null
+CLU-10005:
+  code: 10005
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  arguments:
+    - "reason"
+CLU-10006:
+  code: 10006
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  arguments:
+    - "reason"
+CLU-10007:
+  code: 10007
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  arguments:
+    - "reason"
+CLU-10008:
+  code: 10008
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_SERVICE_NOT_SUPPORTED_ENTITY_ERROR"
+  arguments:
+    - "reason"
+CLU-10009:
+  code: 10009
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_ZKCONFIG_READ_ERROR"
+  arguments:
+    - "reason"
+CLU-10010:
+  code: 10010
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_SERVICE_DUPLICATE_HOST_NAME_ERROR"
+  arguments:
+    - "reason"
+CLU-10011:
+  code: 10011
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  arguments:
+    - "reason"
+CLU-10012:
+  code: 10012
+  severity: "ERROR"
+  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  arguments:
+    - "cluster_uuid"

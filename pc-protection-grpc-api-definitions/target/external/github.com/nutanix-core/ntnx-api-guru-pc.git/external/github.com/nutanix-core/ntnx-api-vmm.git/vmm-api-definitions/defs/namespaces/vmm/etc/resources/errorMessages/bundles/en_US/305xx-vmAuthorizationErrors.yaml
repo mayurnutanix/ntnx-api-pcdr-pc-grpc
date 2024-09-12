@@ -1,0 +1,9 @@
+# VM authorization errors - 305xx.
+- code: 30500
+  errorGroup: VM_UNAUTHORIZED_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as it is
+    not authorized.
+  arguments:
+    - vm_uuid

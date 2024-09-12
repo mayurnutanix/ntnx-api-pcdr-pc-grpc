@@ -1,0 +1,239 @@
+paths:
+  /domain-managers:
+    get:
+      tags:
+        - "ApiEndpoint(DomainManager)"
+      description: DocRef(DomainManagerListEndPointsDescription)
+      summary: DocRef(DomainManagerListEndPointsSummary)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      operationId: "listDomainManagers"
+      x-internal-api: false
+      x-permissions:
+        displayName: View Domain Managers
+        entityType: prism_central
+        operationName: View_Domain_Manager
+        serviceName: Prism
+        roleList:
+          - Super Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Cluster Admin
+          - Domain Manager Admin
+          - Prism Viewer
+          - Cluster Viewer
+          - Domain Manager Viewer
+        legacyOperationList:
+          - Prism:View_Prism_Central
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: rbac
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 3
+            timeUnit: seconds
+          - type: small
+            count: 3
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 3
+            timeUnit: seconds
+      responses:
+        200:
+          description: DocRef(DomainManagerListResponseDescription)
+          content:
+            application/json:
+              schema:
+                type: array
+                x-constraints:
+                  minItems: ConstantRef(ListDomainManagerMinItems)
+                  maxItems: ConstantRef(ListDomainManagerMaxItems)
+                items:
+                  $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/config/beta/models/DomainManager})"
+        x-api-responses:
+          responseModelName: "ListDomainManagerApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/prism/versioned/v4/modules/config/beta/models/DomainManager})"
+                    container: "array"
+                    index: 2001
+      x-support-projection: true
+    post:
+      tags:
+        - "ApiEndpoint(DomainManager)"
+      summary: DocRef(DomainManagerDeploymentSummary)
+      description: DocRef(DomainManagerDeploymentDescription)
+      operationId: "createDomainManager"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-internal-api: false
+      x-permissions:
+        displayName: Create a Domain Manager
+        entityType: prism_central
+        operationName: Create_Domain_Manager
+        serviceName: Prism
+        roleList:
+          - Super Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Cluster Admin
+          - Domain Manager Admin
+        legacyOperationList:
+          - Prism:Create_Prism_Central
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+          - type: rbac
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "body"
+                  index: 2002
+      requestBody:
+        description: DocRef(DomainManagerDeploymentBodyDescription)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/config/beta/models/DomainManager})"
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 1
+            timeUnit: seconds
+          - type: small
+            count: 1
+            timeUnit: seconds
+          - type: large
+            count: 1
+            timeUnit: seconds
+          - type: xlarge
+            count: 1
+            timeUnit: seconds
+      responses:
+        202:
+          description: DocRef({ext:common:/namespaces/common}, 202AcceptedDesc)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+          responseModelName: "CreateDomainManagerApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /domain-managers/{extId}:
+    parameters:
+      - name: extId
+        in: path
+        description: DocRef(ExtIdDescription)
+        required: true
+        schema:
+          type: string
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+    get:
+      tags:
+        - "ApiEndpoint(DomainManager)"
+      description: DocRef(DomainManagerGetEndPointsDescription)
+      summary: DocRef(DomainManagerGetEndPointSummary)
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      operationId: "getDomainManagerById"
+      x-internal-api: false
+      x-permissions:
+        displayName: View Domain Manager
+        entityType: prism_central
+        operationName: View_Domain_Manager
+        serviceName: Prism
+        roleList:
+          - Super Admin
+          - Internal Super Admin
+          - Prism Admin
+          - Cluster Admin
+          - Domain Manager Admin
+          - Prism Viewer
+          - Cluster Viewer
+          - Domain Manager Viewer
+        legacyOperationList:
+          - Prism:View_Prism_Central
+      x-codegen-hint:
+        spring-mvc:
+          - type: "non-blocking"
+            properties:
+              non-blocking: true
+          - type: rbac
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 3001
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 3
+            timeUnit: seconds
+          - type: small
+            count: 3
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 3
+            timeUnit: seconds
+      responses:
+        200:
+          description: DocRef(DomainManagerGetResponseDescription)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/config/beta/models/DomainManager})"
+        x-api-responses:
+          responseModelName: "GetDomainManagerApiResponse"
+          template: ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/prism/versioned/v4/modules/config/beta/models/DomainManager})"
+                    index: 2001

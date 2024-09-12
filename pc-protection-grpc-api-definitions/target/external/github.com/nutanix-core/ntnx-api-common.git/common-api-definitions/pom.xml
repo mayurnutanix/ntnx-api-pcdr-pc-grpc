@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>common</artifactId>
+    <groupId>com.nutanix.nutanix-core.ntnx-api.common</groupId>
+    <version>16.9.0-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>common-api-definitions</artifactId>
+  <packaging>jar</packaging>
+
+  <name>Common API and Schema definitions</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.nutanix.nutanix-core.ntnx-api.dev-platform</groupId>
+        <artifactId>dev-platform-maven-plugins</artifactId>
+        <version>${openapi-dev-platform.version}</version>
+        <configuration>
+          <apiBaseDir>${project.basedir}/defs</apiBaseDir>
+          <!--<openApiWriterExtensionPlugins>-->
+          <!-- Add any custom writer extensions here
+          <openApiWriterExtensionPlugin>
+            Fully qualified class name of the plugin
+          </openApiWriterExtensionPlugin> -->
+          <!--</openApiWriterExtensionPlugins>-->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <appendAssemblyId>false</appendAssemblyId>
+          <attach>true</attach>
+          <descriptors>
+            <descriptor>${project.basedir}/assembly/assembly.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <id>generate-tar-gz</id>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,675 @@
+paths:
+  /vm-host-affinity-policies/{extId}:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(GetVmHostAffinityPolicyDescription)
+      summary: DocRef(GetVmHostAffinityPolicySummary)
+      operationId: "getVmHostAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 10
+            timeUnit: seconds
+          - type: Small
+            count: 15
+            timeUnit: seconds
+          - type: Large
+            count: 20
+            timeUnit: seconds
+          - type: XLarge
+            count: 20
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: View_VM_Host_Affinity_Policy
+        description: "Allows to view a VM Host Affinity Policy."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+          - Prism Admin
+          - Prism Viewer
+        relatedOperationList:
+          - Prism:View_Category
+          - Clustermgmt:View_Host
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:View_VM_Host_Affinity_Policy
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmHostAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicy})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "GetVmHostAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicy})"
+                    index: 2001
+    put:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(UpdateVmHostAffinityPolicyDescription)
+      summary: DocRef(UpdateVmHostAffinityPolicySummary)
+      operationId: "updateVmHostAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 4
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: Update_VM_Host_Affinity_Policy
+        description: "Allows to update a VM Host Affinity Policy."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Prism Admin
+        relatedOperationList:
+          - Prism:View_Category
+          - Clustermgmt:View_Host
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+          - VMM:View_VM_Host_Affinity_Policy
+        legacyOperationList:
+          - Prism:Update_VM_Host_Affinity_Policy
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmHostAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicy})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+                - name: "body"
+                  index: 2002
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "UpdateVmHostAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+    delete:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(DeleteVmHostAffinityPolicyDescription)
+      summary: DocRef(DeleteVmHostAffinityPolicySummary)
+      operationId: "deleteVmHostAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 4
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: Delete_VM_Host_Affinity_Policy
+        description: "Allows to delete the VM Host Affinity Policy."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Prism Admin
+        relatedOperationList:
+          - Clustermgmt:View_Host
+          - VMM:View_Virtual_Machine
+          - VMM:View_VM_Host_Affinity_Policy
+        legacyOperationList:
+          - Prism:Delete_VM_Host_Affinity_Policy
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmHostAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "DeleteVmHostAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vm-host-affinity-policies/{extId}/$actions/re-enforce:
+    x-backend-service-name: pcVmmSvc
+    post:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(ReEnforceVmHostAffinityPolicyDescription)
+      summary: DocRef(ReEnforceVmHostAffinityPolicySummary)
+      operationId: "reEnforceVmHostAffinityPolicyById"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: Reenforce_VM_Host_Affinity_Policy
+        description: "Allows to re-enforce the VM Host Affinity Policy."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Prism Admin
+        legacyParentOperationList:
+          - VMM:Update_VM_Host_Affinity_Policy
+        relatedOperationList:
+          - Prism:View_Category
+          - Clustermgmt:View_Host
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+          - VMM:View_VM_Host_Affinity_Policy
+          - VMM:View_VM_Host_Affinity_Policy_VM_Compliances
+          - VMM:View_VM_Host_Affinity_Policy_VM_Compliance_States
+      parameters:
+        - name: extId
+          in: path
+          description: DocRef(VmHostAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "extId"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ReEnforceVmHostAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vm-host-affinity-policies:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(ListVmHostAffinityPoliciesDescription)
+      summary: DocRef(ListVmHostAffinityPoliciesSummary)
+      operationId: "listVmHostAffinityPolicies"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: View_VM_Host_Affinity_Policy
+        description: "Allows to view a VM Host Affinity Policy."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+          - Prism Admin
+          - Prism Viewer
+        relatedOperationList:
+          - Prism:View_Category
+          - Clustermgmt:View_Host
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+        legacyOperationList:
+          - Prism:View_VM_Host_Affinity_Policy
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "$page"
+                  index: 2001
+                - name: "$limit"
+                  index: 2002
+                - name: "$filter"
+                  index: 2003
+                - name: "$orderBy"
+                  index: 2004
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicy})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListVmHostAffinityPoliciesApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicy})"
+                    container: "array"
+                    index: 2001
+    post:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(CreateVmHostAffinityPolicyDescription)
+      summary: DocRef(CreateVmHostAffinityPolicySummary)
+      operationId: "createVmHostAffinityPolicy"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 4
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: Create_VM_Host_Affinity_Policy
+        description: "Allows to create a VM Host Affinity Policy."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Prism Admin
+        relatedOperationList:
+          - Prism:View_Category
+          - Clustermgmt:View_Host
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+          - VMM:View_VM_Host_Affinity_Policy
+        legacyOperationList:
+          - Prism:Create_VM_Host_Affinity_Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicy})"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "body"
+                  index: 2001
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      responses:
+        202:
+          description: DocRef(Accepted)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "CreateVmHostAffinityPolicyApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/beta/models/TaskReference})"
+                    index: 2001
+
+  /vm-host-affinity-policies/{vmHostAffinityPolicyExtId}/vm-compliance-states:
+    x-backend-service-name: pcVmmSvc
+    get:
+      tags:
+        - "ApiEndpoint(VmHostAffinityPolicies)"
+      description: DocRef(ListCompliancesInHostAffinityPolicyDescription)
+      summary: DocRef(ListCompliancesInHostAffinityPolicySummary)
+      operationId: "listVmHostAffinityPolicyVmComplianceStates"
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 2
+            timeUnit: seconds
+          - type: Small
+            count: 2
+            timeUnit: seconds
+          - type: Large
+            count: 3
+            timeUnit: seconds
+          - type: XLarge
+            count: 3
+            timeUnit: seconds
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.1
+      x-permissions:
+        operationName: View_VM_Host_Affinity_Policy_VM_Compliance_States
+        description: "Allows to view VM-Host affinity policy VM compliance states."
+        serviceName: VMM
+        entityType: vm_host_affinity_policy
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Virtual Machine Admin
+          - Virtual Machine Viewer
+          - Prism Admin
+          - Prism Viewer
+        legacyParentOperationList:
+          - VMM:View_VM_Host_Affinity_Policy
+          - VMM:View_VM_Host_Affinity_Policy_VM_Compliances
+        relatedOperationList:
+          - Prism:View_Category
+          - Clustermgmt:View_Host
+          - Prism:View_Name_Category
+          - Prism:View_Value_Category
+          - VMM:View_Virtual_Machine
+          - VMM:View_VM_Host_Affinity_Policy_VM_Compliances
+      x-api-features:
+        - ApiFeature(PARAMETERS, {ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/Page})
+      parameters:
+        - name: vmHostAffinityPolicyExtId
+          in: path
+          description: DocRef(VmHostAffinityPolicyExtIdDescription)
+          required: true
+          schema:
+            type: string
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+      x-codegen-hint:
+        spring-mvc:
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "vmHostAffinityPolicyExtId"
+                  index: 2001
+                - name: "$page"
+                  index: 2002
+                - name: "$limit"
+                  index: 2003
+                - name: "$filter"
+                  index: 2004
+        proto:
+          - type: tag
+            properties:
+              value: VmHostAffinityPolicies
+      responses:
+        200:
+          description: DocRef(GetSuccess)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicyVmComplianceState})"
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/apiResponse"
+          responseModelName: "ListVmHostAffinityPolicyVmComplianceStatesApiResponse"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/vmm/versioned/v4/modules/ahv-policies/beta/models/VmHostAffinityPolicyVmComplianceState})"
+                    container: "array"
+                    index: 2001

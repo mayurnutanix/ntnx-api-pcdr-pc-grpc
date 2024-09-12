@@ -1,0 +1,774 @@
+components:
+  schemas:
+    TenantAwareModel:
+      description: DocRef(tenantAwareModelDesc)
+      type: "object"
+      properties:
+        tenantId:
+          type: "string"
+          description: DocRef(tenantIdDesc)
+          readOnly: true
+          x-constraints:
+            pattern: ConstantRef(uuidPattern)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+    Metadata:
+      description: DocRef(metadataDesc)
+      type: "object"
+      properties:
+        ownerReferenceId:
+          type: "string"
+          description: DocRef(ownerReferenceIdDesc)
+          x-constraints:
+            pattern: ConstantRef(uuidPattern)
+        ownerUserName:
+          type: "string"
+          description: DocRef(ownerUserNameDesc)
+          x-constraints:
+            maxLength: ConstantRef(maxOwnerUserName)
+        projectReferenceId:
+          type: "string"
+          description: DocRef(projectReferenceIdDesc)
+          x-constraints:
+            pattern: ConstantRef(uuidPattern)
+        projectName:
+          type: "string"
+          description: DocRef(projectNameDesc)
+          x-constraints:
+            maxLength: ConstantRef(maxProjectName)
+        categoryIds:
+          type: "array"
+          description: DocRef(categoriesDesc)
+          minItems: 1
+          maxItems: 256
+          items:
+            type: "string"
+            x-constraints:
+              pattern: ConstantRef(uuidPattern)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: ownerReferenceId
+                  index: 1001
+                - name: ownerUserName
+                  index: 1002
+                - name: projectReferenceId
+                  index: 1003
+                - name: projectName
+                  index: 1004
+                - name: categoryIds
+                  index: 1005
+    BaseEnum:
+      type: "string"
+      enum:
+        - "$UNKNOWN"
+        - "$REDACTED"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: "$UNKNOWN"
+                  index: 0
+                - value: "$REDACTED"
+                  index: 1
+          - type: enum
+            properties:
+              descriptions:
+                - name: $UNKNOWN
+                  description: DocRef(enum$UnknownDesc)
+                - name: $REDACTED
+                  description: DocRef(enum$RedactedDesc)
+
+    MessageSeverity:
+      description: DocRef(messageSeverityDesc)
+      allOf:
+        - $ref: "ModelRef({./BaseEnum})"
+        - type: "string"
+          enum:
+            - INFO
+            - WARNING
+            - ERROR
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: "INFO"
+                  index: 1001
+                - value: "WARNING"
+                  index: 1002
+                - value: "ERROR"
+                  index: 1003
+          - type: enum
+            properties:
+              descriptions:
+                - name: INFO
+                  description: DocRef(infoSeverityDesc)
+                - name: WARNING
+                  description: DocRef(warningSeverityDesc)
+                - name: ERROR
+                  description: DocRef(errorSeverityDesc)
+    Message:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+          description: DocRef(messageCodeDesc)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        message:
+          type: "string"
+          description: DocRef(messageDesc)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1002
+        locale:
+          type: "string"
+          description: DocRef(messageLocaleDesc)
+          x-constraints:
+            default: ConstantRef(defaultLocale)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1003
+        severity:
+          $ref: ModelRef({./MessageSeverity})
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "severity"
+                  index: 1004
+    Page:
+      type: "object"
+      properties:
+        $page:
+          type: "integer"
+          format: "int32"
+          description: DocRef($pageDesc)
+          default: 0
+          x-constraints:
+            minimum: 0
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        $limit:
+          type: "integer"
+          format: "int32"
+          description: DocRef($limitDesc)
+          default: 50
+          x-constraints:
+            minimum: 1
+            maximum: 100
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1002
+      x-query-param: true
+    Pageable:
+      description: DocRef(pageableDesc)
+      allOf:
+        - $ref: "ModelRef({./Page})"
+        - type: "object"
+          properties:
+            totalPages:
+              type: "integer"
+              format: "int32"
+              readOnly: true
+              description: DocRef(totalPagesDesc)
+              x-codegen-hint:
+                $any:
+                  - type: entity-identifier
+                    properties:
+                      identifiers:
+                        index: 1002
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: ModelRef({./Page})
+                  name: pageInfo
+                  index: 1001
+    IPAddress:
+      type: object
+      description: DocRef(ipAddressDesc)
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - ipv4
+        - ipv6
+      x-sortable-properties:
+        - ipv4
+        - ipv6
+      properties:
+        ipv4:
+          $ref: ModelRef({./IPv4Address})
+        ipv6:
+          $ref: ModelRef({./IPv6Address})
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "ipv4"
+                  index: 1001
+                - name: "ipv6"
+                  index: 1002
+          - type: anyOf
+            properties:
+              vars:
+                - ipv4
+                - ipv6
+    IPAddressOrFQDN:
+      type: object
+      description: DocRef(ipAddressOrFQDNDesc)
+      properties:
+        ipv4:
+          $ref: ModelRef({./IPv4Address})
+        ipv6:
+          $ref: ModelRef({./IPv6Address})
+        fqdn:
+          $ref: ModelRef({./FQDN})
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "ipv4"
+                  index: 1001
+                - name: "ipv6"
+                  index: 1002
+                - name: "fqdn"
+                  index: 1003
+          - type: anyOf
+            properties:
+              vars:
+                - ipv4
+                - ipv6
+                - fqdn
+    IPv4Address:
+      type: "object"
+      x-complex-type-edm: true
+      description: DocRef(ipv4AddressDesc)
+      required:
+        - value
+      x-filterable-properties:
+        - value
+      x-sortable-properties:
+        - value
+      properties:
+        value:
+          description: DocRef(ipv4AddressValueDesc)
+          type: "string"
+          x-constraints:
+            pattern: ConstantRef(ipv4Pattern)
+        prefixLength:
+          type: "integer"
+          description: DocRef(ipv4AddressPrefixLengthDesc)
+          x-constraints:
+            default: ConstantRef(defaultIpv4AddressPrefixLength)
+          format: int32
+          minimum: 0
+          maximum: 32
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: value
+                  index: 1001
+                - name: prefixLength
+                  index: 1002
+    IPv6Address:
+      type: "object"
+      description: DocRef(ipv6AddressDesc)
+      x-complex-type-edm: true
+      required:
+        - value
+      x-filterable-properties:
+        - value
+      x-sortable-properties:
+        - value
+      properties:
+        value:
+          type: "string"
+          description: DocRef(ipv6AddressValueDesc)
+          x-constraints:
+            pattern: ConstantRef(ipv6Pattern)
+        prefixLength:
+          type: "integer"
+          description: DocRef(ipv6AddressPrefixLengthDesc)
+          x-constraints:
+            default: ConstantRef(defaultIpv6AddressPrefixLength)
+          format: int32
+          minimum: 0
+          maximum: 128
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: value
+                  index: 1001
+                - name: prefixLength
+                  index: 1002
+    FQDN:
+      type: "object"
+      description: DocRef(fqdnDesc)
+      properties:
+        value:
+          type: "string"
+          description: DocRef(fqdnValueDesc)
+          x-constraints:
+            pattern: ConstantRef(fqdnPattern)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+    IpRange:
+      description: DocRef(ipRangeDesc)
+      type: "object"
+      properties:
+        begin:
+          description: DocRef(ipRangeBeginDesc)
+          type: "string"
+          $ref: "ModelRef({./IPAddress})"
+        end:
+          description: DocRef(ipRangeEndDesc)
+          type: "string"
+          $ref: "ModelRef({./IPAddress})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "begin"
+                  index: 1001
+                - name: "end"
+                  index: 1002
+    KVStringPair:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "The key of this key-value string pair"
+          x-constraints:
+            maxLength: ConstantRef(maxKeyLength)
+            minLength: ConstantRef(minKeyLength)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        value:
+          type: "string"
+          default: ""
+          description: "The value associated with the key for this key-value string pair"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1002
+      x-complex-type-edm: true
+      x-codegen-hint:
+        java:
+          - type: "bounded-map"
+            properties:
+              valueType: "string"
+    KVPair:
+      type: "object"
+      description: DocRef(kvPairDesc)
+      properties:
+        name:
+          type: "string"
+          description: DocRef(kvPairKeyDesc)
+          x-constraints:
+            maxLength: ConstantRef(maxKeyLength)
+            minLength: ConstantRef(minKeyLength)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        value:
+          oneOf:
+          - type: "string"
+            description: DocRef(kvPairStringValueDesc)
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1002
+          - type: "integer"
+            description: DocRef(kvPairIntegerValueDesc)
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1003
+          - type: "boolean"
+            description: DocRef(kvPairBooleanValueDesc)
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1004
+          - type: "array"
+            description: DocRef(kvPairStringArrayValueDesc)
+            minItems: 0
+            maxItems: 100
+            items:
+              type: "string"
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1005
+          - type: "object"
+            description: DocRef(kvPairMapValueDesc)
+            additionalProperties:
+              type: "string"
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1006
+          - type: "array"
+            description: DocRef(kvPairArrayMapsValueDesc)
+            minItems: 0
+            maxItems: 20
+            items:
+              $ref: "ModelRef({./MapOfStringWrapper})"
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1007
+          - type: "array"
+            description: DocRef(kvPairIntegerArrayValueDesc)
+            minItems: 0
+            maxItems: 100
+            items:
+              type: "integer"
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1008
+          description: "The value associated with the key for this key-value pair"
+    MapOfStringWrapper:
+      type: "object"
+      description: DocRef(mapOfStringWrapperDesc)
+      properties:
+        map:
+          description: DocRef(mapOfStringDesc)
+          type: "object"
+          additionalProperties:
+            type: "string"
+          x-codegen-hint:
+            $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  index: 1001
+    Flag:
+      description: DocRef(flagDesc)
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: DocRef(flagNameDesc)
+          x-constraints:
+            maxLength: ConstantRef(maxFlagNameLength)
+            minLength: ConstantRef(minFlagNameLength)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        value:
+          type: "boolean"
+          description: DocRef(flagValueDesc)
+          default: false
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1002
+    EntityReference:
+      type: "object"
+      properties:
+        extId:
+          type: "string"
+          description: DocRef(extIdDesc)
+          x-constraints:
+            pattern: ConstantRef(uuidPattern)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+        name:
+          type: "string"
+          description: DocRef(entityNameDescription)
+          x-constraints:
+            maxLength: ConstantRef(maxEntityReferenceName)
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1002
+        uris:
+          type: "array"
+          description: DocRef(entityUriDescription)
+          minItems: 0
+          maxItems: 100
+          items:
+            type: "string"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1003
+        entityType:
+          $ref: "ModelRef({./EntityType})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "entityType"
+                  index: 1004
+    EntityType:
+      description: DocRef(entityTypeDescription)
+      allOf:
+        - $ref: "ModelRef({./BaseEnum})"
+        - type: "string"
+          enum:
+            - "CLUSTER"
+            - "VM"
+            - "STORAGE_CONTAINER"
+            - "VOLUME_GROUP"
+            - "TASK"
+            - "IMAGE"
+            - "CATEGORY"
+            - "NODE"
+            - "VPC"
+            - "SUBNET"
+            - "ROUTING_POLICY"
+            - "FLOATING_IP"
+            - "VPN_GATEWAY"
+            - "VPN_CONNECTION"
+            - "DIRECT_CONNECT"
+            - "DIRECT_CONNECT_VIF"
+            - "VIRTUAL_NIC"
+            - "VIRTUAL_SWITCH"
+            - "VM_DISK"
+            - "VOLUME_DISK"
+            - "DISK_RECOVERY_POINT"
+            - "VTEP_GATEWAY"
+            - "RECOVERY_PLAN"
+            - "RECOVERY_PLAN_JOB"
+            - "AVAILABILITY_ZONE"
+            - "VIRTUAL_NETWORK"
+            - "CONSISTENCY_GROUP"
+            - "SUBNET_EXTENSION"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: "CLUSTER"
+                  index: 1001
+                - value: "VM"
+                  index: 1002
+                - value: "STORAGE_CONTAINER"
+                  index: 1003
+                - value: "VOLUME_GROUP"
+                  index: 1004
+                - value: "TASK"
+                  index: 1005
+                - value: "IMAGE"
+                  index: 1006
+                - value: "CATEGORY"
+                  index: 1007
+                - value: "NODE"
+                  index: 1008
+                - value: "VPC"
+                  index: 1009
+                - value: "SUBNET"
+                  index: 1010
+                - value: "ROUTING_POLICY"
+                  index: 1011
+                - value: "FLOATING_IP"
+                  index: 1012
+                - value: "VPN_GATEWAY"
+                  index: 1013
+                - value: "VPN_CONNECTION"
+                  index: 1014
+                - value: "DIRECT_CONNECT"
+                  index: 1015
+                - value: "DIRECT_CONNECT_VIF"
+                  index: 1016
+                - value: "VIRTUAL_NIC"
+                  index: 1017
+                - value: "VIRTUAL_SWITCH"
+                  index: 1018
+                - value: "VM_DISK"
+                  index: 1019
+                - value: "VOLUME_DISK"
+                  index: 1020
+                - value: "DISK_RECOVERY_POINT"
+                  index: 1021
+                - value: "VTEP_GATEWAY"
+                  index: 1022
+                - value: "RECOVERY_PLAN"
+                  index: 1023
+                - value: "RECOVERY_PLAN_JOB"
+                  index: 1024
+                - value: "AVAILABILITY_ZONE"
+                  index: 1025
+                - value: "VIRTUAL_NETWORK"
+                  index: 1026
+                - value: "CONSISTENCY_GROUP"
+                  index: 1027
+                - value: "SUBNET_EXTENSION"
+                  index: 1028
+          - type: enum
+            properties:
+              descriptions:
+                - name: CLUSTER
+                  description: DocRef(clusterEntityTypeDescription)
+                - name: VM
+                  description: DocRef(vmEntityTypeDescription)
+                - name: STORAGE_CONTAINER
+                  description: DocRef(storageContainerEntityTypeDescription)
+                - name: VOLUME_GROUP
+                  description: DocRef(volumeGroupEntityTypeDescription)
+                - name: TASK
+                  description: DocRef(taskEntityTypeDescription)
+                - name: IMAGE
+                  description: DocRef(imageEntityTypeDescription)
+                - name: CATEGORY
+                  description: DocRef(categoryEntityTypeDescription)
+                - name: NODE
+                  description: DocRef(nodeEntityTypeDescription)
+                - name: VPC
+                  description: DocRef(vpcEntityTypeDescription)
+                - name: SUBNET
+                  description: DocRef(subnetEntityTypeDescription)
+                - name: ROUTING_POLICY
+                  description: DocRef(routingPolicyEntityTypeDescription)
+                - name: FLOATING_IP
+                  description: DocRef(floatingIPEntityTypeDescription)
+                - name: VPN_GATEWAY
+                  description: DocRef(vpnGatewayEntityTypeDescription)
+                - name: VPN_CONNECTION
+                  description: DocRef(vpnConnectionEntityTypeDescription)
+                - name: DIRECT_CONNECT
+                  description: DocRef(directConnectEntityTypeDescription)
+                - name: DIRECT_CONNECT_VIF
+                  description: DocRef(directConnectVifEntityTypeDescription)
+                - name: VIRTUAL_NIC
+                  description: DocRef(virtualNicEntityTypeDescription)
+                - name: VIRTUAL_SWITCH
+                  description: DocRef(virtualSwitchEntityTypeDescription)
+                - name: VM_DISK
+                  description: DocRef(vmDiskEntityTypeDescription)
+                - name: VOLUME_DISK
+                  description: DocRef(volumeDiskEntityTypeDescription)
+                - name: DISK_RECOVERY_POINT
+                  description: DocRef(diskRecoveryPointEntityTypeDescription)
+                - name: VTEP_GATEWAY
+                  description: DocRef(vtepGatewayEntityTypeDescription)
+                - name: RECOVERY_PLAN
+                  description: DocRef(recoveryPlanEntityTypeDescription)
+                - name: AVAILABILITY_ZONE
+                  description: DocRef(availabilityZoneEntityTypeDescription)
+                - name: VIRTUAL_NETWORK
+                  description: DocRef(virtualNetworkEntityTypeDescription)
+                - name: CONSISTENCY_GROUP
+                  description: DocRef(consistencyGroupEntityTypeDescription)
+                - name: SUBNET_EXTENSION
+                  description: DocRef(subnetExtensionEntityTypeDescription)
+
+    DryRun:
+      type: "object"
+      properties:
+        $dryrun:
+          description: DocRef(dryRunDesc)
+          type: "boolean"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    index: 1001
+    BasicAuth:
+      type: "object"
+      description: DocRef(basicAuthDescription)
+      required:
+        - username
+        - password
+      properties:
+        username:
+          description: DocRef(usernameDescription)
+          type: "string"
+          x-constraints:
+            maxLength: ConstantRef(basicAuthUsernameMaxLength)
+            minLength: ConstantRef(basicAuthUsernameMinLength)
+        password:
+          description: DocRef(passwordDescription)
+          type: "string"
+          format: "password"
+          x-constraints:
+            maxLength: ConstantRef(basicAuthPasswordMaxLength)
+            minLength: ConstantRef(basicAuthPasswordMinLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: username
+                  index: 2001
+                - name: password
+                  index: 2002

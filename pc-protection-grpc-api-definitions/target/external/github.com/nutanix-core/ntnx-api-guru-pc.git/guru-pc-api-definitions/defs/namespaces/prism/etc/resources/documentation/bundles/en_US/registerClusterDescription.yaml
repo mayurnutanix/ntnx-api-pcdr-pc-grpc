@@ -1,0 +1,65 @@
+- name: OnpremCloudDescription
+  value: "A domain manager (Prism Central) instance which can be reached through a physical address."
+- name: NutanixHostedCloudDescription
+  value: "A domain manager (Prism Central) instance which is accessed through a My Nutanix credentials."
+- name: "RemoteClusterTypeDescription"
+  value: |
+    Type of cluster to be connected:
+    - DOMAIN_MANAGER : Domain manager (Prism Central) instance
+    - AOS : Prism Element cluster instance
+- name: "DomainManagerTypeDescription"
+  value : "Domain manager (Prism Central) instance."
+- name: "AosTypeDescription"
+  value: "AOS (Prism Element) cluster instanc."
+- name: ClusterReferenceDescription
+  value: Cluster reference of the remote cluster to be connected.
+- name: ClusterUuidDescription
+  value: "Cluster UUID of a remote cluster."
+- name: RemoteClusterNameDescription
+  value: "Cluster name of a remote cluster."
+- name: RemoteClusterDescription
+  value: "Description of a remote cluster."
+- name: RemoteClusterAddressDescription
+  value: "Address configuration of a remote cluster. It requires the address of the remote, that is an IP or domain name along with the basic authentication credentials."
+- name: ClusterRegistrationSpecDescription
+  value: "Input specifications to perform the registration with a remote cluster entity."
+- name: DomainManagerCloudTypeDescription
+  value: |
+    Enum denoting whether the domain manager (Prism Central) instance is reachable with its physical address or reachable through the My Nutanix portal.
+    Based on the above description, the allowed enum values are:
+    - ONPREM: Domain manager (Prism Central) reachable on it's physical address.
+    - NUTANIX_HOSTED_CLOUD: Domain manager (Prism Central) reachable through My Nutanix portal.
+- name: ClusterUnregistrationSpecDescription
+  value: "Payload for unregistering a cluster"
+- name: UnregisterDescription
+  value: "Unregister a registered remote cluster from the local cluster.
+          This process is asynchronous, creating an unregisteration task and returning its UUID."
+- name: UnregisterSummary
+  value: "Unregister a registered remote cluster from the local cluster"
+- name: RemoteClusterSpecDescription
+  value: Remote cluster specification required for registering a cluster.
+- name: DomainManagerRemoteClusterSpecDescription
+  value: Remote cluster specification required for registering a domain manager (Prism Central).
+- name: AOSRemoteClusterSpecDescription
+  value: Remote cluster specification required for registering an AOS cluster (Prism Element).
+- name: ClusterNameDescription
+  value: Name of the cluster.
+- name: NodeIpAddressesDescription
+  value: "Node IP addresses of a registered cluster."
+- name: "RegisterDescription"
+  value: "Registers a domain manager (Prism Central) instance to other entities
+          like PE and PC. This process is asynchronous, creating a 
+          registration task and returning its UUID."
+- name: "RegisterSummary"
+  value: "Register a domain manager (Prism Central) to a cluster"
+- name: "RegistrationSpec"
+  value: "The registration request consists of the remote cluster details.
+          Credentials must be of domain manager (Prism Central) role."
+- name: "ExtIdDescription"
+  value: "The external identifier of the domain manager (Prism Central) resource."
+- name: "RemoteAddressDescription"
+  value: "IP address or Domain name to connect to remote cluster."
+- name: "RemoteCredentialsDescription"
+  value: "Credentials to connect to a remote cluster."
+- name: "BasicAuthDescription"
+  value: "Basic authentication details. It should have credentials of domain manager role."

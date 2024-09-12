@@ -1,0 +1,53 @@
+
+components:
+  schemas:
+    {{packageName}}.{{generatedResponseModelType}}:
+      type: "object"
+      properties:
+        {{#if x-api-response-macro}}
+        data:
+          oneOf:
+          - type: "array"
+            items:
+              $ref: "ModelRef({/namespaces/common/versioned/v1/modules/config/beta/models/Message})"
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1002
+          {{#if listType}}
+          - type: "array"
+            items:
+              $ref: "ModelRef({{=<% %>=}} {<%responseModelRef%>}<%={{ }}=%>)"
+            x-codegen-hint:
+              $any:
+                - type: entity-identifier
+                  properties:
+                    identifiers:
+                      index: 1003
+          {{else}}
+          - $ref: "ModelRef({{=<% %>=}} {<%responseModelRef%>}<%={{ }}=%>)"
+          {{/if}}
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({{=<% %>=}} {<%responseModelRef%>}<%={{ }}=%>)"
+                      index: 1003
+        {{/if}}
+        metadata:
+          $ref: "ModelRef({/namespaces/common/versioned/v1/modules/response/beta/models/ApiResponseMetadata})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "metadata"
+                  index: 1001
+      {{#if x-api-response-macro}}
+      description: "REST response for {{#if listType}} list of {{/if}} {{responseModelWrappedEntityName}} type{{#if listType}}s{{/if}}"
+      {{else}}
+      description: "REST response for all response codes in API path {{apiPathName}} {{operationName}} operation"
+      {{/if}}

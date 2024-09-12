@@ -1,0 +1,44 @@
+{
+    "2023.1": {
+        "minimum": "2022.6",
+        "maximum": "2023.3",
+        "exceptions": {
+            "versions": []
+        }
+    },
+    "2023.2": {
+        "minimum": "2022.6",
+        "maximum": "2023.4",
+        "exceptions": {
+            "versions": []
+        }
+    },
+    "2023.3": {
+        "minimum": "2022.6",
+        "maximum": "2024.1",
+        "exceptions": {
+            "versions": []
+        }
+    },
+    "2023.4": {
+        "minimum": "2022.6",
+        "maximum": "2024.2",
+        "exceptions": {
+            "versions": []
+        }
+    },
+    "2024.1": {
+        "minimum": "2023.3",
+        "maximum": "2024.2",
+        "exceptions": {
+            "versions": []
+        }
+    },
+    "2024.2": {
+        "minimum": "2023.4",
+        "maximum": "2024.2",
+        "exceptions": {
+            "versions": ["2023.1"]
+        }
+    }
+}

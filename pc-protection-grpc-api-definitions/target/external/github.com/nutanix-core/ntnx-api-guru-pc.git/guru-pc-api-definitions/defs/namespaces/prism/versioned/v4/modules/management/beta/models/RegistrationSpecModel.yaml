@@ -1,0 +1,96 @@
+components:
+  schemas:
+    ClusterRegistrationSpec:
+      type: "object"
+      description: DocRef(ClusterRegistrationSpecDescription)
+      required:
+        - remoteCluster
+      properties:
+        remoteCluster:
+          description: DocRef(RemoteClusterDescription)
+          oneOf:
+            - $ref: "ModelRef({./DomainManagerRemoteClusterSpec})"
+            - $ref: "ModelRef({./AOSRemoteClusterSpec})"
+            - $ref: "ModelRef({./ClusterReference})"
+          x-codegen-hint:
+            $any:
+              - type: entity-identifier
+                properties:
+                  identifiers:
+                    - type: "ModelRef({./DomainManagerRemoteClusterSpec})"
+                      index: 12001
+                    - type: "ModelRef({./AOSRemoteClusterSpec})"
+                      index: 12002
+                    - type: "ModelRef({./ClusterReference})"
+                      index: 12003
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: remoteCluster
+                  index: 13001
+    RemoteClusterSpec:
+      description: DocRef(RemoteClusterAddressDescription)
+      type: object
+      required:
+        - address
+        - credentials
+      properties:
+        address:
+          description: DocRef(RemoteAddressDescription)
+          $ref: ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/IPAddressOrFQDN})
+        credentials:
+          description: DocRef(RemoteCredentialsDescription)
+          $ref: ModelRef({./Credentials})
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "address"
+                  index: 7001
+                - name: "credentials"
+                  index: 7002
+    DomainManagerRemoteClusterSpec:
+      description: DocRef(DomainManagerRemoteClusterSpecDescription)
+      type: object
+      required:
+        - remoteCluster
+        - cloudType
+      properties:
+        remoteCluster:
+          description: DocRef(RemoteClusterSpecDescription)
+          $ref: "ModelRef({./RemoteClusterSpec})"
+        cloudType:
+          description: DocRef(DomainManagerCloudTypeDescription)
+          $ref: "ModelRef({./DomainManagerCloudType})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "remoteCluster"
+                  index: 8001
+                - name: "cloudType"
+                  index: 8002
+    AOSRemoteClusterSpec:
+      description: DocRef(AOSRemoteClusterSpecDescription)
+      type: object
+      required:
+        - remoteCluster
+      properties:
+        remoteCluster:
+          description: DocRef(RemoteClusterSpecDescription)
+          $ref: "ModelRef({./RemoteClusterSpec})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "remoteCluster"
+                  index: 9001
+
+    ClusterUnregistrationSpec:
+      $ref: "ModelRef({./ClusterReference})"
+      description: DocRef(ClusterUnregistrationSpecDescription)

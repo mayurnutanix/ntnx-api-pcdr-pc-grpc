@@ -1,0 +1,12 @@
+port: 8888
+backendServices:
+  - name: pcVmmEsxiSvc
+    environments:
+      - platform: pc
+        port: 2122
+        host: localhost
+  - name: pcVmmSvc
+    environments:
+      - platform: pc
+        port: 2120
+        host: localhost

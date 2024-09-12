@@ -1,0 +1,19 @@
+- code: 10001
+  severity: ERROR
+  errorGroup: Gone
+  message: >
+    Failed to load the resource with the URI {{{uri}}} as it does not not exist on this server.
+  arguments:
+    - "uri"
+- code: 10002
+  severity: ERROR
+  errorGroup: BAD_REQUEST
+  message: >
+    Failed to fetch the resource as the specified query param {{{param}}} is invalid
+  arguments:
+    - "param"
+- code: 99999
+  severity: ERROR
+  errorGroup: INTERNAL_SERVER_ERROR
+  message: >
+    Failed to service the request due to an internal server error.

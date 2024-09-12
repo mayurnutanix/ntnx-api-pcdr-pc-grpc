@@ -1,0 +1,12 @@
+port: 8888
+backendServices:
+  - name: mitra
+    environments:
+      - platform: pc
+        port: 2105
+        host: mitra-service.pc-platform-nci
+  - name: ahvclustermgmt
+    environments:
+      - platform: pc
+        port: 2120
+        host: localhost

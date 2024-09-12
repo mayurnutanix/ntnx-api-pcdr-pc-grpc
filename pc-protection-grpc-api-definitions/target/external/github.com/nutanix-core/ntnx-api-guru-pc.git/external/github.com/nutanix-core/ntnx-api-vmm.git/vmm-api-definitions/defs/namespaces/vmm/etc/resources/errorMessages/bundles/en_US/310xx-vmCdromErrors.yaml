@@ -1,0 +1,10 @@
+# VM CDROM related errors - 310xx.
+- code: 31000
+  errorGroup: VM_CDROM_NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as the
+    CD-ROM with UUID '{{{cdrom_uuid}}}' is not found.
+  arguments:
+    - vm_uuid
+    - cdrom_uuid

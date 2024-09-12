@@ -1,0 +1,154 @@
+# Internal errors
+- code: 55000
+  errorGroup: INTERNAL_ERROR
+  severity: ERROR
+  message: > 
+    Failed to perform the operation {{{operation}}} due to an internal error.
+  arguments:
+    - operation
+
+# Request validation errors
+- code: 55100
+  errorGroup: INVALID_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} because an argument {{{argument}}}
+    is missing in the request.
+  arguments:
+    - operation
+    - argument
+
+- code: 55101
+  errorGroup: INVALID_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} because an argument {{{argument}}}
+    is present in an invalid format.
+  arguments:
+    - operation
+    - argument
+
+- code: 55102
+  errorGroup: INVALID_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to an invalid argument {{{argument_key}}} and
+    value {{{argument_value}}}.
+  arguments:
+    - operation
+    - argument_key
+    - argument_value
+
+- code: 55103
+  errorGroup: INVALID_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to missing If-Match header in the request.
+  arguments:
+    - operation
+
+- code: 55104
+  errorGroup: INVALID_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} as the If-Match header value passed '{{{request_etag}}}'
+    is invalid.
+  arguments:
+    - operation
+    - request_etag
+
+- code: 55105
+  errorGroup: INVALID_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to invalid remote entity specified in the request.
+  arguments:
+    - operation
+
+# Precondition failed errors
+- code: 55200
+  errorGroup: PRECONDITION_FAILED
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the resource with If-Match header value passed
+    '{{{request_etag}}}' because it doesn't match the current value in the server '{{{current_etag}}}'.
+  arguments:
+    - operation
+    - request_etag
+    - current_etag
+
+- code: 55201
+  errorGroup: PRECONDITION_FAILED
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} during precheck execution due to reason - {{{error_message}}}.
+  arguments:
+    - operation
+    - error_message
+
+# Not implemented error
+- code: 55300
+  errorGroup: NOT_IMPLEMENTED
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} because it is not supported.
+  arguments:
+    - operation
+
+# Service unavailable error
+- code: 55400
+  errorGroup: SERVICE_UNAVAILABLE
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to service unavailability.
+    Please retry the operation after sometime.
+  arguments:
+    - operation
+
+# Unauthorized Request error
+- code: 55500
+  errorGroup: UNAUTHORIZED_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to invalid credentials provided
+    for the remote cluster.
+  arguments:
+    - operation
+
+# Forbidden Request error
+- code: 55600
+  errorGroup: FORBIDDEN_REQUEST
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to insufficient permissions for the
+    specified user on the remote cluster.
+  arguments:
+    - operation
+
+# Gateway timeout error
+- code: 55700
+  errorGroup: GATEWAY_TIMEOUT
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} due to the remote cluster being not reachable.
+  arguments:
+    - operation 
+
+# Not Found error
+- code: 55800
+  errorGroup: NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} because it is not supported on the remote cluster.
+  arguments:
+    - operation 
+
+- code: 55801
+  errorGroup: NOT_FOUND
+  severity: ERROR
+  message: >
+    Failed to perform the operation {{{operation}}} on the resource with extID {{{extID}}},
+    because it is not found.
+  arguments:
+    - operation 
+    - extID

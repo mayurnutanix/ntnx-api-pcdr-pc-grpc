@@ -1,0 +1,480 @@
+components:
+  schemas:
+    Task:
+      type: "object"
+      description: DocRef(TaskDescription)
+      properties:
+        extId:
+          description: DocRef(TaskExtIdDescription)
+          type: string
+          readOnly: true
+          required: true
+          x-constraints:
+            pattern: ConstantRef(taskExtIdPattern)
+        operation:
+          description: DocRef(TaskOperationDescription)
+          type: string
+          readOnly: true
+        operationDescription:
+          description: DocRef(TaskOperationDescDescription)
+          type: string
+          readOnly: true
+        parentTask:
+          description: DocRef(TaskParentDescription)
+          $ref: "ModelRef({./TaskReferenceInternal})"
+          readOnly: true
+        createdTime:
+          description: DocRef(TaskCreateTimeDescription)
+          type: string
+          readOnly: true
+          format: date-time
+        startedTime:
+          description: DocRef(TaskStartTimeDescription)
+          type: string
+          readOnly: true
+          format: date-time
+        completedTime:
+          description: DocRef(TaskCompleteTimeDescription)
+          type: string
+          readOnly: true
+          format: date-time
+        status:
+          readOnly: true
+          $ref: "ModelRef({./TaskStatus})"
+        progressPercentage:
+          description: DocRef(TaskProgressPercentageDescription)
+          type: integer
+          format: int32
+          readOnly: true
+          x-constraints:
+            minimum: 0
+            maximum: 100
+        entitiesAffected:
+          # TODO - ENG-493981 - Support filtering on enititesAffected
+          description: DocRef(TaskEntitiesDescription)
+          type: array
+          minItems: 0
+          maxItems: 300
+          readOnly: true
+          items:
+            $ref: "ModelRef({./EntityReference})"
+        subTasks:
+          description: DocRef(TaskSubtasksDescription)
+          type: array
+          minItems: 0
+          maxItems: 100
+          readOnly: true
+          items:
+            $ref: "ModelRef({./TaskReferenceInternal})"
+        subSteps:
+          description: DocRef(TaskSubstepsDescription)
+          type: array
+          minItems: 0
+          maxItems: 50
+          readOnly: true
+          items:
+            $ref: "ModelRef({./TaskStep})"
+        isCancelable:
+          description: DocRef(TaskCancelableDescription)
+          type: boolean
+          readOnly: true
+        ownedBy:
+          $ref: "ModelRef({./OwnerReference})"
+        completionDetails:
+          description: DocRef(TaskCompletionDetailsDescription)
+          type: array
+          minItems: 0
+          maxItems: 50
+          readOnly: true
+          items:
+            $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/KVPair})"
+        errorMessages:
+          description: DocRef(TaskErrorMessagesDescription)
+          type: array
+          minItems: 0
+          maxItems: 100
+          readOnly: true
+          items:
+            $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/error/beta/models/AppMessage})"
+        legacyErrorMessage:
+          description: DocRef(TaskLegacyErrorDescription)
+          type: string
+          readOnly: true
+        warnings:
+          description: DocRef(TaskWarningMessagesDescription)
+          type: array
+          minItems: 0
+          maxItems: 50
+          readOnly: true
+          items:
+            $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/error/beta/models/AppMessage})"
+        lastUpdatedTime:
+          description: DocRef(TaskLastUpdatedTimeDescription)
+          type: string
+          readOnly: true
+          format: date-time
+        clusterExtIds:
+          description: DocRef(TaskClusterExtIdsDescription)
+          type: array
+          minItems: 0
+          maxItems: 500
+          readOnly: true
+          items:
+            type: "string"
+            x-constraints:
+              pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        rootTask:
+          description: DocRef(TaskRootDescription)
+          $ref: "ModelRef({./RootTaskReference})"
+          readOnly: true
+        isBackgroundTask:
+          description: DocRef(TaskBackgroundDescription)
+          type: boolean
+          readOnly: true
+        numberOfSubtasks:
+          description: DocRef(TaskNumberOfSubtasksDescription)
+          type: integer
+          format: int32
+          readOnly: true
+        numberOfEntitiesAffected:
+          description: DocRef(TaskNumberOfEntitiesAffectedDescription)
+          type: integer
+          format: int32
+          readOnly: true
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+                - name: operation
+                  index: 2002
+                - name: operationDescription
+                  index: 2003
+                - name: parentTask
+                  index: 2004
+                - name: createdTime
+                  index: 2005
+                - name: startedTime
+                  index: 2006
+                - name: completedTime
+                  index: 2007
+                - name: status
+                  index: 2008
+                - name: progressPercentage
+                  index: 2009
+                - name: entitiesAffected
+                  index: 2010
+                - name: subTasks
+                  index: 2011
+                - name: subSteps
+                  index: 2012
+                - name: isCancelable
+                  index: 2013
+                - name: ownedBy
+                  index: 2014
+                - name: completionDetails
+                  index: 2015
+                - name: errorMessages
+                  index: 2016
+                - name: legacyErrorMessage
+                  index: 2017
+                - name: warnings
+                  index: 2018
+                - name: lastUpdatedTime
+                  index: 2019
+                - name: clusterExtIds
+                  index: 2020
+                - name: rootTask
+                  index: 2021
+                - name: isBackgroundTask
+                  index: 2022
+                - name: numberOfSubtasks
+                  index: 2023
+                - name: numberOfEntitiesAffected
+                  index: 2024
+      x-filterable-properties:
+        - extId
+        - operation
+        - operationDescription
+        - parentTask
+        - entitiesAffected
+        - createdTime
+        - startedTime
+        - completedTime
+        - lastUpdatedTime
+        - ownedBy
+        - status
+        - progressPercentage
+        - clusterExtIds
+        - rootTask
+        - isBackgroundTask
+      x-sortable-properties:
+        - operation
+        - operationDescription
+        - createdTime
+        - startedTime
+        - completedTime
+        - lastUpdatedTime
+        - ownedBy
+        - status
+        - progressPercentage
+      x-property-mapping:
+        - name: "extId"
+          value: "uuid"
+        - name: "operation"
+          value: "operation_type"
+        - name: "operationDescription"
+          value: "display_name"
+        - name: "createdTime"
+          value: "create_time_usecs"
+        - name: "startedTime"
+          value: "start_time_usecs"
+        - name: "completedTime"
+          value: "complete_time_usecs"
+        - name: "lastUpdatedTime"
+          value: "last_updated_time_usecs"
+        - name: "status"
+          value: "state"
+        - name: "progressPercentage"
+          value: "percentage_complete"
+        - name: "clusterExtIds"
+          value: "cluster_list"
+        - name: "parentTask"
+          value: "parent_task_uuid"
+        - name: "entitiesAffected"
+          value: "entity_list"
+        - name: "rootTask"
+          value: "root_task_uuid"
+        - name: "isBackgroundTask"
+          value: "ui_hidden_task"
+      x-projections:
+        unmappedFields:
+          - subSteps
+          - legacyErrorMessage
+
+    TaskStatus:
+      description: DocRef(TaskStatusDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "QUEUED"
+            - "RUNNING"
+            - "CANCELING"
+            - "SUCCEEDED"
+            - "FAILED"
+            - "CANCELED"
+            - "SUSPENDED"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: QUEUED
+                  index: 2001
+                - value: RUNNING
+                  index: 2002
+                - value: CANCELING
+                  index: 2003
+                - value: SUCCEEDED
+                  index: 2004
+                - value: FAILED
+                  index: 2005
+                - value: CANCELED
+                  index: 2006
+                - value: SUSPENDED
+                  index: 2007
+          - type: enum
+            properties:
+              descriptions:
+                - name: QUEUED
+                  description: DocRef(TaskStatusQueuedDescription)
+                - name: RUNNING
+                  description: DocRef(TaskStatusRunningDescription)
+                - name: CANCELING
+                  description: DocRef(TaskStatusCancelingDescription)
+                - name: SUCCEEDED
+                  description: DocRef(TaskStatusSucceededDescription)
+                - name: FAILED
+                  description: DocRef(TaskStatusFailedDescription)
+                - name: CANCELED
+                  description: DocRef(TaskStatusCanceledDescription)
+                - name: SUSPENDED
+                  description: DocRef(TaskStatusSuspendedDescription)
+      x-property-mapping:
+        - name: "QUEUED"
+          value: "kQueued"
+        - name: "RUNNING"
+          value: "kRunning"
+        - name: "CANCELING"
+          value: "kCanceling"
+        - name: "SUCCEEDED"
+          value: "kSucceeded"
+        - name: "FAILED"
+          value: "kFailed"
+        - name: "CANCELED"
+          value: "kAborted"
+        - name: "SUSPENDED"
+          value: "kSuspended"
+
+    EntityReference:
+      type: object
+      description: DocRef(TaskEntityReferenceDescription)
+      properties:
+        extId:
+          description: DocRef(TaskEntityExtIdDescription)
+          type: string
+          readOnly: true
+        rel:
+          description: DocRef(TaskEntityRelDescription)
+          type: string
+          readOnly: true
+        name:
+          description: DocRef(TaskEntityNameDescription)
+          type: string
+          readOnly: true
+          x-constraints:
+            maxLength: ConstantRef(entityReferenceNameMaxLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+                - name: rel
+                  index: 2002
+                - name: name
+                  index: 2003
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+        - rel
+        - name
+      x-property-mapping:
+        - name: extId
+          value: entity_id
+        - name: rel
+          value: entity_type
+        - name: name
+          value: entity_name
+
+    TaskReferenceInternal:
+      description: DocRef(AssociatedTaskDescription)
+      allOf:
+      - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ApiLink})"
+      - type: object
+        properties:
+          extId:
+            description: DocRef(AssociatedTaskExtIdDescription)
+            type: string
+            readOnly: true
+            x-constraints:
+              pattern: ConstantRef(taskExtIdPattern)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ApiLink})"
+                  name: base
+                  index: 2001
+                - name: extId
+                  index: 2002
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+      x-property-mapping:
+        - name: extId
+          value: parent_task_uuid
+        - name: href
+          value: parent_task_uuid
+        - name: rel
+          value: parent_task_uuid
+
+    OwnerReference:
+      description: DocRef(TaskOwnerDescription)
+      type: object
+      properties:
+        extId:
+          type: string
+          description: DocRef(TaskOwnerExtIdDescription)
+          readOnly: true
+          x-constraints:
+            pattern: "ConstantRef({ext:common:/namespaces/common}, uuidPattern)"
+        name:
+          type: string
+          description: DocRef(TaskOwnerNameDescription)
+          readOnly: true
+          x-constraints:
+            maxLength: ConstantRef(ownerReferenceNameMaxLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+                - name: name
+                  index: 2002
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+        - name
+      x-sortable-properties:
+        - extId
+        - name
+      x-property-mapping:
+        - name: extId
+          value: request_context.user_uuid
+        - name: name
+          value: request_context.user_name
+
+    RootTaskReference:
+      description: DocRef(AssociatedRootTaskDescription)
+      allOf:
+      - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ApiLink})"
+      - type: object
+        properties:
+          extId:
+            description: DocRef(AssociatedTaskExtIdDescription)
+            type: string
+            readOnly: true
+            x-constraints:
+              pattern: ConstantRef(taskExtIdPattern)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - type: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/response/beta/models/ApiLink})"
+                  name: base
+                  index: 2001
+                - name: extId
+                  index: 2002
+      x-complex-type-edm: true
+      x-filterable-properties:
+        - extId
+      x-property-mapping:
+        - name: extId
+          value: root_task_uuid
+
+    TaskStep:
+      description: DocRef(TaskStepDescription)
+      type: object
+      properties:
+        name:
+          description: DocRef(TaskStepMessageDescription)
+          type: string
+          readOnly: true
+          x-constraints:
+            maxLength: ConstantRef(taskStepNameMaxLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: name
+                  index: 2001

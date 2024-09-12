@@ -1,0 +1,24 @@
+- name: DomainManagerListEndPointsDescription
+  value: "Returns a list of elements representing the domain manager (Prism Central) instance."
+- name: DomainManagerListEndPointsSummary
+  value: "List domain manager (Prism Central) configuration details"
+- name: DomainManagerListResponseDescription
+  value: "Returns a list of domain manager (Prism Central) entities."
+- name: DomainManagerGetResponseDescription
+  value: "Returns the requested domain manager (Prism Central) entity."
+- name: DomainManagerGetEndPointsDescription
+  value: "Fetches the attributes associated with the domain manager (Prism Central) resource
+          based on the provided external identifier. It includes attributes like config, network, node 
+          and other information such as size, environment and resource specifications."
+- name: DomainManagerGetEndPointSummary
+  value: "Get the requested domain manager (Prism Central) entity"
+- name:  DomainManagerDeploymentSummary
+  value: "Deploy a Prism Central"
+- name: DomainManagerDeploymentDescription
+  value: "Deploys a Prism Central using the provided details. Prism Central Size,
+          Network Config are mandatory fields to deploy Prism Central. The response from 
+          this endpoint contains the URL in the task object location header that can 
+          be used to track the request status."
+- name: DomainManagerDeploymentBodyDescription
+  value: "Request body to deploy a Prism Central."
+

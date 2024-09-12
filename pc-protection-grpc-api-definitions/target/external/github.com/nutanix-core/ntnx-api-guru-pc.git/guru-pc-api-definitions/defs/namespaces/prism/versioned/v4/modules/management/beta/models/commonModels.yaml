@@ -1,0 +1,93 @@
+components:
+  schemas:
+    ClusterReference:
+      type: object
+      description: DocRef(ClusterReferenceDescription)
+      required:
+        - extId
+      properties:
+        extId:
+          description: DocRef(ClusterUuidDescription)
+          type: string
+          x-constraints:
+            pattern: ConstantRef({ext:common:/namespaces/common}, uuidPattern)
+        name:
+          type: "string"
+          readOnly: true
+          description: DocRef(ClusterNameDescription)
+          x-constraints:
+            maxLength: ConstantRef(clusterNameMaxLength)
+            minLength: ConstantRef(clusterNameMinLength)
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: extId
+                  index: 2001
+                - name: name
+                  index: 2002
+    ClusterType:
+      description: DocRef(RemoteClusterTypeDescription)
+      allOf:
+        - $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})"
+        - type: string
+          enum:
+            - "DOMAIN_MANAGER"
+            - "AOS"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: DOMAIN_MANAGER
+                  index: 1001
+                - value: AOS
+                  index: 1002
+          - type: enum
+            properties:
+              descriptions:
+                - name: "DOMAIN_MANAGER"
+                  description: DocRef(DomainManagerTypeDescription)
+                - name: "AOS"
+                  description: DocRef(AosTypeDescription)
+    Credentials:
+      type: "object"
+      description: DocRef(RemoteCredentialsDescription)
+      required:
+        - authentication
+      properties:
+        authentication:
+          description: DocRef(BasicAuthDescription)
+          $ref: "ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BasicAuth})"
+      x-codegen-hint:
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: authentication
+                  index: 7001
+    DomainManagerCloudType:
+      description: DocRef(DomainManagerCloudTypeDescription)
+      allOf:
+        - $ref: ModelRef({ext:common:/namespaces/common/versioned/v1/modules/config/beta/models/BaseEnum})
+        - type: string
+          enum:
+            - "ONPREM_CLOUD"
+            - "NUTANIX_HOSTED_CLOUD"
+      x-codegen-hint:
+        $any:
+          - type: enum
+            properties:
+              descriptions:
+                - name: "ONPREM_CLOUD"
+                  description: DocRef(OnpremCloudDescription)
+                - name: "NUTANIX_HOSTED_CLOUD"
+                  description: DocRef(NutanixHostedCloudDescription)
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - value: "ONPREM_CLOUD"
+                  index: 6001
+                - value: "NUTANIX_HOSTED_CLOUD"
+                  index: 6002

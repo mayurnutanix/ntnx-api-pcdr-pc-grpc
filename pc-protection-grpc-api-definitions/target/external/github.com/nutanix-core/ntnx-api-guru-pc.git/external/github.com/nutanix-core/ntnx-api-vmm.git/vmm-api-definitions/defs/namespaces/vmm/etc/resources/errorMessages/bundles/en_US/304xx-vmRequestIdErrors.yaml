@@ -1,0 +1,14 @@
+# VM request ID errors - 304xx.
+- code: 30400
+  errorGroup: VM_MISSING_REQUEST_ID_HEADER
+  severity: ERROR
+  message: >
+    Failed to perform the operation because of the missing request Id header.
+- code: 30401
+  errorGroup: VM_INVALID_REQUEST_ID_HEADER
+  severity: ERROR
+  message: >
+    Failed to perform the operation as the request Id header value passed
+    '{{{request_id}}}' is invalid.
+  arguments:
+    - request_id
