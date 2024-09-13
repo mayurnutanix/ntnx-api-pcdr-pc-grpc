@@ -172,3 +172,12 @@ $RECYCLE.BIN/
 
 #Javascrippt
 node_modules/
+
+**/*/package-lock.json
+*.iml
+*.ipr
+**/external/*
+
+**/generated-sources/*
+**/pc-protection-grpc-proto-to-java/src
+**/pc-protection-grpc-client/src
