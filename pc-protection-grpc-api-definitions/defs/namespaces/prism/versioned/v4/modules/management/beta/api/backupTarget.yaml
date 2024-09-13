@@ -54,6 +54,9 @@ paths:
           - type: "rbac"
             properties:
               metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
         $any:
           - type: entity-identifier
             properties:
@@ -136,6 +139,9 @@ paths:
           - type: "rbac"
             properties:
               metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
         $any:
           - type: entity-identifier
             properties:
@@ -238,6 +244,9 @@ paths:
           - type: "rbac"
             properties:
               metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
         $any:
           - type: entity-identifier
             properties:
@@ -309,6 +318,9 @@ paths:
           - type: "rbac"
             properties:
               metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
         $any:
           - type: entity-identifier
             properties:
@@ -391,6 +403,9 @@ paths:
           - type: "rbac"
             properties:
               metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
         $any:
           - type: entity-identifier
             properties:
