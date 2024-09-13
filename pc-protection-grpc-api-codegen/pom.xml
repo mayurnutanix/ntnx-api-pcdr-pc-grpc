@@ -14,7 +14,55 @@
 
   <name>PC Protection Client and Server SDKs</name>
 
+  <properties>
+    <swagger-codegen.version>3.0.10</swagger-codegen.version>
+    <jknack.version>4.1.2</jknack.version>
+    <rbac-method-annotator.version>10.0.87-RELEASE</rbac-method-annotator.version>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
+      <artifactId>${api.defs}</artifactId>
+      <version>${project.version}</version>
+      <type>tgz</type>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars</artifactId>
+      <version>${jknack.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.4</version>
+    </dependency>
+
+  </dependencies>
+
+
+  <!--<dependencies>
     <dependency>
       <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
       <artifactId>${api.defs}</artifactId>
@@ -30,7 +78,7 @@
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
     </dependency>
-  </dependencies>
+  </dependencies>-->
 
   <modules>
 
@@ -60,14 +108,17 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
+                  <groupId>
+                    com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc
+                  </groupId>
                   <artifactId>${api.defs}</artifactId>
                   <version>${project.version}</version>
                   <type>tgz</type>
                   <overWrite>false</overWrite>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}</outputDirectory>
+              <outputDirectory>${project.build.directory}
+              </outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
             </configuration>
