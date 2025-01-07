@@ -819,9 +819,23 @@ public class ClusterServiceImpl implements ClusterService {
   }
 
   private InsightsInterfaceProto.GetEntitiesWithMetricsRet queryGpuProfiles(String clusterUuid,
-                                                                              Integer limit, Integer page, String gpuType)
-  throws ClustermgmtServiceException
+                                                                            String filter, String orderBy, String gpuType)
+  throws ClustermgmtServiceException, ValidationException
   {
+    // Boolean expression from Odata filer
+    final ClustermgmtOdataParser.Result odataResult =
+      clustermgmtOdataParser.parse("/host-gpus", filter, orderBy, null, null, null);
+
+    List<InsightsInterfaceProto.QueryOrderBy> queryOrderBy = odataResult.getOrderBy();
+    InsightsInterfaceProto.BooleanExpression filterExpression = odataResult.getFilter();
+    InsightsInterfaceProto.QueryGroupBy queryGroupBy = odataResult.getGroupBy();
+    InsightsInterfaceProto.QueryOrderBy sortQueryOrderBy = null;
+    if(queryOrderBy != null && !CollectionUtils.isEmpty(queryOrderBy)) {
+      sortQueryOrderBy = queryOrderBy.get(0);
+    }
+
+    InsightsInterfaceProto.BooleanExpression joinExpression = filterExpression;
+
     // Boolean expression to get host gpus belong to this cluster
     InsightsInterfaceProto.DataValue.Builder value1 =
       InsightsInterfaceProto.DataValue.newBuilder().setStrValue(clusterUuid);
@@ -830,7 +844,7 @@ public class ClusterServiceImpl implements ClusterService {
         InsightsInterfaceProto.ComparisonExpression.Operator.kEQ,
         value1);
 
-    // Boolean expression to get host gpus of kVirtual type
+    // Boolean expression to get host gpus of type
     InsightsInterfaceProto.DataValue.Builder value2 =
       InsightsInterfaceProto.DataValue.newBuilder().setStrValue(gpuType);
     InsightsInterfaceProto.BooleanExpression expression2 =
@@ -843,19 +857,27 @@ public class ClusterServiceImpl implements ClusterService {
       clustermgmtResourceAdapter.joinBooleanExpressions(
         expression1, InsightsInterfaceProto.BooleanExpression.Operator.kAnd, expression2);
 
+    // Join Boolean Expression with Odate filter and above one.
+    if (joinExpression != null)
+      expression = clustermgmtResourceAdapter.joinBooleanExpressions(
+        expression, InsightsInterfaceProto.BooleanExpression.Operator.kAnd, joinExpression);     
+
     // Get Entities
     InsightsInterfaceProto.GetEntitiesWithMetricsRet getEntitiesWithMetricsRet =
-    ClustermgmtUtils.getEntitiesWithMetricsRet(page, limit,
-      HOST_GPU_ENTITY, entityDbProxy, ClustermgmtUtils.hostGpuAttributeList, null, clustermgmtResourceAdapter, expression, null, null);
+    ClustermgmtUtils.getEntitiesWithMetricsRet(null, null,
+      HOST_GPU_ENTITY, entityDbProxy, ClustermgmtUtils.hostGpuAttributeList, null, clustermgmtResourceAdapter, expression, sortQueryOrderBy, null);
     log.debug("The RPC response GetEntitiesWithMetricsRet obtained {}", getEntitiesWithMetricsRet);
     return getEntitiesWithMetricsRet;
   }
 
   @Override
-  public Pair<Integer, List<VirtualGpuProfile> > listVirtualGpuProfiles(String clusterUuid, Integer limit, Integer page)
+  public Pair<Integer, List<VirtualGpuProfile> > listVirtualGpuProfiles(String clusterUuid, Integer limit, Integer page, String filter, String orderBy)
     throws ClustermgmtServiceException, ValidationException {
     List<VirtualGpuProfile> virtualGpuProfileList = new ArrayList<>();
     Integer totalEntityCount = null;
+    Integer currentCount = 0;
+    Integer startItem = page * limit;
+    Integer endItem = startItem + limit;
     // Validate and check if cluster is PE/PC.
     if (isMulticluster(clusterUuid)) {
       log.debug("PC Cluster");
@@ -863,30 +885,38 @@ public class ClusterServiceImpl implements ClusterService {
     }
 
     InsightsInterfaceProto.GetEntitiesWithMetricsRet getEntitiesWithMetricsRet =
-    queryGpuProfiles(clusterUuid, limit, page, "kVirtual");
+    queryGpuProfiles(clusterUuid, filter, orderBy, "kVirtual");
+
 
     if (!CollectionUtils.isEmpty(getEntitiesWithMetricsRet.getGroupResultsListList())) {
       final List<InsightsInterfaceProto.EntityWithMetric> entitiesWithMetric =
         getEntitiesWithMetricsRet.getGroupResultsList(0).getRawResultsList();
       totalEntityCount =
         (int) getEntitiesWithMetricsRet.getGroupResultsList(0).getTotalEntityCount();
+      
       for (final InsightsInterfaceProto.EntityWithMetric entityWithMetric : entitiesWithMetric) {
         final List<InsightsInterfaceProto.MetricData> metricDataList =
           entityWithMetric.getMetricDataListList();
         VirtualGpuProfile tempVirtualGpuProfile = new VirtualGpuProfile();
 
         tempVirtualGpuProfile = clusterResourceAdapter.adaptIdfMetricsToVirtualGpuProfile(metricDataList, tempVirtualGpuProfile);
-        virtualGpuProfileList.add(tempVirtualGpuProfile);
+        if (currentCount >= startItem && currentCount < endItem) {
+          virtualGpuProfileList.add(tempVirtualGpuProfile);
+        }
+        currentCount++;
       }
     }
     return new Pair<>(totalEntityCount, virtualGpuProfileList);
   }
 
   @Override
-  public Pair<Integer, List<PhysicalGpuProfile> > listPhysicalGpuProfiles(String clusterUuid, Integer limit, Integer page)
+  public Pair<Integer, List<PhysicalGpuProfile> > listPhysicalGpuProfiles(String clusterUuid, Integer limit, Integer page, String filter, String orderBy)
     throws ClustermgmtServiceException, ValidationException {
     List<PhysicalGpuProfile> physicalGpuProfileList = new ArrayList<>();
     Integer totalEntityCount = null;
+    Integer currentCount = 0;
+    Integer startItem = page * limit;
+    Integer endItem = startItem + limit;
     // Validate and check if cluster is PE/PC.
     if (isMulticluster(clusterUuid)) {
       log.debug("PC Cluster");
@@ -894,7 +924,7 @@ public class ClusterServiceImpl implements ClusterService {
     }
 
     InsightsInterfaceProto.GetEntitiesWithMetricsRet getEntitiesWithMetricsRet =
-    queryGpuProfiles(clusterUuid, limit, page, "kPassthroughCompute");
+    queryGpuProfiles(clusterUuid, filter, orderBy, "kPassthroughCompute");
 
     if (!CollectionUtils.isEmpty(getEntitiesWithMetricsRet.getGroupResultsListList())) {
       final List<InsightsInterfaceProto.EntityWithMetric> entitiesWithMetric =
@@ -908,12 +938,15 @@ public class ClusterServiceImpl implements ClusterService {
         PhysicalGpuProfile tempPhysicalGpuProfile = new PhysicalGpuProfile();
 
         tempPhysicalGpuProfile = clusterResourceAdapter.adaptIdfMetricsToPhysicalGpuProfile(metricDataList, tempPhysicalGpuProfile);
-        physicalGpuProfileList.add(tempPhysicalGpuProfile);
+        if (currentCount >= startItem && currentCount < endItem) {
+          physicalGpuProfileList.add(tempPhysicalGpuProfile);;
+        }
+        currentCount++;
       }
     }
 
     InsightsInterfaceProto.GetEntitiesWithMetricsRet getEntitiesWithMetricsRet2 =
-    queryGpuProfiles(clusterUuid, limit, page, "kPassthroughGraphics");
+    queryGpuProfiles(clusterUuid, filter, orderBy, "kPassthroughGraphics");
 
     if (!CollectionUtils.isEmpty(getEntitiesWithMetricsRet2.getGroupResultsListList())) {
       final List<InsightsInterfaceProto.EntityWithMetric> entitiesWithMetric =
@@ -931,7 +964,10 @@ public class ClusterServiceImpl implements ClusterService {
         PhysicalGpuProfile tempPhysicalGpuProfile = new PhysicalGpuProfile();
 
         tempPhysicalGpuProfile = clusterResourceAdapter.adaptIdfMetricsToPhysicalGpuProfile(metricDataList, tempPhysicalGpuProfile);
-        physicalGpuProfileList.add(tempPhysicalGpuProfile);
+        if (currentCount >= startItem && currentCount < endItem) {
+          physicalGpuProfileList.add(tempPhysicalGpuProfile);;
+        }
+        currentCount++;
       }
     }
     return new Pair<>(totalEntityCount, physicalGpuProfileList);
@@ -1103,6 +1139,11 @@ public class ClusterServiceImpl implements ClusterService {
 
     // PC-PE Capability check
     if (!isPc) isRequestAllowed(clusterExtId, ClustermgmtUtils.UPDATE_CLUSTER);
+
+    // FQDN should not be available in name server - since it is the one that resolves the FQDN to IP Address
+    if(ClustermgmtUtils.doesNameServerHaveFqdn(body)){
+      throw new ClustermgmtInvalidInputException("The name server cannot have an FQDN value provided, as it is responsible for resolving all FQDN addresses");
+    }
 
     // Cluster EntityId
     ErgonTypes.EntityId entityId = ClustermgmtUtils.getClusterEntityId(clusterExtId);
@@ -2663,18 +2704,23 @@ public class ClusterServiceImpl implements ClusterService {
     // PC-PE Capability check
     String fullVersion = RequestContextHelper.getVersionHeader();
     Integer version = getGenesisApiVersion(clusterExtId);
-    Boolean isCapabilityMapEmpty = CollectionUtils.isEmpty(ClustermgmtUtils.capabilityMap);
-    Boolean isAdapterMapEmpty = CollectionUtils.isEmpty(ClustermgmtUtils.capabilityMap.get(fullVersion));
-    if(!isCapabilityMapEmpty && !isAdapterMapEmpty) {
-      if (ClustermgmtUtils.capabilityMap.get(fullVersion).get(method) != null) {
-        if (version < ClustermgmtUtils.capabilityMap.get(fullVersion).get(method)) {
+
+    if (ClustermgmtUtils.capabilityMap != null && ClustermgmtUtils.capabilityMap.containsKey(fullVersion)) {
+      Map<String, Integer> versionMap = ClustermgmtUtils.capabilityMap.get(fullVersion);
+      if(versionMap != null && versionMap.containsKey(method)){
+        Integer requiredVersion = versionMap.get(method);
+        String debugLogString = String.format("Required version for method %s is %d", method, requiredVersion);
+        log.debug(debugLogString);
+        if (requiredVersion != null && version < requiredVersion) {
           throw new ClustermgmtNotSupportedException("Upgrade to the compatible release is not done for cluster: " + clusterExtId);
         }
-      } else {
-        throw new ClustermgmtNotSupportedException("Capability Map doesn't contain the mapping for version: " + fullVersion
-          + " for cluster: " + clusterExtId);
       }
+    } else {
+      throw new ClustermgmtNotSupportedException("Capability Map doesn't contain the mapping for version: " + fullVersion
+        + " for cluster: " + clusterExtId);
     }
+    log.debug("The request is allowed for method {}", method);
+
   }
 
   ErgonInterface.TaskGetRet getTask(String taskExtId) throws ClustermgmtServiceException{
@@ -2701,9 +2747,10 @@ public class ClusterServiceImpl implements ClusterService {
   }
 
   @Override
-  public SearchResponse getSearchResponse(String taskExtId, SearchType searchType) throws ClustermgmtServiceException {
-    SearchResponse searchResponse = new SearchResponse();
-    searchResponse.setSearchType(searchType);
+  public TaskResponse getTaskResponse(String taskExtId, TaskResponseType taskResponseType) throws ClustermgmtServiceException {
+    TaskResponse taskResponse = new TaskResponse();
+    taskResponse.setExtId(taskExtId);
+    taskResponse.setTaskResponseType(taskResponseType);
     String md5sum = null;
 
     ErgonInterface.TaskGetRet parentTask = getTask(taskExtId);
@@ -2732,8 +2779,8 @@ public class ClusterServiceImpl implements ClusterService {
       String key = childTask.getCompletionDetails(0).getKey();
       if(key.equals("search_type")) {
         String requestType = childTask.getCompletionDetails(0).getStrData();
-        if (!requestType.equals(searchType.fromEnum())) {
-          throw new ClustermgmtServiceException("Search type " + searchType.fromEnum() +
+        if (!requestType.equals(taskResponseType.fromEnum())) {
+          throw new ClustermgmtServiceException("Search type " + taskResponseType.fromEnum() +
             " doesn't match with task uuid provided " + taskExtId);
         }
       }
@@ -2742,30 +2789,30 @@ public class ClusterServiceImpl implements ClusterService {
       }
     }
 
-    switch (searchType) {
+    switch (taskResponseType) {
       case UNCONFIGURED_NODES:
         UnconfigureNodeDetails unconfigureNodesResponse =
           clusterResourceAdapter.adaptJsonResponsetoUnconfiguredNodes(getJsonObjFromTaskResponse(childTask),
             new UnconfigureNodeDetails());
-        searchResponse.setResponseInWrapper(unconfigureNodesResponse);
+        taskResponse.setResponseInWrapper(unconfigureNodesResponse);
         break;
       case NETWORKING_DETAILS:
         NodeNetworkingDetails networkingDetailResponsee =
           clusterResourceAdapter.adaptJsonResponsetoNetworkingDetails(getJsonObjFromTaskResponse(childTask),
             new NodeNetworkingDetails());
-        searchResponse.setResponseInWrapper(networkingDetailResponsee);
+        taskResponse.setResponseInWrapper(networkingDetailResponsee);
         break;
       case HYPERVISOR_UPLOAD_INFO:
         HypervisorUploadInfo hypervisorUploadInfoResponse =
           clusterResourceAdapter.adaptJsonResponsetoHypervisorIso(getJsonObjFromTaskResponse(childTask),
             new HypervisorUploadInfo());
-        searchResponse.setResponseInWrapper(hypervisorUploadInfoResponse);
+        taskResponse.setResponseInWrapper(hypervisorUploadInfoResponse);
         break;
       case VALIDATE_BUNDLE_INFO:
         ValidateBundleInfo validateBundleInfo = new ValidateBundleInfo();
         if(md5sum != null)
           validateBundleInfo.setMd5Sum(md5sum);
-        searchResponse.setResponseInWrapper(validateBundleInfo);
+        taskResponse.setResponseInWrapper(validateBundleInfo);
         break;
       case NON_COMPATIBLE_CLUSTERS:
         if (childTask.getCompletionDetailsCount() <= 0) {
@@ -2774,12 +2821,12 @@ public class ClusterServiceImpl implements ClusterService {
         List<NonCompatibleClusterReference> nonCompliantClustersReference = new ArrayList<>();
         clusterResourceAdapter.adaptJsonResponseToNonCompatibleClusters(getJsonObjFromTaskResponse(childTask),
           nonCompliantClustersReference);
-        searchResponse.setResponseInWrapper(nonCompliantClustersReference);
+        taskResponse.setResponseInWrapper(nonCompliantClustersReference);
         break;
       default:
         break;
     }
-    return searchResponse;
+    return taskResponse;
   }
   public List<NetworkSwitchInterface> getSwitchInterfaceEntities(String hostUuid)
           throws ClustermgmtServiceException {
@@ -3202,7 +3249,6 @@ public class ClusterServiceImpl implements ClusterService {
     log.debug("Fetching Cluster stats");
     ClusterStats clusterStats = new ClusterStats();
     clusterStats.setExtId(extId);
-    clusterStats.setStatType(statsType);
 
     ParsedQuery parsedQuery;
     if(selectString==null){
@@ -3280,8 +3326,6 @@ public class ClusterServiceImpl implements ClusterService {
     log.debug("Fetching Host stats");
     HostStats hostStats = new HostStats();
     hostStats.setExtId(hostUuid);
-    hostStats.setStatType(statsType);
-
 
     ParsedQuery parsedQuery;
     if(selectString==null){
@@ -3346,8 +3390,20 @@ public class ClusterServiceImpl implements ClusterService {
       throw new ClustermgmtInvalidInputException(msg);
     }
 
+    // FQDN should not be available in name server - since it is the one that resolves the FQDN to IP Address
+    if(ClustermgmtUtils.doesNameServerHaveFqdn(params)){
+      throw new ClustermgmtInvalidInputException("The name server cannot have an FQDN value provided, as it is responsible for resolving all FQDN addresses");
+    }
+
     clusterCreateArgBuilder.setTaskUuid(UuidUtils.getByteStringFromUUID(taskUuid));
-    clusterCreateArgBuilder.setPrechecksOnly($dryrun);
+    if($dryrun != null)
+    {
+      clusterCreateArgBuilder.setPrechecksOnly($dryrun);
+    }
+    else
+    {
+      clusterCreateArgBuilder.setPrechecksOnly(false);
+    }
 
     ClusterManagementInterfaceProto.ClusterCreateArg clusterCreateArgs = clusterResourceAdapter.adaptClusterCreateParamsToClusterCreateArg(params, clusterCreateArgBuilder);
     log.debug("Args to send to Create RPC: {}\n", clusterCreateArgs);
@@ -3626,6 +3682,7 @@ public class ClusterServiceImpl implements ClusterService {
     log.debug("The RPC response GetEntitiesWithMetricsRet obtained {}", getEntitiesWithMetricsRet);
 
     NonMigratableVmsResult nonMigratableVmsResult = new NonMigratableVmsResult();
+    nonMigratableVmsResult.setExtId(extId);
     if (!CollectionUtils.isEmpty(getEntitiesWithMetricsRet.getGroupResultsListList())) {
       final InsightsInterfaceProto.EntityWithMetric entityWithMetric = getEntitiesWithMetricsRet.getGroupResultsList(0).getRawResults(0);
       final List<InsightsInterfaceProto.MetricData> metricDataList = entityWithMetric.getMetricDataListList();

@@ -96,7 +96,7 @@
     PE cluster uuid. A unique id corresponding to the cluster.
 - name: "objectStoreEntityIdDesc"
   value:
-     A unique id corresponding to the object store.
+    A unique id corresponding to the object store.
 - name: "peNameDesc"
   value:
     A human redable name of the PE cluster.
@@ -161,7 +161,7 @@
     is present.
 - name: "PcEndpointCredentialsDesc"
   value: |
-    This object consists of accessKey, secretAccessKey for a given entityId.
+    This object consists of accessKey, secretAccessKey, certificate for a given entityId.
 - name: "accessKeyDesc"
   value: |
     AccessKey for the endpoint flavor
@@ -228,5 +228,14 @@
 
 - name: "BackupRetentionDays"
   value: |
-    Retention days configured for backup in Object Store.    
-    
+    Retention days configured for backup in Object Store.
+- name: "SkipCertificateValidationDescription"
+  value: |
+    Skip the verification of certificate during communication with object
+    store endpoint
+- name: "CertificateDescription"
+  value: |
+    Certificate which will be used while validating object store identity
+- name: "HasCustomCertificate"
+  value: |
+    Whether custom certificate provided or not.

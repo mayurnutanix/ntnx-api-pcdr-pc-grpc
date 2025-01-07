@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # CHANGE THIS FILE TO PUSH YOUR GO CODE TO A GO REPOSITORY
-API_SERVER_SOURCE_PATH=../../generated-code/target
+API_SERVER_SOURCE_PATH=../../generated-code
 PROTO_SERVICES_PATH=$API_SERVER_SOURCE_PATH/protobuf
  
 mkdir -p $PROTO_SERVICES_PATH
@@ -25,13 +25,13 @@ fi
 
 # Correcting import statements of go files generated from proto files
 export old_path_common="common/"
-export new_path_common="ntnx-api-guru-pc/generated-code/target/protobuf/common/"
+export new_path_common="github.com/nutanix-core/ntnx-api-guru-pc/generated-code/protobuf/common/"
 export old_path_prism="prism/"
-export new_path_prism="ntnx-api-guru-pc/generated-code/target/protobuf/prism/"
+export new_path_prism="github.com/nutanix-core/ntnx-api-guru-pc/generated-code/protobuf/prism/"
 export old_path_clustermgmt="clustermgmt/"
-export new_path_clustermgmt="ntnx-api-guru-pc/generated-code/target/protobuf/clustermgmt/"
+export new_path_clustermgmt="github.com/nutanix-core/ntnx-api-guru-pc/generated-code/protobuf/clustermgmt/"
 export old_path_vmm="vmm/"
-export new_path_vmm="ntnx-api-guru-pc/generated-code/target/protobuf/vmm/"
+export new_path_vmm="github.com/nutanix-core/ntnx-api-guru-pc/generated-code/protobuf/vmm/"
 export folder_path=$(pwd)
 
 echo $folder_path

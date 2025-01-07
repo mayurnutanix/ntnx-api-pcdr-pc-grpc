@@ -115,8 +115,10 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
           break;
         case "tx_ring_size":
           hostNicEntity.setTxRingSizeInBytes(metricData.getValueList(0).getValue().getInt64Value());
+          break;
         case "rx_ring_size":
           hostNicEntity.setRxRingSizeInBytes(metricData.getValueList(0).getValue().getInt64Value());
+          break;
         default:
           break;
       }
@@ -666,38 +668,6 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
     }
 
     return clusterCreateArg.build();
-  }
-
-  @Override
-  public GenesisInterfaceProto.UpdateCategoryAssociationsArg adaptUpdateCategoriesParamsToUpdateCategoryAssociationsArg(Set<String> categoryUuids,
-                                                                                                                        String entityType,
-                                                                                                                        String entityUuid,
-                                                                                                                        String operationType,
-                                                                                                                        GenesisInterfaceProto.UpdateCategoryAssociationsArg.Builder updateCategoryAssociationsArg) {
-    if (!categoryUuids.isEmpty()) {
-      updateCategoryAssociationsArg.addAllCategoryUuids(categoryUuids);
-    }
-
-    if (entityType != null) {
-      updateCategoryAssociationsArg.setEntityType(entityType);
-    }
-
-    if (entityUuid != null) {
-      updateCategoryAssociationsArg.setEntityUuid(entityUuid);
-    }
-
-    if (operationType != null) {
-      if (operationType.equals("attach")) {
-        updateCategoryAssociationsArg.setOperationType(GenesisInterfaceProto.UpdateCategoryAssociationsArg.OperationType.kOperationAttach);
-      } else
-        updateCategoryAssociationsArg.setOperationType(GenesisInterfaceProto.UpdateCategoryAssociationsArg.OperationType.kOperationDetach);
-    }
-
-    if (adapterRegistry.canForwardToNextHandler(this.getClass())) {
-      return nextChainAdapter.adaptUpdateCategoriesParamsToUpdateCategoryAssociationsArg(categoryUuids, entityType, entityUuid, operationType, updateCategoryAssociationsArg);
-    }
-
-    return updateCategoryAssociationsArg.build();
   }
 
   @Override

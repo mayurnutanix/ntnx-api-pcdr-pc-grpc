@@ -2,13 +2,13 @@
 CLU-10001:
   code: 10001
   severity: "ERROR"
-  errorGroup: "CLUSTERMGMT_SERVICE_RPC_ERROR"
+  errorGroup: "CLUSTERMGMT_SERVICE_ERROR"
   arguments:
     - "reason"
 CLU-10002:
   code: 10002
   severity: "ERROR"
-  errorGroup: "CLUSTERMGMT_SERVICE_RPC_ERROR"
+  errorGroup: "CLUSTERMGMT_SERVICE_ERROR"
   arguments: null
 CLU-10003:
   code: 10003
@@ -60,12 +60,12 @@ CLU-10010:
 CLU-10011:
   code: 10011
   severity: "ERROR"
-  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  errorGroup: "CLUSTERMGMT_SERVICE_ERROR"
   arguments:
     - "reason"
 CLU-10012:
   code: 10012
   severity: "ERROR"
-  errorGroup: "CLUSTERMGMT_INVALID_INPUT"
+  errorGroup: "CLUSTERMGMT_UNAUTHORIZED_REQUEST"
   arguments:
     - "cluster_uuid"

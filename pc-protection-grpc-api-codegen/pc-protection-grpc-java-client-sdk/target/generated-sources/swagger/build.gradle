@@ -41,7 +41,7 @@ if(hasProperty('target') && target == 'android') {
             variant.outputs.each { output ->
                 def outputFile = output.outputFile
                 if (outputFile != null && outputFile.name.endsWith('.aar')) {
-                    def fileName = "Open API Platform Code generation templates-${variant.baseName}-16.9.0.8055-RELEASE.aar"
+                    def fileName = "Open API Platform Code generation templates-${variant.baseName}-17.0.0.8486-RELEASE.aar"
                     output.outputFile = new File(outputFile.parent, fileName)
                 }
             }
@@ -59,7 +59,7 @@ if(hasProperty('target') && target == 'android') {
             task.dependsOn variant.javaCompile
             task.from variant.javaCompile.destinationDir
             task.destinationDir = project.file("${project.buildDir}/outputs/jar")
-            task.archiveName = "Open API Platform Code generation templates-${variant.baseName}-16.9.0.8055-RELEASE.jar"
+            task.archiveName = "Open API Platform Code generation templates-${variant.baseName}-17.0.0.8486-RELEASE.jar"
             artifacts.add('archives', task);
         }
     }

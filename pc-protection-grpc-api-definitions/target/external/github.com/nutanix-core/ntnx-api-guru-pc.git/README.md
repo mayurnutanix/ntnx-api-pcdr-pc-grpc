@@ -1,29 +1,10 @@
-# [[github_repo_name]]
-[[github_repo_description]]
+# Guru
+Guru hosts Domain Manager a.k.a. Prism Central management APIs. It is a gRPC service written in Go with its controller onboarded on Adonis. Currently, it only runs on a PCVM as a Genesis managed service.
 
-# The Hello World service
-We've created an example service to show you the setup and workflow with Canaveral.
+### Build and Deployment
+1. After checking out the repo, from the base repo directory, run `mvn clean install -s settings.xml` to build the schema models. This requires Java, Maven, ProtocGenGo (v3.12.1) to be installed on the system.
+2. To build the Go binary, from the base repo directory, run `GOOS=linux GOARCH=amd64 go build ./guru-pc-api-service/server/main/main.go`. This builds the Go binary for the PCVM architecture environment.
+3. To deploy the binary on PC, scp the file to PC at location `~/bin/` and replace the binary `go_guru_server`. This might initially require stopping the already running Guru service. This can be done using `genesis stop guru`. To restart the service after replacing the binary, use `cluster start`.
+4. Logs for the service can be found in `~/data/logs/guru.INFO`.
 
-### Directory Structure
-The top level directory of your repository should be set up like this:
-  1. `README.md`: this file contains a textual description of the repository.
-  2. `.circleci/`: this directory contains CircleCI's `config.yml` file.
-  3. `hooks/`: this directory, if present, can contain *ad hoc* scripts that customize your build.
-  4. `package/`:  add your `Dockerfile` under `package/docker/` to build a docker image.  (Note:  You can refer to files and folders directly in your `Dockerfile` because all files and folders under `services/` will be copied into the same folder as the `Dockerfile` during build.)
-  5. `services/`: this directory should have a subdirectory for each `service`, *e.g.* `services/hello-world/`.  Each subdirectory contains the definition (source and tests) for the service.
-  6. `blueprint.json`: this file, if present, contains instructions for Canaveral to deploy the service.
-
-### Build
-Canaveral uses CircleCI for building, packaging, and alerting its Deployment Engine. Your repository should have been registered with CircleCI when it was provisioned.  Here are some additional steps you should follow to ensure proper builds:
-
-##### Ensure `.circleci/config.yml` has the correct variables (docker image only)
-  1. Specify your preferred `CANAVERAL_BUILD_SYSTEM` (default is noop)
-  2. Specify your preferred `CANAVERAL_PACKAGE_TOOLS` (use "docker" if deploying a docker image, use "noop" if no packaging is needed)
-  3. **[OPTIONAL]** Specify the target `DOCKERFILE_NAME` to use  (default is Dockerfile)
-
-You'll be able to monitor the build at [circleci.canaveral-corp.us-west-2.aws](https://circleci.canaveral-corp.us-west-2.aws/)
-
-### Deployment
-To use Canaveral for deployment, `blueprint.json` should be placed at the top level of the repo.  Spec for the blueprint can be found at [Canaveral Blueprint Spec](https://confluence.eng.nutanix.com:8443/x/5kbdBQ).
-
-__Questions, issues or suggestions? Reach us at https://nutanix.slack.com/messages/canaveral-onboarding/.__
+__For more info, reach out on slack channel #ask-prism or #prism_central__

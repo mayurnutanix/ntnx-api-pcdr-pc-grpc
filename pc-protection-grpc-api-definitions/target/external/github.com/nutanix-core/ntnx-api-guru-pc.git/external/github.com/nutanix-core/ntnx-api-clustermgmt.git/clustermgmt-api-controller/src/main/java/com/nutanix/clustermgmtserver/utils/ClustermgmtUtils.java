@@ -83,8 +83,9 @@ public class ClustermgmtUtils {
   public static final String V4_R0_A2_VERSION = "v4.0.a2";
   public static final String V4_R0_B1_VERSION = "v4.0.b1";
   public static final String V4_R0_B2_VERSION = "v4.0.b2";
+  public static final String V4_R0_VERSION = "v4.0";
   public static final String FULL_VERSION_HEADER_NAME = "Full-Version";
-  public static final String LATEST_FULL_VERSION_HEADER_VALUE = V4_R0_B2_VERSION;
+  public static final String LATEST_FULL_VERSION_HEADER_VALUE = V4_R0_VERSION;
 
   // Constants
   public static final String CVM_IP = "cvm_ip";
@@ -94,8 +95,7 @@ public class ClustermgmtUtils {
   public static final String HYPERVISOR_IPV6 = "hypervisor_ipv6";
   public static final String IPMI_IPV6 = "ipmi_ipv6";
   public static final String HYPERVISOR_TYPE = "hypervisor_type";
-  private static final Pattern FQDN_PATTERN = Pattern.compile("^(?:[a-z0-9][\\w\\-]*[a-z0-9]*\\.)*(?:(?:(?:[a-z0-9][\\w\\-]*[a-z0-9]*)(?:\\.[a-z0-9]+)?))$");
-
+  private static final Pattern FQDN_PATTERN = Pattern.compile("^(?!-)(?:[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,}$");
   public static final String RENAME_HOST = "renameHost";
   public static final String UPDATE_CLUSTER = "updateCluster";
   public static final String UPDATE_SNMP_STATUS = "updateSnmpStatus";
@@ -185,13 +185,16 @@ public class ClustermgmtUtils {
     "num_vgpus_allocated", "vm_uuid_list", "gpu_type", "gpu_mode",
     "vendor_name", "device_id", "device_name", "sbdf", "in_use",
     "assignable", "numa_node", "guest_driver_version", "fraction",
-    "license_list", "num_virtual_display_heads", "max_resolution", "frame_buffer_size_bytes");
+    "license_list", "num_virtual_display_heads", "max_resolution", "frame_buffer_size_bytes",
+    "max_instances_per_vm");
 
   public final static ImmutableList<String> hostNicAttributeList =  ImmutableList.of(
     "switch_mgmt_ip_address", "switch_port_id", "switch_dev_id", "mac_address",
     "ipv6_addresses", "ipv4_addresses", "discovery_protocol", "dhcp_enabled", "switch_vlan_id",
     "description", "mtu_bytes", "status", "link_speed_kbps", "switch_mac_addr",
-    "node", "port_name", "switch_hardware_platform", "tx_ring_size", "rx_ring_size");
+    "node", "port_name", "switch_hardware_platform", "tx_ring_size", "rx_ring_size",
+    "cluster_uuid", "link_capacity", "nic_profile_id", "supported_capabilities",
+    "driver_version", "firmware_version");
 
   public final static ImmutableList<String> virtualNicAttributeList =  ImmutableList.of(
     "mac_address", "ipv6_addresses", "ipv4_addresses", "dhcp_enabled", "description",
@@ -217,8 +220,8 @@ public class ClustermgmtUtils {
     "controller_read_io_bandwidth_kBps","capacity.controller_read_io_bandwidth_kBps.upper_buff","capacity.controller_read_io_bandwidth_kBps.lower_buff",
     "controller_write_io_bandwidth_kBps","capacity.controller_write_io_bandwidth_kBps.upper_buff","capacity.controller_write_io_bandwidth_kBps.lower_buff",
     "storage.usage_bytes","storage.capacity_bytes","storage.free_bytes","storage.logical_usage_bytes","overall_memory_usage_bytes",
-    "check.score","storage.recycle_bin_usage_bytes","storage.snapshot_reclaimable_bytes","data_reduction.saved_bytes", "data_reduction.overall.saving_ratio_ppm",
-    "capacity.cpu_capacity_hz", "capacity.cpu_usage_hz", "capacity.memory_capacity_bytes");
+    "check.score","storage.recycle_bin_usage_bytes","storage.snapshot_reclaimable_bytes","data_reduction.overall.saved_bytes", "data_reduction.overall.saving_ratio_ppm",
+    "capacity.cpu_capacity_hz", "capacity.cpu_usage_hz", "capacity.memory_capacity_bytes", "power_consumption_instant_watt");
 
   //required statistics attribute for host entity can be added below
   public final static ImmutableList<String> hostStatsAttributeList =  ImmutableList.of(
@@ -235,7 +238,7 @@ public class ClustermgmtUtils {
     "controller_read_io_bandwidth_kBps","capacity.controller_read_io_bandwidth_kBps.upper_buff","capacity.controller_read_io_bandwidth_kBps.lower_buff",
     "controller_write_io_bandwidth_kBps","capacity.controller_write_io_bandwidth_kBps.upper_buff","capacity.controller_write_io_bandwidth_kBps.lower_buff",
     "storage.usage_bytes","storage.capacity_bytes","storage.free_bytes","memory_size_bytes","cpu.capacity_hz",
-    "check.score", "storage.logical_usage_bytes", "capacity.cpu_usage_hz", "overall_memory_usage_bytes");
+    "check.score", "storage.logical_usage_bytes", "capacity.cpu_usage_hz", "overall_memory_usage_bytes", "power_consumption_instant_watt");
 
   //required attribute for compute_non_migratable_vms_entity can be added below
   public final static ImmutableList<String> nonMigratableVmsAttributeList =  ImmutableList.of(
@@ -642,15 +645,20 @@ public class ClustermgmtUtils {
     .put(VALIDATE_NODE, GenesisInterfaceProto.GenesisApiVersion.kAddNodeSupportedVersion.getNumber())
     .put(REMOVE_NODE, GenesisInterfaceProto.GenesisApiVersion.kAddNodeSupportedVersion.getNumber())
     .put(CLUSTER_DESTROY, GenesisInterfaceProto.GenesisApiVersion.kAsyncUpdateClusterSupportedVersion.getNumber())
+    .build();
+
+  public final static ImmutableMap<String, Integer> r0capabilityMap = new ImmutableMap.Builder<String, Integer>()
     .put(ENTER_HOST_MAINTENANCE, GenesisInterfaceProto.GenesisApiVersion.kPlannedOutageManagerSupportedVersion.getNumber())
     .put(EXIT_HOST_MAINTENANCE, GenesisInterfaceProto.GenesisApiVersion.kPlannedOutageManagerSupportedVersion.getNumber())
     .put(COMPUTE_NON_MIGRATABLE_VMS, GenesisInterfaceProto.GenesisApiVersion.kPlannedOutageManagerSupportedVersion.getNumber())
-    .build();
+    .putAll(b2capabilityMap).build();
+
   public final static ImmutableMap<String, ImmutableMap<String, Integer> > capabilityMap
     = new ImmutableMap.Builder<String, ImmutableMap<String, Integer> >()
     .put(V4_R0_A2_VERSION, a2capabilityMap)
     .put(V4_R0_B1_VERSION, b1capabilityMap)
     .put(V4_R0_B2_VERSION, b2capabilityMap)
+    .put(V4_R0_VERSION, r0capabilityMap)
     .build();
 
   public final static ImmutableMap<String, EncryptionScopeInfo> encryptionScopeMap
@@ -1496,5 +1504,22 @@ public class ClustermgmtUtils {
       }
       return jsonNode;
     }
+
+  public static Boolean doesNameServerHaveFqdn(Cluster payload){
+    if(payload != null){
+      if(payload.getNetwork() != null){
+        List<IPAddressOrFQDN> ipList;
+        if(payload.getNetwork().getNameServerIpList() != null){
+           ipList = payload.getNetwork().getNameServerIpList();
+           for(IPAddressOrFQDN ip: ipList){
+             if(ip.hasFqdn()){
+               return true;
+             }
+           }
+        }
+      }
+    }
+    return false;
+  }
 
 }

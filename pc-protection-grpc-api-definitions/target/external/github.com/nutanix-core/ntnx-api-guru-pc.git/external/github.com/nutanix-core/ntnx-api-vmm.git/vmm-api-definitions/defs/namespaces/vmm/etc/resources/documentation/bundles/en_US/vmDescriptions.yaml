@@ -15,9 +15,11 @@
 - name: "VmSourceTimeDescription"
   value: "The source VM from which this VM is cloned."
 - name: "VmGuestOsNameDescription"
-  value: "Name of the Guest OS."
+  value: "Name of the guest OS."
 - name: "VmCategoriesDescription"
   value: "Categories for the VM."
+- name: "VmProjectReferenceDescription"
+  value: "Project associated with the VM."
 - name: "VmOwnershipInfoDescription"
   value: "Ownership information for the VM."
 - name: "VmReferenceDescription"
@@ -51,15 +53,15 @@
 - name: "VmScsiControllerEnableDescription"
   value: "Indicates whether the VM SCSI controller is enabled."
 - name: "GenerationUuidDescription"
-  value: "Generation UUID of the VM. It should be of type UUID."
+  value: "Generation UUID of the VM of type UUID."
 - name: "BiosUuidDescription"
-  value: "BIOS UUID of the VM. It should be of type UUID."
+  value: "BIOS UUID of the VM of type UUID."
 - name: "VmClusterReferenceDescription"
   value: "The reference to a cluster."
 - name: "VmSourceReferenceDescription"
-  value: "Reference to an entity that the VM should be cloned or created from."
+  value: "Reference to an entity from which the VM should be cloned or created."
 - name: "VmRecoveryPointSourceReferenceEntityTypeDescription"
-  value: "Reference to recovery point entity that the VM should be cloned or created from."
+  value: "Reference to the recovery point entity from which the VM should be cloned or created."
 - name: "VmMachineTypeDescription"
   value: "Machine type for the VM. Machine type Q35 is required for secure boot
           and does not support IDE disks."
@@ -145,9 +147,9 @@
 - name: "BootDeviceType"
   value: "The type of boot device. Valid values are CDROM, NIC, and DISK."
 - name: "ExtIdDescription"
-  value: "The globally unique identifier of an instance. It should be of type UUID."
+  value: "The globally unique identifier of an instance of type UUID."
 - name: "VmExtIdDescription"
-  value: "The globally unique identifier of a VM. It should be of type UUID."
+  value: "A globally unique identifier of a VM of type UUID."
 - name: "ApcConfigDescription"
   value: "Advanced Processor Compatibility configuration for the VM. Enabling this
           retains the CPU model for the VM across power cycles and migrations."
@@ -242,13 +244,13 @@
           compliance state is not known."
 # GPUs attributes.
 - name: "GpuExtIdDescription"
-  value: "The globally unique identifier of a VM GPU. It should be of type UUID."
+  value: "A globally unique identifier of a VM GPU of type UUID."
 - name: "GpuModeDescription"
   value: "The mode of this GPU."
 - name: "GpuVendorDescription"
   value: "The vendor of the GPU."
 - name: "GpuDescription"
-  value: "Graphics resource information for the Virtual Machine."
+  value: "Graphics resource information for the virtual machine."
 - name: "GpuPciAddressDescription"
   value: "GPU {segment:bus:device:function} (sbdf) address if assigned."
 - name: "GpuDeviceIdDescription"
@@ -265,12 +267,12 @@
   value: "Fraction of the physical GPU assigned."
 # NICs attributes.
 - name: "NicExtIdDescription"
-  value: "The globally unique identifier of a VM NIC. It should be of type UUID."
+  value: "A globally unique identifier of a VM NIC of type UUID."
 - name: "NetworkFunctionChainExtIdDescription"
   value: "The globally unique identifier of a network function chain. It should be
           of type UUID."
 - name: "SubnetExtIdDescription"
-  value: "The globally unique identifier of a subnet. It should be of type UUID."
+  value: "The globally unique identifier of a subnet of type UUID."
 - name: "PortGroupInfoDescription"
   value: "Information about the virtual network in the datacenter."
 - name: "PortGroupNameDescription"
@@ -278,13 +280,15 @@
 - name: "NicDescription"
   value: "Virtual Machine NIC."
 - name: "NicBackingInfoDescription"
-  value: "Information about how NIC is emulated."
-- name: "NicNetworkInfoDescription"
-  value: "Network information for a NIC."
+  value: "Information about how NIC is associated with a VM."
 - name: "NicAdapterTypeDescription"
   value: "Adapter type for VM NIC."
 - name: "EmulatedNicModelDescription"
   value: "Options for the NIC emulation."
+- name: "VirtualEthernetNicModelDescription"
+  value: "Options for the NIC emulation."
+- name: "VirtualEthernetNicModelDescription"
+  value: "Options for the Virtual Ethernet NIC emulation."
 - name: "NicTypeDescription"
   value: "NIC type. Defaults to NORMAL_NIC."
 - name: "NetworkFunctionChainReferenceDescription"
@@ -304,27 +308,43 @@
 - name: "IpAddressRequestIpv4Description"
   value: "Value for the ip address requested."
 - name: "EmulatedNicDescription"
-  value: "Defines a NIC emulated by the hypervisor"
+  value: "Defines a NIC emulated by the hypervisor. This object is now deprecated."
+- name: "VirtualEthernetNicDescription"
+  value: "Defines a Virtual Ethernet NIC."
+- name: "SriovNicDescription"
+  value: "Defines an SR-IOV NIC."
+- name: "DpOffloadNicDescription"
+  value: "Defines a DP Offload NIC."
 - name: "EmulatedNicDescription"
   value: "Model of the emulated NIC."
-- name: "EmulatedNicMacAddressDescription"
-  value: "MAC address of the emulated NIC."
+- name: "NicMacAddressDescription"
+  value: "MAC address of the NIC."
 - name: "NicBackingInfoMacAddressDescription"
   value: "MAC address of the NIC."
-- name: "EmulatedNicConnectedDescription"
+- name: "NicConnectedDescription"
   value: "Indicates whether the NIC is connected or not. Default is True."
 - name: "NicBackingInfoConnectedDescription"
   value: "Indicates whether the NIC is connected or not. Default is True."
-- name: "EmulatedNicNumQueuesDescription"
+- name: "NicNumQueuesDescription"
   value: "The number of Tx/Rx queue pairs for this NIC."
 - name: "NicNetworkInfoAllowUnknownMacs"
   value: "Indicates whether an unknown unicast traffic is forwarded to this NIC
           or not. This is applicable only for the NICs on the overlay subnets."
-- name: "NicNetworkInfoDescription"
+- name: "NetworkInfoDescription"
   value: "Networking information object for a NIC."
+- name: "NicNetworkInfoDescription"
+  value: "Networking information object for a NIC. This object is now deprecated."
+- name: "VirtualEthernetNicNetworkInfoDescription"
+  value: "Networking information object for a Virtual Ethernet NIC."
+- name: "SriovNicNetworkInfoDescription"
+  value: "Networking information object for an SR-IOV NIC."
+- name: "DpOffloadNicNetworkInfoDescription"
+  value: "Networking information object for a DP Offload NIC."
 - name: "NicNetworkInfoTrunkedVlansDescription"
   value: "List of networks to trunk if VLAN mode is marked as TRUNKED. If empty
           and VLAN mode is set to TRUNKED, all the VLANs are trunked."
+- name: "SriovNicNetworkInfoVlanIdDescription"
+  value: "VLAN ID for the SR-IOV NIC."
 - name: "MigrateNicConfigDescription"
   value: "Configurations for migrating a VM NIC."
 - name: "MigrateNicConfigIpAddressDescription"
@@ -362,26 +382,44 @@
   value: "Gateway IP addresses matching the subnet."
 # Disks attributes.
 - name: "CdRomExtIdDescription"
-  value: "The globally unique identifier of a CD-ROM. It should be of type UUID."
+  value: "A globally unique identifier of a CD-ROM of type UUID."
 - name: "DiskExtIdDescription"
-  value: "The globally unique identifier of a VM disk. It should be of type UUID."
+  value: "A globally unique identifier of a VM disk of type UUID."
 - name: "DeviceExtIdDescription"
-  value: "The globally unique identifier of a VM device. It should be of type UUID."
+  value: "A globally unique identifier of a VM device of type UUID."
 - name: "VmDiskContainerExtIdDescription"
-  value: "The globally unique identifier of a VM disk container. It should be of
+  value: "A globally unique identifier of a VM disk container. It should be of
           type UUID."
 - name: "ImageExtIdDescription"
-  value: "The globally unique identifier of an image. It should be of type UUID."
+  value: "A globally unique identifier of an image of type UUID."
+- name: "VolumeGroupExtIdDescription"
+  value: "The external identifier of the Volume Group. It should be of type UUID."
 - name: "AdsfVolumeGroupExtIdDescription"
   value: "The globally unique identifier of an ADSF volume group. It should be of
           type UUID."
 - name: "ADSFVolumeGroupReferenceDescription"
   value: "Reference to an ADSF Volume Group."
+- name: "VolumeDiskReferenceDescription"
+  value: "Reference to a Volume Disk."
+- name: "VolumeDiskExtIdDescription"
+  value: "The external identifier of the Volume disk. It should be of type UUID."
+- name: "VmDiskRecoveryPointReferenceDescription"
+  value: "Reference to a Disk Recovery Point of a VM disk."
+- name: "VmDiskRecoveryPointExtIdDescription"
+  value: "The external identifier of the Disk Recovery Point for a VM disk. It should be of type UUID."
+- name: "VmRecoveryPointExtIdDescription"
+  value: "The external identifier of the VM Recovery Point. It should be of type UUID."
+- name: "VolumeDiskRecoveryPointReferenceDescription"
+  value: "Reference to a disk Recovery Point of a Volume disk."
+- name: "VolumeDiskRecoveryPointExtIdDescription"
+  value: "The external identifier of the Volume disk Recovery Point. It should be of type UUID."
+- name: "VolumeGroupRecoveryPointExtIdDescription"
+  value: "The external identifier of the Volume Group Recovery Point. It should be of type UUID."
 - name: "DiskBusTypeDescription"
   value: "Bus type for the device. The acceptable values are: SCSI, IDE, PCI,
           SATA, SPAPR (only PPC)."
 - name: "CdRomBusTypeDescription"
-  value: "Bus type for the device. The acceptable values are: IDE, SATA."
+  value: "Bus type for the device. The acceptable values are: IDE or SATA."
 - name: "DiskAddressDescription"
   value: "Disk address."
 - name: "DiskAddressBusTypeDescription"
@@ -407,9 +445,9 @@
           This preference specifies the storage container to which this
           disk belongs."
 - name: "VmDiskDescription"
-  value: "Storage provided by Nutanix ADSF"
+  value: "Storage provided by Nutanix ADSF."
 - name: "VmDiskDiskSizeBytesDescription"
-  value: "Size of the disk in Bytes"
+  value: "Size of the disk in bytes."
 - name: "VmDiskStorageContainerDescription"
   value: "This reference is for disk level storage container preference.
           This preference specifies the storage container to which this
@@ -442,7 +480,7 @@
   value: "Reference to an existing VM disk that needs to be migrated."
 # Serial port attributes.
 - name: "SerialPortExtIdDescription"
-  value: "The globally unique identifier of a serial port. It should be of type
+  value: "The globally unique identifier of a serial port of type
           UUID."
 - name: "SerialPortsDescription"
   value: "Serial ports configured on the VM."
@@ -451,7 +489,7 @@
 - name: "SerialPortIsConnectedDescription"
   value: "Indicates whether the serial port is connected or not."
 - name: "SerialPortIndexDescription"
-  value: "Index of the serial port."
+  value: "Index of the serial port. Index 1 is reserved for internal usage."
 # Misc VM attributes.
 - name: "ProjectReferenceDescription"
   value: "Reference to a project."
@@ -484,25 +522,28 @@
 - name: "TaskDescription"
   value: "Information about the task that was created for the request."
 - name: "OwnerExtIdDescription"
-  value: "The globally unique identifier of a VM owner. It should be of type UUID."
+  value: "A globally unique identifier of a VM owner type UUID."
 - name: "CategoryExtIdDescription"
-  value: "The globally unique identifier of a VM category. It should be of type
+  value: "A globally unique identifier of a VM category of type
           UUID."
 - name: "AvailabilityZoneExtIdDescription"
-  value: "The globally unique identifier of an availability zone. It should be of
-          type UUID."
+  value: "The globally unique identifier of an availability zone type UUID."
 - name: "ClusterExtIdDescription"
-  value: "The globally unique identifier of a cluster. It should be of type UUID."
+  value: "The globally unique identifier of a cluster type UUID."
 - name: "HostExtIdDescription"
-  value: "The globally unique identifier of a host. It should be of type UUID."
+  value: "The globally unique identifier of a host type UUID."
 # PCIe device attributes.
 - name: "PcieDevicesDescription"
   value: "PCIe devices attached to the VM."
 - name: "PcieDeviceDescription"
   value : "Indicates the information about the PCIe device."
 - name: "PcieDeviceExtIdDescription"
-  value: "Globally unique identifier of a PCIe device. It should be of type
-          UUID."
+  value: "Globally unique identifier of a PCIe device  of type UUID."
+- name: "HostPcieDeviceExtIdDescription"
+  value: "Globally unique identifier of the host PCIe device. It should be of
+          type UUID."
+- name: "HostPcieDeviceReferenceDescription"
+  value: "Reference to the host PCIe device."
 - name: "PcieDeviceBackingInfoDescription"
   value: "Indicates the way a PCIe device is associated to the VM."
 - name: "PcieDeviceReferenceDescription"
@@ -518,11 +559,11 @@
 #
 # VM endpoint descriptions.
 - name: "GetVmDescription"
-  value: "Retrieves configuration details for a Virtual Machine."
+  value: "Retrieves configuration details for a virtual machine."
 - name: "GetVmSummary"
   value: "Get VM configuration details."
 - name: "UpdateVmDescription"
-  value: "Updates configuration details for a Virtual Machine."
+  value: "Updates configuration details for a virtual machine."
 - name: "UpdateVmSummary"
   value: "Update configuration for a VM."
 - name: "CreateVmDescription"
@@ -530,7 +571,7 @@
 - name: "CreateVmSummary"
   value: "Create a VM."
 - name: "DeleteVmDescription"
-  value: "Delete the specified Virtual Machine."
+  value: "Delete the specified virtual machine."
 - name: "DeleteVmSummary"
   value: "Delete a VM."
 - name: "ListVmsDescription"
@@ -540,12 +581,12 @@
   value: "List VMs."
 # Disk endpoint descriptions.
 - name: "CreateDiskDescription"
-  value: "Creates and attaches a disk device to a Virtual Machine."
+  value: "Creates and attaches a disk device to a virtual machine."
 - name: "CreateDiskSummary"
   value: "Create a disk device for a VM."
 - name: "GetDiskDescription"
   value: "Retrieves configuration details for the provided disk device attached
-          to a Virtual Machine."
+          to a virtual machine."
 - name: "GetDiskSummary"
   value: "Get configuration details for the provided disk device."
 - name: "UpdateDiskDescription"
@@ -553,21 +594,21 @@
 - name: "UpdateDiskSummary"
   value: "Update the configuration for the provided disk device."
 - name: "DeleteDiskDescription"
-  value: "Removes the specified disk device from a Virtual Machine."
+  value: "Removes the specified disk device from a virtual machine."
 - name: "DeleteDiskSummary"
   value: "Remove a disk device from a VM."
 - name: "ListDisksDescription"
-  value: "Lists the disk devices attached to a Virtual Machine."
+  value: "Lists the disk devices attached to a virtual machine."
 - name: "ListDisksSummary"
   value: "List disks attached to a VM."
 # CD-ROM endpoint descriptions.
 - name: "CreateCdRomDescription"
-  value: "Creates and attaches a CD-ROM device to a Virtual Machine."
+  value: "Creates and attaches a CD-ROM device to a virtual machine."
 - name: "CreateCdRomSummary"
   value: "Create a CD-ROM device for a VM."
 - name: "GetCdRomDescription"
   value: "Retrieves configuration details for the provided CD-ROM device
-          attached to a Virtual Machine."
+          attached to a virtual machine."
 - name: "GetCdRomSummary"
   value: "Get configuration details for the provided CD-ROM."
 - name: "InsertCdRomDescription"
@@ -581,39 +622,39 @@
 - name: "EjectCdRomSummary"
   value: "Ejects an ISO from the provided CD-ROM device."
 - name: "DeleteCdRomDescription"
-  value: "Removes the specified CD-ROM device from a Virtual Machine."
+  value: "Removes the specified CD-ROM device from a virtual machine."
 - name: "DeleteCdRomSummary"
   value: "Remove a CD-ROM device from a VM."
 - name: "ListCdRomsDescription"
-  value: "Lists the CD-ROM devices attached to a Virtual Machine."
+  value: "Lists the CD-ROM devices attached to a virtual machine."
 - name: "ListCdRomsSummary"
   value: "List CD-ROMs attached to a VM."
 # GPU endpoint descriptions.
 - name: "CreateGpuDescription"
-  value: "Attaches a GPU device to a Virtual Machine."
+  value: "Attaches a GPU device to a virtual machine."
 - name: "CreateGpuSummary"
   value: "Attach a GPU device to a VM."
 - name: "GetGpuDescription"
   value: "Retrieves configuration details for the provided GPU device attached
-          to a Virtual Machine."
+          to a virtual machine."
 - name: "GetGpuSummary"
   value: "Get configuration details for the provided GPU device."
 - name: "DeleteGpuDescription"
-  value: "Removes the specified GPU device from a Virtual Machine."
+  value: "Removes the specified GPU device from a virtual machine."
 - name: "DeleteGpuSummary"
   value: "Remove a GPU device from a VM."
 - name: "ListGpusDescription"
-  value: "Lists the GPU devices attached to a Virtual Machine."
+  value: "Lists the GPU devices attached to a virtual machine."
 - name: "ListGpusSummary"
   value: "List GPUs attached to a VM."
 # NIC endpoint descriptions.
 - name: "CreateNicDescription"
-  value: "Creates and attaches a network device to a Virtual Machine."
+  value: "Creates and attaches a network device to a virtual machine."
 - name: "CreateNicSummary"
   value: "Create a network device for a VM."
 - name: "GetNicDescription"
   value: "Retrieves configuration details for the provided network device
-          attached to a Virtual Machine."
+          attached to a virtual machine."
 - name: "GetNicSummary"
   value: "Get configuration details for the provided network device."
 - name: "UpdateNicDescription"
@@ -621,11 +662,11 @@
 - name: "UpdateNicSummary"
   value: "Update the configuration for the provided network device."
 - name: "DeleteNicDescription"
-  value: "Removes the specified network device from a Virtual Machine."
+  value: "Removes the specified network device from a virtual machine."
 - name: "DeleteNicSummary"
   value: "Remove a network device from a VM."
 - name: "ListNicsDescription"
-  value: "Lists the network devices attached to a Virtual Machine."
+  value: "Lists the network devices attached to a virtual machine."
 - name: "ListNicsSummary"
   value: "List network devices attached to a VM."
 - name: "AssignIpDescription"
@@ -648,12 +689,12 @@
   value: "Migrate a network device to another subnet."
 # Serial port endpoint descriptions.
 - name: "CreateSerialPortDescription"
-  value: "Creates and attaches a serial port device to a Virtual Machine."
+  value: "Creates and attaches a serial port device to a virtual machine."
 - name: "CreateSerialPortSummary"
   value: "Create a serial port for a VM."
 - name: "GetSerialPortDescription"
   value: "Retrieves configuration details for the provided serial port attached
-          to a Virtual Machine."
+          to a virtual machine."
 - name: "GetSerialPortSummary"
   value: "Get configuration details for the provided serial port."
 - name: "UpdateSerialPortDescription"
@@ -661,20 +702,20 @@
 - name: "UpdateSerialPortSummary"
   value: "Update the configuration for the provided serial port."
 - name: "DeleteSerialPortDescription"
-  value: "Removes the specified serial port from a Virtual Machine."
+  value: "Removes the specified serial port from a virtual machine."
 - name: "DeleteSerialPortSummary"
   value: "Remove a serial port from a VM."
 - name: "ListSerialPortsDescription"
-  value: "Lists the serial ports attached to a Virtual Machine."
+  value: "Lists the serial ports attached to a virtual machine."
 - name: "ListSerialPortsSummary"
   value: "List serial ports attached to a VM."
 # Nutanix guest tools endpoint descriptions.
 - name: "GetVmGuestToolsDescription"
-  value: "Retrieves the Nutanix Guest Tools configuration for a Virtual Machine."
+  value: "Retrieves the Nutanix Guest Tools configuration for a virtual machine."
 - name: "GetVmGuestToolsSummary"
   value: "Get VM NGT configuration."
 - name: "UpdateVmGuestToolsDescription"
-  value: "Updates the Nutanix Guest Tools configuration for a Virtual Machine."
+  value: "Updates the Nutanix Guest Tools configuration for a virtual machine."
 - name: "UpdateVmGuestToolsSummary"
   value: "Update NGT configuration for a VM."
 - name: "InsertVmGuestToolsDescription"
@@ -703,24 +744,24 @@
 - name: "VmPowerOnSummary"
   value: "Turn on a VM."
 - name: "EsxiVmPowerOnDescription"
-  value: "Turns a Virtual Machine on or resumes it from the suspended state."
+  value: "Powers a Virtual Machine on or resumes it from the suspended state."
 - name: "EsxiVmPowerOnSummary"
-  value: "Turn on or resume a VM."
+  value: "Power on or resume a VM"
 - name: "VmPowerCycleDescription"
-  value: "Force a power-cycle for a Virtual Machine. This operation is
+  value: "Force a power-cycle for a virtual machine. This operation is
           equivalent to requesting a VM power-off followed by the VM power-on.
           Power cycling a VM is slower than resetting it, but it will be
-          creating a fresh instance of the Virtual Machine. When resetting, the
+          creating a fresh instance of the virtual machine. When resetting, the
           same instance is restarted within the context of the running VM
           instance."
 - name: "VmPowerCycleSummary"
   value: "Force a power cycle for a VM."
 - name: "VmPowerOffDescription"
-  value: "Force shutdown of a Virtual Machine. Equivalent to removing the power
-          cable. Note: If any write operations are being made to any disk when
-          this API is called, it might result in some data loss."
+  value: "Forceably shuts down a virtual machine which is equivalent to removing the power
+          cable. Note: The forced shutdown may result in data loss if any
+          operations are in progress during the shutdown."
 - name: "VmPowerOffSummary"
-  value: "Hard power off a VM."
+  value: "Force power off a VM"
 - name: "VmResetDescription"
   value: "Force reset of a Virtual Machine, without waiting for the guest VM to
           shutdown itself. Resetting a VM is faster than power-cycle as the
@@ -729,25 +770,24 @@
 - name: "VmResetSummary"
   value: "Reset a VM immediately."
 - name: "EsxiVmResetDescription"
-  value: "Sequentially performs the power-off and power-on operations;
-         any operation in between these actions will fail."
+  value: "Sequentially performs the power off and power on operations;
+         any operation between these actions will fail."
 - name: "EsxiVmResetSummary"
-  value: "Reset an ESXi Virtual Machine by sequentially performing
-          power-off and power-on operations."
+  value: "Reset an ESXi VM by sequentially powering it off and on"
 - name: "VmACPIShutdownDescription"
   value: "Collaborative shutdown of a Virtual Machine through the ACPI support
           in the operating system."
 - name: "VmACPIShutdownSummary"
   value: "Shutdown the VM using ACPI."
 - name: "EsxiVmSuspendDescription"
-  value: "Suspends execution in an ESXi Virtual Machine."
+  value: "Pause/Suspend execution in an ESXi virtual machine."
 - name: "EsxiVmSuspendSummary"
-  value: "Suspend/Pause execution in virtual machine"
+  value: "Pause/Suspend virtual machine execution"
 - name: "EsxiGuestOsShutdownDescription"
-  value: "Issue a command on ESXi guest OS to perform clean shutdown
-          of services running on it. This operation requires ESXi tools installed."
+  value: "Issues a command to the ESXi guest OS to perform a clean shut down
+          of services running on it. This operation requires ESXi tools to be installed."
 - name: "EsxiGuestOsShutdownSummary"
-  value: "Gracefully shutdown all the services on ESXi guest OS."
+  value: "Shut down services on ESXi guest OS"
 - name: "VmGuestShutdownDescription"
   value: "Collaborative shutdown of a Virtual Machine, requesting Nutanix Guest
           Tools to trigger a shutdown from within the VM."
@@ -764,11 +804,11 @@
 - name: "VmGuestRebootSummary"
   value: "Restart the VM using NGT."
 - name: "EsxiGuestRebootDescription"
-  value: "Reboot ESXi guest OS. This operation requires ESXi tools installed."
+  value: "Issues a command to reboot ESXi guest OS. This operation requires ESXi tools installed."
 - name: "EsxiGuestRebootSummary"
-  value: "Issues a command to reboot ESXi guest OS."
+  value: "Issue an ESXi guest OS reboot command"
 - name: "VmCloneDescription"
-  value: "Clones an existing Virtual Machine. This operation also includes
+  value: "Clones an existing virtual machine. This operation also includes
           updating the existing configuration during the clone operation."
 - name: "VmCloneSummary"
   value: "Clone a VM."
@@ -910,11 +950,11 @@
   value: "Migrate the disks of a VM."
 # Categories endpoint descriptions.
 - name: "AssociateVmCategoriesDescription"
-  value: "Associate categories to a Virtual Machine."
+  value: "Associate categories to a virtual machine."
 - name: "AssociateVmCategoriesSummary"
   value: "Associate categories to a VM."
 - name: "DisassociateVmCategoriesDescription"
-  value: "Disassociate categories from a Virtual Machine."
+  value: "Disassociate categories from a virtual machine."
 - name: "DisassociateVmCategoriesSummary"
   value: "Disassociate categories from a VM."
 - name: "AssociateVmCategoriesParamsDescription"
@@ -925,7 +965,7 @@
 - name: "OwnershipInfoDescription"
   value: "Ownership information for the VM."
 - name: "AssignVmOwnerDescription"
-  value: "Assign the owner of a Virtual Machine."
+  value: "Assign the owner of a virtual machine."
 - name: "AssignVmOwnerSummary"
   value: "Assign owner of a VM."
 - name: "VtpmConfigDescription"
@@ -951,21 +991,21 @@
 # VM PCIe device endpoint descriptions.
 - name: "GetPcieDeviceDescription"
   value: "Retrieves configuration details for the provided PCIe device
-          attached to a Virtual Machine."
+          attached to a virtual machine."
 - name: "GetPcieDeviceSummary"
-  value: "Get configuration details for the provided PCIe device."
+  value: "Get configuration details for the provided PCIe device"
 - name: "DeletePcieDeviceDescription"
-  value: "Removes the specified PCIe device from a Virtual Machine."
+  value: "Removes the specified PCIe device from a virtual machine."
 - name: "DeletePcieDeviceSummary"
-  value: "Remove a PCIe device from a VM."
+  value: "Remove a PCIe device from a VM"
 - name: "ListPcieDevicesDescription"
-  value: "Lists the PCIe devices attached to a Virtual Machine."
+  value: "Lists all the PCIe devices attached to a virtual machine."
 - name: "ListPcieDevicesSummary"
-  value: "List PCIe devices attached to a VM."
+  value: "List PCIe devices attached to a VM"
 - name: "CreatePcieDeviceDescription"
-  value: "Creates and attaches a PCIe device to a Virtual Machine."
+  value: "Creates and attaches a PCIe device to a virtual machine."
 - name: "CreatePcieDeviceSummary"
-  value: "Create a PCIe device for a VM."
+  value: "Create a PCIe device for a VM"
 # Misc.
 - name: "CustomKeyValuesDescription"
   value: "A collection of key/value pairs."
@@ -986,7 +1026,7 @@
 - name: "PausedPowerStateDescription"
   value: "The VM is paused."
 - name: "UndeterminedPowerStateDescription"
-  value: "The current power state of the VM is unknown."
+  value: "The VM power state is currently unknown."
 - name: "SuspendedPowerStateDescription"
   value: "The VM power state is currently suspended."
 # CpuFeature enum descriptions.
@@ -1049,8 +1089,19 @@
   value: "The NIC adapter type is Vmxnet3."
 - name: "E1000eNicModelDescription"
   value: "The NIC adapter type is E1000e."
+# VirtualEthernetNicModel enum descriptions.
+- name: "VirtioVirtualEthernetNicModelDescription"
+  value: "The NIC adapter type is Virtio."
+- name: "E1000VirtualEthernetNicModelDescription"
+  value: "The NIC adapter type is E1000."
 - name: "SriovNicModelDescription"
   value: "The NIC adapter type is Sriov."
+- name: "NicProfileReferenceDescription"
+  value: "Reference to a NIC profile."
+- name: "NicProfileExtIdDescription"
+  value: "Globally unique identifier of a NIC profile. It should be of type UUID."
+- name: "ProfileReferenceDescription"
+  value: "Reference to a profile."
 # NicType enum descriptions.
 - name: "NormalNicDescription"
   value: "The type of NIC is Normal."
@@ -1076,7 +1127,7 @@
 - name: "AssignIpMigrateNicTypeDescription"
   value: "The type of IP address management for NIC migration is Assign IP."
 - name: "ReleaseIpMigrateNicTypeDescription"
-  value: "The type of IP address management for NIC migration is Release IP."
+  value: "Release IP is the type of IP address management for NIC migration."
 # DiskBusType enum descriptions.
 - name: "SCSIDiskBusTypeDescription"
   value: "The type of disk bus is SCSI."
@@ -1124,20 +1175,17 @@
 - name: "listVmStatsSummary"
   value: "List VM stats for all VMs."
 - name: "listVmStatsDescription"
-  value: "List VM stats for all VMs. Users can include the following in the
-          request query:
+  value: "List VM stats for all VMs.  Users can fetch the stats
+          by specifying the following params in the request query:
           1) '$select': comma-separated attributes with the prefix 'stats/', e.g.
           'stats/controllerNumIo,stats/hypervisorNumIo'.
-          2) '$startTime': the start time of the period for which stats should
-          be reported, where the value should be in extended ISO-8601 format,
-          e.g. '2023-01-01T12:00:00.000-08:00';
-          3) '$endTime': the end time of the period for which stats should be
-          reported, where the value should be in extended ISO-8601 format;
+          2) '$startTime': the start time for which stats should
+          be reported, e.g. '2023-01-01T12:00:00.000-08:00';
+          3) '$endTime': the end time for which stats should be reported;
           4) '$samplingInterval': the sampling interval in seconds at which
           statistical data should be collected;
           5) '$statType': the down-sampling operator to use while performing
-          down-sampling on stats data, where the allowed values are SUM, MIN,
-          MAX, AVG, COUNT and LAST;
+          down-sampling on stats data;
           6) '$orderby';
           7) '$page';
           8) '$limit'; and
@@ -1151,20 +1199,17 @@
 - name: "GetVmStatsSummary"
   value: "Get VM stats for a given VM."
 - name: "GetVmStatsDescription"
-  value: "Get VM stats for a given VM. Users can include the following in the
-          request query:
+  value: "Get VM stats for a given VM. Users can fetch the stats
+          by specifying the following params in the request query:
           1) '$select': comma-separated attributes with the prefix 'stats/', e.g.
-          'stats/controllerNumIo,stats/hypervisorNumIo'.
-          2) '$startTime': the start time of the period for which stats should
-          be reported, where the value should be in extended ISO-8601 format,
-          e.g. '2023-01-01T12:00:00.000-08:00';
-          3) '$endTime': the end time of the period for which stats should be
-          reported, where the value should be in extended ISO-8601 format;
+          'stats/checkScore'.
+          2) '$startTime': the start time for which stats should
+          be reported, e.g. '2023-01-01T12:00:00.000-08:00';
+          3) '$endTime': the end time for which stats should be reported;
           4) '$samplingInterval': the sampling interval in seconds at which
           statistical data should be collected;
           5) '$statType': the down-sampling operator to use while performing
-          down-sampling on stats data, where the allowed values are SUM, MIN,
-          MAX, AVG, COUNT and LAST."
+          down-sampling on stats data"
 - name: "GetVmStatsVmExtIdDescription"
   value: "Retrieve statistics for the VM with the specified external ID."
 - name: "GetVmStatsFilterDescription"
@@ -1173,28 +1218,23 @@
   value: "Sort the retrieved statistics for the VM by the specified field."
 # VM disk stats.
 - name: "GetVmStatsVmDiskSummary"
-  value: "Get the stats for the specified VM disk."
+  value: "Get the stats for the specified VM disk"
 - name: "GetVmStatsVmDiskDescription"
-  value: "Get the stats for the specified VM disk. Users can include the
-          following in the request query:
+  value: "Fetches the stats for the specified VM disk. Users can fetch the stats
+          by specifying the following params in the request query:
           1) '$select': comma-separated attributes with the prefix 'stats/', e.g.
-          'stats/controllerNumIo, stats/controllerUserBytes'.
-          2) '$startTime': the start time of the period for which stats should
-          be reported, where the value should be in extended ISO-8601 format,
-          e.g. '2023-01-01T12:00:00.000-08:00';
-          3) '$endTime': the end time of the period for which stats should be
-          reported, where the value should be in extended ISO-8601 format;
+          'stats/checkScore'.
+          2) '$startTime': the start time for which stats should
+          be reported, e.g. '2023-01-01T12:00:00.000-08:00';
+          3) '$endTime': the end time for which stats should be reported;
           4) '$samplingInterval': the sampling interval in seconds at which
           statistical data should be collected;
           5) '$statType': the down-sampling operator to use while performing
-          down-sampling on stats data, where the allowed values are SUM, MIN,
-          MAX, AVG, COUNT and LAST."
+          down-sampling on stats data"
 - name: "GetVmStatsVmDiskVmExtIdDescription"
-  value: "When retrieving stats for a given VM disk, this field specifies
-          the VM external ID."
+  value: "This field specifies the VM external ID when retrieving the stats for a given VM Disk."
 - name: "GetVmStatsVmDiskExtIdDescription"
-  value: "When retrieving stats for a given VM disk, this field specifies
-          the VM disk external ID."
+  value: "This field specifies the VM external ID when retrieving the stats for a given VM Disk."
 - name: "GetVmStatsVmDiskFilterDescription"
   value: "Retrieve statistics for the VM disk that satisfies the specified OData
           filter."
@@ -1202,28 +1242,23 @@
   value: "Sort the retrieved statistics for the VM disk by the specified field."
 # VM NIC stats.
 - name: "GetVmStatsVmNicSummary"
-  value: "Get the stats for the specified VM NIC."
+  value: "Get the stats for the specified VM NIC"
 - name: "GetVmStatsVmNicDescription"
-  value: "Get the stats for the specified VM NIC. Users can include the
-          following in the request query:
+  value: "Fetches the stats for the specified VM NIC. Users can fetch the stats
+          by specifying the following params in the request query:
           1) '$select': comma-separated attributes with the prefix 'stats/', e.g.
           'stats/checkScore'.
-          2) '$startTime': the start time of the period for which stats should
-          be reported, where the value should be in extended ISO-8601 format,
-          e.g. '2023-01-01T12:00:00.000-08:00';
-          3) '$endTime': the end time of the period for which stats should be
-          reported, where the value should be in extended ISO-8601 format;
+          2) '$startTime': the start time for which stats should
+          be reported, e.g. '2023-01-01T12:00:00.000-08:00';
+          3) '$endTime': the end time for which stats should be reported;
           4) '$samplingInterval': the sampling interval in seconds at which
           statistical data should be collected;
           5) '$statType': the down-sampling operator to use while performing
-          down-sampling on stats data, where the allowed values are SUM, MIN,
-          MAX, AVG, COUNT and LAST."
+          down-sampling on stats data"
 - name: "GetVmStatsVmNicVmExtIdDescription"
-  value: "When retrieving stats for a given VM NIC, this field specifies
-          the VM external ID."
+  value: "This field specifies the VM external ID when retrieving the stats for a given VM NIC."
 - name: "GetVmStatsVmNicExtIdDescription"
-  value: "When retrieving stats for a given VM NIC, this field specifies
-          the VM NIC external ID."
+  value: "This field specifies the external ID of the VM NIC when retrieving stats for a given VM NIC."
 - name: "GetVmStatsVmNicFilterDescription"
   value: "Retrieve statistics for the VM NIC that satisfies the specified OData
           filter."
@@ -1513,7 +1548,7 @@
   value: "The VM hypervisor memory assigned in bytes."
 # VM disk stats model.
 - name: "VmDiskStatsDescription"
-  value: "A collection of VM disk stats"
+  value: "A collection of VM disk stats."
 - name: "VmStatsVmDiskExtIdDescription"
   value: "The VM disk external ID associated with the VM disk stats."
 - name: "VmDiskStatsAvgIoLatencyMicrosDescription"
@@ -1835,7 +1870,7 @@
   value: "The data value for a specific VM disk stats response data point."
 # VM NIC stats model.
 - name: "VmNicStatsDescription"
-  value: "A collection of VM NIC stats"
+  value: "A collection of VM NIC stats."
 - name: "VmStatsVmNicExtIdDescription"
   value: "The VM NIC external ID associated with the VM NIC stats."
 - name: "VmNicStatsCheckScoreDescription"
@@ -1882,3 +1917,5 @@
   value: "The timestamp of a specific VM NIC stats response data point."
 - name: "VmNicStatsTimeValuesValueDescription"
   value: "The data value for a specific VM NIC stats response data point."
+- name : "OvaVmConfigOverrideSpecDescription"
+  value : "VM config override spec for OVA VM deploy endpoint."

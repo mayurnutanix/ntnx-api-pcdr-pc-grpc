@@ -3,6 +3,7 @@ package com.nutanix.clustermgmtserver.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.ByteString;
+import com.nutanix.api.utils.json.JsonUtils;
 import com.nutanix.api.utils.links.ApiLinkUtils;
 import com.nutanix.clustermgmtserver.exceptions.ClustermgmtServiceException;
 import com.nutanix.net.RpcProto;
@@ -118,7 +119,7 @@ public class RequestContextHelper {
       if (jsonString == null) {
         return;
       }
-      ObjectMapper mapper = new ObjectMapper();
+      ObjectMapper mapper = JsonUtils.getObjectMapper();
 
       Map<String, Boolean> jsonObj = mapper.readValue(jsonString, Map.class);
 

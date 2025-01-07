@@ -165,7 +165,7 @@
   errorGroup: FILE_FAULT_ERROR
   severity: ERROR
   message: >
-    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
     '{{{vm_uuid}}}' because there was an issue accessing the VM on file system.
   arguments:
     - operation
@@ -174,7 +174,7 @@
   errorGroup: INSUFFICIENT_RESOURCES_ERROR
   severity: ERROR
   message: >
-    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
     '{{{vm_uuid}}}' because it violated the resource usage policy.
   arguments:
     - operation
@@ -183,7 +183,7 @@
   errorGroup: INVALID_CONFIGURATION_ERROR
   severity: ERROR
   message: >
-    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
     '{{{vm_uuid}}}' as configuration of the VM is invalid.
   arguments:
     - operation
@@ -192,11 +192,11 @@
   errorGroup: ESXI_GUEST_TOOLS_UNAVAILABLE_ERROR
   severity: ERROR
   message: >
-    Failed to perform the operation '{{{operation}}}' on the VM with UUID 
-    '{{{vm_uuid}}}' because ESXi guest tools are not available. 
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}' because ESXi guest tools are not available.
     Please mount esxi tools and retry.
   arguments:
-    - operation 
+    - operation
     - vm_uuid
 # Failed to create VM due to invalid memory argument.
 - code: 30121
@@ -269,6 +269,52 @@
   message: >
     Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
     as disabling SCSI controller is not supported for VMs with SCSI disks.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 30128
+  errorGroup: INSUFFICIENT_RESOURCES_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as no host has enough resources.
+  arguments:
+    - operation
+    - vm_uuid
+
+- code: 30129
+  errorGroup: INSUFFICIENT_RESOURCES_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}' because the total numbers of vCPUs present or requested in
+    VM configuration exceeds maximum supported vCPUs on the host: '{{{max_supported_vcpus}}}'.
+  arguments:
+    - operation
+    - vm_uuid
+    - max_supported_vcpus
+
+- code: 30130
+  errorGroup: CLUSTER_NOT_CAPABLE
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}' because there is no cluster capable of handling the field
+    '{{{non_capable_field}}}' in the VM configuration. Upgrade the attached
+    cluster(s) to a newer/supported version.
+  arguments:
+    - operation
+    - vm_uuid
+    - non_capable_field
+
+- code: 30131
+  errorGroup: CLUSTER_NOT_CAPABLE
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID
+    '{{{vm_uuid}}}' because there is no capable cluster found. Upgrade the
+    attached cluster(s) to a newer/supported version.
   arguments:
     - operation
     - vm_uuid

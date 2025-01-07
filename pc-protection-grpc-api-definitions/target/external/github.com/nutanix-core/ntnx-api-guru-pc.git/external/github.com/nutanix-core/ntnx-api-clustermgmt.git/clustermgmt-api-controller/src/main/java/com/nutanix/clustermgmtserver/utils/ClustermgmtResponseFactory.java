@@ -38,6 +38,9 @@ interface AppMessageMapper {
     appMessage.setMessage(standardAppMessage.getMessage());
     appMessage.setCode(standardAppMessage.getCode());
     appMessage.setSeverity(MessageSeverity.ERROR);
+    appMessage.setLocale(standardAppMessage.getLocale().toString());
+    appMessage.setArgumentsMap(standardAppMessage.getArgumentsMap());
+    appMessage.setErrorGroup(standardAppMessage.getErrorGroup());
     return appMessage;
   }
 
@@ -58,17 +61,17 @@ public class ClustermgmtResponseFactory {
   }
 
   public static ErrorResponse createStandardErrorResponse (final Throwable cause) {
-    int errorCode = ErrorCode.CLUSTERMGMT_SERVICE_RPC_ERROR.getStandardCode();
+    int errorCode = ErrorCode.CLUSTERMGMT_SERVICE_ERROR.getStandardCode();
     if (cause instanceof ClustermgmtServiceException) {
       errorCode = ((ClustermgmtServiceException) cause).getStandardCode();
     } else if (cause instanceof ValidationException) {
       errorCode = ErrorCode.CLUSTERMGMT_INVALID_INPUT.getStandardCode();
     } else if (cause instanceof StatsGatewayServiceException) {
-      errorCode = ErrorCode.CLUSTERMGMT_SERVICE_RPC_ERROR.getStandardCode();
+      errorCode = ErrorCode.CLUSTERMGMT_SERVICE_ERROR.getStandardCode();
     }
 
     final Map<String, String> arguments = new HashMap<>();
-    if (errorCode == ErrorCode.CLUSTERMGMT_SERVICE_RPC_ERROR.getStandardCode()
+    if (errorCode == ErrorCode.CLUSTERMGMT_SERVICE_ERROR.getStandardCode()
       || errorCode == ErrorCode.CLUSTERMGMT_INVALID_INPUT.getStandardCode()
       || errorCode == ErrorCode.CLUSTERMGMT_SERVICE_NOT_SUPPORTED_ENTITY.getStandardCode()
       || errorCode == ErrorCode.CLUSTERMGMT_SERVICE_DUPLICATE_HOST_NAME_ERROR.getStandardCode()

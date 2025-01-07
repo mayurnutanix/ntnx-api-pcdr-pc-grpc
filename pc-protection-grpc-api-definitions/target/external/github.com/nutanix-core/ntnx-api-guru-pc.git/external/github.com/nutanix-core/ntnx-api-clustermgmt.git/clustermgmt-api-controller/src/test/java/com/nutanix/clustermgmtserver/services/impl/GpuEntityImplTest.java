@@ -73,7 +73,7 @@ public class GpuEntityImplTest extends ClusterServiceImplTest {
       .thenReturn(HostTestUtils.getHostGpuIdfEntityObj(true, HostTestUtils.HOST_GPU_UUID));
     when(entityDbProxy.doExecute(eq(EntityDbProxyImpl.EntityDbRpcName.GET_ENTITIES_WITH_METRICS), any()))
       .thenReturn(HostTestUtils.getHostGpuIdfEntityMetricObj(true));
-    Pair<Integer, List<VirtualGpuProfile>> response = clusterService.listVirtualGpuProfiles(HostTestUtils.CLUSTER_UUID, 1, 0);
+    Pair<Integer, List<VirtualGpuProfile>> response = clusterService.listVirtualGpuProfiles(HostTestUtils.CLUSTER_UUID, 1, 0, null, null);
     assertEquals(response.right().get(0).getVirtualGpuConfig().getDeviceId(), HostTestUtils.HOST_VIRTUAL_GPU_DEVICE_ID);
   }
 
@@ -83,7 +83,7 @@ public class GpuEntityImplTest extends ClusterServiceImplTest {
       .thenReturn(HostTestUtils.getHostGpuIdfEntityObj(false, HostTestUtils.HOST_GPU_UUID));
     when(entityDbProxy.doExecute(eq(EntityDbProxyImpl.EntityDbRpcName.GET_ENTITIES_WITH_METRICS), any()))
       .thenReturn(HostTestUtils.getHostGpuIdfEntityMetricObj(false));
-    Pair<Integer, List<PhysicalGpuProfile>> response = clusterService.listPhysicalGpuProfiles(HostTestUtils.CLUSTER_UUID, 1, 0);
+    Pair<Integer, List<PhysicalGpuProfile>> response = clusterService.listPhysicalGpuProfiles(HostTestUtils.CLUSTER_UUID, 1, 0, null, null);
     assertEquals(response.right().get(0).getPhysicalGpuConfig().getDeviceId(), HostTestUtils.HOST_PHYSICAL_GPU_DEVICE_ID);
   }
 

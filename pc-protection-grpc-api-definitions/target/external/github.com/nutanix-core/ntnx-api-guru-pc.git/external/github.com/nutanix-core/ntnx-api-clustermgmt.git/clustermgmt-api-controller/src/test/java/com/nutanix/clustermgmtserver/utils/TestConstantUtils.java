@@ -37,8 +37,12 @@ public class TestConstantUtils {
 
   public static com.nutanix.clustermgmtserver.adapters.impl.v4.r0.b2.ClusterResourceAdapterImpl clusterResourceAdapterV40B2;
 
+  public static com.nutanix.clustermgmtserver.adapters.impl.v4.r0.ClusterResourceAdapterImpl clusterResourceAdapterV40R0;
+
   static {
-    clusterResourceAdapterV40B2 = new com.nutanix.clustermgmtserver.adapters.impl.v4.r0.b2.ClusterResourceAdapterImpl();
+    clusterResourceAdapterV40R0 = new com.nutanix.clustermgmtserver.adapters.impl.v4.r0.ClusterResourceAdapterImpl();
+    clusterResourceAdapterV40B2 = new com.nutanix.clustermgmtserver.adapters.impl.v4.r0.b2.ClusterResourceAdapterImpl(
+      clusterResourceAdapterV40R0);
     clusterResourceAdapterV40B1 = new com.nutanix.clustermgmtserver.adapters.impl.v4.r0.b1.ClusterResourceAdapterImpl(
       clusterResourceAdapterV40B2);
     clusterResourceAdapterV40A2 = new com.nutanix.clustermgmtserver.adapters.impl.v4.r0.a2.ClusterResourceAdapterImpl(
@@ -57,6 +61,8 @@ public class TestConstantUtils {
       clusterResourceAdapterV40B1);
     map.put(com.nutanix.clustermgmtserver.adapters.impl.v4.r0.b2.ClusterResourceAdapterImpl.ADAPTER_VERSION,
       clusterResourceAdapterV40B2);
+    map.put(com.nutanix.clustermgmtserver.adapters.impl.v4.r0.ClusterResourceAdapterImpl.ADAPTER_VERSION,
+      clusterResourceAdapterV40R0);
     when(context.getBeansOfType(BaseClusterResourceAdapterImpl.class)).thenReturn(map);
 
     VersionAwareClustermgmtAdapterRegistry adapterRegistry =

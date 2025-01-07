@@ -41,8 +41,8 @@ public interface ClusterService {
     throws ClustermgmtServiceException, ValidationException;
   Pair<Integer, List<HostGpu> > getClusterHostGpus(String clusterUuid, Integer limit, Integer page, String filter, String orderBy, String selectString)
     throws ClustermgmtServiceException, ValidationException;
-  Pair<Integer, List<VirtualGpuProfile>> listVirtualGpuProfiles(String clusterUuid, Integer limit, Integer page) throws ClustermgmtServiceException, ValidationException;
-  Pair<Integer, List<PhysicalGpuProfile>> listPhysicalGpuProfiles(String clusterUuid, Integer limit, Integer page) throws ClustermgmtServiceException, ValidationException;
+  Pair<Integer, List<VirtualGpuProfile>> listVirtualGpuProfiles(String clusterUuid, Integer limit, Integer page, String filter, String orderBy) throws ClustermgmtServiceException, ValidationException;
+  Pair<Integer, List<PhysicalGpuProfile>> listPhysicalGpuProfiles(String clusterUuid, Integer limit, Integer page, String filter, String orderBy) throws ClustermgmtServiceException, ValidationException;
   HostGpu getHostGpu(String clusterUuid, String hostUuid, String hostGpuUuid) throws ClustermgmtServiceException;
   TaskReference renameHost(HostNameParam body, String clusterExtId, String hostExtId) throws ClustermgmtServiceException, ValidationException;
   TaskReference updateCluster(Cluster body, String clusterExtId, String batchTask) throws ClustermgmtServiceException;
@@ -72,7 +72,7 @@ public interface ClusterService {
   TaskReference isHypervisorUploadRequired(String clusterExtId,  HypervisorUploadParam hypervisorUploadParam) throws ClustermgmtServiceException, ValidationException;
   void removeNode(String clusterExtId, NodeRemovalParams removeNode, String taskUuid) throws ClustermgmtServiceException, ValidationException;
   TaskReference validateNode(String clusterExtId, ValidateNodeParam body) throws ClustermgmtServiceException;
-  SearchResponse getSearchResponse(final String taskExtId, SearchType searchType) throws
+  TaskResponse getTaskResponse(final String taskExtId, TaskResponseType taskResponseType) throws
     ClustermgmtServiceException;
   Pair<Integer, List<HostNic> > getHostNics(String clusterUuid, String hostUuid, Integer limit, Integer page, String filter, String orderBy, String selectString)
     throws ClustermgmtServiceException, ValidationException;

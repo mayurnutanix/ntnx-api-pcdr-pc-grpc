@@ -60,7 +60,6 @@ public class StatsImplTest extends ClusterServiceImplTest {
       .thenReturn(ClusterTestUtils.getClusterIdfEntityObj(StatsTestUtils.CLUSTER_UUID));
     ClusterStats resource = clusterService.getClusterStatsInfo(uuid, DownSamplingOperator.AVG, 50, 100L, 100L, null);
     assertEquals(resource.getExtId(), uuid);
-    assertEquals(resource.getStatType(), DownSamplingOperator.AVG);
     Long value = new Long(281683);
     assertEquals(resource.getControllerNumWriteIopsUpperBuf().get(0).getValue(), value);
     assertEquals(resource.getHealthCheckScore().get(0).getValue(), Long.valueOf("74"));
@@ -68,6 +67,7 @@ public class StatsImplTest extends ClusterServiceImplTest {
     assertEquals(resource.getSnapshotCapacityBytes().get(0).getValue(), Long.valueOf("6438191104"));
     assertEquals(resource.getOverallSavingsBytes().get(0).getValue(), Long.valueOf("511778816"));
     assertEquals(resource.getOverallSavingsRatio().get(0).getValue(), Long.valueOf("14694282"));
+    assertEquals(resource.getPowerConsumptionInstantWatt().get(0).getValue(), Long.valueOf("282"));
     //any other assertions if required
   }
 
@@ -121,7 +121,7 @@ public class StatsImplTest extends ClusterServiceImplTest {
       .thenReturn(HostTestUtils.getHostIdfEntityObj(StatsTestUtils.HOST_UUID));
     HostStats resource = clusterService.getHostStatsInfo(StatsTestUtils.CLUSTER_UUID, uuid, DownSamplingOperator.AVG, 50, 100L, 100L, null);
     assertEquals(resource.getExtId(), uuid);
-    assertEquals(resource.getStatType(), DownSamplingOperator.AVG);
+    assertEquals(resource.getPowerConsumptionInstantWatt().get(0).getValue(), Long.valueOf("282"));
     //any other assertions if required
   }
 
@@ -182,7 +182,6 @@ public class StatsImplTest extends ClusterServiceImplTest {
     final String selectString = "controllerAvgIoLatencyUsecs,controllerNumReadIops,healthCheckScore";
     ClusterStats resource = clusterService.getClusterStatsInfo(uuid, DownSamplingOperator.AVG, 50, 100L, 100L, selectString);
     assertEquals(resource.getExtId(), uuid);
-    assertEquals(resource.getStatType(), DownSamplingOperator.AVG);
     assertEquals(resource.getHealthCheckScore().size(), 1);
     assertEquals(resource.getControllerAvgIoLatencyUsecs().size(), 1);
     assertEquals(resource.getControllerNumReadIops().size(), 1);
@@ -215,7 +214,6 @@ public class StatsImplTest extends ClusterServiceImplTest {
     final String selectString = "hypervisorCpuUsagePpm,ioBandwidthKbps";
       HostStats resource = clusterService.getHostStatsInfo(StatsTestUtils.CLUSTER_UUID, uuid, DownSamplingOperator.AVG, 50, 100L, 100L, selectString);
     assertEquals(resource.getExtId(), uuid);
-    assertEquals(resource.getStatType(), DownSamplingOperator.AVG);
     assertEquals(resource.getHypervisorCpuUsagePpm().size(), 1);
     assertEquals(resource.getIoBandwidthKbps().size(), 1);
     //any other assertions if required

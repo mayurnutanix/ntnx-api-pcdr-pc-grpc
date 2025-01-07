@@ -58,7 +58,7 @@
   value: 64
 - name: "maxRsyslogServerNameLength"
   value: 64
-- name: "maxSnmpUernameLength"
+- name: "maxSnmpUsernameLength"
   value: 64
 - name: "maxSnmpTrapUsernameLength"
   value: 64
@@ -146,3 +146,11 @@
   value: 0
 - name: "maxGPUMaxResolutionLength"
   value: 16
+- name: "minClusterSizeLength"
+  value: 1
+- name: "maxClusterSizeLength"
+  value: 48
+- name: "maxRebootDescriptionLength"
+  value: 64
+- name: "rebootDescriptionPattern"
+  value: ^[A-Za-z0-9._-]+$

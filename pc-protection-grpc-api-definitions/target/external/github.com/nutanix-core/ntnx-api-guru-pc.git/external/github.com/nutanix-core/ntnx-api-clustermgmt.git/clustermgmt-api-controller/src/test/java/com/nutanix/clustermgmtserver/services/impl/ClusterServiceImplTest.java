@@ -93,7 +93,6 @@ public class ClusterServiceImplTest {
     entityBindings.add(new ClustermgmtConfigOrderByClusterConfigReference());
     entityBindings.add(new ClustermgmtConfigOrderByClusterReference());
     entityBindings.add(new ClustermgmtConfigOrderByClusterNetworkReference());
-    entityBindings.add(new ClustermgmtConfigOrderByControllerVmReference());
     entityBindings.add(new ClustermgmtConfigOrderByHostTypeEnum());
     entityBindings.add(new ClustermgmtConfigOrderByHypervisorReference());
     entityBindings.add(new ClustermgmtConfigOrderByHypervisorType());
@@ -121,7 +120,6 @@ public class ClusterServiceImplTest {
     entityBindings.add(new ClustermgmtConfigSelectClusterNetworkReference());
     entityBindings.add(new ClustermgmtConfigApplyClusterReference());
     entityBindings.add(new ClustermgmtConfigApplyHypervisorReference());
-    entityBindings.add(new ClustermgmtConfigSelectControllerVmReference());
     entityBindings.add(new ClustermgmtConfigSelectEncryptionOptionInfo());
     entityBindings.add(new ClustermgmtConfigSelectEncryptionScopeInfo());
     entityBindings.add(new ClustermgmtConfigSelectEncryptionStatus());
@@ -149,7 +147,6 @@ public class ClusterServiceImplTest {
     entityBindings.add(new ClustermgmtConfigExpandClusterArchReference());
     entityBindings.add(new ClustermgmtConfigExpandClusterConfigReference());
     entityBindings.add(new ClustermgmtConfigExpandClusterNetworkReference());
-    entityBindings.add(new ClustermgmtConfigExpandControllerVmReference());
     entityBindings.add(new ClustermgmtConfigExpandEncryptionStatus());
     entityBindings.add(new ClustermgmtConfigExpandOperationMode());
     entityBindings.add(new ClustermgmtConfigExpandNodeReference());

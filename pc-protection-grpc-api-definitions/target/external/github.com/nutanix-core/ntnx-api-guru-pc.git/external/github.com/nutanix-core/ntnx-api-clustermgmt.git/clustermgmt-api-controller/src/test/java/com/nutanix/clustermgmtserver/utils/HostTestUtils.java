@@ -822,13 +822,13 @@ public class HostTestUtils {
         nameTimeValuePair9 = InsightsInterfaceProto.NameTimeValuePair.newBuilder()
           .setName("device_id")
           .setValue(
-            InsightsInterfaceProto.DataValue.newBuilder().setInt64Value(HOST_VIRTUAL_GPU_DEVICE_ID))
+            InsightsInterfaceProto.DataValue.newBuilder().setStrValue("" + HOST_VIRTUAL_GPU_DEVICE_ID))
           .build();
       } else {
         nameTimeValuePair9 = InsightsInterfaceProto.NameTimeValuePair.newBuilder()
           .setName("device_id")
           .setValue(
-            InsightsInterfaceProto.DataValue.newBuilder().setInt64Value(HOST_PHYSICAL_GPU_DEVICE_ID))
+            InsightsInterfaceProto.DataValue.newBuilder().setStrValue("" + HOST_PHYSICAL_GPU_DEVICE_ID))
           .build();
       }
       InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair10 =
@@ -920,6 +920,12 @@ public class HostTestUtils {
           .setValue(
             InsightsInterfaceProto.DataValue.newBuilder().setStrValue("test_resolution"))
           .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair26 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+          .setName("max_instances_per_vm")
+          .setValue(
+            InsightsInterfaceProto.DataValue.newBuilder().setInt64Value(1L))
+          .build();
 
       InsightsInterfaceProto.Entity entity = InsightsInterfaceProto.Entity.newBuilder()
         .addAttributeDataMap(nameTimeValuePair)
@@ -947,6 +953,7 @@ public class HostTestUtils {
         .addAttributeDataMap(nameTimeValuePair23)
         .addAttributeDataMap(nameTimeValuePair24)
         .addAttributeDataMap(nameTimeValuePair25)
+        .addAttributeDataMap(nameTimeValuePair26)
         .build();
 
       getEntitiesRet.addEntity(entity);
@@ -1091,7 +1098,7 @@ public class HostTestUtils {
         .setName("device_id")
         .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
           .setValue(InsightsInterfaceProto.DataValue.newBuilder()
-            .setInt64Value(HOST_VIRTUAL_GPU_DEVICE_ID)
+            .setStrValue("" + HOST_VIRTUAL_GPU_DEVICE_ID)
             .build())
           .build())
         .build();
@@ -1100,7 +1107,7 @@ public class HostTestUtils {
         .setName("device_id")
         .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
           .setValue(InsightsInterfaceProto.DataValue.newBuilder()
-            .setInt64Value(HOST_PHYSICAL_GPU_DEVICE_ID)
+            .setStrValue("" + HOST_PHYSICAL_GPU_DEVICE_ID)
             .build())
           .build())
         .build();
@@ -1228,6 +1235,15 @@ public class HostTestUtils {
             .build())
           .build())
         .build();
+    InsightsInterfaceProto.MetricData metric26 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("max_instances_per_vm")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setInt64Value(1L)
+            .build())
+          .build())
+        .build();
 
     InsightsInterfaceProto.QueryGroupResult.Builder queryGroupResult =
       InsightsInterfaceProto.QueryGroupResult.newBuilder().setTotalEntityCount(2);
@@ -1262,7 +1278,9 @@ public class HostTestUtils {
         .addMetricDataList(metric22)
         .addMetricDataList(metric23)
         .addMetricDataList(metric24)
-        .addMetricDataList(metric25).build();
+        .addMetricDataList(metric25)
+        .addMetricDataList(metric26)
+        .build();
     queryGroupResult.addRawResults(entityWithMetric);
     queryGroupResult.addRawResults(entityWithMetric);
 
@@ -1283,6 +1301,8 @@ public class HostTestUtils {
   public static InsightsInterfaceProto.GetEntitiesRet getHostNicIdfEntityObj(String hostUuid, String... hostNicUuids){
     List<String> ipAddressList = new ArrayList<>();
     ipAddressList.add("fe80::225:90ff:fecb:3a2c");
+    List<String> supportedCapabilitiesList = new ArrayList<>();
+    supportedCapabilitiesList.add("test_supported_capabilities");
 
     InsightsInterfaceProto.GetEntitiesRet.Builder getEntitiesRet = InsightsInterfaceProto.GetEntitiesRet.newBuilder();
 
@@ -1383,6 +1403,42 @@ public class HostTestUtils {
           .setName("rx_ring_size")
           .setValue(InsightsInterfaceProto.DataValue.newBuilder().setInt64Value(10))
           .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair22 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+          .setName("cluster_uuid")
+          .setValue(
+            InsightsInterfaceProto.DataValue.newBuilder().setStrValue(HostTestUtils.CLUSTER_UUID))
+          .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair23 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+        .setName("nic_profile_id")
+        .setValue(
+          InsightsInterfaceProto.DataValue.newBuilder().setStrValue("test_nic_profile_id"))
+        .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair24 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+        .setName("link_capacity")
+        .setValue(InsightsInterfaceProto.DataValue.newBuilder().setInt64Value(10))
+        .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair25 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+        .setName("supported_capabilities")
+        .setValue(
+          InsightsInterfaceProto.DataValue.newBuilder().setStrList(
+            InsightsInterfaceProto.DataValue.StrList.newBuilder().addAllValueList(supportedCapabilitiesList)))
+        .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair26 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+        .setName("driver_version")
+        .setValue(
+          InsightsInterfaceProto.DataValue.newBuilder().setStrValue("test_driver_version"))
+        .build();
+      InsightsInterfaceProto.NameTimeValuePair nameTimeValuePair27 =
+        InsightsInterfaceProto.NameTimeValuePair.newBuilder()
+        .setName("firmware_version")
+        .setValue(
+          InsightsInterfaceProto.DataValue.newBuilder().setStrValue("test_firmware_version"))
+        .build();
 
       InsightsInterfaceProto.Entity entity = InsightsInterfaceProto.Entity.newBuilder()
         .addAttributeDataMap(nameTimeValuePair1)
@@ -1404,6 +1460,12 @@ public class HostTestUtils {
         .addAttributeDataMap(nameTimeValuePair19)
         .addAttributeDataMap(nameTimeValuePair20)
         .addAttributeDataMap(nameTimeValuePair21)
+        .addAttributeDataMap(nameTimeValuePair22)
+        .addAttributeDataMap(nameTimeValuePair23)
+        .addAttributeDataMap(nameTimeValuePair24)
+        .addAttributeDataMap(nameTimeValuePair25)
+        .addAttributeDataMap(nameTimeValuePair26)
+        .addAttributeDataMap(nameTimeValuePair27)
         .build();
 
       getEntitiesRet.addEntity(entity);
@@ -1414,6 +1476,8 @@ public class HostTestUtils {
   public static InsightsInterfaceProto.GetEntitiesWithMetricsRet getHostNicIdfEntityMetricObj(String hostUuid) {
     List<String> ipAddressList = new ArrayList<>();
     ipAddressList.add("fe80::225:90ff:fecb:3a2c");
+    List<String> supportedCapabilitiesList = new ArrayList<>();
+    supportedCapabilitiesList.add("test_supported_capabilities");
 
     InsightsInterfaceProto.MetricData metric1 =
       InsightsInterfaceProto.MetricData.newBuilder()
@@ -1586,6 +1650,60 @@ public class HostTestUtils {
             .build())
           .build())
         .build();
+    InsightsInterfaceProto.MetricData metric22 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("cluster_uuid")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setStrValue(HostTestUtils.CLUSTER_UUID)
+            .build())
+          .build())
+        .build();
+    InsightsInterfaceProto.MetricData metric23 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("nic_profile_id")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setStrValue("test_nic_profile_id")
+            .build())
+          .build())
+        .build();
+    InsightsInterfaceProto.MetricData metric24 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("link_capacity")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setInt64Value(10)
+            .build())
+          .build())
+        .build();
+    InsightsInterfaceProto.MetricData metric25 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("supported_capabilities")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setStrList(InsightsInterfaceProto.DataValue.StrList.newBuilder().addAllValueList(supportedCapabilitiesList))
+            .build())
+          .build())
+        .build();
+    InsightsInterfaceProto.MetricData metric26 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("driver_version")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setStrValue("test_driver_version")
+            .build())
+          .build())
+        .build();
+    InsightsInterfaceProto.MetricData metric27 =
+      InsightsInterfaceProto.MetricData.newBuilder()
+        .setName("firmware_version")
+        .addValueList(InsightsInterfaceProto.TimeValuePair.newBuilder()
+          .setValue(InsightsInterfaceProto.DataValue.newBuilder()
+            .setStrValue("test_firmware_version")
+            .build())
+          .build())
+        .build();
     return InsightsInterfaceProto.GetEntitiesWithMetricsRet.newBuilder().setTotalGroupCount(2)
       .addGroupResultsList(InsightsInterfaceProto.QueryGroupResult.newBuilder().
         addRawResults(InsightsInterfaceProto.EntityWithMetric.newBuilder()
@@ -1616,6 +1734,12 @@ public class HostTestUtils {
             .addMetricDataList(metric19)
             .addMetricDataList(metric20)
             .addMetricDataList(metric21)
+            .addMetricDataList(metric22)
+            .addMetricDataList(metric23)
+            .addMetricDataList(metric24)
+            .addMetricDataList(metric25)
+            .addMetricDataList(metric26)
+            .addMetricDataList(metric27)
         ).build()).build();
   }
 

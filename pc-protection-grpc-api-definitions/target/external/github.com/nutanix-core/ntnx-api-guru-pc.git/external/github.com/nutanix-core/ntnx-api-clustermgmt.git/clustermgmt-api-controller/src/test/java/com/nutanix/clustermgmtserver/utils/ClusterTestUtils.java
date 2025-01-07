@@ -1352,7 +1352,7 @@ public class ClusterTestUtils {
   public static ErgonInterface.TaskGetRet getTaskRet() {
     ErgonTypes.KeyValue keyValue = ErgonTypes.KeyValue.newBuilder()
       .setKey("search_type")
-      .setStrData(SearchType.UNCONFIGURED_NODES.fromEnum()).build();
+      .setStrData(TaskResponseType.UNCONFIGURED_NODES.fromEnum()).build();
     ErgonTypes.Task task = ErgonTypes.Task.newBuilder().
       setLogicalTimestamp(1L)
       .addSubtaskUuidList(UuidUtils.getByteStringFromUUID(CHILD_TASK_UUID))
@@ -1363,9 +1363,9 @@ public class ClusterTestUtils {
     return taskCreateRet;
   }
 
-  public static ErgonInterface.TaskGetRet getSearchRet(SearchType searchType){
+  public static ErgonInterface.TaskGetRet getSearchRet(TaskResponseType taskResponseType){
     String jsonString = null;
-    switch (searchType) {
+    switch (taskResponseType) {
       case UNCONFIGURED_NODES:
         jsonString = "{\"discovered_nodes\": [{\"foundation_version\": \"foundation-4.5.4.2-94510908\", \"rackable_unit_serial\": \"15SM13430121\", \"node_uuid\": \"b62a7103-77c7-4f53-a863-f443d3e27f5e\", \"rackable_unit_max_nodes\": 4, \"current_network_interface\": \"eth0\", \"node_position\": \"D\", \"ip\": \"10.40.145.104\", \"svm_ip\": \"10.40.145.104\", \"current_cvm_vlan_tag\": null, \"is_secure_booted\": false, \"nos_version\": \"5.18.1.2\", \"cluster_id\": \"\", \"cpu_type\": [\"Intel\", \"62\"], \"hypervisor\": \"kvm\", \"hypervisor_version\": \"el7.nutanix.20201105.1001814\", \"attributes\": {\"lcm_family\": \"smc_gen_9\", \"maybe_1GbE_only\": true, \"is_model_supported\": true, \"robo_mixed_hypervisor\": true}, \"rackable_unit_model\": \"NX-1065S\", \"arch\": \"x86_64\", \"cvm_ipv6\": \"10.40.145.104\", \"hypervisor_ip\": \"10.40.145.104\", \"hypervisor_ipv6\": \"10.40.145.104\", \"ipmi_ip\": \"10.40.145.104\", \"ipmi_ipv6\": \"10.40.145.104\"}]}";
         break;
@@ -1382,7 +1382,7 @@ public class ClusterTestUtils {
     }
     ErgonTypes.KeyValue keyValue = ErgonTypes.KeyValue.newBuilder()
       .setKey("search_type")
-      .setStrData(searchType.fromEnum()).build();
+      .setStrData(taskResponseType.fromEnum()).build();
     try {
       JsonNode jsonObject = JsonUtils.getObjectMapper().readTree(jsonString);
       ErgonTypes.PayloadOrEmbeddedValue payloadOrEmbeddedValue = ErgonTypes.PayloadOrEmbeddedValue.newBuilder().
@@ -1401,9 +1401,9 @@ public class ClusterTestUtils {
     }
   }
 
-  public static ErgonInterface.TaskGetRet getSearchRetWithEmptyResponse(SearchType searchType) {
+  public static ErgonInterface.TaskGetRet getSearchRetWithEmptyResponse(TaskResponseType taskResponseType) {
     String jsonString = null;
-    switch (searchType) {
+    switch (taskResponseType) {
       case UNCONFIGURED_NODES:
         jsonString = "{\"discovered_nodes\": [{\"attributes\": {}}]}";
         break;
@@ -1419,7 +1419,7 @@ public class ClusterTestUtils {
     try {
       ErgonTypes.KeyValue keyValue = ErgonTypes.KeyValue.newBuilder()
         .setKey("search_type")
-        .setStrData(searchType.fromEnum()).build();
+        .setStrData(taskResponseType.fromEnum()).build();
       JsonNode jsonObject = JsonUtils.getObjectMapper().readTree(jsonString);
       ErgonTypes.PayloadOrEmbeddedValue payloadOrEmbeddedValue = ErgonTypes.PayloadOrEmbeddedValue.newBuilder().
         setEmbedded(ByteString.copyFromUtf8(jsonObject.toString())).build();
@@ -2702,5 +2702,42 @@ public class ClusterTestUtils {
   public static InsightsInterfaceProto.GetEntitiesWithMetricsRet getNonMigratableVmsResultWithMetricRetWithNoEntity(){
     InsightsInterfaceProto.GetEntitiesWithMetricsRet.Builder getEntitiesWithMetricRet = InsightsInterfaceProto.GetEntitiesWithMetricsRet.newBuilder();
     return getEntitiesWithMetricRet.build();
+  }
+
+  public static Cluster getClusterCreateParamsWithNameServerFqdn(){
+    Cluster clusterCreateParams = new Cluster();
+    clusterCreateParams.setName(CLUSTER_NAME);
+    ClusterConfigReference config = new ClusterConfigReference();
+    List<ClusterFunctionRef> clusterFunctionRefList = new ArrayList<>();
+    clusterFunctionRefList.add(ClusterFunctionRef.TWO_NODE);
+    config.setClusterFunction(clusterFunctionRefList);
+    FaultToleranceState faultToleranceState = new FaultToleranceState();
+    faultToleranceState.setDomainAwarenessLevel(DomainAwarenessLevel.RACK);
+    faultToleranceState.setDesiredClusterFaultTolerance(ClusterFaultToleranceRef.CFT_1N_OR_1D);
+    config.setFaultToleranceState(faultToleranceState);
+    config.setRedundancyFactor(2L);
+    clusterCreateParams.setConfig(config);
+    List<NodeListItemReference> nodeList = new ArrayList<>();
+    NodeListItemReference nodeItem = new NodeListItemReference();
+    IPAddress controllerVmIp = new IPAddress();
+    IPv4Address address = new IPv4Address("10.15.99.5", 32);
+    controllerVmIp.setIpv4(address);
+    nodeItem.setControllerVmIp(controllerVmIp);
+    nodeList.add(nodeItem);
+    NodeReference nodes = new NodeReference();
+    nodes.setNodeList(nodeList);
+    clusterCreateParams.setNodes(nodes);
+    List<IPAddressOrFQDN> ipAddressOrFQDNList = new ArrayList<>();
+    IPAddressOrFQDN obj = new IPAddressOrFQDN();
+    FQDN fqdn1 = new FQDN("phxitcorpdcprd1.corp.nutanix.com");
+    obj.setFqdn(fqdn1);
+    ipAddressOrFQDNList.add(obj);
+    IPAddressOrFQDN obj1 = new IPAddressOrFQDN();
+    obj1.setIpv4(ClustermgmtUtils.createIpv4Address("10.15.99.5"));
+    ipAddressOrFQDNList.add(obj1);
+    ClusterNetworkReference clusterNetworkReference = new ClusterNetworkReference();
+    clusterNetworkReference.setNameServerIpList(ipAddressOrFQDNList);
+    clusterCreateParams.setNetwork(clusterNetworkReference);
+    return clusterCreateParams;
   }
 }

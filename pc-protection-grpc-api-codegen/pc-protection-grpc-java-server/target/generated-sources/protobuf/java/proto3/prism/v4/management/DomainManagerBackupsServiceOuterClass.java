@@ -15,80 +15,80 @@ public final class DomainManagerBackupsServiceOuterClass {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_CreateBackupTargetArg_descriptor;
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Arg_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_CreateBackupTargetArg_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_CreateBackupTarget1Arg_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_CreateBackupTargetRet_descriptor;
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_CreateBackupTargetRet_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_CreateBackupTargetRet_ReservedEntry_descriptor;
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_ReservedEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_CreateBackupTargetRet_ReservedEntry_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_ReservedEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdArg_descriptor;
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Arg_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdArg_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Arg_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_descriptor;
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_ReservedEntry_descriptor;
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_ReservedEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_ReservedEntry_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_ReservedEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdArg_descriptor;
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Arg_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_GetBackupTargetByIdArg_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_GetBackupTargetById1Arg_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_descriptor;
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_ReservedEntry_descriptor;
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_ReservedEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_ReservedEntry_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_ReservedEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_ListBackupTargetsArg_descriptor;
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Arg_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_ListBackupTargetsArg_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_ListBackupTargets1Arg_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_ListBackupTargetsRet_descriptor;
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_ListBackupTargetsRet_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_ListBackupTargetsRet_ReservedEntry_descriptor;
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_ReservedEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_ListBackupTargetsRet_ReservedEntry_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_ReservedEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdArg_descriptor;
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Arg_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdArg_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Arg_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_descriptor;
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_ReservedEntry_descriptor;
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_ReservedEntry_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_ReservedEntry_fieldAccessorTable;
+      internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_ReservedEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -103,78 +103,79 @@ public final class DomainManagerBackupsServiceOuterClass {
       ".management\032!proto3/prism/v4/api_version" +
       ".proto\032)proto3/prism/v4/http_method_opti" +
       "ons.proto\032+proto3/prism/v4/management/ma" +
-      "nagement.proto\"r\n\025CreateBackupTargetArg\022" +
-      "\037\n\025domain_manager_ext_id\030\231\362\001 \001(\t\0228\n\004body" +
-      "\030\232\362\001 \001(\0132(.proto3.prism.v4.management.Ba" +
-      "ckupTarget\"\351\001\n\025CreateBackupTargetRet\022K\n\007" +
-      "content\030\347\007 \001(\01329.proto3.prism.v4.managem" +
-      "ent.CreateBackupTargetApiResponse\022R\n\010res" +
-      "erved\030\350\007 \003(\0132?.proto3.prism.v4.managemen" +
-      "t.CreateBackupTargetRet.ReservedEntry\032/\n" +
-      "\rReservedEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001" +
-      "(\t:\0028\001\"N\n\031DeleteBackupTargetByIdArg\022\037\n\025d" +
-      "omain_manager_ext_id\030\231\362\001 \001(\t\022\020\n\006ext_id\030\232" +
-      "\362\001 \001(\t\"\361\001\n\031DeleteBackupTargetByIdRet\022K\n\007" +
-      "content\030\347\007 \001(\01329.proto3.prism.v4.managem" +
-      "ent.DeleteBackupTargetApiResponse\022V\n\010res" +
-      "erved\030\350\007 \003(\0132C.proto3.prism.v4.managemen" +
-      "t.DeleteBackupTargetByIdRet.ReservedEntr" +
+      "nagement.proto\"s\n\026CreateBackupTarget1Arg" +
+      "\022\037\n\025domain_manager_ext_id\030\231\362\001 \001(\t\0228\n\004bod" +
+      "y\030\232\362\001 \001(\0132(.proto3.prism.v4.management.B" +
+      "ackupTarget\"\353\001\n\026CreateBackupTarget1Ret\022K" +
+      "\n\007content\030\347\007 \001(\01329.proto3.prism.v4.manag" +
+      "ement.CreateBackupTargetApiResponse\022S\n\010r" +
+      "eserved\030\350\007 \003(\0132@.proto3.prism.v4.managem" +
+      "ent.CreateBackupTarget1Ret.ReservedEntry" +
+      "\032/\n\rReservedEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030" +
+      "\002 \001(\t:\0028\001\"O\n\032DeleteBackupTargetById1Arg\022" +
+      "\037\n\025domain_manager_ext_id\030\231\362\001 \001(\t\022\020\n\006ext_" +
+      "id\030\232\362\001 \001(\t\"\363\001\n\032DeleteBackupTargetById1Re" +
+      "t\022K\n\007content\030\347\007 \001(\01329.proto3.prism.v4.ma" +
+      "nagement.DeleteBackupTargetApiResponse\022W" +
+      "\n\010reserved\030\350\007 \003(\0132D.proto3.prism.v4.mana" +
+      "gement.DeleteBackupTargetById1Ret.Reserv" +
+      "edEntry\032/\n\rReservedEntry\022\013\n\003key\030\001 \001(\t\022\r\n" +
+      "\005value\030\002 \001(\t:\0028\001\"L\n\027GetBackupTargetById1" +
+      "Arg\022\037\n\025domain_manager_ext_id\030\231\362\001 \001(\t\022\020\n\006" +
+      "ext_id\030\232\362\001 \001(\t\"\352\001\n\027GetBackupTargetById1R" +
+      "et\022H\n\007content\030\347\007 \001(\01326.proto3.prism.v4.m" +
+      "anagement.GetBackupTargetApiResponse\022T\n\010" +
+      "reserved\030\350\007 \003(\0132A.proto3.prism.v4.manage" +
+      "ment.GetBackupTargetById1Ret.ReservedEnt" +
+      "ry\032/\n\rReservedEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005valu" +
+      "e\030\002 \001(\t:\0028\001\"8\n\025ListBackupTargets1Arg\022\037\n\025" +
+      "domain_manager_ext_id\030\231\362\001 \001(\t\"\350\001\n\025ListBa" +
+      "ckupTargets1Ret\022J\n\007content\030\347\007 \001(\01328.prot" +
+      "o3.prism.v4.management.ListBackupTargets" +
+      "ApiResponse\022R\n\010reserved\030\350\007 \003(\0132?.proto3." +
+      "prism.v4.management.ListBackupTargets1Re" +
+      "t.ReservedEntry\032/\n\rReservedEntry\022\013\n\003key\030" +
+      "\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\211\001\n\032UpdateBacku" +
+      "pTargetById1Arg\022\037\n\025domain_manager_ext_id" +
+      "\030\231\362\001 \001(\t\022\020\n\006ext_id\030\232\362\001 \001(\t\0228\n\004body\030\233\362\001 \001" +
+      "(\0132(.proto3.prism.v4.management.BackupTa" +
+      "rget\"\363\001\n\032UpdateBackupTargetById1Ret\022K\n\007c" +
+      "ontent\030\347\007 \001(\01329.proto3.prism.v4.manageme" +
+      "nt.UpdateBackupTargetApiResponse\022W\n\010rese" +
+      "rved\030\350\007 \003(\0132D.proto3.prism.v4.management" +
+      ".UpdateBackupTargetById1Ret.ReservedEntr" +
       "y\032/\n\rReservedEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value" +
-      "\030\002 \001(\t:\0028\001\"K\n\026GetBackupTargetByIdArg\022\037\n\025" +
-      "domain_manager_ext_id\030\231\362\001 \001(\t\022\020\n\006ext_id\030" +
-      "\232\362\001 \001(\t\"\350\001\n\026GetBackupTargetByIdRet\022H\n\007co" +
-      "ntent\030\347\007 \001(\01326.proto3.prism.v4.managemen" +
-      "t.GetBackupTargetApiResponse\022S\n\010reserved" +
-      "\030\350\007 \003(\0132@.proto3.prism.v4.management.Get" +
-      "BackupTargetByIdRet.ReservedEntry\032/\n\rRes" +
-      "ervedEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\002" +
-      "8\001\"7\n\024ListBackupTargetsArg\022\037\n\025domain_man" +
-      "ager_ext_id\030\231\362\001 \001(\t\"\346\001\n\024ListBackupTarget" +
-      "sRet\022J\n\007content\030\347\007 \001(\01328.proto3.prism.v4" +
-      ".management.ListBackupTargetsApiResponse" +
-      "\022Q\n\010reserved\030\350\007 \003(\0132>.proto3.prism.v4.ma" +
-      "nagement.ListBackupTargetsRet.ReservedEn" +
-      "try\032/\n\rReservedEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
-      "ue\030\002 \001(\t:\0028\001\"\210\001\n\031UpdateBackupTargetByIdA" +
-      "rg\022\037\n\025domain_manager_ext_id\030\231\362\001 \001(\t\022\020\n\006e" +
-      "xt_id\030\232\362\001 \001(\t\0228\n\004body\030\233\362\001 \001(\0132(.proto3.p" +
-      "rism.v4.management.BackupTarget\"\361\001\n\031Upda" +
-      "teBackupTargetByIdRet\022K\n\007content\030\347\007 \001(\0132" +
-      "9.proto3.prism.v4.management.UpdateBacku" +
-      "pTargetApiResponse\022V\n\010reserved\030\350\007 \003(\0132C." +
-      "proto3.prism.v4.management.UpdateBackupT" +
-      "argetByIdRet.ReservedEntry\032/\n\rReservedEn" +
-      "try\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\0012\332\010\n\033" +
-      "DomainManagerBackupsService\022\311\001\n\022createBa" +
-      "ckupTarget\0221.proto3.prism.v4.management." +
-      "CreateBackupTargetArg\0321.proto3.prism.v4." +
-      "management.CreateBackupTargetRet\"M\302>J\nH/" +
-      "prism/v4/management/domain-managers/{dom" +
-      "ainManagerExtId}/backup-targets\022\335\001\n\026dele" +
-      "teBackupTargetById\0225.proto3.prism.v4.man" +
-      "agement.DeleteBackupTargetByIdArg\0325.prot" +
-      "o3.prism.v4.management.DeleteBackupTarge" +
-      "tByIdRet\"U\302>R\"P/prism/v4/management/doma" +
-      "in-managers/{domainManagerExtId}/backup-" +
-      "targets/{extId}\022\324\001\n\023getBackupTargetById\022" +
-      "2.proto3.prism.v4.management.GetBackupTa" +
-      "rgetByIdArg\0322.proto3.prism.v4.management" +
-      ".GetBackupTargetByIdRet\"U\302>R*P/prism/v4/" +
-      "management/domain-managers/{domainManage" +
-      "rExtId}/backup-targets/{extId}\022\306\001\n\021listB" +
-      "ackupTargets\0220.proto3.prism.v4.managemen" +
-      "t.ListBackupTargetsArg\0320.proto3.prism.v4" +
-      ".management.ListBackupTargetsRet\"M\302>J*H/" +
-      "prism/v4/management/domain-managers/{dom" +
-      "ainManagerExtId}/backup-targets\022\335\001\n\026upda" +
-      "teBackupTargetById\0225.proto3.prism.v4.man" +
-      "agement.UpdateBackupTargetByIdArg\0325.prot" +
-      "o3.prism.v4.management.UpdateBackupTarge" +
-      "tByIdRet\"U\302>R\032P/prism/v4/management/doma" +
-      "in-managers/{domainManagerExtId}/backup-" +
-      "targets/{extId}\032\017\202}\014\n\0014\022\0010\032\001b\"\0011B:\n\032prot" +
-      "o3.prism.v4.managementP\001Z\032proto3/prism/v" +
-      "4/managementb\006proto3"
+      "\030\002 \001(\t:\0028\0012\367\010\n\033DomainManagerBackupsServi" +
+      "ce\022\320\001\n\023createBackupTarget1\0222.proto3.pris" +
+      "m.v4.management.CreateBackupTarget1Arg\0322" +
+      ".proto3.prism.v4.management.CreateBackup" +
+      "Target1Ret\"Q\302>N\nL/prism/v4/management/do" +
+      "main-managers/{domainManagerExtId}/backu" +
+      "p-targets-new\022\344\001\n\027deleteBackupTargetById" +
+      "1\0226.proto3.prism.v4.management.DeleteBac" +
+      "kupTargetById1Arg\0326.proto3.prism.v4.mana" +
+      "gement.DeleteBackupTargetById1Ret\"Y\302>V\"T" +
+      "/prism/v4/management/domain-managers/{do" +
+      "mainManagerExtId}/backup-targets-new/{ex" +
+      "tId}\022\333\001\n\024getBackupTargetById1\0223.proto3.p" +
+      "rism.v4.management.GetBackupTargetById1A" +
+      "rg\0323.proto3.prism.v4.management.GetBacku" +
+      "pTargetById1Ret\"Y\302>V*T/prism/v4/manageme" +
+      "nt/domain-managers/{domainManagerExtId}/" +
+      "backup-targets-new/{extId}\022\315\001\n\022listBacku" +
+      "pTargets1\0221.proto3.prism.v4.management.L" +
+      "istBackupTargets1Arg\0321.proto3.prism.v4.m" +
+      "anagement.ListBackupTargets1Ret\"Q\302>N*L/p" +
+      "rism/v4/management/domain-managers/{doma" +
+      "inManagerExtId}/backup-targets-new\022\344\001\n\027u" +
+      "pdateBackupTargetById1\0226.proto3.prism.v4" +
+      ".management.UpdateBackupTargetById1Arg\0326" +
+      ".proto3.prism.v4.management.UpdateBackup" +
+      "TargetById1Ret\"Y\302>V\032T/prism/v4/managemen" +
+      "t/domain-managers/{domainManagerExtId}/b" +
+      "ackup-targets-new/{extId}\032\t\202}\006\n\0014\022\0010B:\n\032" +
+      "proto3.prism.v4.managementP\001Z\032proto3/pri" +
+      "sm/v4/managementb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -183,95 +184,95 @@ public final class DomainManagerBackupsServiceOuterClass {
           proto3.prism.v4.HttpMethodOptionsOuterClass.getDescriptor(),
           proto3.prism.v4.management.Management.getDescriptor(),
         });
-    internal_static_proto3_prism_v4_management_CreateBackupTargetArg_descriptor =
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Arg_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_proto3_prism_v4_management_CreateBackupTargetArg_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Arg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_CreateBackupTargetArg_descriptor,
+        internal_static_proto3_prism_v4_management_CreateBackupTarget1Arg_descriptor,
         new java.lang.String[] { "DomainManagerExtId", "Body", });
-    internal_static_proto3_prism_v4_management_CreateBackupTargetRet_descriptor =
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_proto3_prism_v4_management_CreateBackupTargetRet_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_CreateBackupTargetRet_descriptor,
+        internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_descriptor,
         new java.lang.String[] { "Content", "Reserved", });
-    internal_static_proto3_prism_v4_management_CreateBackupTargetRet_ReservedEntry_descriptor =
-      internal_static_proto3_prism_v4_management_CreateBackupTargetRet_descriptor.getNestedTypes().get(0);
-    internal_static_proto3_prism_v4_management_CreateBackupTargetRet_ReservedEntry_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_ReservedEntry_descriptor =
+      internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_descriptor.getNestedTypes().get(0);
+    internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_ReservedEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_CreateBackupTargetRet_ReservedEntry_descriptor,
+        internal_static_proto3_prism_v4_management_CreateBackupTarget1Ret_ReservedEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdArg_descriptor =
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Arg_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdArg_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Arg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdArg_descriptor,
+        internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Arg_descriptor,
         new java.lang.String[] { "DomainManagerExtId", "ExtId", });
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_descriptor =
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_descriptor,
+        internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_descriptor,
         new java.lang.String[] { "Content", "Reserved", });
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_ReservedEntry_descriptor =
-      internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_descriptor.getNestedTypes().get(0);
-    internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_ReservedEntry_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_ReservedEntry_descriptor =
+      internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_descriptor.getNestedTypes().get(0);
+    internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_ReservedEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_DeleteBackupTargetByIdRet_ReservedEntry_descriptor,
+        internal_static_proto3_prism_v4_management_DeleteBackupTargetById1Ret_ReservedEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdArg_descriptor =
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Arg_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdArg_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Arg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_GetBackupTargetByIdArg_descriptor,
+        internal_static_proto3_prism_v4_management_GetBackupTargetById1Arg_descriptor,
         new java.lang.String[] { "DomainManagerExtId", "ExtId", });
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_descriptor =
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_descriptor,
+        internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_descriptor,
         new java.lang.String[] { "Content", "Reserved", });
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_ReservedEntry_descriptor =
-      internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_descriptor.getNestedTypes().get(0);
-    internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_ReservedEntry_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_ReservedEntry_descriptor =
+      internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_descriptor.getNestedTypes().get(0);
+    internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_ReservedEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_GetBackupTargetByIdRet_ReservedEntry_descriptor,
+        internal_static_proto3_prism_v4_management_GetBackupTargetById1Ret_ReservedEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_proto3_prism_v4_management_ListBackupTargetsArg_descriptor =
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Arg_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_proto3_prism_v4_management_ListBackupTargetsArg_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Arg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_ListBackupTargetsArg_descriptor,
+        internal_static_proto3_prism_v4_management_ListBackupTargets1Arg_descriptor,
         new java.lang.String[] { "DomainManagerExtId", });
-    internal_static_proto3_prism_v4_management_ListBackupTargetsRet_descriptor =
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_descriptor =
       getDescriptor().getMessageTypes().get(7);
-    internal_static_proto3_prism_v4_management_ListBackupTargetsRet_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_ListBackupTargetsRet_descriptor,
+        internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_descriptor,
         new java.lang.String[] { "Content", "Reserved", });
-    internal_static_proto3_prism_v4_management_ListBackupTargetsRet_ReservedEntry_descriptor =
-      internal_static_proto3_prism_v4_management_ListBackupTargetsRet_descriptor.getNestedTypes().get(0);
-    internal_static_proto3_prism_v4_management_ListBackupTargetsRet_ReservedEntry_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_ReservedEntry_descriptor =
+      internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_descriptor.getNestedTypes().get(0);
+    internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_ReservedEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_ListBackupTargetsRet_ReservedEntry_descriptor,
+        internal_static_proto3_prism_v4_management_ListBackupTargets1Ret_ReservedEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdArg_descriptor =
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Arg_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdArg_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Arg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdArg_descriptor,
+        internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Arg_descriptor,
         new java.lang.String[] { "DomainManagerExtId", "ExtId", "Body", });
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_descriptor =
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_descriptor,
+        internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_descriptor,
         new java.lang.String[] { "Content", "Reserved", });
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_ReservedEntry_descriptor =
-      internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_descriptor.getNestedTypes().get(0);
-    internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_ReservedEntry_fieldAccessorTable = new
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_ReservedEntry_descriptor =
+      internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_descriptor.getNestedTypes().get(0);
+    internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_ReservedEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_proto3_prism_v4_management_UpdateBackupTargetByIdRet_ReservedEntry_descriptor,
+        internal_static_proto3_prism_v4_management_UpdateBackupTargetById1Ret_ReservedEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();

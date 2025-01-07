@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -68,11 +68,11 @@ public class S3Config implements java.io.Serializable, PriObjectTypeTypedObject 
 
 
   protected String initialize$fv() {
-    return "v4.r0.b1";
+    return "v4.r0";
   }
 
   @JsonAnySetter
-  private void setUndeserializedFields(String name, String value) {
+  private void setUndeserializedFields(String name, Object value) {
     $unknownFields.put(name, value);
   }
 
@@ -82,7 +82,7 @@ public class S3Config implements java.io.Serializable, PriObjectTypeTypedObject 
   
     /**
     * The bucket name of the object store endpoint where backup data of domain manager
-is stored.
+is to be stored.
 
     */
     @javax.validation.constraints.Size(min = 3, max = 63)

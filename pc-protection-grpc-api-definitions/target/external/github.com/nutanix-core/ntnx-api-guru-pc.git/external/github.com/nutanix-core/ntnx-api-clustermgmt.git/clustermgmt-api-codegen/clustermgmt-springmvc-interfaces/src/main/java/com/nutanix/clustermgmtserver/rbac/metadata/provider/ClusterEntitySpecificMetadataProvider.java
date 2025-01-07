@@ -1,5 +1,6 @@
 package com.nutanix.clustermgmtserver.rbac.metadata.provider;
 
+import com.nutanix.api.utils.exceptions.PlatformResponseException.RbacAuthorizationException;
 import com.nutanix.clustermgmtserver.utils.rbac.ClustermgmtEntityDbQueryUtil;
 import com.nutanix.insights.ifc.InsightsInterfaceProto;
 import com.nutanix.prism.adapter.service.ApplianceConfiguration;
@@ -9,6 +10,7 @@ import com.nutanix.prism.rbac.RbacConstants;
 import com.nutanix.prism.rbac.util.RbacUrlUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -29,16 +31,18 @@ public class ClusterEntitySpecificMetadataProvider implements MetadataContextPro
     Map<String, Object> map = new HashMap<>();
 
     if (metadataArguments == null) {
-      log.warn("Null instance of MetadataArguments in 'getMetadata'");
-      return map;
+      String errMsg  = "Null instance of MetadataArguments in 'getMetadata'";
+      log.warn(errMsg);
+      throw new RbacAuthorizationException(errMsg, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     String requestUrl = metadataArguments.getRequestUrl();
     List<String> entityUuidList =
       RbacUrlUtil.getEntityUuidsFromUrl(requestUrl);
     if (entityUuidList.isEmpty()) {
-      log.error("Unable to determine the entity uuid from requestUrl {}", requestUrl);
-      return map;
+      String errMsg = String.format("Unable to determine the entity uuid from requestUrl %s", requestUrl);
+      log.error(errMsg);
+      throw new RbacAuthorizationException(errMsg, HttpStatus.BAD_REQUEST);
     }
 
     String entityUuid = entityUuidList.get(0);

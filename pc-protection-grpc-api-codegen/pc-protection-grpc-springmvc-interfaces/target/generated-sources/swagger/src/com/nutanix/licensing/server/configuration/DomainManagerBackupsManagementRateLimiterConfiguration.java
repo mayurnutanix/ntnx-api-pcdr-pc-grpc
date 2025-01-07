@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -28,161 +28,171 @@ public class DomainManagerBackupsManagementRateLimiterConfiguration {
 
 
     /**
-    * Rate limiter configuration for CREATE_BACKUP_TARGET
+    * Rate limiter configuration for CREATE_BACKUP_TARGET1
     */
-    @Bean(name="prism_management_createBackupTarget")
-    public RateLimitOpConfig createBackupTargetRateLimitOpConfig() {
+    @Bean(name="prism_management_createBackupTarget1")
+    public RateLimitOpConfig createBackupTarget1RateLimitOpConfig() {
         RateLimitOpConfig rateLimitOpConfig = new RateLimitOpConfig();
-        rateLimitOpConfig.setName("prism_management_createBackupTarget");
+        rateLimitOpConfig.setName("prism_management_createBackupTarget1");
+        rateLimitOpConfig.setMethod("POST");
+        rateLimitOpConfig.setPath("/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new");
         Map<String, RateLimitConfigMapping> configMapping = new HashMap<>();
 
-        RateLimitConfigMapping createBackupTargetXSmallConfigMapping = new RateLimitConfigMapping();
-        createBackupTargetXSmallConfigMapping.setCount(3);
-        createBackupTargetXSmallConfigMapping.setDuration(1);
-        configMapping.put("XSmall",  createBackupTargetXSmallConfigMapping);
+        RateLimitConfigMapping createBackupTarget1XSmallConfigMapping = new RateLimitConfigMapping();
+        createBackupTarget1XSmallConfigMapping.setCount(3);
+        createBackupTarget1XSmallConfigMapping.setDuration(1);
+        configMapping.put("XSmall",  createBackupTarget1XSmallConfigMapping);
 
-        RateLimitConfigMapping createBackupTargetSmallConfigMapping = new RateLimitConfigMapping();
-        createBackupTargetSmallConfigMapping.setCount(3);
-        createBackupTargetSmallConfigMapping.setDuration(1);
-        configMapping.put("Small",  createBackupTargetSmallConfigMapping);
+        RateLimitConfigMapping createBackupTarget1SmallConfigMapping = new RateLimitConfigMapping();
+        createBackupTarget1SmallConfigMapping.setCount(3);
+        createBackupTarget1SmallConfigMapping.setDuration(1);
+        configMapping.put("Small",  createBackupTarget1SmallConfigMapping);
 
-        RateLimitConfigMapping createBackupTargetLargeConfigMapping = new RateLimitConfigMapping();
-        createBackupTargetLargeConfigMapping.setCount(3);
-        createBackupTargetLargeConfigMapping.setDuration(1);
-        configMapping.put("Large",  createBackupTargetLargeConfigMapping);
+        RateLimitConfigMapping createBackupTarget1LargeConfigMapping = new RateLimitConfigMapping();
+        createBackupTarget1LargeConfigMapping.setCount(3);
+        createBackupTarget1LargeConfigMapping.setDuration(1);
+        configMapping.put("Large",  createBackupTarget1LargeConfigMapping);
 
-        RateLimitConfigMapping createBackupTargetXLargeConfigMapping = new RateLimitConfigMapping();
-        createBackupTargetXLargeConfigMapping.setCount(3);
-        createBackupTargetXLargeConfigMapping.setDuration(1);
-        configMapping.put("XLarge",  createBackupTargetXLargeConfigMapping);
+        RateLimitConfigMapping createBackupTarget1XLargeConfigMapping = new RateLimitConfigMapping();
+        createBackupTarget1XLargeConfigMapping.setCount(3);
+        createBackupTarget1XLargeConfigMapping.setDuration(1);
+        configMapping.put("XLarge",  createBackupTarget1XLargeConfigMapping);
 
         rateLimitOpConfig.setSizeConfigMapping(configMapping);
         return rateLimitOpConfig;
     }
     /**
-    * Rate limiter configuration for DELETE_BACKUP_TARGET_BY_ID
+    * Rate limiter configuration for DELETE_BACKUP_TARGET_BY_ID1
     */
-    @Bean(name="prism_management_deleteBackupTargetById")
-    public RateLimitOpConfig deleteBackupTargetByIdRateLimitOpConfig() {
+    @Bean(name="prism_management_deleteBackupTargetById1")
+    public RateLimitOpConfig deleteBackupTargetById1RateLimitOpConfig() {
         RateLimitOpConfig rateLimitOpConfig = new RateLimitOpConfig();
-        rateLimitOpConfig.setName("prism_management_deleteBackupTargetById");
+        rateLimitOpConfig.setName("prism_management_deleteBackupTargetById1");
+        rateLimitOpConfig.setMethod("DELETE");
+        rateLimitOpConfig.setPath("/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}");
         Map<String, RateLimitConfigMapping> configMapping = new HashMap<>();
 
-        RateLimitConfigMapping deleteBackupTargetByIdXSmallConfigMapping = new RateLimitConfigMapping();
-        deleteBackupTargetByIdXSmallConfigMapping.setCount(3);
-        deleteBackupTargetByIdXSmallConfigMapping.setDuration(1);
-        configMapping.put("XSmall",  deleteBackupTargetByIdXSmallConfigMapping);
+        RateLimitConfigMapping deleteBackupTargetById1XSmallConfigMapping = new RateLimitConfigMapping();
+        deleteBackupTargetById1XSmallConfigMapping.setCount(3);
+        deleteBackupTargetById1XSmallConfigMapping.setDuration(1);
+        configMapping.put("XSmall",  deleteBackupTargetById1XSmallConfigMapping);
 
-        RateLimitConfigMapping deleteBackupTargetByIdSmallConfigMapping = new RateLimitConfigMapping();
-        deleteBackupTargetByIdSmallConfigMapping.setCount(3);
-        deleteBackupTargetByIdSmallConfigMapping.setDuration(1);
-        configMapping.put("Small",  deleteBackupTargetByIdSmallConfigMapping);
+        RateLimitConfigMapping deleteBackupTargetById1SmallConfigMapping = new RateLimitConfigMapping();
+        deleteBackupTargetById1SmallConfigMapping.setCount(3);
+        deleteBackupTargetById1SmallConfigMapping.setDuration(1);
+        configMapping.put("Small",  deleteBackupTargetById1SmallConfigMapping);
 
-        RateLimitConfigMapping deleteBackupTargetByIdLargeConfigMapping = new RateLimitConfigMapping();
-        deleteBackupTargetByIdLargeConfigMapping.setCount(3);
-        deleteBackupTargetByIdLargeConfigMapping.setDuration(1);
-        configMapping.put("Large",  deleteBackupTargetByIdLargeConfigMapping);
+        RateLimitConfigMapping deleteBackupTargetById1LargeConfigMapping = new RateLimitConfigMapping();
+        deleteBackupTargetById1LargeConfigMapping.setCount(3);
+        deleteBackupTargetById1LargeConfigMapping.setDuration(1);
+        configMapping.put("Large",  deleteBackupTargetById1LargeConfigMapping);
 
-        RateLimitConfigMapping deleteBackupTargetByIdXLargeConfigMapping = new RateLimitConfigMapping();
-        deleteBackupTargetByIdXLargeConfigMapping.setCount(3);
-        deleteBackupTargetByIdXLargeConfigMapping.setDuration(1);
-        configMapping.put("XLarge",  deleteBackupTargetByIdXLargeConfigMapping);
+        RateLimitConfigMapping deleteBackupTargetById1XLargeConfigMapping = new RateLimitConfigMapping();
+        deleteBackupTargetById1XLargeConfigMapping.setCount(3);
+        deleteBackupTargetById1XLargeConfigMapping.setDuration(1);
+        configMapping.put("XLarge",  deleteBackupTargetById1XLargeConfigMapping);
 
         rateLimitOpConfig.setSizeConfigMapping(configMapping);
         return rateLimitOpConfig;
     }
     /**
-    * Rate limiter configuration for GET_BACKUP_TARGET_BY_ID
+    * Rate limiter configuration for GET_BACKUP_TARGET_BY_ID1
     */
-    @Bean(name="prism_management_getBackupTargetById")
-    public RateLimitOpConfig getBackupTargetByIdRateLimitOpConfig() {
+    @Bean(name="prism_management_getBackupTargetById1")
+    public RateLimitOpConfig getBackupTargetById1RateLimitOpConfig() {
         RateLimitOpConfig rateLimitOpConfig = new RateLimitOpConfig();
-        rateLimitOpConfig.setName("prism_management_getBackupTargetById");
+        rateLimitOpConfig.setName("prism_management_getBackupTargetById1");
+        rateLimitOpConfig.setMethod("GET");
+        rateLimitOpConfig.setPath("/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}");
         Map<String, RateLimitConfigMapping> configMapping = new HashMap<>();
 
-        RateLimitConfigMapping getBackupTargetByIdXSmallConfigMapping = new RateLimitConfigMapping();
-        getBackupTargetByIdXSmallConfigMapping.setCount(5);
-        getBackupTargetByIdXSmallConfigMapping.setDuration(1);
-        configMapping.put("XSmall",  getBackupTargetByIdXSmallConfigMapping);
+        RateLimitConfigMapping getBackupTargetById1XSmallConfigMapping = new RateLimitConfigMapping();
+        getBackupTargetById1XSmallConfigMapping.setCount(5);
+        getBackupTargetById1XSmallConfigMapping.setDuration(1);
+        configMapping.put("XSmall",  getBackupTargetById1XSmallConfigMapping);
 
-        RateLimitConfigMapping getBackupTargetByIdSmallConfigMapping = new RateLimitConfigMapping();
-        getBackupTargetByIdSmallConfigMapping.setCount(5);
-        getBackupTargetByIdSmallConfigMapping.setDuration(1);
-        configMapping.put("Small",  getBackupTargetByIdSmallConfigMapping);
+        RateLimitConfigMapping getBackupTargetById1SmallConfigMapping = new RateLimitConfigMapping();
+        getBackupTargetById1SmallConfigMapping.setCount(5);
+        getBackupTargetById1SmallConfigMapping.setDuration(1);
+        configMapping.put("Small",  getBackupTargetById1SmallConfigMapping);
 
-        RateLimitConfigMapping getBackupTargetByIdLargeConfigMapping = new RateLimitConfigMapping();
-        getBackupTargetByIdLargeConfigMapping.setCount(5);
-        getBackupTargetByIdLargeConfigMapping.setDuration(1);
-        configMapping.put("Large",  getBackupTargetByIdLargeConfigMapping);
+        RateLimitConfigMapping getBackupTargetById1LargeConfigMapping = new RateLimitConfigMapping();
+        getBackupTargetById1LargeConfigMapping.setCount(5);
+        getBackupTargetById1LargeConfigMapping.setDuration(1);
+        configMapping.put("Large",  getBackupTargetById1LargeConfigMapping);
 
-        RateLimitConfigMapping getBackupTargetByIdXLargeConfigMapping = new RateLimitConfigMapping();
-        getBackupTargetByIdXLargeConfigMapping.setCount(5);
-        getBackupTargetByIdXLargeConfigMapping.setDuration(1);
-        configMapping.put("XLarge",  getBackupTargetByIdXLargeConfigMapping);
+        RateLimitConfigMapping getBackupTargetById1XLargeConfigMapping = new RateLimitConfigMapping();
+        getBackupTargetById1XLargeConfigMapping.setCount(5);
+        getBackupTargetById1XLargeConfigMapping.setDuration(1);
+        configMapping.put("XLarge",  getBackupTargetById1XLargeConfigMapping);
 
         rateLimitOpConfig.setSizeConfigMapping(configMapping);
         return rateLimitOpConfig;
     }
     /**
-    * Rate limiter configuration for LIST_BACKUP_TARGETS
+    * Rate limiter configuration for LIST_BACKUP_TARGETS1
     */
-    @Bean(name="prism_management_listBackupTargets")
-    public RateLimitOpConfig listBackupTargetsRateLimitOpConfig() {
+    @Bean(name="prism_management_listBackupTargets1")
+    public RateLimitOpConfig listBackupTargets1RateLimitOpConfig() {
         RateLimitOpConfig rateLimitOpConfig = new RateLimitOpConfig();
-        rateLimitOpConfig.setName("prism_management_listBackupTargets");
+        rateLimitOpConfig.setName("prism_management_listBackupTargets1");
+        rateLimitOpConfig.setMethod("GET");
+        rateLimitOpConfig.setPath("/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new");
         Map<String, RateLimitConfigMapping> configMapping = new HashMap<>();
 
-        RateLimitConfigMapping listBackupTargetsXSmallConfigMapping = new RateLimitConfigMapping();
-        listBackupTargetsXSmallConfigMapping.setCount(5);
-        listBackupTargetsXSmallConfigMapping.setDuration(1);
-        configMapping.put("XSmall",  listBackupTargetsXSmallConfigMapping);
+        RateLimitConfigMapping listBackupTargets1XSmallConfigMapping = new RateLimitConfigMapping();
+        listBackupTargets1XSmallConfigMapping.setCount(5);
+        listBackupTargets1XSmallConfigMapping.setDuration(1);
+        configMapping.put("XSmall",  listBackupTargets1XSmallConfigMapping);
 
-        RateLimitConfigMapping listBackupTargetsSmallConfigMapping = new RateLimitConfigMapping();
-        listBackupTargetsSmallConfigMapping.setCount(5);
-        listBackupTargetsSmallConfigMapping.setDuration(1);
-        configMapping.put("Small",  listBackupTargetsSmallConfigMapping);
+        RateLimitConfigMapping listBackupTargets1SmallConfigMapping = new RateLimitConfigMapping();
+        listBackupTargets1SmallConfigMapping.setCount(5);
+        listBackupTargets1SmallConfigMapping.setDuration(1);
+        configMapping.put("Small",  listBackupTargets1SmallConfigMapping);
 
-        RateLimitConfigMapping listBackupTargetsLargeConfigMapping = new RateLimitConfigMapping();
-        listBackupTargetsLargeConfigMapping.setCount(5);
-        listBackupTargetsLargeConfigMapping.setDuration(1);
-        configMapping.put("Large",  listBackupTargetsLargeConfigMapping);
+        RateLimitConfigMapping listBackupTargets1LargeConfigMapping = new RateLimitConfigMapping();
+        listBackupTargets1LargeConfigMapping.setCount(5);
+        listBackupTargets1LargeConfigMapping.setDuration(1);
+        configMapping.put("Large",  listBackupTargets1LargeConfigMapping);
 
-        RateLimitConfigMapping listBackupTargetsXLargeConfigMapping = new RateLimitConfigMapping();
-        listBackupTargetsXLargeConfigMapping.setCount(5);
-        listBackupTargetsXLargeConfigMapping.setDuration(1);
-        configMapping.put("XLarge",  listBackupTargetsXLargeConfigMapping);
+        RateLimitConfigMapping listBackupTargets1XLargeConfigMapping = new RateLimitConfigMapping();
+        listBackupTargets1XLargeConfigMapping.setCount(5);
+        listBackupTargets1XLargeConfigMapping.setDuration(1);
+        configMapping.put("XLarge",  listBackupTargets1XLargeConfigMapping);
 
         rateLimitOpConfig.setSizeConfigMapping(configMapping);
         return rateLimitOpConfig;
     }
     /**
-    * Rate limiter configuration for UPDATE_BACKUP_TARGET_BY_ID
+    * Rate limiter configuration for UPDATE_BACKUP_TARGET_BY_ID1
     */
-    @Bean(name="prism_management_updateBackupTargetById")
-    public RateLimitOpConfig updateBackupTargetByIdRateLimitOpConfig() {
+    @Bean(name="prism_management_updateBackupTargetById1")
+    public RateLimitOpConfig updateBackupTargetById1RateLimitOpConfig() {
         RateLimitOpConfig rateLimitOpConfig = new RateLimitOpConfig();
-        rateLimitOpConfig.setName("prism_management_updateBackupTargetById");
+        rateLimitOpConfig.setName("prism_management_updateBackupTargetById1");
+        rateLimitOpConfig.setMethod("PUT");
+        rateLimitOpConfig.setPath("/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}");
         Map<String, RateLimitConfigMapping> configMapping = new HashMap<>();
 
-        RateLimitConfigMapping updateBackupTargetByIdXSmallConfigMapping = new RateLimitConfigMapping();
-        updateBackupTargetByIdXSmallConfigMapping.setCount(3);
-        updateBackupTargetByIdXSmallConfigMapping.setDuration(1);
-        configMapping.put("XSmall",  updateBackupTargetByIdXSmallConfigMapping);
+        RateLimitConfigMapping updateBackupTargetById1XSmallConfigMapping = new RateLimitConfigMapping();
+        updateBackupTargetById1XSmallConfigMapping.setCount(3);
+        updateBackupTargetById1XSmallConfigMapping.setDuration(1);
+        configMapping.put("XSmall",  updateBackupTargetById1XSmallConfigMapping);
 
-        RateLimitConfigMapping updateBackupTargetByIdSmallConfigMapping = new RateLimitConfigMapping();
-        updateBackupTargetByIdSmallConfigMapping.setCount(3);
-        updateBackupTargetByIdSmallConfigMapping.setDuration(1);
-        configMapping.put("Small",  updateBackupTargetByIdSmallConfigMapping);
+        RateLimitConfigMapping updateBackupTargetById1SmallConfigMapping = new RateLimitConfigMapping();
+        updateBackupTargetById1SmallConfigMapping.setCount(3);
+        updateBackupTargetById1SmallConfigMapping.setDuration(1);
+        configMapping.put("Small",  updateBackupTargetById1SmallConfigMapping);
 
-        RateLimitConfigMapping updateBackupTargetByIdLargeConfigMapping = new RateLimitConfigMapping();
-        updateBackupTargetByIdLargeConfigMapping.setCount(3);
-        updateBackupTargetByIdLargeConfigMapping.setDuration(1);
-        configMapping.put("Large",  updateBackupTargetByIdLargeConfigMapping);
+        RateLimitConfigMapping updateBackupTargetById1LargeConfigMapping = new RateLimitConfigMapping();
+        updateBackupTargetById1LargeConfigMapping.setCount(3);
+        updateBackupTargetById1LargeConfigMapping.setDuration(1);
+        configMapping.put("Large",  updateBackupTargetById1LargeConfigMapping);
 
-        RateLimitConfigMapping updateBackupTargetByIdXLargeConfigMapping = new RateLimitConfigMapping();
-        updateBackupTargetByIdXLargeConfigMapping.setCount(3);
-        updateBackupTargetByIdXLargeConfigMapping.setDuration(1);
-        configMapping.put("XLarge",  updateBackupTargetByIdXLargeConfigMapping);
+        RateLimitConfigMapping updateBackupTargetById1XLargeConfigMapping = new RateLimitConfigMapping();
+        updateBackupTargetById1XLargeConfigMapping.setCount(3);
+        updateBackupTargetById1XLargeConfigMapping.setDuration(1);
+        configMapping.put("XLarge",  updateBackupTargetById1XLargeConfigMapping);
 
         rateLimitOpConfig.setSizeConfigMapping(configMapping);
         return rateLimitOpConfig;

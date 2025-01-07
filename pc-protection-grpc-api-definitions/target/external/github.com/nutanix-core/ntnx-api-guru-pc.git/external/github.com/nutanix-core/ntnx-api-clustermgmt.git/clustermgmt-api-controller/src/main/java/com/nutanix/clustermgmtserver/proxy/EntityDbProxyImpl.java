@@ -89,7 +89,7 @@ public class EntityDbProxyImpl extends ClustermgmtProxy<InsightsRpcSvc.BlockingI
     Supplier<RPCResponse<E>> supplier = CircuitBreaker.decorateSupplier(circuitBreaker, ()-> {
       try {
         return doExecute(rpcName.toString(), rpcArg,
-          getEmptyRpcRequestContext());
+          getEmptyRequestContextForRpc());
       }
       catch(ClustermgmtServiceException e){
         throw new ClustermgmtGenericException(e);

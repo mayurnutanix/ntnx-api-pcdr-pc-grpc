@@ -2,24 +2,34 @@ tags:
   - name: Vm
     x-displayName: VMs
     description: >
-      APIs for creating and managing Virtual Machines on AHV.
+      A virtual machine (VM) is a digital environment that operates as a virtual compute resource on a physical server. It uses software to run and deploy applications instead of a physical computer system. One server or host can have many VMs or guests running at the same time.
+      The APIs under VM are used for creating and managing virtual machines on AHV.
   - name: EsxiVm
     x-displayName: ESXi VMs
     description: >
-      APIs for managing Virtual Machines on ESXi.
+      The ESXi VM APIs are used to manage virtual machines on ESXi.
   - name: Stats
     x-displayName: Stats
     description: >
-      APIs to fetch stats for AHV Virtual Machines.
+      The APIs provide functionality to fetch statistics for AHV Virtual machines.
+      Users can utilize the list/get VM stats APIs to retrieve comprehensive statistics, including specific metrics for disks and NICs attached to the VMs. The APIs support querying data within a specified time range by allowing users to specify start and end times.
+      In addition, users can specify the sample interval, apply filters, and perform various aggregations such as AVG, SUM, COUNT, MIN, and MAX on the retrieved data.
   - name: EsxiStats
     x-displayName: ESXi Stats
     description: >
-      APIs to fetch stats for ESXi Virtual Machines.
+      The APIs provide functionality to fetch statistics for ESXi Virtual machines.
+      Users can utilize the list/get VM stats APIs to retrieve comprehensive statistics, including specific metrics for disks and NICs attached to the VMs. The APIs support querying data within a specified time range by allowing users to specify start and end times.
+      In addition, users can specify the sample interval, apply filters, and perform various aggregations such as AVG, SUM, COUNT, MIN, and MAX on the retrieved data.
   - name: VmAntiAffinityPolicies
     x-displayName: VM-VM Anti-Affinity Policies
     description: >
-      APIs for managing VM-VM Anti-Affinity Policies.
+      The VM-VM anti-affinity policy is used to specify anti-affinity between the AHV virtual machines. The VM-VM anti-affinity policy keeps the specified virtual machines apart in such a way that when a problem occurs with one host, you should not lose both the virtual machines.
+      The VM-VM anti-affinity policy APIs are used to manage these policies.
   - name: VmHostAffinityPolicies
     x-displayName: VM-Host Affinity Policies
     description: >
       APIs for managing VM-Host Affinity Policies.
+  - name: VmRecoveryPoints
+    x-displayName: VM Recovery Points
+    description: >
+      APIs for managing VM Recovery Points.

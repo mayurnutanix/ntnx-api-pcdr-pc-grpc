@@ -1,6 +1,6 @@
 tags:
   - name: Tasks
     description: >
-      Tasks are primarily a way of asynchronous execution of operations. Tasks record the intention, progress,
-      and other relevant information about the long-running operations in a persistent manner.
-      Users can interact with the tasks on the system using these APIs.
+      Tasks are primarily a way of asynchronously executing operations. Tasks persistently record the intent, 
+      progress, and other relevant information about the long-running operations. Users can interact with 
+      tasks in the system using these APIs.

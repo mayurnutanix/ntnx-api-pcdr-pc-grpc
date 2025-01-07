@@ -4,17 +4,17 @@
 
   <groupId>com.nutanix.nutanix-core.ntnx-api.guru-pc</groupId>
   <artifactId>guru-pc</artifactId>
-  <version>16.9.0-SNAPSHOT</version>
+  <version>17.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Guru API Service</name>
   <description>Guru - The new GoLang service which hosts API endpoints for Prism Central. This is Guru PC, specific to PC.</description>
 
   <properties>
-    <service-parent.version>16.9.0.2187-RELEASE</service-parent.version>
-    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
+    <service-parent.version>17.0.0.2277-RELEASE</service-parent.version>
+    <openapi-dev-platform.version>17.0.0.8486-RELEASE</openapi-dev-platform.version>
     <swagger-codegen.version>3.0.10</swagger-codegen.version>
-    <platform-tools.version>16.9.0.368-RELEASE</platform-tools.version>
+    <platform-tools.version>17.0.0.395-RELEASE</platform-tools.version>
     <swagger-codegen-version>3.0.10</swagger-codegen-version>
     <api.defs>guru-pc-api-definitions</api.defs>
     <exec-maven-plugin-version>1.5.0</exec-maven-plugin-version>
@@ -22,7 +22,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <mapstruct-version>1.4.1.Final</mapstruct-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <expose.internal.api>false</expose.internal.api>
+    <expose.internal.api>true</expose.internal.api>
   </properties>
 
   <modules>

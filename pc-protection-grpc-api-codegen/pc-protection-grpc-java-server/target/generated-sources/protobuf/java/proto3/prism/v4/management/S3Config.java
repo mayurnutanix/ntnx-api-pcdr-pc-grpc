@@ -102,7 +102,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object bucketName_;
   /**
    * <pre>
-   * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+   * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
    * </pre>
    *
    * <code>string bucket_name = 1000;</code>
@@ -123,7 +123,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+   * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
    * </pre>
    *
    * <code>string bucket_name = 1000;</code>
@@ -516,7 +516,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object bucketName_ = "";
     /**
      * <pre>
-     * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+     * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
      * </pre>
      *
      * <code>string bucket_name = 1000;</code>
@@ -536,7 +536,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+     * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
      * </pre>
      *
      * <code>string bucket_name = 1000;</code>
@@ -557,7 +557,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+     * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
      * </pre>
      *
      * <code>string bucket_name = 1000;</code>
@@ -576,7 +576,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+     * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
      * </pre>
      *
      * <code>string bucket_name = 1000;</code>
@@ -590,7 +590,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+     * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
      * </pre>
      *
      * <code>string bucket_name = 1000;</code>

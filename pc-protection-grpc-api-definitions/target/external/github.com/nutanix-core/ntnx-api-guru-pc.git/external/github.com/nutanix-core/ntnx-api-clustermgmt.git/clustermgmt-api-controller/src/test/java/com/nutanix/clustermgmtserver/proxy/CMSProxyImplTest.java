@@ -53,7 +53,7 @@ public class CMSProxyImplTest {
       .thenReturn(createclusterRet);
     ClusterManagementInterfaceProto.ClusterCreateArg createclusterArgs = ClusterManagementInterfaceProto.ClusterCreateArg.newBuilder().build();
     ClusterManagementInterfaceProto.ClusterCreateRet rpcResponse =
-      cmsProxy.doExecute(CMSProxyImpl.CMSRpcName.CREATE_CLUSTER, createclusterArgs, cmsProxy.getEmptyRpcRequestContext());
+      cmsProxy.doExecute(CMSProxyImpl.CMSRpcName.CREATE_CLUSTER, createclusterArgs, cmsProxy.getEmptyRequestContextForRpc());
     assertNotNull(rpcResponse);
     assertEquals(createclusterRet, rpcResponse);
   }

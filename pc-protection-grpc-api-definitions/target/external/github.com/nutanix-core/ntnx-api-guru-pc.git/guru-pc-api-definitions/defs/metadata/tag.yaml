@@ -4,5 +4,6 @@ tags:
     description: >
       The domain manager represents the multi-cluster manager, responsible for managing 
       (registering/viewing) multiple Nutanix clusters to provide a single, centralized management 
-      interface. It also exposes the ability to manage the lifecycle of multiple opt-in 
-      products such as Intelligent Ops, Leap, and Flow networking, and so on.
+      interface. It has support for backup and restore of domain manager on clusters as well as 
+      s3-compatible object stores. It also exposes the ability manage the lifecycle of multiple 
+      opt-in products such as Intelligent Ops, Leap, and Flow networking, and so on.

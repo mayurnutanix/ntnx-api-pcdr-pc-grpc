@@ -27,7 +27,7 @@ public class PriDeserializerUtils {
   public static final String API_MINOR_VERSION = "minorVersion";
   private static final String DOT = ".";
 
-  private static final String VERSION_REGEX = String.format("(.*\\.)?(v\\d+\\.r\\d+\\.(?<%s>[a|b]\\d+)?)(\\.(.*))?", API_MINOR_VERSION);
+  private static final String VERSION_REGEX = String.format("(.*\\.)?(v\\d+\\.r\\d+\\.?(?<%s>[a|b]\\d+)?)(\\.(.*))?", API_MINOR_VERSION);
   private static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_REGEX);
 
   public static Class<?> getObjectTypedType(JsonNode node, String packagePrefix) throws ClassNotFoundException {

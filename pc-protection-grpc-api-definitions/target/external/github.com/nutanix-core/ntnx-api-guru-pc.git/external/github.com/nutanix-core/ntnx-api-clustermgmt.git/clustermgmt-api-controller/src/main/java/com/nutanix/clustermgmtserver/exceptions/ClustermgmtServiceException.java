@@ -21,7 +21,7 @@ public class ClustermgmtServiceException extends Exception {
 
   public ClustermgmtServiceException(final String message) {
     super(message);
-    this.errorCode = ErrorCode.CLUSTERMGMT_SERVICE_RPC_ERROR;
+    this.errorCode = ErrorCode.CLUSTERMGMT_SERVICE_ERROR;
     this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
   }
 

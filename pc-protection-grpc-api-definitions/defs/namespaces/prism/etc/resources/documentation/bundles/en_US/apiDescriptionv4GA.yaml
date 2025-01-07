@@ -1,56 +1,59 @@
 - name: "CreateBackupTargetDescription"
   value: |
-    Creates a cluster or object store as backup target on which the backup is required to be
-    stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-    If any one of the cluster/object store does not qualify for backup, then the API will fail.
+    Creates a cluster or object store as the backup target. For a given Prism Central,
+    there can be up to 3 clusters as backup targets 
+    and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+    lacks appropriate permissions, the API request will fail. 
+    For object store backup targets, specifying backup policy is mandatory along 
+    with the location of the object store.
 - name: "CreateBackupTargetResponseDescription"
   value: |
-    Task Id corresponding to the create backup target api
+    Returns the task ID corresponding to the create backup target request.
 - name: "ListBackupTargetsDescription"
   value: |
     Lists backup targets (cluster or object store) configured for a given domain manager.
 - name: "ListBackupTargetsSummary"
   value: |
-    List Backup Targets
+    List backup targets
 - name: "ListBackupTargetsResponseDescription"
   value: |
-    List of backup clusters/object store backing up the domain manager configurations.
+    Returns a list of backup clusters/object store backing up the domain manager.
 - name: "GetBackupTargetDescription"
   value: |
-    Retrieves the backup targets (cluster or object store) from domain manager. Returns the
-    backup config and lastSyncTimestamp to the user
+    Retrieves the backup targets (cluster or object store) from a domain manager and returns the
+    backup configuration and lastSyncTimestamp parameter to the user.
 - name: "GetBackupTargetSummary"
   value: |
     Fetch backup target
 - name: "GetBackupTargetResponseDescription"
   value: |
-    Backup target details corresponding to the cluster/object store configuration.
+    Returns the backup target details corresponding to the cluster/object store configuration.
 - name: "UpdateBackupTargetDescription"
   value: |
-    Updates the credentials and/or rpo of the given objectstore
+    Updates the credentials and/or RPO of the given object store.
 - name: "UpdateBackupTargetResponseDescription"
   value: |
-    Task Id corresponding to the update backup target api.
+    Returns the task ID corresponding to the update backup target request.
 - name: "DeleteBackupTargetDescription"
   value: |
-    Removes cluster/object store from backup targets. This will stop backup from being
-    taken on cluster/object store.
+    Removes cluster/object store from the backup targets. This will stop the cluster/object store 
+    from backing up Prism Central data.
 - name: "DeleteBackupTargetResponseDescription"
   value: |
-    Task Id corresponding to the delete backup target api.
+    Returns the task ID corresponding to the delete backup target request.
 - name: "RestoreDomainManagerDescription"
   value: |
-    A task driven API to restore a domain manager from a cluster or object store backup location based on the 
-    selected restore point.
+    The restore domain manager is a task-driven operation to restore a domain manager from a cluster or object store 
+    backup location based on the selected restore point.
 - name: "RestoreDomainManagerResponseDescription"
   value: |
-    A TaskReference object specifying a unique taskExtId corresponding to the restore operation.
+    Returns a task reference object specifying a unique task ID corresponding to the restore operation.
 - name: "GetRestoreInfoResponseDescription"
   value: |
-    Details of restore point queried.
+    Returns the requested restore point details.
 - name: "DomainManagerExtIdDescription"
   value: |
-    The unique identifier for the domain manager that is to be restored.
+    A unique identifier for the domain manager.
 - name: "ClusterExtIdDescription"
   value: |
     Cluster identifier
@@ -69,12 +72,13 @@
     List restore points
 - name: "ListRestorePointsDescription"
   value: |
-    API provides a mechanism to retrieve a list of available restore points. Restore points are snapshots of the
-    domain manager at various times, which can be used to restore the domain manager to a previous
-    state. List response contains creation time and identifier id for config data.
-    1.For cluster based backups, only the latest restore point is available as backup is continuous.
-    2.For object store based backups, multiple restore points can be available, depending on the defined Recovery 
-    Point Objective (RPO) and retention period configured on the s3 bucket.
+    The list restore points API allows you to retrieve a list of available restore points, 
+    which are snapshots of the domain manager taken at different times.
+    These restore points can be used to revert the domain manager to a previous state.
+    The list response includes the creation time and identifier ID for the configuration data.<br> 
+    1. For cluster-based backups, only the most recent restore point is available, as backups are continuous.<br>
+    2. For object store-based backups, multiple restore points may be available, depending on the configured 
+    Recovery Point Objective (RPO) and the retention period set on the s3 bucket.
 - name: "ObjectStoreProviderDescription"
   value: |
     Object store provider represents the object store used to store backup and trigger recovery.
@@ -90,61 +94,60 @@
 - name: "GetRestorePointDetailsSummary"
   value: |
     Get restore point details
-- name: "RestoreDomainManagerDescription"
-  value: |
-    This is a task driven API. It restores the domain manager from cluster/object store.
 - name: "GetRestorePointDetailsDescription"
   value: |
-    Retrieves the detailed information about a specific recovery point. It provides essential domain manager info
-    stored in the backup, required for the restoration process.
+    Retrieves detailed information about a specific recovery point and provides essential domain manager information
+    stored in the backup, which is required for the restoration process.
 - name: "RestoreDomainManagerSummary"
   value: |
     Restore domain manager
 - name: "RestoreSourceExtIdDescription"
   value: |
-    The unique identifier obtained from restore source API corresponding to restore source details provided.
+    A unique identifier obtained from the restore source API that corresponds to the details provided for the 
+    restore source.
 - name: "ListRestorableDomainManagersDescription"
   value: |
-    Restorable domain manager response with domain manager, last sync time and hosting cluster info.
-- name: "ListRestorableDomainManagersInfo"
-  value: |
-    List all domain manager backed up at object store/cluster.
+    Lists all the domain managers backed up at the object store/cluster.
 - name: "ListRestorableDomainManagersSummary"
   value: |
     List restorable domain managers
 - name: "CreateRestoreSourceDescription"
   value: |
-    Create restore source on cluster to restore domain manager.
+    Creates a restore source pointing to a cluster or object store to restore the domain manager. The created 
+    restore source is intended to be deleted after use. If the restore source is
+    not deleted using the deleteRestoreSource API, then it is auto-deleted after sometime. Also note that a restore 
+    source will not contain a backup policy. It is only used to access the backup data at the location from where 
+    the Prism Central may be restored. Credentials used to access the restore source are not validated at the time 
+    of creation of the restore source. They are validated when the restore source is used to fetch data.
 - name: "CreateRestoreSourceSummary"
   value: |
-    Create restore source.
+    Create restore source
 - name: "LocationHeaderDesc"
   value: |
     Response header specifying the location of a newly created resource.
 - name: "CreateRestoreSourceResponseDescription"
   value: |
-    Restore source response for cluster identified by external identifier.
+    Restore source response for cluster identified by the external identifier.
 - name: "DeleteRestoreSourceDescription"
   value: |
-    Delete restore source on cluster.
+    Deletes a restore source on a cluster/object store.
 - name: "DeleteRestoreSourceSummary"
   value: |
-    Delete restore source.
+    Delete restore source
 - name: "DeleteRestoreSourceResponseDescription"
   value: |
-    Delete restore source request is accepted.
+    The delete restore source request is accepted.
 - name: "GetRestoreSourceDescription"
   value: |
-    Retrieve the restore source from PE cache store. Returns the
-    backup config and extId to the user.
+    Retrieves the restore source from the PE cache store and returns the
+    restore source configuration and external identifier to the user.
 - name: "GetRestoreSourceSummary"
   value: |
     Fetch restore source
 - name: "GetRestoreSourceResponseDescription"
   value: |
-    Restore source corresponding to source extId from cluster cache store.
-    Returns the restore source config and extId to the user.
+    Returns the restore source configuration and external Identifier to the user.
 - name: "ListRestorePointsResponseDescription"
   value: |
-    Paginated list of restore points.
+    Returns a list of paginated restore points.
 

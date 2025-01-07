@@ -6,6 +6,45 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="pc-protection-grpc-java-server" />
+        <module name="pc-protection-grpc-protobuf-services" />
+        <module name="pc-protection-grpc-client" />
+        <module name="pc-protection-grpc-protobuf-messages" />
+        <module name="pc-protection-grpc-java-dto-definitions" />
+        <module name="pc-protection-grpc-springmvc-interfaces" />
+        <module name="pc-protection-grpc-api-definitions" />
+        <module name="pc-protection-grpc-java-client-sdk" />
+        <module name="pc-protection-grpc-proto-to-java" />
+      </profile>
+      <profile name="Annotation profile for PC Protection" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/nutanix/nutanix-core/ntnx-api/dev-platform/spi-impl/16.9.0.8055-RELEASE/spi-impl-16.9.0.8055-RELEASE.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.13.0/protobuf-java-3.13.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/guava/guava/33.0.0-jre/guava-33.0.0-jre.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/checkerframework/checker-qual/3.41.0/checker-qual-3.41.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/errorprone/error_prone_annotations/2.23.0/error_prone_annotations-2.23.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/github/jknack/handlebars/4.1.2/handlebars-4.1.2.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/testng/testng/7.5.1/testng-7.5.1.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/beust/jcommander/1.78/jcommander-1.78.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/webjars/jquery/3.5.1/jquery-3.5.1.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/apache/ant/ant/1.10.11/ant-1.10.11.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/apache/ant/ant-launcher/1.10.11/ant-launcher-1.10.11.jar" />
+          <entry name="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/../lib/tools.jar" />
+        </processorPath>
+        <module name="pc-protection-grpc-protobuf-mappers" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -62,7 +62,7 @@ public class AWSS3Config extends dp1.pri.prism.v4.management.S3Config implements
 
   @Override 
   protected String initialize$fv() {
-    return "v4.r0.b1";
+    return "v4.r0";
   }
 
 

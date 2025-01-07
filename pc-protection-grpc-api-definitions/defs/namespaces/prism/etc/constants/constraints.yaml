@@ -22,3 +22,5 @@
   value: 2
 - name: "maxProviderLength"
   value: 63
+- name: "certificateMaxLength"
+  value: 42667

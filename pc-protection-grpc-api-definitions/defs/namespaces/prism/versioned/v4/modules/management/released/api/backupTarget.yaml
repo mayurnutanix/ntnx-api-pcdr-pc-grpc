@@ -1,0 +1,439 @@
+
+paths:
+  /domain-managers/{domainManagerExtId}/backup-targets-new:
+    parameters:
+      - in: path
+        name: domainManagerExtId
+        required: true
+        description: DocRef(DomainManagerExtIdDescription)
+        schema:
+          type: "string"
+          x-constraints:
+            pattern: ConstantRef({ext:common:/namespaces/common}, uuidPattern)
+    post:
+      tags:
+        - "ApiEndpoint(Domain Manager Backups)"
+      description: DocRef(CreateBackupTargetDescription)
+      summary: DocRef(CreateBackupTargetSummary)
+      operationId: "createBackupTarget1"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-permissions:
+        operationName: Create_Domain_Manager_Backup_Target
+        entityType: prism_central
+        displayName: DocRef(CreateBackupTargetSummary)
+        description: Allows to create a backup target for the Prism Central
+        serviceName: Prism
+        relatedOperationList:
+          - Clustermgmt:View_Cluster
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Prism Admin
+          - Domain Manager Admin
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 3
+            timeUnit: seconds
+          - type: small
+            count: 3
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 3
+            timeUnit: seconds
+      x-codegen-hint:
+        spring-mvc:
+          - type: "rbac"
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "domainManagerExtId"
+                  index: 31001
+                - name: "body"
+                  index: 31002
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ModelRef({/namespaces/prism/versioned/v4/modules/management/released/models/BackupTarget})
+      responses:
+        202:
+          description: DocRef(CreateBackupTargetResponseDescription)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/released/models/TaskReference})"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/released/models/TaskReference})"
+                    index: 31007
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/released/models/apiResponse"
+          responseModelName: "CreateBackupTargetApiResponse"
+
+    get:
+      tags:
+        - "ApiEndpoint(Domain Manager Backups)"
+      description: DocRef(ListBackupTargetsDescription)
+      summary: DocRef(ListBackupTargetsSummary)
+      operationId: "listBackupTargets1"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      x-permissions:
+        operationName: View_Domain_Manager_Backup_Target
+        entityType: prism_central
+        description: Allows to list backup targets of the Prism Central
+        serviceName: Prism
+        displayName: DocRef(ListBackupTargetsSummary)
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Domain Manager Admin
+          - Domain Manager Viewer
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: small
+            count: 5
+            timeUnit: seconds
+          - type: large
+            count: 5
+            timeUnit: seconds
+          - type: xlarge
+            count: 5
+            timeUnit: seconds
+      x-codegen-hint:
+        spring-mvc:
+          - type: "rbac"
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "domainManagerExtId"
+                  index: 31001
+      responses:
+        200:
+          description: DocRef(ListBackupTargetsResponseDescription)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/management/released/models/BackupTarget})"
+                maxItems: 4
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/prism/versioned/v4/modules/management/released/models/BackupTarget})"
+                    container: array
+                    index: 31007
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/released/models/apiResponse"
+          responseModelName: "ListBackupTargetsApiResponse"
+
+  /domain-managers/{domainManagerExtId}/backup-targets-new/{extId}:
+    parameters:
+      - in: path
+        name: domainManagerExtId
+        description: DocRef(DomainManagerExtIdDescription)
+        required: true
+        schema:
+          type: "string"
+          x-constraints:
+            pattern: ConstantRef({ext:common:/namespaces/common}, uuidPattern)
+      - in: path
+        name: extId
+        description: DocRef({ext:common:/namespaces/common}, extIdDesc)
+        required: true
+        schema:
+          type: "string"
+          x-constraints:
+            pattern: ConstantRef({ext:common:/namespaces/common}, uuidPattern)
+    get:
+      tags:
+        - "ApiEndpoint(Domain Manager Backups)"
+      description: DocRef(GetBackupTargetDescription)
+      summary: DocRef(GetBackupTargetSummary)
+      operationId: "getBackupTargetById1"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+        - product: PE
+          version: 6.9
+      parameters:
+        - in: path
+          name: extId
+          description: DocRef({ext:common:/namespaces/common}, extIdDesc)
+          required: true
+          schema:
+            type: "string"
+            x-constraints:
+              pattern: ConstantRef({ext:common:/namespaces/common}, uuidPattern)
+      x-permissions:
+        operationName: View_Domain_Manager_Backup_Target
+        entityType: prism_central
+        description: Allows to get a particular backup target
+        serviceName: Prism
+        displayName: DocRef(GetBackupTargetSummary)
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Prism Admin
+          - Prism Viewer
+          - Domain Manager Admin
+          - Domain Manager Viewer
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 5
+            timeUnit: seconds
+          - type: small
+            count: 5
+            timeUnit: seconds
+          - type: large
+            count: 5
+            timeUnit: seconds
+          - type: xlarge
+            count: 5
+            timeUnit: seconds
+      x-codegen-hint:
+        spring-mvc:
+          - type: "rbac"
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "domainManagerExtId"
+                  index: 31001
+                - name: "extId"
+                  index: 31002
+      responses:
+        200:
+          description: DocRef(GetBackupTargetResponseDescription)
+          content:
+            application/json:
+              schema:
+                $ref: ModelRef({/namespaces/prism/versioned/v4/modules/management/released/models/BackupTarget})
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({/namespaces/prism/versioned/v4/modules/management/released/models/BackupTarget})"
+                    index: 31007
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/released/models/apiResponse"
+          responseModelName: "GetBackupTargetApiResponse"
+
+    put:
+      tags:
+        - "ApiEndpoint(Domain Manager Backups)"
+      description: DocRef(UpdateBackupTargetDescription)
+      summary: DocRef(UpdateBackupTargetSummary)
+      operationId: "updateBackupTargetById1"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-permissions:
+        operationName: Update_Domain_Manager_Backup_Target
+        entityType: prism_central
+        description: Allows to update properties of a backup target such as RPO and credentials
+        serviceName: Prism
+        displayName: DocRef(UpdateBackupTargetSummary)
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Prism Admin
+          - Domain Manager Admin
+        relatedOperationList:
+          - Prism:View_Domain_Manager_Backup_Target
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 3
+            timeUnit: seconds
+          - type: small
+            count: 3
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 3
+            timeUnit: seconds
+      x-codegen-hint:
+        spring-mvc:
+          - type: "rbac"
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "domainManagerExtId"
+                  index: 31001
+                - name: "extId"
+                  index: 31002
+                - name: "body"
+                  index: 31003
+      x-required-headers:
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "ModelRef({/namespaces/prism/versioned/v4/modules/management/released/models/BackupTarget})"
+      responses:
+        202:
+          description: DocRef(UpdateBackupTargetResponseDescription)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/released/models/TaskReference})"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/released/models/TaskReference})"
+                    index: 31007
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/released/models/apiResponse"
+          responseModelName: "UpdateBackupTargetApiResponse"
+
+    delete:
+      tags:
+        - "ApiEndpoint(Domain Manager Backups)"
+      description: DocRef(DeleteBackupTargetDescription)
+      summary: DocRef(DeleteBackupTargetSummary)
+      operationId: "deleteBackupTargetById1"
+      x-supported-versions:
+        - product: PC
+          version: 2024.3
+      x-permissions:
+        operationName: Delete_Domain_Manager_Backup_Target
+        entityType: prism_central
+        description: Allows to delete a backup target
+        displayName: DocRef(DeleteBackupTargetSummary)
+        serviceName: Prism
+        deploymentList:
+          - ON_PREM
+          - CLOUD
+        roleList:
+          - Internal Super Admin
+          - Super Admin
+          - Prism Admin
+          - Domain Manager Admin
+        relatedOperationList:
+          - Prism:View_Domain_Manager_Backup_Target
+      x-rate-limit:
+        type: pc
+        config:
+          - type: xsmall
+            count: 3
+            timeUnit: seconds
+          - type: small
+            count: 3
+            timeUnit: seconds
+          - type: large
+            count: 3
+            timeUnit: seconds
+          - type: xlarge
+            count: 3
+            timeUnit: seconds
+      x-codegen-hint:
+        spring-mvc:
+          - type: "rbac"
+            properties:
+              metadataProvider: com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider
+          - type: non-blocking
+            properties:
+              non-blocking: true
+        $any:
+          - type: entity-identifier
+            properties:
+              identifiers:
+                - name: "domainManagerExtId"
+                  index: 31001
+                - name: "extId"
+                  index: 31002
+      x-required-headers:
+        - name: If-Match
+          description: DocRef({ext:common:/namespaces/common}, ifMatchHeaderDesc)
+        - name: NTNX-Request-Id
+          description: DocRef({ext:common:/namespaces/common}, requestIdHeaderDesc)
+      responses:
+        202:
+          description: DocRef(DeleteBackupTargetResponseDescription)
+          content:
+            application/json:
+              schema:
+                $ref: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/released/models/TaskReference})"
+        x-codegen-hint:
+          $any:
+            - type: entity-identifier
+              properties:
+                identifiers:
+                  - type: "ModelRef({ext:tasks:/namespaces/prism/versioned/v4/modules/config/released/models/TaskReference})"
+                    index: 31007
+        x-api-responses:
+          template: "ext:common:/namespaces/common/versioned/v1/modules/response/released/models/apiResponse"
+          responseModelName: "DeleteBackupTargetApiResponse"

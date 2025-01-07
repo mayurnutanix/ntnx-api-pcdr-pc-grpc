@@ -8,6 +8,7 @@ package com.nutanix.clustermgmtserver.odata;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nutanix.api.utils.json.JsonUtils;
 import com.nutanix.clustermgmtserver.exceptions.ClustermgmtOdataException;
 import com.nutanix.clustermgmtserver.exceptions.ClustermgmtServiceException;
 import com.nutanix.clustermgmtserver.services.impl.StatsGatewayServiceImpl;
@@ -48,7 +49,7 @@ import java.util.Map;
 @Component
 public class ClustermgmtOdataParser {
 
-  final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  final static ObjectMapper OBJECT_MAPPER = JsonUtils.getObjectMapper();
   final ServiceMetadataProvider metadataProvider;
   final StatsGatewayServiceImpl statsGatewayService;
 

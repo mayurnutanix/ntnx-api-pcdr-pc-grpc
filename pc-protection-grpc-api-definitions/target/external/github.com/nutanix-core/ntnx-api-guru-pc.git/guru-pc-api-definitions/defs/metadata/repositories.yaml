@@ -1,27 +1,27 @@
 - name: "common"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-common.git"
-  ref: "refs/tags/16.9.0.1046-RELEASE"
+  ref: "refs/tags/17.0.0.1076-RELEASE"
   baseDir: "common-api-definitions/defs"
   authRequired: false
 
 - name: "tasks"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-tasks.git"
-  ref: "refs/tags/16.9.0.893-RELEASE"
+  ref: "refs/tags/17.0.0.934-RELEASE"
   baseDir: "tasks-api-definitions/defs"
   authRequired: false
 
 - name: "vmm"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-vmm.git"
-  ref: "refs/tags/16.9.0.2860-RELEASE"
+  ref: "refs/tags/17.0.0.3248-RELEASE"
   baseDir: "vmm-api-definitions/defs"
   authRequired: false
 
 - name: "clsmgmt"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-clustermgmt.git"
-  ref: "refs/tags/16.9.0.2743-RELEASE"
+  ref: "refs/tags/17.0.0.3089-RELEASE"
   baseDir: "clustermgmt-api-definitions/defs"
   authRequired: false

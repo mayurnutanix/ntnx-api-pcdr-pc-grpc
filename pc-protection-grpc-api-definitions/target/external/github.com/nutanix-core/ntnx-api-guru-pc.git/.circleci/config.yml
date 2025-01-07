@@ -20,7 +20,7 @@ jobs:
       CANAVERAL_USE_BLUEPRINT_PROXY: 1
       CANAVERAL_GIT_USER: API-Infra-Build-User
       CANAVERAL_GIT_EMAIL: svc.canGit@nutanix.com
-      CANAVERAL_PACKAGER_BRANCH: fraser-2024.3-stable-pc-0
+      CANAVERAL_PACKAGER_BRANCH: main
       CANAVERAL_DEPLOY_PACKAGE_NAME: none
       CANAVERAL_SONAR_HOST: http://10.41.28.200:9000
       CANAVERAL_MAVEN_VERISON: 3.6.1
@@ -131,26 +131,6 @@ jobs:
           name: Build
           no_output_timeout: 30m
           command: python -m canaveral_build_tools.core.build
-          environment:
-            PYENV_VERSION: canaveral_build
-      - run:
-          name: '"unit" Tests'
-          command: python -m canaveral_build_tools.core.run_tests "unit"
-          environment:
-            PYENV_VERSION: canaveral_build
-      - run:
-          name: Sonar Scan
-          command: |-
-            source /home/circleci/project/.workspace/.canaveralrc
-            echo ${PROJECT_ROOT_FOLDER}
-            cd ${PROJECT_ROOT_FOLDER}/guru-pc-api-service
-            python -m canaveral_build_tools.tools.non_maven_sonar_scanner
-            cd ${PROJECT_ROOT_FOLDER}
-          environment:
-            PYENV_VERSION: canaveral_build
-      - run:
-          name: Package
-          command: python -m canaveral_build_tools.core.package
           environment:
             PYENV_VERSION: canaveral_build
       - run:

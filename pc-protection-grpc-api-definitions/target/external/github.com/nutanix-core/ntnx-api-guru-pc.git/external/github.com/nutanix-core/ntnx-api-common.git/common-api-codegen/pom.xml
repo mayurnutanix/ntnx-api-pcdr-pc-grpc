@@ -5,7 +5,7 @@
   <parent>
     <artifactId>common</artifactId>
     <groupId>com.nutanix.nutanix-core.ntnx-api.common</groupId>
-    <version>16.9.0-SNAPSHOT</version>
+    <version>17.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>common-api-codegen</artifactId>

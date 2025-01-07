@@ -5,7 +5,7 @@ package proto3.prism.v4.management;
 
 /**
  * <pre>
- * Model which contains the information of backup cluster 
+ * Model which contains the information of backup cluster. 
  * </pre>
  *
  * Protobuf type {@code proto3.prism.v4.management.ClusterLocation}
@@ -297,7 +297,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Model which contains the information of backup cluster 
+   * Model which contains the information of backup cluster. 
    * </pre>
    *
    * Protobuf type {@code proto3.prism.v4.management.ClusterLocation}

@@ -159,6 +159,8 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
     try {
       ConfigCredentials configCredentials = clusterService.getConfigCredentials(clusterUuid);
       getConfigCredentialsByClusterIdApiResponse.setDataInWrapper(configCredentials);
+      getConfigCredentialsByClusterIdApiResponse.setMetadata(ClustermgmtResponseFactory.createMetadataFor(MetadataHateOsLinkUtils.
+              getMetadataHateOsLinksForSelf(ClustersApiControllerInterface.GET_CONFIG_CREDENTIALS_BY_CLUSTER_ID_URI, clusterUuid), false,false));
     } catch (ClustermgmtServiceException | ClustermgmtGenericException e) {
       log.error(RPC_INVOKE_ERROR_MESSAGE, e);
       getConfigCredentialsByClusterIdApiResponse.setDataInWrapper(ClustermgmtResponseFactory.createStandardErrorResponse(e));
@@ -178,6 +180,8 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
     try {
       List<RsyslogServer> rsyslogServers = clusterService.getRsyslogServerConfig(clusterUuid);
       listRsyslogServersByClusterIdApiResponse.setDataInWrapper(rsyslogServers);
+      listRsyslogServersByClusterIdApiResponse.setMetadata(
+              ClustermgmtResponseFactory.createListMetadata(rsyslogServers.size(), allQueryParams));
     } catch (ClustermgmtServiceException | ClustermgmtGenericException e) {
       log.error(RPC_INVOKE_ERROR_MESSAGE, e);
       listRsyslogServersByClusterIdApiResponse.setDataInWrapper(ClustermgmtResponseFactory.createStandardErrorResponse(e));
@@ -198,6 +202,7 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
     try {
       List<RackableUnit> rackableUnits = clusterService.getRackableUnits(clusterUuid);
       listRackableUnitsByClusterIdApiResponse.setDataInWrapper(rackableUnits);
+      listRackableUnitsByClusterIdApiResponse.setMetadata(ClustermgmtResponseFactory.createListMetadata(rackableUnits.size(),allQueryParams));
     } catch (ClustermgmtServiceException | ClustermgmtGenericException e) {
       log.error(RPC_INVOKE_ERROR_MESSAGE, e);
       listRackableUnitsByClusterIdApiResponse.setDataInWrapper(ClustermgmtResponseFactory.createStandardErrorResponse(e));
@@ -244,6 +249,9 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
       MultiDomainFaultToleranceStatus multiDomainFaultToleranceStatus = new MultiDomainFaultToleranceStatus();
       multiDomainFaultToleranceStatus.setMultiDomainFaultToleranceStatus(domainFaultTolerances);
       getFaultToleranceStatusByClusterIdApiResponse.setDataInWrapper(multiDomainFaultToleranceStatus);
+      getFaultToleranceStatusByClusterIdApiResponse.setMetadata(ClustermgmtResponseFactory.createMetadataFor(
+              MetadataHateOsLinkUtils.getMetadataHateOsLinksForSelf(ClustersApiControllerInterface.GET_FAULT_TOLERANCE_STATUS_BY_CLUSTER_ID_URI, clusterUuid),
+              false,false));
     } catch (ClustermgmtServiceException | ClustermgmtGenericException e) {
       log.error(RPC_INVOKE_ERROR_MESSAGE, e);
       getFaultToleranceStatusByClusterIdApiResponse.setDataInWrapper(ClustermgmtResponseFactory.createStandardErrorResponse(e));
@@ -398,6 +406,7 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
   @Override
   public ResponseEntity<MappingJacksonValue> listPhysicalGpuProfiles(String clusterExtId,
                                                             Integer page, Integer limit,
+                                                            String filter, String orderby,                                                            
                                                             Map<String, String> allQueryParams,
                                                             HttpServletRequest request,
                                                             HttpServletResponse response) {
@@ -415,7 +424,7 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
     }
     try {
       Pair<Integer, List<PhysicalGpuProfile>> physicalGpuProfileList =
-         clusterService.listPhysicalGpuProfiles(clusterExtId, limit, page);
+         clusterService.listPhysicalGpuProfiles(clusterExtId, limit, page, filter, orderby);
       listPhysicalGpuProfilesApiResponse.setDataInWrapper(physicalGpuProfileList.right());
       listPhysicalGpuProfilesApiResponse.setMetadata(
         ClustermgmtResponseFactory.createListMetadata(physicalGpuProfileList.left(), allQueryParams));
@@ -434,6 +443,7 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
   @Override
   public ResponseEntity<MappingJacksonValue> listVirtualGpuProfiles(String clusterExtId,
                                                             Integer page, Integer limit,
+                                                            String filter, String orderby,
                                                             Map<String, String> allQueryParams,
                                                             HttpServletRequest request,
                                                             HttpServletResponse response) {
@@ -451,7 +461,7 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
     }
     try {
       Pair<Integer, List<VirtualGpuProfile>> virtualGpuProfileList =
-         clusterService.listVirtualGpuProfiles(clusterExtId, limit, page);
+         clusterService.listVirtualGpuProfiles(clusterExtId, limit, page, filter, orderby);
       listVirtualGpuProfilesApiResponse.setDataInWrapper(virtualGpuProfileList.right());
       listVirtualGpuProfilesApiResponse.setMetadata(
         ClustermgmtResponseFactory.createListMetadata(virtualGpuProfileList.left(), allQueryParams));
@@ -1168,16 +1178,19 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
   }
 
   @Override
-  public ResponseEntity<MappingJacksonValue> fetchTaskResponse(SearchParams body,
-                                                        String taskExtId,
-                                                        Map<String, String> allQueryParams,
-                                                        HttpServletRequest request,
-                                                        HttpServletResponse response) {
+  public ResponseEntity<MappingJacksonValue> fetchTaskResponse(String extId,
+                                                               TaskResponseType taskResponseType,
+                                                               Map<String, String> allQueryParams,
+                                                               HttpServletRequest request,
+                                                               HttpServletResponse response) {
+    log.debug("Query param received: {}", taskResponseType.toString());
     HttpStatus httpStatus = HttpStatus.OK;
     FetchTaskApiResponse fetchTaskApiResponse = new FetchTaskApiResponse();
     try {
-      SearchResponse searchResponse = clusterService.getSearchResponse(taskExtId, body.getSearchType());
-      fetchTaskApiResponse.setDataInWrapper(searchResponse);
+      TaskResponse taskResponse = clusterService.getTaskResponse(extId, taskResponseType);
+      fetchTaskApiResponse.setDataInWrapper(taskResponse);
+      fetchTaskApiResponse.setMetadata(ClustermgmtResponseFactory.createMetadataFor(MetadataHateOsLinkUtils.
+              getMetadataHateOsLinksForSelf(ClustersApiControllerInterface.FETCH_TASK_RESPONSE_URI, extId), false,false));
     } catch (ClustermgmtServiceException | ClustermgmtGenericException e) {
       log.error(RPC_INVOKE_ERROR_MESSAGE, e);
       fetchTaskApiResponse.setDataInWrapper(ClustermgmtResponseFactory.createStandardErrorResponse(e));
@@ -1533,6 +1546,9 @@ public class ClusterApiControllerImpl implements ClustersApiControllerInterface 
     try {
       NonMigratableVmsResult nonMigratableVmsResult = clusterService.getNonMigratableVmsResult(extId);
       getNonMigratableVmsResultApiResponse.setDataInWrapper(nonMigratableVmsResult);
+      getNonMigratableVmsResultApiResponse.setMetadata(ClustermgmtResponseFactory.createMetadataFor(
+              MetadataHateOsLinkUtils.getMetadataHateOsLinksForSelf(ClustersApiControllerInterface.GET_NON_MIGRATABLE_VMS_RESULT_BY_ID_URI, clusterExtId, extId),
+              false,false));
     } catch (ClustermgmtServiceException | ValidationException | ClustermgmtGenericException e) {
       log.error(RPC_INVOKE_ERROR_MESSAGE, e);
       getNonMigratableVmsResultApiResponse.setDataInWrapper(ClustermgmtResponseFactory.createStandardErrorResponse(e));

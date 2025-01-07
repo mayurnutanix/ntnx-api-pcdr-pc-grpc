@@ -99,3 +99,13 @@
     after migration, meaning VM on target cluster will be created without NGT installed.
   arguments:
     - vm_uuid
+- code: 32710
+  errorGroup: MIGRATE_VM_WARNING
+  severity: WARNING
+  message: >
+    Warning while migrating VM with UUID '{{{vm_uuid}}}' because the VM has a host 
+    affinity policy configured on the source cluster which will not be migrated to 
+    target cluster with UUID '{{{target_cluster_uuid}}}'
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid

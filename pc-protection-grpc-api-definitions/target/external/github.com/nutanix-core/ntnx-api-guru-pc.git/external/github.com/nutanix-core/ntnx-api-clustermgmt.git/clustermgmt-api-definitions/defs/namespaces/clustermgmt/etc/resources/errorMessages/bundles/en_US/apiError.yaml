@@ -1,11 +1,11 @@
 - code: 10001
-  errorGroup: CLUSTERMGMT_SERVICE_RPC_ERROR
+  errorGroup: CLUSTERMGMT_SERVICE_ERROR
   severity: ERROR
   message: Failed to perform the operation due to an internal service error - {{{reason}}}.
   arguments:
     - reason
 - code: 10002
-  errorGroup: CLUSTERMGMT_SERVICE_RPC_ERROR
+  errorGroup: CLUSTERMGMT_SERVICE_ERROR
   severity: ERROR
   message: Failed while retrying to reach the internal service as the service might be down.
 - code: 10003
@@ -55,13 +55,13 @@
   arguments:
     - reason
 - code: 10011
-  errorGroup: CLUSTERMGMT_INVALID_INPUT
+  errorGroup: CLUSTERMGMT_SERVICE_ERROR
   severity: ERROR
-  message: Failed to start the operation because {{{reason}}}.
+  message: Failed to start the operation due to an error - {{{reason}}}.
   arguments:
     - reason
 - code: 10012
-  errorGroup: CLUSTERMGMT_INVALID_INPUT
+  errorGroup: CLUSTERMGMT_UNAUTHORIZED_REQUEST
   severity: ERROR
   message: Failed to perform the operation on the cluster with UUID '{{{cluster_uuid}}}' as it is not authorized.
   arguments:

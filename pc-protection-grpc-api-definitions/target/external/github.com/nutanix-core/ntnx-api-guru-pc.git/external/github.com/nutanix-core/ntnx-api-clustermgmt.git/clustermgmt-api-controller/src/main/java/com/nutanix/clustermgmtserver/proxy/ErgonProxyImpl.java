@@ -88,7 +88,7 @@ public class ErgonProxyImpl extends ClustermgmtProxy<ErgonInterface.ErgonRpcSvc.
     Supplier<RPCResponse<E>> supplier = CircuitBreaker.decorateSupplier(circuitBreaker, ()-> {
       try {
         return doExecute(rpcName.toString(), rpcArg,
-          getEmptyRpcRequestContext());
+          getEmptyRequestContextForRpc());
       }
       catch(ClustermgmtServiceException e){
         throw new ClustermgmtGenericException(e);

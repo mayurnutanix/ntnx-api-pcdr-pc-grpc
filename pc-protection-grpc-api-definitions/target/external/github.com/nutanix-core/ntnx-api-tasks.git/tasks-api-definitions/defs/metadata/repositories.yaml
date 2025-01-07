@@ -1,6 +1,6 @@
 - name: "common"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-common.git"
-  ref: "refs/tags/16.9.0.1046-RELEASE"
+  ref: "refs/tags/17.0.0.1076-RELEASE"
   baseDir: "common-api-definitions/defs"
   authRequired: false

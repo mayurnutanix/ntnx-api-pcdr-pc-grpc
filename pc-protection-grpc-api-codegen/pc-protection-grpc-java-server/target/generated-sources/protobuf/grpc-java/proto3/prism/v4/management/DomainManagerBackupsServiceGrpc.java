@@ -14,159 +14,159 @@ public final class DomainManagerBackupsServiceGrpc {
   public static final String SERVICE_NAME = "proto3.prism.v4.management.DomainManagerBackupsService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.CreateBackupTargetArg,
-      proto3.prism.v4.management.CreateBackupTargetRet> getCreateBackupTargetMethod;
+  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.CreateBackupTarget1Arg,
+      proto3.prism.v4.management.CreateBackupTarget1Ret> getCreateBackupTarget1Method;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "createBackupTarget",
-      requestType = proto3.prism.v4.management.CreateBackupTargetArg.class,
-      responseType = proto3.prism.v4.management.CreateBackupTargetRet.class,
+      fullMethodName = SERVICE_NAME + '/' + "createBackupTarget1",
+      requestType = proto3.prism.v4.management.CreateBackupTarget1Arg.class,
+      responseType = proto3.prism.v4.management.CreateBackupTarget1Ret.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.CreateBackupTargetArg,
-      proto3.prism.v4.management.CreateBackupTargetRet> getCreateBackupTargetMethod() {
-    io.grpc.MethodDescriptor<proto3.prism.v4.management.CreateBackupTargetArg, proto3.prism.v4.management.CreateBackupTargetRet> getCreateBackupTargetMethod;
-    if ((getCreateBackupTargetMethod = DomainManagerBackupsServiceGrpc.getCreateBackupTargetMethod) == null) {
+  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.CreateBackupTarget1Arg,
+      proto3.prism.v4.management.CreateBackupTarget1Ret> getCreateBackupTarget1Method() {
+    io.grpc.MethodDescriptor<proto3.prism.v4.management.CreateBackupTarget1Arg, proto3.prism.v4.management.CreateBackupTarget1Ret> getCreateBackupTarget1Method;
+    if ((getCreateBackupTarget1Method = DomainManagerBackupsServiceGrpc.getCreateBackupTarget1Method) == null) {
       synchronized (DomainManagerBackupsServiceGrpc.class) {
-        if ((getCreateBackupTargetMethod = DomainManagerBackupsServiceGrpc.getCreateBackupTargetMethod) == null) {
-          DomainManagerBackupsServiceGrpc.getCreateBackupTargetMethod = getCreateBackupTargetMethod =
-              io.grpc.MethodDescriptor.<proto3.prism.v4.management.CreateBackupTargetArg, proto3.prism.v4.management.CreateBackupTargetRet>newBuilder()
+        if ((getCreateBackupTarget1Method = DomainManagerBackupsServiceGrpc.getCreateBackupTarget1Method) == null) {
+          DomainManagerBackupsServiceGrpc.getCreateBackupTarget1Method = getCreateBackupTarget1Method =
+              io.grpc.MethodDescriptor.<proto3.prism.v4.management.CreateBackupTarget1Arg, proto3.prism.v4.management.CreateBackupTarget1Ret>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "createBackupTarget"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "createBackupTarget1"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.CreateBackupTargetArg.getDefaultInstance()))
+                  proto3.prism.v4.management.CreateBackupTarget1Arg.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.CreateBackupTargetRet.getDefaultInstance()))
-              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("createBackupTarget"))
+                  proto3.prism.v4.management.CreateBackupTarget1Ret.getDefaultInstance()))
+              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("createBackupTarget1"))
               .build();
         }
       }
     }
-    return getCreateBackupTargetMethod;
+    return getCreateBackupTarget1Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.DeleteBackupTargetByIdArg,
-      proto3.prism.v4.management.DeleteBackupTargetByIdRet> getDeleteBackupTargetByIdMethod;
+  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.DeleteBackupTargetById1Arg,
+      proto3.prism.v4.management.DeleteBackupTargetById1Ret> getDeleteBackupTargetById1Method;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "deleteBackupTargetById",
-      requestType = proto3.prism.v4.management.DeleteBackupTargetByIdArg.class,
-      responseType = proto3.prism.v4.management.DeleteBackupTargetByIdRet.class,
+      fullMethodName = SERVICE_NAME + '/' + "deleteBackupTargetById1",
+      requestType = proto3.prism.v4.management.DeleteBackupTargetById1Arg.class,
+      responseType = proto3.prism.v4.management.DeleteBackupTargetById1Ret.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.DeleteBackupTargetByIdArg,
-      proto3.prism.v4.management.DeleteBackupTargetByIdRet> getDeleteBackupTargetByIdMethod() {
-    io.grpc.MethodDescriptor<proto3.prism.v4.management.DeleteBackupTargetByIdArg, proto3.prism.v4.management.DeleteBackupTargetByIdRet> getDeleteBackupTargetByIdMethod;
-    if ((getDeleteBackupTargetByIdMethod = DomainManagerBackupsServiceGrpc.getDeleteBackupTargetByIdMethod) == null) {
+  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.DeleteBackupTargetById1Arg,
+      proto3.prism.v4.management.DeleteBackupTargetById1Ret> getDeleteBackupTargetById1Method() {
+    io.grpc.MethodDescriptor<proto3.prism.v4.management.DeleteBackupTargetById1Arg, proto3.prism.v4.management.DeleteBackupTargetById1Ret> getDeleteBackupTargetById1Method;
+    if ((getDeleteBackupTargetById1Method = DomainManagerBackupsServiceGrpc.getDeleteBackupTargetById1Method) == null) {
       synchronized (DomainManagerBackupsServiceGrpc.class) {
-        if ((getDeleteBackupTargetByIdMethod = DomainManagerBackupsServiceGrpc.getDeleteBackupTargetByIdMethod) == null) {
-          DomainManagerBackupsServiceGrpc.getDeleteBackupTargetByIdMethod = getDeleteBackupTargetByIdMethod =
-              io.grpc.MethodDescriptor.<proto3.prism.v4.management.DeleteBackupTargetByIdArg, proto3.prism.v4.management.DeleteBackupTargetByIdRet>newBuilder()
+        if ((getDeleteBackupTargetById1Method = DomainManagerBackupsServiceGrpc.getDeleteBackupTargetById1Method) == null) {
+          DomainManagerBackupsServiceGrpc.getDeleteBackupTargetById1Method = getDeleteBackupTargetById1Method =
+              io.grpc.MethodDescriptor.<proto3.prism.v4.management.DeleteBackupTargetById1Arg, proto3.prism.v4.management.DeleteBackupTargetById1Ret>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "deleteBackupTargetById"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "deleteBackupTargetById1"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.DeleteBackupTargetByIdArg.getDefaultInstance()))
+                  proto3.prism.v4.management.DeleteBackupTargetById1Arg.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.DeleteBackupTargetByIdRet.getDefaultInstance()))
-              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("deleteBackupTargetById"))
+                  proto3.prism.v4.management.DeleteBackupTargetById1Ret.getDefaultInstance()))
+              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("deleteBackupTargetById1"))
               .build();
         }
       }
     }
-    return getDeleteBackupTargetByIdMethod;
+    return getDeleteBackupTargetById1Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.GetBackupTargetByIdArg,
-      proto3.prism.v4.management.GetBackupTargetByIdRet> getGetBackupTargetByIdMethod;
+  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.GetBackupTargetById1Arg,
+      proto3.prism.v4.management.GetBackupTargetById1Ret> getGetBackupTargetById1Method;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getBackupTargetById",
-      requestType = proto3.prism.v4.management.GetBackupTargetByIdArg.class,
-      responseType = proto3.prism.v4.management.GetBackupTargetByIdRet.class,
+      fullMethodName = SERVICE_NAME + '/' + "getBackupTargetById1",
+      requestType = proto3.prism.v4.management.GetBackupTargetById1Arg.class,
+      responseType = proto3.prism.v4.management.GetBackupTargetById1Ret.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.GetBackupTargetByIdArg,
-      proto3.prism.v4.management.GetBackupTargetByIdRet> getGetBackupTargetByIdMethod() {
-    io.grpc.MethodDescriptor<proto3.prism.v4.management.GetBackupTargetByIdArg, proto3.prism.v4.management.GetBackupTargetByIdRet> getGetBackupTargetByIdMethod;
-    if ((getGetBackupTargetByIdMethod = DomainManagerBackupsServiceGrpc.getGetBackupTargetByIdMethod) == null) {
+  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.GetBackupTargetById1Arg,
+      proto3.prism.v4.management.GetBackupTargetById1Ret> getGetBackupTargetById1Method() {
+    io.grpc.MethodDescriptor<proto3.prism.v4.management.GetBackupTargetById1Arg, proto3.prism.v4.management.GetBackupTargetById1Ret> getGetBackupTargetById1Method;
+    if ((getGetBackupTargetById1Method = DomainManagerBackupsServiceGrpc.getGetBackupTargetById1Method) == null) {
       synchronized (DomainManagerBackupsServiceGrpc.class) {
-        if ((getGetBackupTargetByIdMethod = DomainManagerBackupsServiceGrpc.getGetBackupTargetByIdMethod) == null) {
-          DomainManagerBackupsServiceGrpc.getGetBackupTargetByIdMethod = getGetBackupTargetByIdMethod =
-              io.grpc.MethodDescriptor.<proto3.prism.v4.management.GetBackupTargetByIdArg, proto3.prism.v4.management.GetBackupTargetByIdRet>newBuilder()
+        if ((getGetBackupTargetById1Method = DomainManagerBackupsServiceGrpc.getGetBackupTargetById1Method) == null) {
+          DomainManagerBackupsServiceGrpc.getGetBackupTargetById1Method = getGetBackupTargetById1Method =
+              io.grpc.MethodDescriptor.<proto3.prism.v4.management.GetBackupTargetById1Arg, proto3.prism.v4.management.GetBackupTargetById1Ret>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBackupTargetById"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBackupTargetById1"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.GetBackupTargetByIdArg.getDefaultInstance()))
+                  proto3.prism.v4.management.GetBackupTargetById1Arg.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.GetBackupTargetByIdRet.getDefaultInstance()))
-              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("getBackupTargetById"))
+                  proto3.prism.v4.management.GetBackupTargetById1Ret.getDefaultInstance()))
+              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("getBackupTargetById1"))
               .build();
         }
       }
     }
-    return getGetBackupTargetByIdMethod;
+    return getGetBackupTargetById1Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.ListBackupTargetsArg,
-      proto3.prism.v4.management.ListBackupTargetsRet> getListBackupTargetsMethod;
+  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.ListBackupTargets1Arg,
+      proto3.prism.v4.management.ListBackupTargets1Ret> getListBackupTargets1Method;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "listBackupTargets",
-      requestType = proto3.prism.v4.management.ListBackupTargetsArg.class,
-      responseType = proto3.prism.v4.management.ListBackupTargetsRet.class,
+      fullMethodName = SERVICE_NAME + '/' + "listBackupTargets1",
+      requestType = proto3.prism.v4.management.ListBackupTargets1Arg.class,
+      responseType = proto3.prism.v4.management.ListBackupTargets1Ret.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.ListBackupTargetsArg,
-      proto3.prism.v4.management.ListBackupTargetsRet> getListBackupTargetsMethod() {
-    io.grpc.MethodDescriptor<proto3.prism.v4.management.ListBackupTargetsArg, proto3.prism.v4.management.ListBackupTargetsRet> getListBackupTargetsMethod;
-    if ((getListBackupTargetsMethod = DomainManagerBackupsServiceGrpc.getListBackupTargetsMethod) == null) {
+  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.ListBackupTargets1Arg,
+      proto3.prism.v4.management.ListBackupTargets1Ret> getListBackupTargets1Method() {
+    io.grpc.MethodDescriptor<proto3.prism.v4.management.ListBackupTargets1Arg, proto3.prism.v4.management.ListBackupTargets1Ret> getListBackupTargets1Method;
+    if ((getListBackupTargets1Method = DomainManagerBackupsServiceGrpc.getListBackupTargets1Method) == null) {
       synchronized (DomainManagerBackupsServiceGrpc.class) {
-        if ((getListBackupTargetsMethod = DomainManagerBackupsServiceGrpc.getListBackupTargetsMethod) == null) {
-          DomainManagerBackupsServiceGrpc.getListBackupTargetsMethod = getListBackupTargetsMethod =
-              io.grpc.MethodDescriptor.<proto3.prism.v4.management.ListBackupTargetsArg, proto3.prism.v4.management.ListBackupTargetsRet>newBuilder()
+        if ((getListBackupTargets1Method = DomainManagerBackupsServiceGrpc.getListBackupTargets1Method) == null) {
+          DomainManagerBackupsServiceGrpc.getListBackupTargets1Method = getListBackupTargets1Method =
+              io.grpc.MethodDescriptor.<proto3.prism.v4.management.ListBackupTargets1Arg, proto3.prism.v4.management.ListBackupTargets1Ret>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "listBackupTargets"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "listBackupTargets1"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.ListBackupTargetsArg.getDefaultInstance()))
+                  proto3.prism.v4.management.ListBackupTargets1Arg.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.ListBackupTargetsRet.getDefaultInstance()))
-              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("listBackupTargets"))
+                  proto3.prism.v4.management.ListBackupTargets1Ret.getDefaultInstance()))
+              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("listBackupTargets1"))
               .build();
         }
       }
     }
-    return getListBackupTargetsMethod;
+    return getListBackupTargets1Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.UpdateBackupTargetByIdArg,
-      proto3.prism.v4.management.UpdateBackupTargetByIdRet> getUpdateBackupTargetByIdMethod;
+  private static volatile io.grpc.MethodDescriptor<proto3.prism.v4.management.UpdateBackupTargetById1Arg,
+      proto3.prism.v4.management.UpdateBackupTargetById1Ret> getUpdateBackupTargetById1Method;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "updateBackupTargetById",
-      requestType = proto3.prism.v4.management.UpdateBackupTargetByIdArg.class,
-      responseType = proto3.prism.v4.management.UpdateBackupTargetByIdRet.class,
+      fullMethodName = SERVICE_NAME + '/' + "updateBackupTargetById1",
+      requestType = proto3.prism.v4.management.UpdateBackupTargetById1Arg.class,
+      responseType = proto3.prism.v4.management.UpdateBackupTargetById1Ret.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.UpdateBackupTargetByIdArg,
-      proto3.prism.v4.management.UpdateBackupTargetByIdRet> getUpdateBackupTargetByIdMethod() {
-    io.grpc.MethodDescriptor<proto3.prism.v4.management.UpdateBackupTargetByIdArg, proto3.prism.v4.management.UpdateBackupTargetByIdRet> getUpdateBackupTargetByIdMethod;
-    if ((getUpdateBackupTargetByIdMethod = DomainManagerBackupsServiceGrpc.getUpdateBackupTargetByIdMethod) == null) {
+  public static io.grpc.MethodDescriptor<proto3.prism.v4.management.UpdateBackupTargetById1Arg,
+      proto3.prism.v4.management.UpdateBackupTargetById1Ret> getUpdateBackupTargetById1Method() {
+    io.grpc.MethodDescriptor<proto3.prism.v4.management.UpdateBackupTargetById1Arg, proto3.prism.v4.management.UpdateBackupTargetById1Ret> getUpdateBackupTargetById1Method;
+    if ((getUpdateBackupTargetById1Method = DomainManagerBackupsServiceGrpc.getUpdateBackupTargetById1Method) == null) {
       synchronized (DomainManagerBackupsServiceGrpc.class) {
-        if ((getUpdateBackupTargetByIdMethod = DomainManagerBackupsServiceGrpc.getUpdateBackupTargetByIdMethod) == null) {
-          DomainManagerBackupsServiceGrpc.getUpdateBackupTargetByIdMethod = getUpdateBackupTargetByIdMethod =
-              io.grpc.MethodDescriptor.<proto3.prism.v4.management.UpdateBackupTargetByIdArg, proto3.prism.v4.management.UpdateBackupTargetByIdRet>newBuilder()
+        if ((getUpdateBackupTargetById1Method = DomainManagerBackupsServiceGrpc.getUpdateBackupTargetById1Method) == null) {
+          DomainManagerBackupsServiceGrpc.getUpdateBackupTargetById1Method = getUpdateBackupTargetById1Method =
+              io.grpc.MethodDescriptor.<proto3.prism.v4.management.UpdateBackupTargetById1Arg, proto3.prism.v4.management.UpdateBackupTargetById1Ret>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "updateBackupTargetById"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "updateBackupTargetById1"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.UpdateBackupTargetByIdArg.getDefaultInstance()))
+                  proto3.prism.v4.management.UpdateBackupTargetById1Arg.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  proto3.prism.v4.management.UpdateBackupTargetByIdRet.getDefaultInstance()))
-              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("updateBackupTargetById"))
+                  proto3.prism.v4.management.UpdateBackupTargetById1Ret.getDefaultInstance()))
+              .setSchemaDescriptor(new DomainManagerBackupsServiceMethodDescriptorSupplier("updateBackupTargetById1"))
               .build();
         }
       }
     }
-    return getUpdateBackupTargetByIdMethod;
+    return getUpdateBackupTargetById1Method;
   }
 
   /**
@@ -219,110 +219,113 @@ public final class DomainManagerBackupsServiceGrpc {
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: POST
      * Create backup target 
-     * Creates a cluster or object store as backup target on which the backup is required to be
-     *stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-     *If any one of the cluster/object store does not qualify for backup, then the API will fail.
+     * Creates a cluster or object store as the backup target. For a given Prism Central,
+     *there can be up to 3 clusters as backup targets 
+     *and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+     *lacks appropriate permissions, the API request will fail. 
+     *For object store backup targets, specifying backup policy is mandatory along 
+     *with the location of the object store.
      * </pre>
      */
-    public void createBackupTarget(proto3.prism.v4.management.CreateBackupTargetArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.CreateBackupTargetRet> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateBackupTargetMethod(), responseObserver);
+    public void createBackupTarget1(proto3.prism.v4.management.CreateBackupTarget1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.CreateBackupTarget1Ret> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateBackupTarget1Method(), responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: DELETE
      * Delete backup target 
-     * Removes cluster/object store from backup targets. This will stop backup from being
-     *taken on cluster/object store.
+     * Removes cluster/object store from the backup targets. This will stop the cluster/object store 
+     *from backing up Prism Central data.
      * </pre>
      */
-    public void deleteBackupTargetById(proto3.prism.v4.management.DeleteBackupTargetByIdArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.DeleteBackupTargetByIdRet> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteBackupTargetByIdMethod(), responseObserver);
+    public void deleteBackupTargetById1(proto3.prism.v4.management.DeleteBackupTargetById1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.DeleteBackupTargetById1Ret> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteBackupTargetById1Method(), responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: GET
      * Fetch backup target 
-     * Retrieves the backup targets (cluster or object store) from domain manager. Returns the
-     *backup config and lastSyncTimestamp to the user
+     * Retrieves the backup targets (cluster or object store) from a domain manager and returns the
+     *backup configuration and lastSyncTimestamp parameter to the user.
      * </pre>
      */
-    public void getBackupTargetById(proto3.prism.v4.management.GetBackupTargetByIdArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.GetBackupTargetByIdRet> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBackupTargetByIdMethod(), responseObserver);
+    public void getBackupTargetById1(proto3.prism.v4.management.GetBackupTargetById1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.GetBackupTargetById1Ret> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBackupTargetById1Method(), responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: GET
-     * List Backup Targets 
+     * List backup targets 
      * Lists backup targets (cluster or object store) configured for a given domain manager.
      * </pre>
      */
-    public void listBackupTargets(proto3.prism.v4.management.ListBackupTargetsArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.ListBackupTargetsRet> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListBackupTargetsMethod(), responseObserver);
+    public void listBackupTargets1(proto3.prism.v4.management.ListBackupTargets1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.ListBackupTargets1Ret> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListBackupTargets1Method(), responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: PUT
      * Update backup target 
-     * Updates the credentials and/or rpo of the given objectstore
+     * Updates the credentials and/or RPO of the given object store.
      * </pre>
      */
-    public void updateBackupTargetById(proto3.prism.v4.management.UpdateBackupTargetByIdArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.UpdateBackupTargetByIdRet> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateBackupTargetByIdMethod(), responseObserver);
+    public void updateBackupTargetById1(proto3.prism.v4.management.UpdateBackupTargetById1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.UpdateBackupTargetById1Ret> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateBackupTargetById1Method(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getCreateBackupTargetMethod(),
+            getCreateBackupTarget1Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                proto3.prism.v4.management.CreateBackupTargetArg,
-                proto3.prism.v4.management.CreateBackupTargetRet>(
-                  this, METHODID_CREATE_BACKUP_TARGET)))
+                proto3.prism.v4.management.CreateBackupTarget1Arg,
+                proto3.prism.v4.management.CreateBackupTarget1Ret>(
+                  this, METHODID_CREATE_BACKUP_TARGET1)))
           .addMethod(
-            getDeleteBackupTargetByIdMethod(),
+            getDeleteBackupTargetById1Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                proto3.prism.v4.management.DeleteBackupTargetByIdArg,
-                proto3.prism.v4.management.DeleteBackupTargetByIdRet>(
-                  this, METHODID_DELETE_BACKUP_TARGET_BY_ID)))
+                proto3.prism.v4.management.DeleteBackupTargetById1Arg,
+                proto3.prism.v4.management.DeleteBackupTargetById1Ret>(
+                  this, METHODID_DELETE_BACKUP_TARGET_BY_ID1)))
           .addMethod(
-            getGetBackupTargetByIdMethod(),
+            getGetBackupTargetById1Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                proto3.prism.v4.management.GetBackupTargetByIdArg,
-                proto3.prism.v4.management.GetBackupTargetByIdRet>(
-                  this, METHODID_GET_BACKUP_TARGET_BY_ID)))
+                proto3.prism.v4.management.GetBackupTargetById1Arg,
+                proto3.prism.v4.management.GetBackupTargetById1Ret>(
+                  this, METHODID_GET_BACKUP_TARGET_BY_ID1)))
           .addMethod(
-            getListBackupTargetsMethod(),
+            getListBackupTargets1Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                proto3.prism.v4.management.ListBackupTargetsArg,
-                proto3.prism.v4.management.ListBackupTargetsRet>(
-                  this, METHODID_LIST_BACKUP_TARGETS)))
+                proto3.prism.v4.management.ListBackupTargets1Arg,
+                proto3.prism.v4.management.ListBackupTargets1Ret>(
+                  this, METHODID_LIST_BACKUP_TARGETS1)))
           .addMethod(
-            getUpdateBackupTargetByIdMethod(),
+            getUpdateBackupTargetById1Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                proto3.prism.v4.management.UpdateBackupTargetByIdArg,
-                proto3.prism.v4.management.UpdateBackupTargetByIdRet>(
-                  this, METHODID_UPDATE_BACKUP_TARGET_BY_ID)))
+                proto3.prism.v4.management.UpdateBackupTargetById1Arg,
+                proto3.prism.v4.management.UpdateBackupTargetById1Ret>(
+                  this, METHODID_UPDATE_BACKUP_TARGET_BY_ID1)))
           .build();
     }
   }
@@ -343,76 +346,79 @@ public final class DomainManagerBackupsServiceGrpc {
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: POST
      * Create backup target 
-     * Creates a cluster or object store as backup target on which the backup is required to be
-     *stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-     *If any one of the cluster/object store does not qualify for backup, then the API will fail.
+     * Creates a cluster or object store as the backup target. For a given Prism Central,
+     *there can be up to 3 clusters as backup targets 
+     *and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+     *lacks appropriate permissions, the API request will fail. 
+     *For object store backup targets, specifying backup policy is mandatory along 
+     *with the location of the object store.
      * </pre>
      */
-    public void createBackupTarget(proto3.prism.v4.management.CreateBackupTargetArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.CreateBackupTargetRet> responseObserver) {
+    public void createBackupTarget1(proto3.prism.v4.management.CreateBackupTarget1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.CreateBackupTarget1Ret> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getCreateBackupTargetMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getCreateBackupTarget1Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: DELETE
      * Delete backup target 
-     * Removes cluster/object store from backup targets. This will stop backup from being
-     *taken on cluster/object store.
+     * Removes cluster/object store from the backup targets. This will stop the cluster/object store 
+     *from backing up Prism Central data.
      * </pre>
      */
-    public void deleteBackupTargetById(proto3.prism.v4.management.DeleteBackupTargetByIdArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.DeleteBackupTargetByIdRet> responseObserver) {
+    public void deleteBackupTargetById1(proto3.prism.v4.management.DeleteBackupTargetById1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.DeleteBackupTargetById1Ret> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getDeleteBackupTargetByIdMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getDeleteBackupTargetById1Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: GET
      * Fetch backup target 
-     * Retrieves the backup targets (cluster or object store) from domain manager. Returns the
-     *backup config and lastSyncTimestamp to the user
+     * Retrieves the backup targets (cluster or object store) from a domain manager and returns the
+     *backup configuration and lastSyncTimestamp parameter to the user.
      * </pre>
      */
-    public void getBackupTargetById(proto3.prism.v4.management.GetBackupTargetByIdArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.GetBackupTargetByIdRet> responseObserver) {
+    public void getBackupTargetById1(proto3.prism.v4.management.GetBackupTargetById1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.GetBackupTargetById1Ret> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getGetBackupTargetByIdMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetBackupTargetById1Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: GET
-     * List Backup Targets 
+     * List backup targets 
      * Lists backup targets (cluster or object store) configured for a given domain manager.
      * </pre>
      */
-    public void listBackupTargets(proto3.prism.v4.management.ListBackupTargetsArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.ListBackupTargetsRet> responseObserver) {
+    public void listBackupTargets1(proto3.prism.v4.management.ListBackupTargets1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.ListBackupTargets1Ret> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getListBackupTargetsMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getListBackupTargets1Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: PUT
      * Update backup target 
-     * Updates the credentials and/or rpo of the given objectstore
+     * Updates the credentials and/or RPO of the given object store.
      * </pre>
      */
-    public void updateBackupTargetById(proto3.prism.v4.management.UpdateBackupTargetByIdArg request,
-        io.grpc.stub.StreamObserver<proto3.prism.v4.management.UpdateBackupTargetByIdRet> responseObserver) {
+    public void updateBackupTargetById1(proto3.prism.v4.management.UpdateBackupTargetById1Arg request,
+        io.grpc.stub.StreamObserver<proto3.prism.v4.management.UpdateBackupTargetById1Ret> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getUpdateBackupTargetByIdMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getUpdateBackupTargetById1Method(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -432,71 +438,74 @@ public final class DomainManagerBackupsServiceGrpc {
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: POST
      * Create backup target 
-     * Creates a cluster or object store as backup target on which the backup is required to be
-     *stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-     *If any one of the cluster/object store does not qualify for backup, then the API will fail.
+     * Creates a cluster or object store as the backup target. For a given Prism Central,
+     *there can be up to 3 clusters as backup targets 
+     *and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+     *lacks appropriate permissions, the API request will fail. 
+     *For object store backup targets, specifying backup policy is mandatory along 
+     *with the location of the object store.
      * </pre>
      */
-    public proto3.prism.v4.management.CreateBackupTargetRet createBackupTarget(proto3.prism.v4.management.CreateBackupTargetArg request) {
+    public proto3.prism.v4.management.CreateBackupTarget1Ret createBackupTarget1(proto3.prism.v4.management.CreateBackupTarget1Arg request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getCreateBackupTargetMethod(), getCallOptions(), request);
+          getChannel(), getCreateBackupTarget1Method(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: DELETE
      * Delete backup target 
-     * Removes cluster/object store from backup targets. This will stop backup from being
-     *taken on cluster/object store.
+     * Removes cluster/object store from the backup targets. This will stop the cluster/object store 
+     *from backing up Prism Central data.
      * </pre>
      */
-    public proto3.prism.v4.management.DeleteBackupTargetByIdRet deleteBackupTargetById(proto3.prism.v4.management.DeleteBackupTargetByIdArg request) {
+    public proto3.prism.v4.management.DeleteBackupTargetById1Ret deleteBackupTargetById1(proto3.prism.v4.management.DeleteBackupTargetById1Arg request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getDeleteBackupTargetByIdMethod(), getCallOptions(), request);
+          getChannel(), getDeleteBackupTargetById1Method(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: GET
      * Fetch backup target 
-     * Retrieves the backup targets (cluster or object store) from domain manager. Returns the
-     *backup config and lastSyncTimestamp to the user
+     * Retrieves the backup targets (cluster or object store) from a domain manager and returns the
+     *backup configuration and lastSyncTimestamp parameter to the user.
      * </pre>
      */
-    public proto3.prism.v4.management.GetBackupTargetByIdRet getBackupTargetById(proto3.prism.v4.management.GetBackupTargetByIdArg request) {
+    public proto3.prism.v4.management.GetBackupTargetById1Ret getBackupTargetById1(proto3.prism.v4.management.GetBackupTargetById1Arg request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getGetBackupTargetByIdMethod(), getCallOptions(), request);
+          getChannel(), getGetBackupTargetById1Method(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: GET
-     * List Backup Targets 
+     * List backup targets 
      * Lists backup targets (cluster or object store) configured for a given domain manager.
      * </pre>
      */
-    public proto3.prism.v4.management.ListBackupTargetsRet listBackupTargets(proto3.prism.v4.management.ListBackupTargetsArg request) {
+    public proto3.prism.v4.management.ListBackupTargets1Ret listBackupTargets1(proto3.prism.v4.management.ListBackupTargets1Arg request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getListBackupTargetsMethod(), getCallOptions(), request);
+          getChannel(), getListBackupTargets1Method(), getCallOptions(), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: PUT
      * Update backup target 
-     * Updates the credentials and/or rpo of the given objectstore
+     * Updates the credentials and/or RPO of the given object store.
      * </pre>
      */
-    public proto3.prism.v4.management.UpdateBackupTargetByIdRet updateBackupTargetById(proto3.prism.v4.management.UpdateBackupTargetByIdArg request) {
+    public proto3.prism.v4.management.UpdateBackupTargetById1Ret updateBackupTargetById1(proto3.prism.v4.management.UpdateBackupTargetById1Arg request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getUpdateBackupTargetByIdMethod(), getCallOptions(), request);
+          getChannel(), getUpdateBackupTargetById1Method(), getCallOptions(), request);
     }
   }
 
@@ -516,84 +525,87 @@ public final class DomainManagerBackupsServiceGrpc {
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: POST
      * Create backup target 
-     * Creates a cluster or object store as backup target on which the backup is required to be
-     *stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-     *If any one of the cluster/object store does not qualify for backup, then the API will fail.
+     * Creates a cluster or object store as the backup target. For a given Prism Central,
+     *there can be up to 3 clusters as backup targets 
+     *and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+     *lacks appropriate permissions, the API request will fail. 
+     *For object store backup targets, specifying backup policy is mandatory along 
+     *with the location of the object store.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.CreateBackupTargetRet> createBackupTarget(
-        proto3.prism.v4.management.CreateBackupTargetArg request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.CreateBackupTarget1Ret> createBackupTarget1(
+        proto3.prism.v4.management.CreateBackupTarget1Arg request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getCreateBackupTargetMethod(), getCallOptions()), request);
+          getChannel().newCall(getCreateBackupTarget1Method(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: DELETE
      * Delete backup target 
-     * Removes cluster/object store from backup targets. This will stop backup from being
-     *taken on cluster/object store.
+     * Removes cluster/object store from the backup targets. This will stop the cluster/object store 
+     *from backing up Prism Central data.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.DeleteBackupTargetByIdRet> deleteBackupTargetById(
-        proto3.prism.v4.management.DeleteBackupTargetByIdArg request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.DeleteBackupTargetById1Ret> deleteBackupTargetById1(
+        proto3.prism.v4.management.DeleteBackupTargetById1Arg request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getDeleteBackupTargetByIdMethod(), getCallOptions()), request);
+          getChannel().newCall(getDeleteBackupTargetById1Method(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: GET
      * Fetch backup target 
-     * Retrieves the backup targets (cluster or object store) from domain manager. Returns the
-     *backup config and lastSyncTimestamp to the user
+     * Retrieves the backup targets (cluster or object store) from a domain manager and returns the
+     *backup configuration and lastSyncTimestamp parameter to the user.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.GetBackupTargetByIdRet> getBackupTargetById(
-        proto3.prism.v4.management.GetBackupTargetByIdArg request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.GetBackupTargetById1Ret> getBackupTargetById1(
+        proto3.prism.v4.management.GetBackupTargetById1Arg request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getGetBackupTargetByIdMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetBackupTargetById1Method(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
      * http method: GET
-     * List Backup Targets 
+     * List backup targets 
      * Lists backup targets (cluster or object store) configured for a given domain manager.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.ListBackupTargetsRet> listBackupTargets(
-        proto3.prism.v4.management.ListBackupTargetsArg request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.ListBackupTargets1Ret> listBackupTargets1(
+        proto3.prism.v4.management.ListBackupTargets1Arg request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getListBackupTargetsMethod(), getCallOptions()), request);
+          getChannel().newCall(getListBackupTargets1Method(), getCallOptions()), request);
     }
 
     /**
      * <pre>
-     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+     * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
      * http method: PUT
      * Update backup target 
-     * Updates the credentials and/or rpo of the given objectstore
+     * Updates the credentials and/or RPO of the given object store.
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.UpdateBackupTargetByIdRet> updateBackupTargetById(
-        proto3.prism.v4.management.UpdateBackupTargetByIdArg request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto3.prism.v4.management.UpdateBackupTargetById1Ret> updateBackupTargetById1(
+        proto3.prism.v4.management.UpdateBackupTargetById1Arg request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getUpdateBackupTargetByIdMethod(), getCallOptions()), request);
+          getChannel().newCall(getUpdateBackupTargetById1Method(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_CREATE_BACKUP_TARGET = 0;
-  private static final int METHODID_DELETE_BACKUP_TARGET_BY_ID = 1;
-  private static final int METHODID_GET_BACKUP_TARGET_BY_ID = 2;
-  private static final int METHODID_LIST_BACKUP_TARGETS = 3;
-  private static final int METHODID_UPDATE_BACKUP_TARGET_BY_ID = 4;
+  private static final int METHODID_CREATE_BACKUP_TARGET1 = 0;
+  private static final int METHODID_DELETE_BACKUP_TARGET_BY_ID1 = 1;
+  private static final int METHODID_GET_BACKUP_TARGET_BY_ID1 = 2;
+  private static final int METHODID_LIST_BACKUP_TARGETS1 = 3;
+  private static final int METHODID_UPDATE_BACKUP_TARGET_BY_ID1 = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -612,25 +624,25 @@ public final class DomainManagerBackupsServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_CREATE_BACKUP_TARGET:
-          serviceImpl.createBackupTarget((proto3.prism.v4.management.CreateBackupTargetArg) request,
-              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.CreateBackupTargetRet>) responseObserver);
+        case METHODID_CREATE_BACKUP_TARGET1:
+          serviceImpl.createBackupTarget1((proto3.prism.v4.management.CreateBackupTarget1Arg) request,
+              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.CreateBackupTarget1Ret>) responseObserver);
           break;
-        case METHODID_DELETE_BACKUP_TARGET_BY_ID:
-          serviceImpl.deleteBackupTargetById((proto3.prism.v4.management.DeleteBackupTargetByIdArg) request,
-              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.DeleteBackupTargetByIdRet>) responseObserver);
+        case METHODID_DELETE_BACKUP_TARGET_BY_ID1:
+          serviceImpl.deleteBackupTargetById1((proto3.prism.v4.management.DeleteBackupTargetById1Arg) request,
+              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.DeleteBackupTargetById1Ret>) responseObserver);
           break;
-        case METHODID_GET_BACKUP_TARGET_BY_ID:
-          serviceImpl.getBackupTargetById((proto3.prism.v4.management.GetBackupTargetByIdArg) request,
-              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.GetBackupTargetByIdRet>) responseObserver);
+        case METHODID_GET_BACKUP_TARGET_BY_ID1:
+          serviceImpl.getBackupTargetById1((proto3.prism.v4.management.GetBackupTargetById1Arg) request,
+              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.GetBackupTargetById1Ret>) responseObserver);
           break;
-        case METHODID_LIST_BACKUP_TARGETS:
-          serviceImpl.listBackupTargets((proto3.prism.v4.management.ListBackupTargetsArg) request,
-              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.ListBackupTargetsRet>) responseObserver);
+        case METHODID_LIST_BACKUP_TARGETS1:
+          serviceImpl.listBackupTargets1((proto3.prism.v4.management.ListBackupTargets1Arg) request,
+              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.ListBackupTargets1Ret>) responseObserver);
           break;
-        case METHODID_UPDATE_BACKUP_TARGET_BY_ID:
-          serviceImpl.updateBackupTargetById((proto3.prism.v4.management.UpdateBackupTargetByIdArg) request,
-              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.UpdateBackupTargetByIdRet>) responseObserver);
+        case METHODID_UPDATE_BACKUP_TARGET_BY_ID1:
+          serviceImpl.updateBackupTargetById1((proto3.prism.v4.management.UpdateBackupTargetById1Arg) request,
+              (io.grpc.stub.StreamObserver<proto3.prism.v4.management.UpdateBackupTargetById1Ret>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -693,11 +705,11 @@ public final class DomainManagerBackupsServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DomainManagerBackupsServiceFileDescriptorSupplier())
-              .addMethod(getCreateBackupTargetMethod())
-              .addMethod(getDeleteBackupTargetByIdMethod())
-              .addMethod(getGetBackupTargetByIdMethod())
-              .addMethod(getListBackupTargetsMethod())
-              .addMethod(getUpdateBackupTargetByIdMethod())
+              .addMethod(getCreateBackupTarget1Method())
+              .addMethod(getDeleteBackupTargetById1Method())
+              .addMethod(getGetBackupTargetById1Method())
+              .addMethod(getListBackupTargets1Method())
+              .addMethod(getUpdateBackupTargetById1Method())
               .build();
         }
       }

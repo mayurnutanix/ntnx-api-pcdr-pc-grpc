@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -34,7 +34,7 @@ import static dp1.pri.deserializers.PriDeserializerUtils.*;
 
 
 /**
- * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Get operation
+ * REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId} Get operation
  */
 
 @Data
@@ -69,11 +69,11 @@ public class GetBackupTargetApiResponse implements java.io.Serializable, PriObje
 
 
   protected String initialize$fv() {
-    return "v4.r0.b1";
+    return "v4.r0";
   }
 
   @JsonAnySetter
-  private void setUndeserializedFields(String name, String value) {
+  private void setUndeserializedFields(String name, Object value) {
     $unknownFields.put(name, value);
   }
 

@@ -134,6 +134,8 @@
   value: "Genesis module."
 - name: "PrismModuleDescription"
   value: "Prism module."
+- name: "StargateModuleDescription"
+  value: "Stargate Module"
 - name: "SysLogModuleDescription"
   value: "Syslog module."
 - name: "ZookeeperModuleDescription"

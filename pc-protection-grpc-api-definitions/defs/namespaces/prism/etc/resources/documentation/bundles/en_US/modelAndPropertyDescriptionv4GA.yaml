@@ -1,9 +1,9 @@
 - name: "BackupTargetDescription"
   value: |
-    Backup target for the domain manager, either a cluster or object store.
+    The backup target for the domain manager, which can be either a cluster or an object store.
 - name: "PrismElementClusterModelDescription"
   value: |
-    Model which contains the information of backup cluster
+    Model which contains the information of backup cluster.
 - name: "LastSyncTimeDescription"
   value: |
     Represents the time when the domain manager was last synchronized or copied its 
@@ -13,7 +13,7 @@
     Whether the backup is paused on the given cluster or not.
 - name: "BackupPauseReasonDescription"
   value: |
-    Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false.
+    Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false.
 - name: "ObjectStoreDescription"
   value: |
     Model which contains the information of the object store endpoint where 
@@ -27,7 +27,7 @@
     This object is a container for credentials to access the objectstore
 - name: "LocationDescription"
   value: |
-    Location of the backup target. For example a cluster or an object store endpoint such as AWS s3.
+    Location of the backup target. For example, a cluster or an object store endpoint, such as AWS s3.
 # Model Description for get-recovery-status API
 - name: "PortDescription"
   value: |
@@ -36,26 +36,22 @@
 - name: "BucketNameDescription"
   value: |
     The bucket name of the object store endpoint where backup data of domain manager
-    is stored.
+    is to be stored.
 - name: "RegionDescription"
   value: |
     The region name of the object store endpoint where backup data of domain manager
     is stored.
 
 # ApiError Model description
-- name: "ShouldSkipTLSDescription"
-  value: |
-    Skip the verification of TLS certificates during communication with object
-    store endpoint.
 - name: "AccessKeyDescription"
   value:
-    Access key for the object store provided for backup target.
+    Access key Id for the object store provided for backup target.
 - name: "SecretAccessKeyDescription"
   value: |
-    Secret access key ID for the object store provided for backup target.
+    Secret access key for the object store provided for backup target.
 - name: "ObjectStoreBackupPolicyDescription"
   value:
-    Backup policy for the object store provided defining the rpo etc.
+    Backup policy for the object store provided.
 - name: "AccessKeyCredentialsDescription"
   value:
     Secret credentials model for the object store containing access key ID and secret access key.
@@ -82,7 +78,7 @@
 - name: "secretAccessKeyDesc"
   value: |
     Secret access key for the object store.
-- name: "IpAddressOrHostname"
+- name: "IpAddressOrHostnameDescription"
   value: |
     The ip address or domain of the object store endpoint where backup data 
     of domain manager is stored.
@@ -118,7 +114,7 @@
     FQDN of domain manager.
 - name: "NutanixObjectsConfigDescription"
   value: |
-    Nutanix object store model.
+    The base model of Nutanix Objects object store endpoint where domain manager is backed up.
 - name: "DomainManagerDeploySpecDesc"
   value: |
     Deploy spec of domain manager deployed as part of recovery.
@@ -130,7 +126,7 @@
     Restore point represents the state of domain manager at a specific moment. It can be used to restore the domain manager to that state in cases such as disaster. Each restore point captures key details i.e creation time and domain manager config necessary for restoring the system to a prior state.
 - name: "RestorePointExtIdDescription"
   value: |
-    Restore point id for backup created in object store.
+    Restore point ID for the backup created in cluster/object store.
 - name: "PcRestorePointCreatedTimeDescription"
   value: |
     The UTC date and time in ISO-8601 format when the Restore point was created.
@@ -142,11 +138,17 @@
     Cluster config for the backup target or recovery source.
 - name: "ListRestorableDomainManagersInfoDescription"
   value: |
-    Identifier spec of domain manager whose backup available in restore source i.e name,ip,
-    last sync time.
-- name: "RestoreSourceExtIdDescription"
+    Returns a list of restorable domain mangers.
+- name: "ConnectionConfigDescription"
   value: |
-    Restore source external identifier.
-- name: "RestorePointExtIdDescription"
+    Connection config to be used when making connection with object store.
+- name: "SkipCertificateValidationDescription"
   value: |
-    Restore point identifier for snapshot restore point.
+    Skip the verification of certificate during communication with object
+    store endpoint
+- name: "CertificateDescription"
+  value: |
+    Certificate which will be used while validating object store identity
+- name: "HasCustomCertificate"
+  value: |
+    Indicates whether custom certificate were configured or not.

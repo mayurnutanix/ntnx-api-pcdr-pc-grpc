@@ -31,6 +31,7 @@ com/nutanix/dp1/pri/common/v1/config/MessageSeverity.class
 com/nutanix/dp1/pri/prism/v4/management/CreateBackupTargetApiResponse$OneOfDataWrapper$OneOfDataWrapperJsonDeserializer.class
 com/nutanix/pri/java/client/ApiClient$CustomBinaryResponseMessageConverter.class
 com/nutanix/dp1/pri/prism/v4/management/GetBackupTargetApiResponse$OneOfDataWrapper.class
+com/nutanix/pri/java/client/ApiClient$CustomTextHttpMessageConverter.class
 com/nutanix/dp1/pri/prism/v4/management/CreateBackupTargetApiResponse.class
 com/nutanix/dp1/pri/prism/v4/management/CreateBackupTargetApiResponse$OneOfDataWrapper.class
 com/nutanix/dp1/pri/prism/v4/management/DeleteBackupTargetApiResponse$OneOfDataWrapper.class

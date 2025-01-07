@@ -2,18 +2,18 @@
 - name: "common"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-common.git"
-  ref: "refs/tags/16.9.0.1046-RELEASE"
+  ref: "refs/tags/17.0.0.1076-RELEASE"
   baseDir: "common-api-definitions/defs"
   authRequired: false
 - name: "tasks"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-tasks.git"
-  ref: "refs/tags/16.9.0.893-RELEASE"
+  ref: "refs/tags/17.0.0.934-RELEASE"
   baseDir: "tasks-api-definitions/defs"
   authRequired: false
 - name: "guru"
   type: "git"
   uri: "https://github.com/nutanix-core/ntnx-api-guru-pc.git"
-  ref: "refs/tags/16.9.0.3756-RELEASE"
+  ref: "refs/tags/17.0.0.4156-RELEASE"
   baseDir: "guru-pc-api-definitions/defs"
   authRequired: false

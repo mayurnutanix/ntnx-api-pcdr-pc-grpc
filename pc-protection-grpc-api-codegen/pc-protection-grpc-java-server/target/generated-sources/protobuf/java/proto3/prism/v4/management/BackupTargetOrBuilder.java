@@ -127,7 +127,7 @@ public interface BackupTargetOrBuilder extends
 
   /**
    * <pre>
-   * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+   * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
    * </pre>
    *
    * <code>string backup_pause_reason = 1004;</code>
@@ -136,7 +136,7 @@ public interface BackupTargetOrBuilder extends
   java.lang.String getBackupPauseReason();
   /**
    * <pre>
-   * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+   * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
    * </pre>
    *
    * <code>string backup_pause_reason = 1004;</code>

@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -20,14 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.concurrent.CompletableFuture;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import com.nutanix.devplatform.annotation.GetValidator;
+import com.nutanix.devplatform.annotation.ArgName;
+
 import java.util.List;
-    @javax.annotation.Generated(value = "com.nutanix.swagger.codegen.generators.SpringMvcApiInterfaceGenerator", date = "2024-09-12T19:51:03.122+05:30[Asia/Kolkata]")
+    @javax.annotation.Generated(value = "com.nutanix.swagger.codegen.generators.SpringMvcApiInterfaceGenerator", date = "2025-01-06T14:24:19.110+05:30[Asia/Kolkata]")
+@Validated
 public interface DomainManagerBackupsApiControllerInterface {
         /**
          * This operation supports the following parameters:
@@ -63,8 +70,8 @@ public interface DomainManagerBackupsApiControllerInterface {
 
          * 
          */
-        public static final String CREATE_BACKUP_TARGET_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets";
-        @RequestMapping(value = CREATE_BACKUP_TARGET_URI, 
+        public static final String CREATE_BACKUP_TARGET1_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new";
+        @RequestMapping(value = CREATE_BACKUP_TARGET1_URI, 
             produces = { "application/json" }, 
             consumes = { "application/json" },
         method = RequestMethod.POST)
@@ -80,7 +87,7 @@ public interface DomainManagerBackupsApiControllerInterface {
             legacyRolesSupported = { "Internal Super Admin", "Super Admin", "Prism Admin", "Domain Manager Admin" },
             isListCall = false
         )
-        ResponseEntity<MappingJacksonValue> createBackupTarget(
+        CompletableFuture<ResponseEntity<MappingJacksonValue>> createBackupTarget1(
 
    @RequestBody dp1.pri.prism.v4.management.BackupTarget body,
 
@@ -123,8 +130,8 @@ public interface DomainManagerBackupsApiControllerInterface {
 
          * 
          */
-        public static final String DELETE_BACKUP_TARGET_BY_ID_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}";
-        @RequestMapping(value = DELETE_BACKUP_TARGET_BY_ID_URI, 
+        public static final String DELETE_BACKUP_TARGET_BY_ID1_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}";
+        @RequestMapping(value = DELETE_BACKUP_TARGET_BY_ID1_URI, 
             produces = { "application/json" }, 
         method = RequestMethod.DELETE)
         @com.nutanix.prism.rbac.RbacPermissions(
@@ -139,7 +146,7 @@ public interface DomainManagerBackupsApiControllerInterface {
             legacyRolesSupported = { "Internal Super Admin", "Super Admin", "Prism Admin", "Domain Manager Admin" },
             isListCall = false
         )
-        ResponseEntity<MappingJacksonValue> deleteBackupTargetById(@PathVariable("domainManagerExtId") String domainManagerExtId,
+        CompletableFuture<ResponseEntity<MappingJacksonValue>> deleteBackupTargetById1(@PathVariable("domainManagerExtId") String domainManagerExtId,
 
 
 
@@ -182,8 +189,8 @@ public interface DomainManagerBackupsApiControllerInterface {
 
          * 
          */
-        public static final String GET_BACKUP_TARGET_BY_ID_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}";
-        @RequestMapping(value = GET_BACKUP_TARGET_BY_ID_URI, 
+        public static final String GET_BACKUP_TARGET_BY_ID1_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}";
+        @RequestMapping(value = GET_BACKUP_TARGET_BY_ID1_URI, 
             produces = { "application/json" }, 
         method = RequestMethod.GET)
         @com.nutanix.prism.rbac.RbacPermissions(
@@ -198,11 +205,12 @@ public interface DomainManagerBackupsApiControllerInterface {
             legacyRolesSupported = { "Internal Super Admin", "Super Admin", "Prism Admin", "Prism Viewer", "Domain Manager Admin", "Domain Manager Viewer" },
             isListCall = false
         )
-        ResponseEntity<MappingJacksonValue> getBackupTargetById(@PathVariable("domainManagerExtId") String domainManagerExtId,
+        @GetValidator
+        CompletableFuture<ResponseEntity<MappingJacksonValue>> getBackupTargetById1(@PathVariable("domainManagerExtId") @Pattern(regexp = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")   @ArgName("domainManagerExtId-path") String domainManagerExtId,
 
 
 
-@PathVariable("extId") String extId,
+@PathVariable("extId") @Pattern(regexp = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")   @ArgName("extId-path") String extId,
 
 
 
@@ -226,8 +234,8 @@ public interface DomainManagerBackupsApiControllerInterface {
 
          * 
          */
-        public static final String LIST_BACKUP_TARGETS_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets";
-        @RequestMapping(value = LIST_BACKUP_TARGETS_URI, 
+        public static final String LIST_BACKUP_TARGETS1_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new";
+        @RequestMapping(value = LIST_BACKUP_TARGETS1_URI, 
             produces = { "application/json" }, 
         method = RequestMethod.GET)
         @com.nutanix.prism.rbac.RbacPermissions(
@@ -242,7 +250,8 @@ public interface DomainManagerBackupsApiControllerInterface {
             legacyRolesSupported = { "Internal Super Admin", "Super Admin", "Prism Admin", "Prism Viewer", "Domain Manager Admin", "Domain Manager Viewer" },
             isListCall = true
         )
-        ResponseEntity<MappingJacksonValue> listBackupTargets(@PathVariable("domainManagerExtId") String domainManagerExtId,
+        @GetValidator
+        CompletableFuture<ResponseEntity<MappingJacksonValue>> listBackupTargets1(@PathVariable("domainManagerExtId") @Pattern(regexp = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")   @ArgName("domainManagerExtId-path") String domainManagerExtId,
 
 
 
@@ -296,8 +305,8 @@ public interface DomainManagerBackupsApiControllerInterface {
 
          * 
          */
-        public static final String UPDATE_BACKUP_TARGET_BY_ID_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}";
-        @RequestMapping(value = UPDATE_BACKUP_TARGET_BY_ID_URI, 
+        public static final String UPDATE_BACKUP_TARGET_BY_ID1_URI = "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}";
+        @RequestMapping(value = UPDATE_BACKUP_TARGET_BY_ID1_URI, 
             produces = { "application/json" }, 
             consumes = { "application/json" },
         method = RequestMethod.PUT)
@@ -313,7 +322,7 @@ public interface DomainManagerBackupsApiControllerInterface {
             legacyRolesSupported = { "Internal Super Admin", "Super Admin", "Prism Admin", "Domain Manager Admin" },
             isListCall = false
         )
-        ResponseEntity<MappingJacksonValue> updateBackupTargetById(
+        CompletableFuture<ResponseEntity<MappingJacksonValue>> updateBackupTargetById1(
 
    @RequestBody dp1.pri.prism.v4.management.BackupTarget body,
 

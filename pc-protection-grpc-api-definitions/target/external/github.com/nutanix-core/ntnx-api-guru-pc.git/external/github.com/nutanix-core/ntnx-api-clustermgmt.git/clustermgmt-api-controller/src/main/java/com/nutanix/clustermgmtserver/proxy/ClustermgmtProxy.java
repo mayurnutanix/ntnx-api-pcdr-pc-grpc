@@ -56,7 +56,7 @@ abstract class ClustermgmtProxy<X> extends BaseProxy {
   // The map that returns BiFunction corresponding to a specific RPC service.
   Map<String, ExceptionBiFunction<Rpc, Object, Object, ServiceException>> rpcServiceBiFunctionMap;
 
-  RpcRequestContext getEmptyRpcRequestContext() {
+  RpcRequestContext getEmptyRequestContextForRpc() {
     return RpcRequestContext.newBuilder().build();
   }
 

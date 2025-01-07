@@ -9,7 +9,7 @@ public interface AccessKeyCredentialsOrBuilder extends
 
   /**
    * <pre>
-   * Access key for the object store provided for backup target.
+   * Access key Id for the object store provided for backup target.
    * </pre>
    *
    * <code>string access_key_id = 1000;</code>
@@ -18,7 +18,7 @@ public interface AccessKeyCredentialsOrBuilder extends
   java.lang.String getAccessKeyId();
   /**
    * <pre>
-   * Access key for the object store provided for backup target.
+   * Access key Id for the object store provided for backup target.
    * </pre>
    *
    * <code>string access_key_id = 1000;</code>
@@ -29,7 +29,7 @@ public interface AccessKeyCredentialsOrBuilder extends
 
   /**
    * <pre>
-   * Secret access key ID for the object store provided for backup target. 
+   * Secret access key for the object store provided for backup target. 
    * </pre>
    *
    * <code>string secret_access_key = 1001;</code>
@@ -38,7 +38,7 @@ public interface AccessKeyCredentialsOrBuilder extends
   java.lang.String getSecretAccessKey();
   /**
    * <pre>
-   * Secret access key ID for the object store provided for backup target. 
+   * Secret access key for the object store provided for backup target. 
    * </pre>
    *
    * <code>string secret_access_key = 1001;</code>

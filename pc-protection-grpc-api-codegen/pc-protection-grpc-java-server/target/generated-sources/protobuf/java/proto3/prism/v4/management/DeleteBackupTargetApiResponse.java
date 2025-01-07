@@ -5,7 +5,7 @@ package proto3.prism.v4.management;
 
 /**
  * <pre>
- * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Delete operation
+ * REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId} Delete operation
  * </pre>
  *
  * Protobuf type {@code proto3.prism.v4.management.DeleteBackupTargetApiResponse}
@@ -491,7 +491,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Delete operation
+   * REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId} Delete operation
    * </pre>
    *
    * Protobuf type {@code proto3.prism.v4.management.DeleteBackupTargetApiResponse}

@@ -9,7 +9,7 @@ public interface TaskReferenceOrBuilder extends
 
   /**
    * <pre>
-   * A globally unique identifier of a task.
+   * A globally unique identifier for a task.
    * </pre>
    *
    * <code>string ext_id = 2001;</code>
@@ -18,7 +18,7 @@ public interface TaskReferenceOrBuilder extends
   java.lang.String getExtId();
   /**
    * <pre>
-   * A globally unique identifier of a task.
+   * A globally unique identifier for a task.
    * </pre>
    *
    * <code>string ext_id = 2001;</code>

@@ -28,14 +28,12 @@ public class StatsTestUtils {
   public static ClusterStats getClusterStatsObj(){
     ClusterStats statsObj = new ClusterStats();
     statsObj.setExtId(CLUSTER_UUID);
-    statsObj.setStatType(DownSamplingOperator.AVG);
     return statsObj;
   }
 
   public static HostStats getHostStatsObj(){
     HostStats statsObj = new HostStats();
     statsObj.setExtId(HOST_UUID);
-    statsObj.setStatType(DownSamplingOperator.AVG);
     return statsObj;
   }
 
@@ -80,8 +78,9 @@ public class StatsTestUtils {
     attributeStatsMap.put("check.score", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "74"))));
     attributeStatsMap.put("storage.recycle_bin_usage_bytes", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "0"))));
     attributeStatsMap.put("storage.snapshot_reclaimable_bytes", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "6438191104"))));
-    attributeStatsMap.put("data_reduction.saved_bytes", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "511778816"))));
+    attributeStatsMap.put("data_reduction.overall.saved_bytes", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "511778816"))));
     attributeStatsMap.put("data_reduction.overall.saving_ratio_ppm", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "14694282"))));
+    attributeStatsMap.put("power_consumption_instant_watt", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "282"))));
 
     if(clusterStats){
       attributeStatsMap.put("overall_memory_usage_bytes", new ArrayList<>(Collections.singletonList(new StatsQueryResponse.TimeValuePair(-1L, "100"))));

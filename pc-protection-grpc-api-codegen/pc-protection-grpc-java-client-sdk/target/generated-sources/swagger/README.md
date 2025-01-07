@@ -8,8 +8,8 @@ The Java client for PC Protection PC Client SDK is designed for Java client appl
 - Use standard methods for installation.
 ## Version
 
-- API version: v4.0.b1
-- Package version: 0.0.1-SNAPSHOT
+- API version: v4.0
+- Package version: 17.0.0-SNAPSHOT
 
 ## Requirements.
 
@@ -28,7 +28,7 @@ This library is distributed on [Maven Central](https://search.maven.org/). In or
 <dependency>
   <groupId>com.nutanix.api</groupId>
   <artifactId>pc_protection_pc_client-java-client</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>17.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -36,7 +36,7 @@ This library is distributed on [Maven Central](https://search.maven.org/). In or
 
 ```groovy
 dependencies {
-    implementation("com.nutanix.api:pc_protection_pc_client-java-client:0.0.1-SNAPSHOT")
+    implementation("com.nutanix.api:pc_protection_pc_client-java-client:17.0.0-SNAPSHOT")
 }
 ```
 
@@ -174,9 +174,9 @@ public class Sample {
     // Configure the client
     // ...
     DomainManagerBackupsApi domainManagerBackupsApi = new DomainManagerBackupsApi(client);
-    String domainManagerExtId = "Ba0Ad7dB-9B0F-4CCA-45C8-D4AEFFAaE2cA";
-    String extId = "C1dc7aca-5DDE-DB1b-F2F0-4ddcFd52B1e8";
-    GetBackupTargetApiResponse getBackupTargetApiResponse = domainManagerBackupsApi.getBackupTargetById(domainManagerExtId, extId);
+    String domainManagerExtId = "dC2cDebe-FaeF-ebdb-e303-7f44Adf3293d";
+    String extId = "d2ABB8Fe-8EA9-Fad1-575d-8B31C896EF51";
+      = domainManagerBackupsApi.getBackupTargetById1(domainManagerExtId, extId);
   }
 }
 ```
@@ -211,18 +211,18 @@ public class Sample {
     // ...
     // perform GET call
     DomainManagerBackupsApi domainManagerBackupsApi = new DomainManagerBackupsApi(client);
-    String domainManagerExtId = "Ba0Ad7dB-9B0F-4CCA-45C8-D4AEFFAaE2cA";
-    String extId = "C1dc7aca-5DDE-DB1b-F2F0-4ddcFd52B1e8";
-    GetBackupTargetApiResponse getBackupTargetApiResponse = domainManagerBackupsApi.getBackupTargetById(domainManagerExtId, extId);
+    String domainManagerExtId = "dC2cDebe-FaeF-ebdb-e303-7f44Adf3293d";
+    String extId = "d2ABB8Fe-8EA9-Fad1-575d-8B31C896EF51";
+      = domainManagerBackupsApi.getBackupTargetById1(domainManagerExtId, extId);
     // Extract E-Tag Header
-    final String eTagHeader = ApiClient.getEtag(getBackupTargetApiResponse);
+    final String eTagHeader = ApiClient.getEtag();
     // ...
     // Perform update call with received E-Tag reference
-    BackupTarget backupTarget = (BackupTarget) getBackupTargetApiResponse.getData();
+    BackupTarget backupTarget = (BackupTarget) .getData();
     // initialize/change parameters for update
     HashMap<String, Object> opts = new HashMap<>();
     opts.put("If-Match", eTagHeader);
-    domainManagerBackupsApi.updateBackupTargetById(backupTargetdomainManagerExtId, extId, , opts);
+    domainManagerBackupsApi.updateBackupTargetById1(backupTargetdomainManagerExtId, extId, , opts);
   }
 }
 
@@ -269,7 +269,7 @@ The list of filterable and sortable fields with expansion keys can be found in t
 
 ## API Reference
 
-This library has a full set of [API Reference Documentation](https://developers.nutanix.com/sdk-reference?namespace=prism&version=v4.0.b1&language=java). This documentation is auto-generated, and the location may change.
+This library has a full set of [API Reference Documentation](https://developers.nutanix.com/sdk-reference?namespace=prism&version=v4.0&language=java). This documentation is auto-generated, and the location may change.
 
 ## License
 This library is licensed under Nutanix proprietary license. Full license text is available in [LICENSE](https://developers.nutanix.com/license).

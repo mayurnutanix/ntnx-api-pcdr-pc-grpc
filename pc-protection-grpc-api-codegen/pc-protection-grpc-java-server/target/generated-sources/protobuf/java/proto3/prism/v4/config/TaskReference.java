@@ -95,7 +95,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object extId_;
   /**
    * <pre>
-   * A globally unique identifier of a task.
+   * A globally unique identifier for a task.
    * </pre>
    *
    * <code>string ext_id = 2001;</code>
@@ -116,7 +116,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * A globally unique identifier of a task.
+   * A globally unique identifier for a task.
    * </pre>
    *
    * <code>string ext_id = 2001;</code>
@@ -446,7 +446,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object extId_ = "";
     /**
      * <pre>
-     * A globally unique identifier of a task.
+     * A globally unique identifier for a task.
      * </pre>
      *
      * <code>string ext_id = 2001;</code>
@@ -466,7 +466,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A globally unique identifier of a task.
+     * A globally unique identifier for a task.
      * </pre>
      *
      * <code>string ext_id = 2001;</code>
@@ -487,7 +487,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A globally unique identifier of a task.
+     * A globally unique identifier for a task.
      * </pre>
      *
      * <code>string ext_id = 2001;</code>
@@ -506,7 +506,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A globally unique identifier of a task.
+     * A globally unique identifier for a task.
      * </pre>
      *
      * <code>string ext_id = 2001;</code>
@@ -520,7 +520,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * A globally unique identifier of a task.
+     * A globally unique identifier for a task.
      * </pre>
      *
      * <code>string ext_id = 2001;</code>

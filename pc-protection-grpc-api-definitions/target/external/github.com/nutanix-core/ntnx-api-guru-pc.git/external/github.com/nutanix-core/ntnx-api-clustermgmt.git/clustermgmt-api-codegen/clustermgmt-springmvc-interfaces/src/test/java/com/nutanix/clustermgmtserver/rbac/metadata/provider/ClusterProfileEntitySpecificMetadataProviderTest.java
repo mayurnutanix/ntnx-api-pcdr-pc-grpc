@@ -1,5 +1,6 @@
 package com.nutanix.clustermgmtserver.rbac.metadata.provider;
 
+import com.nutanix.api.utils.exceptions.PlatformResponseException.RbacAuthorizationException;
 import com.nutanix.clustermgmtserver.utils.ClusterTestUtilsForMvc;
 import com.nutanix.clustermgmtserver.utils.rbac.ClustermgmtEntityDbQueryUtil;
 import com.nutanix.prism.rbac.MetadataArguments;
@@ -48,15 +49,14 @@ public class ClusterProfileEntitySpecificMetadataProviderTest {
     assertNotNull(metadataMap);
   }
 
-  @Test
+  @Test(expectedExceptions = RbacAuthorizationException.class)
   public void testGetMetadataWithNullParam() throws Exception {
     when(clustermgmtEntityDbQueryUtil.getEntityFromEntityDb("cluster_profile", ClusterTestUtilsForMvc.CLUSTER_PROFILE_UUID))
       .thenReturn(ClusterTestUtilsForMvc.getClusterProfileIdfEntityObj(ClusterTestUtilsForMvc.CLUSTER_PROFILE_UUID));
-    Map<String, Object> metadataMap = provider.getMetadata(null, null);
-    assertNotNull(metadataMap);
+    provider.getMetadata(null, null);
   }
 
-  @Test
+  @Test(expectedExceptions = RbacAuthorizationException.class)
   public void testGetMetadataWithNoUuid() throws Exception {
     MetadataArguments metadataArguments = new MetadataArguments();
     metadataArguments.setRequestUrl(
@@ -64,8 +64,7 @@ public class ClusterProfileEntitySpecificMetadataProviderTest {
         CLUSTERMGMT_CONTROLLER_CLUSTER_PROFILE_BASE_URL_WITH_FULL_VERSION);
     when(clustermgmtEntityDbQueryUtil.getEntityFromEntityDb("cluster_profile", ClusterTestUtilsForMvc.CLUSTER_PROFILE_UUID))
       .thenReturn(ClusterTestUtilsForMvc.getClusterProfileIdfEntityObj(ClusterTestUtilsForMvc.CLUSTER_PROFILE_UUID));
-    Map<String, Object> metadataMap = provider.getMetadata(metadataArguments, null);
-    assertNotNull(metadataMap);;
+    provider.getMetadata(metadataArguments, null);
   }
 
   @Test

@@ -345,10 +345,12 @@
   errorGroup: MIGRATE_VM_ERROR
   severity: ERROR
   message: >
-    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has hardware virtualization
-    enabled.
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support on-demand live migration of VMs
+    with hardware virtualization enabled.
   arguments:
     - vm_uuid
+    - source_cluster_uuid
 - code: 32039
   errorGroup: MIGRATE_VM_ERROR
   severity: ERROR
@@ -877,18 +879,16 @@
   arguments:
     - vm_uuid
     - az_uuid
-# Error that Acropolis error kAdvancedVlanUnsupportedError maps to.
 - code: 32095
   errorGroup: MIGRATE_VM_ERROR
   severity: ERROR
   message: >
-    Cannot migrate VM with UUID '{{{vm_uuid}}}' and with source NIC with MAC address
-    '{{{mac_address}}}' because NIC is connected to an advanced VLAN with UUID
-    '{{{source_network_uuid}}}'.
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source cluster with UUID
+    '{{{source_cluster_uuid}}}' does not support live migration of VMs in an
+    advanced VLAN.
   arguments:
     - vm_uuid
-    - mac_address
-    - source_network_uuid
+    - source_cluster_uuid
 - code: 32096
   errorGroup: MIGRATE_VM_ERROR
   severity: ERROR
@@ -928,26 +928,26 @@
   errorGroup: MIGRATE_VM_ERROR 
   severity: ERROR
   message: >
-    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
-    '{{{source_cluster_uuid}}}' because advanced network controller is not
-    enabled for the cluster or it does not meet minimum ANC version
-    '{{{anc_version}}}'.
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source Availability Zone
+    with advanced network controller version '{{{anc_version}}}' because it
+    does not meet minimum ANC version '{{{minimum_anc_version}}}'.
   arguments:
     - vm_uuid
-    - source_cluster_uuid
     - anc_version
+    - minimum_anc_version
 - code: 32101
   errorGroup: MIGRATE_VM_ERROR
   severity: ERROR
   message: >
-    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
-    '{{{target_cluster_uuid}}}' because advanced network controller is not
-    enabled for the cluster or it does not meet minimum ANC version
-    '{{{anc_version}}}'.
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target Availability Zone
+    with UUID '{{{az_uuid}}}' and advanced network controller version
+    '{{{anc_version}}}' because it does not meet minimum ANC version
+    '{{{minimum_anc_version}}}'.
   arguments:
     - vm_uuid
-    - target_cluster_uuid
+    - az_uuid
     - anc_version
+    - minimum_anc_version    
 - code: 32102
   errorGroup: MIGRATE_VM_ERROR
   severity: ERROR
@@ -1027,16 +1027,6 @@
     enabled.
   arguments:
     - vm_uuid
-# Error that Acropolis error kUserProvidedCbrIncapabilityError maps to.
-- code: 32110
-  errorGroup: MIGRATE_VM_ERROR
-  severity: ERROR
-  message: >
-    Cannot migrate VM with UUID '{{{vm_uuid}}}' because of a user-provided backup and
-    recovery incapability: '{{{cbr_incapability_reason}}}'.
-  arguments:
-    - vm_uuid
-    - cbr_incapability_reason
 # Error that Acropolis error kVmHasRf1DisksError maps to.
 - code: 32111
   errorGroup: MIGRATE_VM_ERROR
@@ -1100,6 +1090,114 @@
   arguments:
     - vm_uuid
     - target_cluster_uuid
+- code: 32118
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support live migration of VMs in an
+    advanced VLAN.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32119
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because live migration of VMs in an
+    unmanaged VPC subnet with UUID '{{{source_network_uuid}}}' is not supported.
+  arguments:
+    - vm_uuid
+    - source_network_uuid
+- code: 32120
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' because live migration of VMs in a
+    multi cluster virtual switch subnet with UUID '{{{source_network_uuid}}}'
+    is not supported.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+    - source_network_uuid
+- code: 32121
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because VM has disk(s) with UUID(s)
+    '{{{disk_uuids}}}' undergoing container migration.
+  arguments:
+    - vm_uuid
+    - disk_uuids
+- code: 32122
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' because advanced network controller is disabled
+    on the source cluster.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+- code: 32123
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because advanced network controller is disabled
+    on the target cluster.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32124
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because live migration of VMs in a
+    multi cluster virtual switch subnet with UUID '{{{target_network_uuid}}}'
+    is not supported.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+    - target_network_uuid
+# Source cluster AOS has the capability to migrate HW virt VM but the nodes are
+# of older CPU generation.
+- code: 32125
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on source cluster with UUID
+    '{{{source_cluster_uuid}}}' because one or more source cluster nodes are of
+    an older CPU generation which doesn't support live migration of VMs with
+    hardware virtualization enabled.
+  arguments:
+    - vm_uuid
+    - source_cluster_uuid
+# Target cluster AOS has the capability to migrate HW virt VM but the nodes are
+# of older CPU generation.
+- code: 32126
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' on target cluster with UUID
+    '{{{target_cluster_uuid}}}' because one or more target cluster nodes are of
+    an older CPU generation which doesn't support live migration of VMs with
+    hardware virtualization enabled.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
+- code: 32127
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because target cluster with UUID
+    '{{{target_cluster_uuid}}}' does not support on-demand live migration of VMs
+    with hardware virtualization enabled.
+  arguments:
+    - vm_uuid
+    - target_cluster_uuid
 
 # 32200-32299: Prepare.
 # Error that Anduril error kNoHostResourcesError maps to.
@@ -1155,6 +1253,16 @@
     VM before it was ready for migration.
   arguments:
     - vm_uuid
+# Error that Anduril error kEMMInProgress maps to.
+- code: 32212
+  errorGroup: MIGRATE_VM_ERROR
+  severity: ERROR
+  message: >
+    Cannot migrate VM with UUID '{{{vm_uuid}}}' because source host with UUID
+    '{{{source_host_uuid}}}' is undergoing maintenance.
+  arguments:
+    - vm_uuid
+    - source_host_uuid
 
 # 32300-32399: Copy data.
 # Error that Magneto error kRemoteClusterNetworkLatencyError maps to.

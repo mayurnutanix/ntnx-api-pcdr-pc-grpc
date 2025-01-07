@@ -10,3 +10,8 @@ backendServices:
       - platform: pc
         port: 2120
         host: localhost
+  - name: magneto
+    environments:
+      - platform: pc
+        port: 14169
+        host: localhost

@@ -1,7 +1,7 @@
 - name: TaskGetSummary
   value: Fetch a task
 - name: TaskGetDescription
-  value: "Fetch an asynchronous operation called a task for the provided extId."
+  value: "Fetches an asynchronous operation called a task for the provided external identifier."
 - name: TaskCancelSummary
   value: Cancel an ongoing task
 - name: TaskCancelDescription
@@ -11,17 +11,17 @@
 - name: TaskListSummary
   value: List tasks
 - name: TaskListDescription
-  value: "List tasks in the system. The response can be further filtered / sorted using the filtering and sorting options provided.
-    By default the response would be sorted by 'createdTime' in the descending order."
+  value: "List of tasks in the system. The response can be further filtered/sorted using the filter and sort options provided.
+    By default, the response would be sorted by 'createdTime' in descending order."
 - name: TaskExtIdParamDescription
-  value: A globally unique identifier of a task. It consists of a prefix and a UUID separated by ':'.
-    'legacy' prefix can be used with a task UUID provided by previous API families.
+  value: A globally unique identifier for a task. It consists of a prefix and a UUID separated by ':'.
+    The 'legacy' prefix can be used with a task UUID provided by previous API families.
 - name: TaskExtIdDescription
-  value: A globally unique identifier of a task.
+  value: A globally unique identifier for a task.
 - name: TaskGetSuccess
-  value: Task object is returned in response.
+  value: Returns the task object.
 - name: TaskListSuccess
-  value: List of task objects is returned in response.
+  value: Returns a list of task objects.
 - name: TaskCancelSuccess
   value: Successful submission message is returned in response.
 - name: TaskReferenceDescription
@@ -29,9 +29,9 @@
 - name: TaskDescription
   value: The task object tracking an asynchronous operation.
 - name: TaskOperationDescription
-  value: The operation name being tracked by the task.
+  value: The name of the operation being tracked by the task.
 - name: TaskOperationDescDescription
-  value: Description of the operation being tracked by the task.
+  value: Description of the operation tracked by the task.
 - name: TaskParentDescription
   value: Reference to the task that is the parent of the current task.
 - name: TaskCreateTimeDescription
@@ -47,13 +47,13 @@
 - name: TaskEntitiesDescription
   value: Reference to entities associated with the task.
 - name: TaskSubtasksDescription
-  value: Reference to tasks spawned as children of the current task. The task get response
-    would contain a limited number of subtask references. To get the entire
-    list of subtasks for a task, use the parent task filter in the task list API.
+  value: Reference to tasks spawned as children of the current task. The Task Get API operation response 
+    would contain a limited number of subtask references. To retrieve the full list of subtasks for a task, 
+    use the parent task filter in the Task List API operation.
 - name: TaskSubstepsDescription
   value: List of steps completed as part of the task.
 - name: TaskCancelableDescription
-  value: Signifies if the task can be cancelled.
+  value: Indicates whether the task can be canceled.
 - name: TaskStatusDescription
   value: Status of the task.
 - name: TaskEntityReferenceDescription
@@ -61,8 +61,8 @@
 - name: TaskEntityExtIdDescription
   value: A globally unique identifier of the entity.
 - name: TaskEntityRelDescription
-  value: Entity type identified as 'namespace:module[:submodule]:entityType'. For example - vmm:ahv:vm,
-    where vmm is the namepsace, ahv is the module and vm is the entitytype.
+  value: Entity type identified as 'namespace:module[:submodule]:entityType'. For example- vmm:ahv:vm,
+    where vmm is the namespace, ahv is the module, and vm is the entity type.
 - name: TaskEntityNameDescription
   value: Name of the entity.
 - name: AssociatedTaskDescription
@@ -80,28 +80,28 @@
 - name: TaskStepMessageDescription
   value: Message describing the completed steps for the task.
 - name: TaskCompletionDetailsDescription
-  value: Additional details on the task to aid the user with further actions post completion of the task.
+  value: Additional details about the task to help the user take further action after the task is completed.
 - name: TaskErrorMessagesDescription
-  value: Error details explaining a task failure. These would be populated only in the case of task failures.
+  value: Error details that explain a task failure. These would only be populated if a task failed.
 - name: TaskLegacyErrorDescription
-  value: Provides an error message in the absence of a well-defined error message for the tasks created through legacy APIs.
+  value: Provides an error message in the absence of a well-defined error message for tasks created by legacy APIs.
 - name: TaskWarningMessagesDescription
-  value: Warning messages to alert the user of issues which did not directly cause task failure.
+  value: Warning messages to alert the user of issues which did not directly cause the task to fail..
     These can be populated for any task.
 - name: TaskClusterExtIdsDescription
   value: List of globally unique identifiers for clusters associated with the task or any of its subtasks.
 - name: TaskStatusQueuedDescription
   value: Status indicating that the task is queued for execution.
 - name: TaskStatusRunningDescription
-  value: Status indicating that the task is currently being executed.
+  value: Status indicating that the task is being executed.
 - name: TaskStatusCancelingDescription
   value: Status indicating that the task is marked for cancellation.
 - name: TaskStatusSucceededDescription
-  value: Status indicating that the task has been executed successfully.
+  value: Status indicating that the task was successfully executed.
 - name: TaskStatusFailedDescription
-  value: Status indicating that the task has failed.
+  value: Status indicating that the task failed.
 - name: TaskStatusCanceledDescription
-  value: Status indicating that the task has been cancelled.
+  value: Status indicating that the task was cancelled.
 - name: TaskStatusSuspendedDescription
   value: Status indicating that the task is currently suspended.
 - name: ViewTaskPermissionDescription
@@ -115,9 +115,7 @@
 - name: TaskRootDescription
   value: Reference to the task that is the earliest ancestor of the current task.
 - name: TaskBackgroundDescription
-  value: Signifies if the task is a background task or not.
-- name: AssociatedRootTaskDescription
-  value: Reference to the root task associated with the current task.
+  value: Indicates whether or not the task is a background task.
 - name: TaskNumberOfSubtasksDescription
   value: Number of tasks spawned as children of the current task.
 - name: TaskNumberOfEntitiesAffectedDescription

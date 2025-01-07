@@ -119,4 +119,8 @@
   value: 1
 - name: "MaxNodeExtIds"
   value: 3
+- name: "ListProductsMinItems"
+  value: 1
+- name: "ListProductsMaxItems"
+  value: 1
 

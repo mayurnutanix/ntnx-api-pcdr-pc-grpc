@@ -63,3 +63,12 @@
     Guest Tools is already upgraded.
   arguments:
     - vm_uuid
+
+- code: 31108
+  errorGroup: VM_NGT_INSTALL_ERROR
+  severity: ERROR
+  message: >
+    Failed to install Nutanix Guest Tools on VM with UUID '{{{vm_uuid}}}' 
+    as there is no IP address assigned to the VM.
+  arguments:
+    - vm_uuid

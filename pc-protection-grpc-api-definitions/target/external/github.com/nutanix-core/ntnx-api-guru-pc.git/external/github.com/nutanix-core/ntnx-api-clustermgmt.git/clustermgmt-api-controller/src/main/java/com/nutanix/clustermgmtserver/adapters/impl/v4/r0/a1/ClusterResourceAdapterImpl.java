@@ -832,6 +832,7 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
 
   @Override
   public Host adaptZeusEntriestoHostEntity(ZeusConfiguration zkConfig, Host hostEntity, String hostUuid) {
+    boolean setControllerVm = false;
     ControllerVmReference controllerVmReference = new ControllerVmReference();
     if(hostEntity.getHypervisor() == null)
       hostEntity.setHypervisor(new HypervisorReference());
@@ -841,28 +842,35 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
       final Node node = nodeOptional.get();
 
       // CVM IP: Ipv4
+      boolean setExternalAddress = false;
       IPAddress ipAddress = new IPAddress();
       if(node.getSvmExternalIpListCount() > 0) {
+        setExternalAddress = true;
         ipAddress.setIpv4(ClustermgmtUtils.createIpv4Address(
           node.getSvmExternalIpList(0)));
       }
       else if(node.hasServiceVmExternalIp()) {
+        setExternalAddress = true;
         ipAddress.setIpv4(ClustermgmtUtils.createIpv4Address(
           node.getServiceVmExternalIp()));
       }
 
       // CVM IP: Ipv6
       if(node.getSvmExternalIpListCount() > 1) {
+        setExternalAddress = true;
         ipAddress.setIpv6(ClustermgmtUtils.createIpv6Address(
           node.getSvmExternalIpList(1)));
       }
-      controllerVmReference.setExternalAddress(ipAddress);
+      if(setExternalAddress) {
+        setControllerVm = true;
+        controllerVmReference.setExternalAddress(ipAddress);
+      }
 
-      // CVM ID
-      controllerVmReference.setId(node.getServiceVmId());
       // CVM Backplane Address
-      if(node.hasControllerVmBackplaneIp())
+      if(node.hasControllerVmBackplaneIp()) {
+        setControllerVm = true;
         controllerVmReference.setBackplaneAddress(ClustermgmtUtils.createIpv4Ipv6Address(node.getControllerVmBackplaneIp()));
+      }
 
       // CVM ipmi
       if (node.hasIpmi()) {
@@ -872,7 +880,7 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
           IpmiReference ipmiReference = new IpmiReference();
           ipmiReference.setIp(ClustermgmtUtils.createIpv4Ipv6Address(ipmiNE.getAddressList(0)));
           ipmiReference.setUsername(ipmiNE.getUsername());
-          controllerVmReference.setIpmi(ipmiReference);
+          hostEntity.setIpmi(ipmiReference);
         }
       }
 
@@ -882,27 +890,31 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
         for (final String ip : node.getRdmaBackplaneIpsList()) {
           rdmaBackplaneIps.add(ClustermgmtUtils.createIpv4Ipv6Address(ip));
         }
+        setControllerVm = true;
         controllerVmReference.setRdmaBackplaneAddress(rdmaBackplaneIps);
       }
 
       // Cvm nat ip
       if (node.hasServiceVmNatIp()) {
+        setControllerVm = true;
         controllerVmReference.setNatIp(ClustermgmtUtils.createIpv4Ipv6Address(node.getServiceVmNatIp()));
       }
 
       // Cvm nat Port
       if (node.hasServiceVmNatPort()) {
+        setControllerVm = true;
         controllerVmReference.setNatPort(node.getServiceVmNatPort());
       }
 
       // Cvm maintenance mode
       if (node.hasMaintenanceMode()) {
+        setControllerVm = true;
         controllerVmReference.setIsInMaintenanceMode(node.getMaintenanceMode());
       }
 
       // rackable unit uuid
       if (node.hasRackableUnitUuid()) {
-        controllerVmReference.setRackableUnitUuid(node.getRackableUnitUuid());
+        hostEntity.setRackableUnitUuid(node.getRackableUnitUuid());
       }
 
       // Hypervisor IP: Ipv4
@@ -1013,7 +1025,8 @@ public class ClusterResourceAdapterImpl extends BaseClusterResourceAdapterImpl {
       }
       hostEntity.setKeyManagementDeviceToCertStatus(keyManagementDeviceToCertStatusList);
     }
-    hostEntity.setControllerVm(controllerVmReference);
+    if(setControllerVm)
+      hostEntity.setControllerVm(controllerVmReference);
 
     if (adapterRegistry.canForwardToNextHandler(this.getClass())) {
       return nextChainAdapter.adaptZeusEntriestoHostEntity(zkConfig, hostEntity, hostUuid);

@@ -50,7 +50,7 @@ Each of the modules will further contain resources, e.g.:
 - images
 - templates
 
-`versioned/v2/modules/ahv/beta` - This folder indicates the current state of the release of the module.
+`versioned/v2/modules/ahv/released` - This folder indicates the current state of the release of the module.
 This can be alpha, beta, released.
 
 Each module underneath has models and apis.

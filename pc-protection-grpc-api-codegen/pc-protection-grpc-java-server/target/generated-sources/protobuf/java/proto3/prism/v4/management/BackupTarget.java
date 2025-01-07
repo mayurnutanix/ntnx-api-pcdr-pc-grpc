@@ -372,7 +372,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object backupPauseReason_;
   /**
    * <pre>
-   * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+   * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
    * </pre>
    *
    * <code>string backup_pause_reason = 1004;</code>
@@ -393,7 +393,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+   * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
    * </pre>
    *
    * <code>string backup_pause_reason = 1004;</code>
@@ -1592,7 +1592,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object backupPauseReason_ = "";
     /**
      * <pre>
-     * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+     * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
      * </pre>
      *
      * <code>string backup_pause_reason = 1004;</code>
@@ -1612,7 +1612,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+     * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
      * </pre>
      *
      * <code>string backup_pause_reason = 1004;</code>
@@ -1633,7 +1633,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+     * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
      * </pre>
      *
      * <code>string backup_pause_reason = 1004;</code>
@@ -1652,7 +1652,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+     * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
      * </pre>
      *
      * <code>string backup_pause_reason = 1004;</code>
@@ -1666,7 +1666,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false. 
+     * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false. 
      * </pre>
      *
      * <code>string backup_pause_reason = 1004;</code>

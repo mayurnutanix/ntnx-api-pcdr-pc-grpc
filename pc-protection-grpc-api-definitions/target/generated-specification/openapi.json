@@ -2,7 +2,7 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "PC Protection PC Client SDK",
-    "version" : "0.0.1-SNAPSHOT",
+    "version" : "17.0.0-SNAPSHOT",
     "x-repo-name" : "pc_protection_pc_client"
   },
   "servers" : [ {
@@ -19,16 +19,16 @@
     "x-displayName" : "Domain Manager Backup And Restore"
   } ],
   "paths" : {
-    "/prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets" : {
+    "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new" : {
       "get" : {
         "tags" : [ "DomainManagerBackups" ],
-        "summary" : "List Backup Targets\n",
+        "summary" : "List backup targets\n",
         "description" : "Lists backup targets (cluster or object store) configured for a given domain manager.\n",
-        "operationId" : "listBackupTargets",
+        "operationId" : "listBackupTargets1",
         "parameters" : [ {
           "name" : "domainManagerExtId",
           "in" : "path",
-          "description" : "The unique identifier for the domain manager that is to be restored.\n",
+          "description" : "A unique identifier for the domain manager.\n",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -39,11 +39,11 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "List of backup clusters/object store backing up the domain manager configurations.\n",
+            "description" : "Returns a list of backup clusters/object store backing up the domain manager.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.ListBackupTargetsApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.ListBackupTargetsApiResponse"
                 }
               }
             }
@@ -53,7 +53,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.ListBackupTargetsApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.ListBackupTargetsApiResponse"
                 }
               }
             }
@@ -63,7 +63,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.ListBackupTargetsApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.ListBackupTargetsApiResponse"
                 }
               }
             }
@@ -81,7 +81,7 @@
           "entityType" : "prism_central",
           "description" : "Allows to list backup targets of the Prism Central",
           "serviceName" : "Prism",
-          "displayName" : "List Backup Targets\n",
+          "displayName" : "List backup targets\n",
           "deploymentList" : [ "ON_PREM", "CLOUD" ],
           "roleList" : [ "Internal Super Admin", "Super Admin", "Prism Admin", "Prism Viewer", "Domain Manager Admin", "Domain Manager Viewer" ]
         },
@@ -111,6 +111,11 @@
             "properties" : {
               "metadataProvider" : "com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider"
             }
+          }, {
+            "type" : "non-blocking",
+            "properties" : {
+              "non-blocking" : true
+            }
           } ],
           "$any" : [ {
             "type" : "entity-identifier",
@@ -121,17 +126,29 @@
               } ]
             }
           } ]
-        }
+        },
+        "x-backend-service-name" : "backupService",
+        "x-backend-service-host" : {
+          "pc" : "localhost"
+        },
+        "x-backend-service-port" : {
+          "pc" : "8555"
+        },
+        "x-enable-circuit-breaker" : "true",
+        "x-sliding-window-size" : "10",
+        "x-failure-threshold" : "50",
+        "x-wait-duration" : "10",
+        "x-permitted-calls" : "3"
       },
       "post" : {
         "tags" : [ "DomainManagerBackups" ],
         "summary" : "Create backup target\n",
-        "description" : "Creates a cluster or object store as backup target on which the backup is required to be\nstored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.\nIf any one of the cluster/object store does not qualify for backup, then the API will fail.\n",
-        "operationId" : "createBackupTarget",
+        "description" : "Creates a cluster or object store as the backup target. For a given Prism Central,\nthere can be up to 3 clusters as backup targets \nand 1 object store as backup target. If any cluster or object store is not eligible for backup or \nlacks appropriate permissions, the API request will fail. \nFor object store backup targets, specifying backup policy is mandatory along \nwith the location of the object store.\n",
+        "operationId" : "createBackupTarget1",
         "parameters" : [ {
           "name" : "domainManagerExtId",
           "in" : "path",
-          "description" : "The unique identifier for the domain manager that is to be restored.\n",
+          "description" : "A unique identifier for the domain manager.\n",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -144,7 +161,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.management.BackupTarget"
+                "$ref" : "#/components/schemas/prism.v4.r0.management.BackupTarget"
               }
             }
           },
@@ -152,7 +169,7 @@
         },
         "responses" : {
           "202" : {
-            "description" : "Task Id corresponding to the create backup target api\n",
+            "description" : "Returns the task ID corresponding to the create backup target request.\n",
             "headers" : {
               "Location" : {
                 "style" : "simple",
@@ -167,7 +184,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.CreateBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.CreateBackupTargetApiResponse"
                 }
               }
             }
@@ -177,7 +194,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.CreateBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.CreateBackupTargetApiResponse"
                 }
               }
             }
@@ -187,7 +204,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.CreateBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.CreateBackupTargetApiResponse"
                 }
               }
             }
@@ -233,6 +250,11 @@
             "properties" : {
               "metadataProvider" : "com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider"
             }
+          }, {
+            "type" : "non-blocking",
+            "properties" : {
+              "non-blocking" : true
+            }
           } ],
           "$any" : [ {
             "type" : "entity-identifier",
@@ -250,24 +272,36 @@
         "x-required-headers" : [ {
           "name" : "NTNX-Request-Id",
           "description" : "A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.\n"
-        } ]
+        } ],
+        "x-backend-service-name" : "backupService",
+        "x-backend-service-host" : {
+          "pc" : "localhost"
+        },
+        "x-backend-service-port" : {
+          "pc" : "8555"
+        },
+        "x-enable-circuit-breaker" : "true",
+        "x-sliding-window-size" : "10",
+        "x-failure-threshold" : "50",
+        "x-wait-duration" : "10",
+        "x-permitted-calls" : "3"
       },
       "x-api-namespace" : "prism",
-      "x-api-namespace-version" : "v4.r0.b1",
+      "x-api-namespace-version" : "v4.r0",
       "x-api-namespace-module" : "management",
-      "x-odp-apioperation-package" : "prism.v4.r0.b1.management",
-      "x-odp-apioperation-tag" : "__prism.v4.r0.b1.management__DomainManagerBackups"
+      "x-odp-apioperation-package" : "prism.v4.r0.management",
+      "x-odp-apioperation-tag" : "__prism.v4.r0.management__DomainManagerBackups"
     },
-    "/prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}" : {
+    "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}" : {
       "get" : {
         "tags" : [ "DomainManagerBackups" ],
         "summary" : "Fetch backup target\n",
-        "description" : "Retrieves the backup targets (cluster or object store) from domain manager. Returns the\nbackup config and lastSyncTimestamp to the user\n",
-        "operationId" : "getBackupTargetById",
+        "description" : "Retrieves the backup targets (cluster or object store) from a domain manager and returns the\nbackup configuration and lastSyncTimestamp parameter to the user.\n",
+        "operationId" : "getBackupTargetById1",
         "parameters" : [ {
           "name" : "domainManagerExtId",
           "in" : "path",
-          "description" : "The unique identifier for the domain manager that is to be restored.\n",
+          "description" : "A unique identifier for the domain manager.\n",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -289,11 +323,11 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Backup target details corresponding to the cluster/object store configuration.\n",
+            "description" : "Returns the backup target details corresponding to the cluster/object store configuration.\n",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.GetBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.GetBackupTargetApiResponse"
                 }
               }
             }
@@ -303,7 +337,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.GetBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.GetBackupTargetApiResponse"
                 }
               }
             }
@@ -313,7 +347,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.GetBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.GetBackupTargetApiResponse"
                 }
               }
             }
@@ -361,6 +395,11 @@
             "properties" : {
               "metadataProvider" : "com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider"
             }
+          }, {
+            "type" : "non-blocking",
+            "properties" : {
+              "non-blocking" : true
+            }
           } ],
           "$any" : [ {
             "type" : "entity-identifier",
@@ -375,17 +414,29 @@
             }
           } ]
         },
-        "x-readme-example-get" : true
+        "x-readme-example-get" : true,
+        "x-backend-service-name" : "backupService",
+        "x-backend-service-host" : {
+          "pc" : "localhost"
+        },
+        "x-backend-service-port" : {
+          "pc" : "8555"
+        },
+        "x-enable-circuit-breaker" : "true",
+        "x-sliding-window-size" : "10",
+        "x-failure-threshold" : "50",
+        "x-wait-duration" : "10",
+        "x-permitted-calls" : "3"
       },
       "put" : {
         "tags" : [ "DomainManagerBackups" ],
         "summary" : "Update backup target\n",
-        "description" : "Updates the credentials and/or rpo of the given objectstore\n",
-        "operationId" : "updateBackupTargetById",
+        "description" : "Updates the credentials and/or RPO of the given object store.\n",
+        "operationId" : "updateBackupTargetById1",
         "parameters" : [ {
           "name" : "domainManagerExtId",
           "in" : "path",
-          "description" : "The unique identifier for the domain manager that is to be restored.\n",
+          "description" : "A unique identifier for the domain manager.\n",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -409,7 +460,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.management.BackupTarget"
+                "$ref" : "#/components/schemas/prism.v4.r0.management.BackupTarget"
               }
             }
           },
@@ -417,7 +468,7 @@
         },
         "responses" : {
           "202" : {
-            "description" : "Task Id corresponding to the update backup target api.\n",
+            "description" : "Returns the task ID corresponding to the update backup target request.\n",
             "headers" : {
               "Location" : {
                 "style" : "simple",
@@ -432,7 +483,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.UpdateBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.UpdateBackupTargetApiResponse"
                 }
               }
             }
@@ -442,7 +493,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.UpdateBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.UpdateBackupTargetApiResponse"
                 }
               }
             }
@@ -452,7 +503,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.UpdateBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.UpdateBackupTargetApiResponse"
                 }
               }
             }
@@ -498,6 +549,11 @@
             "properties" : {
               "metadataProvider" : "com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider"
             }
+          }, {
+            "type" : "non-blocking",
+            "properties" : {
+              "non-blocking" : true
+            }
           } ],
           "$any" : [ {
             "type" : "entity-identifier",
@@ -519,17 +575,29 @@
           "name" : "NTNX-Request-Id",
           "description" : "A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.\n"
         } ],
-        "x-readme-example-put" : true
+        "x-readme-example-put" : true,
+        "x-backend-service-name" : "backupService",
+        "x-backend-service-host" : {
+          "pc" : "localhost"
+        },
+        "x-backend-service-port" : {
+          "pc" : "8555"
+        },
+        "x-enable-circuit-breaker" : "true",
+        "x-sliding-window-size" : "10",
+        "x-failure-threshold" : "50",
+        "x-wait-duration" : "10",
+        "x-permitted-calls" : "3"
       },
       "delete" : {
         "tags" : [ "DomainManagerBackups" ],
         "summary" : "Delete backup target\n",
-        "description" : "Removes cluster/object store from backup targets. This will stop backup from being\ntaken on cluster/object store.\n",
-        "operationId" : "deleteBackupTargetById",
+        "description" : "Removes cluster/object store from the backup targets. This will stop the cluster/object store \nfrom backing up Prism Central data.\n",
+        "operationId" : "deleteBackupTargetById1",
         "parameters" : [ {
           "name" : "domainManagerExtId",
           "in" : "path",
-          "description" : "The unique identifier for the domain manager that is to be restored.\n",
+          "description" : "A unique identifier for the domain manager.\n",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -551,7 +619,7 @@
         } ],
         "responses" : {
           "202" : {
-            "description" : "Task Id corresponding to the delete backup target api.\n",
+            "description" : "Returns the task ID corresponding to the delete backup target request.\n",
             "headers" : {
               "Location" : {
                 "style" : "simple",
@@ -566,7 +634,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.DeleteBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.DeleteBackupTargetApiResponse"
                 }
               }
             }
@@ -576,7 +644,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.DeleteBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.DeleteBackupTargetApiResponse"
                 }
               }
             }
@@ -586,7 +654,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/prism.v4.r0.b1.management.DeleteBackupTargetApiResponse"
+                  "$ref" : "#/components/schemas/prism.v4.r0.management.DeleteBackupTargetApiResponse"
                 }
               }
             }
@@ -632,6 +700,11 @@
             "properties" : {
               "metadataProvider" : "com.nutanix.prism.rbac.metadata.provider.AllowAllMetadataProvider"
             }
+          }, {
+            "type" : "non-blocking",
+            "properties" : {
+              "non-blocking" : true
+            }
           } ],
           "$any" : [ {
             "type" : "entity-identifier",
@@ -652,46 +725,58 @@
         }, {
           "name" : "NTNX-Request-Id",
           "description" : "A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.\n"
-        } ]
+        } ],
+        "x-backend-service-name" : "backupService",
+        "x-backend-service-host" : {
+          "pc" : "localhost"
+        },
+        "x-backend-service-port" : {
+          "pc" : "8555"
+        },
+        "x-enable-circuit-breaker" : "true",
+        "x-sliding-window-size" : "10",
+        "x-failure-threshold" : "50",
+        "x-wait-duration" : "10",
+        "x-permitted-calls" : "3"
       },
       "x-api-namespace" : "prism",
-      "x-api-namespace-version" : "v4.r0.b1",
+      "x-api-namespace-version" : "v4.r0",
       "x-api-namespace-module" : "management",
-      "x-odp-apioperation-package" : "prism.v4.r0.b1.management",
-      "x-odp-apioperation-tag" : "__prism.v4.r0.b1.management__DomainManagerBackups"
+      "x-odp-apioperation-package" : "prism.v4.r0.management",
+      "x-odp-apioperation-tag" : "__prism.v4.r0.management__DomainManagerBackups"
     }
   },
   "components" : {
     "schemas" : {
-      "prism.v4.r0.b1.management.BackupTarget" : {
+      "prism.v4.r0.management.BackupTarget" : {
         "required" : [ "location" ],
-        "description" : "Backup target for the domain manager, either a cluster or object store.\n",
+        "description" : "The backup target for the domain manager, which can be either a cluster or an object store.\n",
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel"
+          "$ref" : "#/components/schemas/common.v1.r0.response.ExternalizableAbstractModel"
         }, {
           "type" : "object",
           "properties" : {
             "location" : {
               "required" : [ "$objectType" ],
               "type" : "object",
-              "description" : "Location of the backup target. For example a cluster or an object store endpoint such as AWS s3.\n",
+              "description" : "Location of the backup target. For example, a cluster or an object store endpoint, such as AWS s3.\n",
               "discriminator" : {
                 "propertyName" : "$objectType"
               },
               "oneOf" : [ {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.management.ClusterLocation"
+                "$ref" : "#/components/schemas/prism.v4.r0.management.ClusterLocation"
               }, {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.management.ObjectStoreLocation"
+                "$ref" : "#/components/schemas/prism.v4.r0.management.ObjectStoreLocation"
               } ],
               "x-codegen-hint" : {
                 "$any" : [ {
                   "type" : "entity-identifier",
                   "properties" : {
                     "identifiers" : [ {
-                      "type" : "#/components/schemas/prism.v4.r0.b1.management.ClusterLocation",
+                      "type" : "#/components/schemas/prism.v4.r0.management.ClusterLocation",
                       "index" : 12001
                     }, {
-                      "type" : "#/components/schemas/prism.v4.r0.b1.management.ObjectStoreLocation",
+                      "type" : "#/components/schemas/prism.v4.r0.management.ObjectStoreLocation",
                       "index" : 12002
                     } ]
                   }
@@ -711,7 +796,7 @@
             },
             "backupPauseReason" : {
               "type" : "string",
-              "description" : "Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false.\n",
+              "description" : "Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false.\n",
               "readOnly" : true
             }
           },
@@ -723,7 +808,7 @@
             "properties" : {
               "identifiers" : [ {
                 "name" : "externalizableAbstractModel",
-                "type" : "#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel",
+                "type" : "#/components/schemas/common.v1.r0.response.ExternalizableAbstractModel",
                 "index" : 1000
               }, {
                 "name" : "location",
@@ -743,11 +828,11 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.management.ClusterLocation" : {
+      "prism.v4.r0.management.ClusterLocation" : {
         "type" : "object",
         "properties" : {
           "config" : {
-            "$ref" : "#/components/schemas/prism.v4.r0.b1.management.ClusterReference"
+            "$ref" : "#/components/schemas/prism.v4.r0.management.ClusterReference"
           },
           "$reserved" : {
             "type" : "object",
@@ -762,7 +847,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "Model which contains the information of backup cluster\n",
+        "description" : "Model which contains the information of backup cluster.\n",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -776,15 +861,15 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.management.ObjectStoreLocation" : {
+      "prism.v4.r0.management.ObjectStoreLocation" : {
         "required" : [ "backupPolicy", "providerConfig" ],
         "type" : "object",
         "properties" : {
           "providerConfig" : {
-            "$ref" : "#/components/schemas/prism.v4.r0.b1.management.AWSS3Config"
+            "$ref" : "#/components/schemas/prism.v4.r0.management.AWSS3Config"
           },
           "backupPolicy" : {
-            "$ref" : "#/components/schemas/prism.v4.r0.b1.management.BackupPolicy"
+            "$ref" : "#/components/schemas/prism.v4.r0.management.BackupPolicy"
           },
           "$reserved" : {
             "type" : "object",
@@ -816,7 +901,7 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.management.S3Config" : {
+      "prism.v4.r0.management.S3Config" : {
         "required" : [ "bucketName", "region" ],
         "type" : "object",
         "properties" : {
@@ -824,7 +909,7 @@
             "maxLength" : 63,
             "minLength" : 3,
             "type" : "string",
-            "description" : "The bucket name of the object store endpoint where backup data of domain manager\nis stored.\n",
+            "description" : "The bucket name of the object store endpoint where backup data of domain manager\nis to be stored.\n",
             "x-constraints" : {
               "$scopes" : [ {
                 "name" : "update",
@@ -877,10 +962,10 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.management.AWSS3Config" : {
+      "prism.v4.r0.management.AWSS3Config" : {
         "description" : "The base model of S3 object store endpoint where domain manager is backed up.\n",
         "allOf" : [ {
-          "$ref" : "#/components/schemas/prism.v4.r0.b1.management.S3Config"
+          "$ref" : "#/components/schemas/prism.v4.r0.management.S3Config"
         }, {
           "type" : "object",
           "properties" : {
@@ -892,14 +977,14 @@
                 "propertyName" : "$objectType"
               },
               "oneOf" : [ {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.management.AccessKeyCredentials"
+                "$ref" : "#/components/schemas/prism.v4.r0.management.AccessKeyCredentials"
               } ],
               "x-codegen-hint" : {
                 "$any" : [ {
                   "type" : "entity-identifier",
                   "properties" : {
                     "identifiers" : [ {
-                      "type" : "#/components/schemas/prism.v4.r0.b1.management.AccessKeyCredentials",
+                      "type" : "#/components/schemas/prism.v4.r0.management.AccessKeyCredentials",
                       "index" : 12001
                     } ]
                   }
@@ -915,7 +1000,7 @@
             "properties" : {
               "identifiers" : [ {
                 "name" : "s3Config",
-                "type" : "#/components/schemas/prism.v4.r0.b1.management.S3Config",
+                "type" : "#/components/schemas/prism.v4.r0.management.S3Config",
                 "index" : 1000
               }, {
                 "name" : "credentials",
@@ -926,19 +1011,19 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.management.AccessKeyCredentials" : {
+      "prism.v4.r0.management.AccessKeyCredentials" : {
         "type" : "object",
         "properties" : {
           "accessKeyId" : {
             "maxLength" : 128,
             "minLength" : 16,
             "type" : "string",
-            "description" : "Access key for the object store provided for backup target."
+            "description" : "Access key Id for the object store provided for backup target."
           },
           "secretAccessKey" : {
             "maxLength" : 1024,
             "type" : "string",
-            "description" : "Secret access key ID for the object store provided for backup target.\n",
+            "description" : "Secret access key for the object store provided for backup target.\n",
             "format" : "password"
           },
           "$reserved" : {
@@ -971,7 +1056,7 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.management.BackupPolicy" : {
+      "prism.v4.r0.management.BackupPolicy" : {
         "required" : [ "rpoInMinutes" ],
         "type" : "object",
         "properties" : {
@@ -995,7 +1080,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "Backup policy for the object store provided defining the rpo etc.",
+        "description" : "Backup policy for the object store provided.",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -1009,28 +1094,28 @@
         },
         "x-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.error.ErrorResponse" : {
+      "prism.v4.r0.error.ErrorResponse" : {
         "type" : "object",
         "properties" : {
           "error" : {
             "oneOf" : [ {
               "type" : "array",
               "items" : {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.error.AppMessage"
+                "$ref" : "#/components/schemas/prism.v4.r0.error.AppMessage"
               }
             }, {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.SchemaValidationError"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.SchemaValidationError"
             } ],
             "x-codegen-hint" : {
               "$any" : [ {
                 "type" : "entity-identifier",
                 "properties" : {
                   "identifiers" : [ {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.AppMessage",
+                    "type" : "#/components/schemas/prism.v4.r0.error.AppMessage",
                     "container" : "array",
                     "index" : 201
                   }, {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.SchemaValidationError",
+                    "type" : "#/components/schemas/prism.v4.r0.error.SchemaValidationError",
                     "index" : 202
                   } ]
                 }
@@ -1053,7 +1138,7 @@
         "description" : "An error response indicates that the operation has failed either due to a client error(4XX) or server error(5XX). Please look at the HTTP status code and namespace specific error code and error message for further details.",
         "x-platform-generated" : true
       },
-      "prism.v4.r0.b1.error.AppMessage" : {
+      "prism.v4.r0.error.AppMessage" : {
         "type" : "object",
         "properties" : {
           "message" : {
@@ -1061,7 +1146,7 @@
             "description" : "The message string."
           },
           "severity" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.config.MessageSeverity"
+            "$ref" : "#/components/schemas/common.v1.r0.config.MessageSeverity"
           },
           "code" : {
             "type" : "string",
@@ -1125,7 +1210,7 @@
           } ]
         }
       },
-      "prism.v4.r0.b1.error.SchemaValidationError" : {
+      "prism.v4.r0.error.SchemaValidationError" : {
         "type" : "object",
         "properties" : {
           "timestamp" : {
@@ -1149,7 +1234,7 @@
             "type" : "array",
             "description" : "List of validation error messages",
             "items" : {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.SchemaValidationErrorMessage"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.SchemaValidationErrorMessage"
             }
           },
           "$reserved" : {
@@ -1191,7 +1276,7 @@
           } ]
         }
       },
-      "prism.v4.r0.b1.error.SchemaValidationErrorMessage" : {
+      "prism.v4.r0.error.SchemaValidationErrorMessage" : {
         "type" : "object",
         "properties" : {
           "location" : {
@@ -1239,11 +1324,11 @@
           } ]
         }
       },
-      "prism.v4.r0.b1.management.CreateBackupTargetApiResponse" : {
+      "prism.v4.r0.management.CreateBackupTargetApiResponse" : {
         "type" : "object",
         "properties" : {
           "metadata" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata"
+            "$ref" : "#/components/schemas/common.v1.r0.response.ApiResponseMetadata"
           },
           "data" : {
             "required" : [ "$objectType" ],
@@ -1251,19 +1336,19 @@
               "propertyName" : "$objectType"
             },
             "oneOf" : [ {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.config.TaskReference"
+              "$ref" : "#/components/schemas/prism.v4.r0.config.TaskReference"
             }, {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.ErrorResponse"
             } ],
             "x-codegen-hint" : {
               "$any" : [ {
                 "type" : "entity-identifier",
                 "properties" : {
                   "identifiers" : [ {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.config.TaskReference",
+                    "type" : "#/components/schemas/prism.v4.r0.config.TaskReference",
                     "index" : 31007
                   }, {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse",
+                    "type" : "#/components/schemas/prism.v4.r0.error.ErrorResponse",
                     "index" : 400
                   } ]
                 }
@@ -1283,7 +1368,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets Post operation",
+        "description" : "REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new Post operation",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -1297,33 +1382,33 @@
         },
         "x-generated-api-response" : true
       },
-      "prism.v4.r0.b1.management.ListBackupTargetsApiResponse" : {
+      "prism.v4.r0.management.ListBackupTargetsApiResponse" : {
         "type" : "object",
         "properties" : {
           "metadata" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata"
+            "$ref" : "#/components/schemas/common.v1.r0.response.ApiResponseMetadata"
           },
           "data" : {
             "oneOf" : [ {
               "maxItems" : 4,
               "type" : "array",
               "items" : {
-                "$ref" : "#/components/schemas/prism.v4.r0.b1.management.BackupTarget"
+                "$ref" : "#/components/schemas/prism.v4.r0.management.BackupTarget"
               },
               "x-is-success-response" : true
             }, {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.ErrorResponse"
             } ],
             "x-codegen-hint" : {
               "$any" : [ {
                 "type" : "entity-identifier",
                 "properties" : {
                   "identifiers" : [ {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.management.BackupTarget",
+                    "type" : "#/components/schemas/prism.v4.r0.management.BackupTarget",
                     "container" : "array",
                     "index" : 31007
                   }, {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse",
+                    "type" : "#/components/schemas/prism.v4.r0.error.ErrorResponse",
                     "index" : 400
                   } ]
                 }
@@ -1343,7 +1428,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets Get operation",
+        "description" : "REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new Get operation",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -1357,11 +1442,11 @@
         },
         "x-generated-api-response" : true
       },
-      "prism.v4.r0.b1.management.DeleteBackupTargetApiResponse" : {
+      "prism.v4.r0.management.DeleteBackupTargetApiResponse" : {
         "type" : "object",
         "properties" : {
           "metadata" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata"
+            "$ref" : "#/components/schemas/common.v1.r0.response.ApiResponseMetadata"
           },
           "data" : {
             "required" : [ "$objectType" ],
@@ -1369,19 +1454,19 @@
               "propertyName" : "$objectType"
             },
             "oneOf" : [ {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.config.TaskReference"
+              "$ref" : "#/components/schemas/prism.v4.r0.config.TaskReference"
             }, {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.ErrorResponse"
             } ],
             "x-codegen-hint" : {
               "$any" : [ {
                 "type" : "entity-identifier",
                 "properties" : {
                   "identifiers" : [ {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.config.TaskReference",
+                    "type" : "#/components/schemas/prism.v4.r0.config.TaskReference",
                     "index" : 31007
                   }, {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse",
+                    "type" : "#/components/schemas/prism.v4.r0.error.ErrorResponse",
                     "index" : 400
                   } ]
                 }
@@ -1401,7 +1486,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Delete operation",
+        "description" : "REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId} Delete operation",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -1415,11 +1500,11 @@
         },
         "x-generated-api-response" : true
       },
-      "prism.v4.r0.b1.management.GetBackupTargetApiResponse" : {
+      "prism.v4.r0.management.GetBackupTargetApiResponse" : {
         "type" : "object",
         "properties" : {
           "metadata" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata"
+            "$ref" : "#/components/schemas/common.v1.r0.response.ApiResponseMetadata"
           },
           "data" : {
             "required" : [ "$objectType" ],
@@ -1427,19 +1512,19 @@
               "propertyName" : "$objectType"
             },
             "oneOf" : [ {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.management.BackupTarget"
+              "$ref" : "#/components/schemas/prism.v4.r0.management.BackupTarget"
             }, {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.ErrorResponse"
             } ],
             "x-codegen-hint" : {
               "$any" : [ {
                 "type" : "entity-identifier",
                 "properties" : {
                   "identifiers" : [ {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.management.BackupTarget",
+                    "type" : "#/components/schemas/prism.v4.r0.management.BackupTarget",
                     "index" : 31007
                   }, {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse",
+                    "type" : "#/components/schemas/prism.v4.r0.error.ErrorResponse",
                     "index" : 400
                   } ]
                 }
@@ -1459,7 +1544,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Get operation",
+        "description" : "REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId} Get operation",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -1473,11 +1558,11 @@
         },
         "x-generated-api-response" : true
       },
-      "prism.v4.r0.b1.management.UpdateBackupTargetApiResponse" : {
+      "prism.v4.r0.management.UpdateBackupTargetApiResponse" : {
         "type" : "object",
         "properties" : {
           "metadata" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata"
+            "$ref" : "#/components/schemas/common.v1.r0.response.ApiResponseMetadata"
           },
           "data" : {
             "required" : [ "$objectType" ],
@@ -1485,19 +1570,19 @@
               "propertyName" : "$objectType"
             },
             "oneOf" : [ {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.config.TaskReference"
+              "$ref" : "#/components/schemas/prism.v4.r0.config.TaskReference"
             }, {
-              "$ref" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse"
+              "$ref" : "#/components/schemas/prism.v4.r0.error.ErrorResponse"
             } ],
             "x-codegen-hint" : {
               "$any" : [ {
                 "type" : "entity-identifier",
                 "properties" : {
                   "identifiers" : [ {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.config.TaskReference",
+                    "type" : "#/components/schemas/prism.v4.r0.config.TaskReference",
                     "index" : 31007
                   }, {
-                    "type" : "#/components/schemas/prism.v4.r0.b1.error.ErrorResponse",
+                    "type" : "#/components/schemas/prism.v4.r0.error.ErrorResponse",
                     "index" : 400
                   } ]
                 }
@@ -1517,7 +1602,7 @@
           }
         },
         "additionalProperties" : false,
-        "description" : "REST response for all response codes in API path /prism/v4.0.b1/management/domain-managers/{domainManagerExtId}/backup-targets/{extId} Put operation",
+        "description" : "REST response for all response codes in API path /prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId} Put operation",
         "x-codegen-hint" : {
           "$any" : [ {
             "type" : "entity-identifier",
@@ -1531,7 +1616,7 @@
         },
         "x-generated-api-response" : true
       },
-      "common.v1.r0.b1.config.TenantAwareModel" : {
+      "common.v1.r0.config.TenantAwareModel" : {
         "type" : "object",
         "properties" : {
           "tenantId" : {
@@ -1569,7 +1654,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.config.MessageSeverity" : {
+      "common.v1.r0.config.MessageSeverity" : {
         "type" : "string",
         "description" : "The message severity.\n",
         "enum" : [ "$UNKNOWN", "$REDACTED", "INFO", "WARNING", "ERROR" ],
@@ -1622,7 +1707,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.config.Message" : {
+      "common.v1.r0.config.Message" : {
         "type" : "object",
         "properties" : {
           "code" : {
@@ -1669,7 +1754,7 @@
             }
           },
           "severity" : {
-            "$ref" : "#/components/schemas/common.v1.r0.b1.config.MessageSeverity"
+            "$ref" : "#/components/schemas/common.v1.r0.config.MessageSeverity"
           },
           "$reserved" : {
             "type" : "object",
@@ -1700,7 +1785,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.config.KVPair" : {
+      "common.v1.r0.config.KVPair" : {
         "type" : "object",
         "properties" : {
           "name" : {
@@ -1800,7 +1885,7 @@
               "type" : "array",
               "description" : "A value in a key-value pair that represents an array of maps of string keys and values.\n",
               "items" : {
-                "$ref" : "#/components/schemas/common.v1.r0.b1.config.MapOfStringWrapper"
+                "$ref" : "#/components/schemas/common.v1.r0.config.MapOfStringWrapper"
               },
               "x-codegen-hint" : {
                 "$any" : [ {
@@ -1851,7 +1936,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.config.MapOfStringWrapper" : {
+      "common.v1.r0.config.MapOfStringWrapper" : {
         "type" : "object",
         "properties" : {
           "map" : {
@@ -1890,7 +1975,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.config.Flag" : {
+      "common.v1.r0.config.Flag" : {
         "type" : "object",
         "properties" : {
           "name" : {
@@ -1943,7 +2028,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.response.ApiResponseMetadata" : {
+      "common.v1.r0.response.ApiResponseMetadata" : {
         "type" : "object",
         "properties" : {
           "flags" : {
@@ -1952,7 +2037,7 @@
             "type" : "array",
             "description" : "An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and value 'false', indicates that the response is not paginated.\n",
             "items" : {
-              "$ref" : "#/components/schemas/common.v1.r0.b1.config.Flag"
+              "$ref" : "#/components/schemas/common.v1.r0.config.Flag"
             },
             "x-codegen-hint" : {
               "java" : [ {
@@ -1979,7 +2064,7 @@
             "type" : "array",
             "description" : "An array of HATEOAS style links for the response that may also include pagination links for list operations.\n",
             "items" : {
-              "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiLink"
+              "$ref" : "#/components/schemas/common.v1.r0.response.ApiLink"
             },
             "x-codegen-hint" : {
               "$any" : [ {
@@ -2013,7 +2098,7 @@
             "type" : "array",
             "description" : "Information, Warning or Error messages that might provide additional contextual information related to the operation.\n",
             "items" : {
-              "$ref" : "#/components/schemas/common.v1.r0.b1.config.Message"
+              "$ref" : "#/components/schemas/common.v1.r0.config.Message"
             },
             "x-codegen-hint" : {
               "$any" : [ {
@@ -2032,7 +2117,7 @@
             "type" : "array",
             "description" : "An array of entity-specific metadata\n",
             "items" : {
-              "$ref" : "#/components/schemas/common.v1.r0.b1.config.KVPair"
+              "$ref" : "#/components/schemas/common.v1.r0.config.KVPair"
             },
             "x-codegen-hint" : {
               "$any" : [ {
@@ -2064,7 +2149,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.response.ApiLink" : {
+      "common.v1.r0.response.ApiLink" : {
         "type" : "object",
         "properties" : {
           "href" : {
@@ -2114,10 +2199,10 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "common.v1.r0.b1.response.ExternalizableAbstractModel" : {
+      "common.v1.r0.response.ExternalizableAbstractModel" : {
         "description" : "A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and, therefore, extend the TenantAwareModel\n",
         "allOf" : [ {
-          "$ref" : "#/components/schemas/common.v1.r0.b1.config.TenantAwareModel"
+          "$ref" : "#/components/schemas/common.v1.r0.config.TenantAwareModel"
         }, {
           "type" : "object",
           "properties" : {
@@ -2160,7 +2245,7 @@
               "description" : "A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.\n",
               "readOnly" : true,
               "items" : {
-                "$ref" : "#/components/schemas/common.v1.r0.b1.response.ApiLink"
+                "$ref" : "#/components/schemas/common.v1.r0.response.ApiLink"
               },
               "x-codegen-hint" : {
                 "$any" : [ {
@@ -2182,7 +2267,7 @@
             "properties" : {
               "identifiers" : [ {
                 "name" : "tenantInfo",
-                "type" : "#/components/schemas/common.v1.r0.b1.config.TenantAwareModel",
+                "type" : "#/components/schemas/common.v1.r0.config.TenantAwareModel",
                 "index" : 1001
               } ]
             }
@@ -2193,7 +2278,7 @@
         "x-external-repo-name" : "common",
         "x-external-namespace-version-folder-path" : "/namespaces/common/versioned/v1/"
       },
-      "prism.v4.r0.b1.management.ClusterReference" : {
+      "prism.v4.r0.management.ClusterReference" : {
         "required" : [ "extId" ],
         "type" : "object",
         "properties" : {
@@ -2242,13 +2327,13 @@
         "x-external-repo-name" : "guru",
         "x-external-namespace-version-folder-path" : "/namespaces/prism/versioned/v4/"
       },
-      "prism.v4.r0.b1.config.TaskReference" : {
+      "prism.v4.r0.config.TaskReference" : {
         "type" : "object",
         "properties" : {
           "extId" : {
             "pattern" : "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
             "type" : "string",
-            "description" : "A globally unique identifier of a task."
+            "description" : "A globally unique identifier for a task."
           },
           "$reserved" : {
             "type" : "object",
@@ -2307,8 +2392,11 @@
       "prism.v4.error" : "Auto-injected error response object by the dev platform"
     }
   },
-  "x-internal-roles-config" : "/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/iam-config-16.8.0.26-RELEASE/hide-roles.yml",
-  "x-cluster-sizes-config" : "/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/adonis-configuration-16.9.0.18-RELEASE/pc-sizes.yml",
-  "x-time-units-config" : "/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/adonis-configuration-16.9.0.18-RELEASE/time-units.yml",
-  "x-uber-rate-limits-config" : "/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/adonis-configuration-16.9.0.18-RELEASE/uber-rate-limits.yml"
+  "x-time-units-config" : "/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/adonis-configuration-16.9.0.18-RELEASE/time-units.yml",
+  "x-internal-roles-config" : "/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/iam-config-16.8.0.26-RELEASE/hide-roles.yml",
+  "x-proto-to-json-scale-factor" : {
+    "backupService" : 1.0
+  },
+  "x-cluster-sizes-config" : "/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/adonis-configuration-16.9.0.18-RELEASE/pc-sizes.yml",
+  "x-uber-rate-limits-config" : "/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-definitions/target/dependency/adonis-configuration-16.9.0.18-RELEASE/uber-rate-limits.yml"
 }

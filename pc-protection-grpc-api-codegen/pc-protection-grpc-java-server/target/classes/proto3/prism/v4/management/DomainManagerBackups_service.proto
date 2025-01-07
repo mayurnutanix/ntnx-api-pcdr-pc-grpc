@@ -1,11 +1,11 @@
 /*
  * Generated file proto3/prism/v4/management.proto.
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -25,100 +25,103 @@ import "proto3/prism/v4/management/management.proto";
 service DomainManagerBackupsService {
     option (ntnx_api_version) = {
     MAJOR: "4",
-    MINOR: "0",
-    RELEASE_TYPE: "b",
-    RELEASE_TYPE_REVISION: "1"
-    };
+    MINOR: "0"    };
 
 
   /*
-   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
    * http method: POST
    * Create backup target 
-   * Creates a cluster or object store as backup target on which the backup is required to be
-stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-If any one of the cluster/object store does not qualify for backup, then the API will fail.
+   * Creates a cluster or object store as the backup target. For a given Prism Central,
+there can be up to 3 clusters as backup targets 
+and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+lacks appropriate permissions, the API request will fail. 
+For object store backup targets, specifying backup policy is mandatory along 
+with the location of the object store.
 
    */
-  rpc createBackupTarget(CreateBackupTargetArg) returns (CreateBackupTargetRet) {
+  rpc createBackupTarget1(CreateBackupTarget1Arg) returns (CreateBackupTarget1Ret) {
     option (ntnx_api_http) = {
-      POST: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets"
+      POST: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new"
     };
   }
   /*
-   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
    * http method: DELETE
    * Delete backup target 
-   * Removes cluster/object store from backup targets. This will stop backup from being
-taken on cluster/object store.
+   * Removes cluster/object store from the backup targets. This will stop the cluster/object store 
+from backing up Prism Central data.
 
    */
-  rpc deleteBackupTargetById(DeleteBackupTargetByIdArg) returns (DeleteBackupTargetByIdRet) {
+  rpc deleteBackupTargetById1(DeleteBackupTargetById1Arg) returns (DeleteBackupTargetById1Ret) {
     option (ntnx_api_http) = {
-      DELETE: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}"
+      DELETE: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}"
     };
   }
   /*
-   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
    * http method: GET
    * Fetch backup target 
-   * Retrieves the backup targets (cluster or object store) from domain manager. Returns the
-backup config and lastSyncTimestamp to the user
+   * Retrieves the backup targets (cluster or object store) from a domain manager and returns the
+backup configuration and lastSyncTimestamp parameter to the user.
 
    */
-  rpc getBackupTargetById(GetBackupTargetByIdArg) returns (GetBackupTargetByIdRet) {
+  rpc getBackupTargetById1(GetBackupTargetById1Arg) returns (GetBackupTargetById1Ret) {
     option (ntnx_api_http) = {
-      GET: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}"
+      GET: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}"
     };
   }
   /*
-   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets
+   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new
    * http method: GET
-   * List Backup Targets 
+   * List backup targets 
    * Lists backup targets (cluster or object store) configured for a given domain manager.
 
    */
-  rpc listBackupTargets(ListBackupTargetsArg) returns (ListBackupTargetsRet) {
+  rpc listBackupTargets1(ListBackupTargets1Arg) returns (ListBackupTargets1Ret) {
     option (ntnx_api_http) = {
-      GET: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets"
+      GET: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new"
     };
   }
   /*
-   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}
+   * uri: /prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}
    * http method: PUT
    * Update backup target 
-   * Updates the credentials and/or rpo of the given objectstore
+   * Updates the credentials and/or RPO of the given object store.
 
    */
-  rpc updateBackupTargetById(UpdateBackupTargetByIdArg) returns (UpdateBackupTargetByIdRet) {
+  rpc updateBackupTargetById1(UpdateBackupTargetById1Arg) returns (UpdateBackupTargetById1Ret) {
     option (ntnx_api_http) = {
-      PUT: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}"
+      PUT: "/prism/v4/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}"
     };
   }
 }
 
 /*
- * message containing all attributes expected in the createBackupTarget request
+ * message containing all attributes expected in the createBackupTarget1 request
  */
-message CreateBackupTargetArg {
+message CreateBackupTarget1Arg {
   /*
-   * The unique identifier for the domain manager that is to be restored.
+   * A unique identifier for the domain manager.
 
    */
   string domain_manager_ext_id = 31001;
   /*
-   * Creates a cluster or object store as backup target on which the backup is required to be
-stored. The maximum allowed backup targets at a given moment  for cluster is 3 and for object store is 1.
-If any one of the cluster/object store does not qualify for backup, then the API will fail.
+   * Creates a cluster or object store as the backup target. For a given Prism Central,
+there can be up to 3 clusters as backup targets 
+and 1 object store as backup target. If any cluster or object store is not eligible for backup or 
+lacks appropriate permissions, the API request will fail. 
+For object store backup targets, specifying backup policy is mandatory along 
+with the location of the object store.
 
    */
   proto3.prism.v4.management.BackupTarget body = 31002;
 }
 
 /*
- * message containing all attributes expected in the createBackupTarget response
+ * message containing all attributes expected in the createBackupTarget1 response
  */
-message CreateBackupTargetRet {
+message CreateBackupTarget1Ret {
   /*
    * field containing expected response content
    */
@@ -129,11 +132,11 @@ message CreateBackupTargetRet {
   map<string, string> reserved = 1000;
 }
 /*
- * message containing all attributes expected in the deleteBackupTargetById request
+ * message containing all attributes expected in the deleteBackupTargetById1 request
  */
-message DeleteBackupTargetByIdArg {
+message DeleteBackupTargetById1Arg {
   /*
-   * The unique identifier for the domain manager that is to be restored.
+   * A unique identifier for the domain manager.
 
    */
   string domain_manager_ext_id = 31001;
@@ -145,9 +148,9 @@ message DeleteBackupTargetByIdArg {
 }
 
 /*
- * message containing all attributes expected in the deleteBackupTargetById response
+ * message containing all attributes expected in the deleteBackupTargetById1 response
  */
-message DeleteBackupTargetByIdRet {
+message DeleteBackupTargetById1Ret {
   /*
    * field containing expected response content
    */
@@ -158,11 +161,11 @@ message DeleteBackupTargetByIdRet {
   map<string, string> reserved = 1000;
 }
 /*
- * message containing all attributes expected in the getBackupTargetById request
+ * message containing all attributes expected in the getBackupTargetById1 request
  */
-message GetBackupTargetByIdArg {
+message GetBackupTargetById1Arg {
   /*
-   * The unique identifier for the domain manager that is to be restored.
+   * A unique identifier for the domain manager.
 
    */
   string domain_manager_ext_id = 31001;
@@ -174,9 +177,9 @@ message GetBackupTargetByIdArg {
 }
 
 /*
- * message containing all attributes expected in the getBackupTargetById response
+ * message containing all attributes expected in the getBackupTargetById1 response
  */
-message GetBackupTargetByIdRet {
+message GetBackupTargetById1Ret {
   /*
    * field containing expected response content
    */
@@ -187,20 +190,20 @@ message GetBackupTargetByIdRet {
   map<string, string> reserved = 1000;
 }
 /*
- * message containing all attributes expected in the listBackupTargets request
+ * message containing all attributes expected in the listBackupTargets1 request
  */
-message ListBackupTargetsArg {
+message ListBackupTargets1Arg {
   /*
-   * The unique identifier for the domain manager that is to be restored.
+   * A unique identifier for the domain manager.
 
    */
   string domain_manager_ext_id = 31001;
 }
 
 /*
- * message containing all attributes expected in the listBackupTargets response
+ * message containing all attributes expected in the listBackupTargets1 response
  */
-message ListBackupTargetsRet {
+message ListBackupTargets1Ret {
   /*
    * field containing expected response content
    */
@@ -211,11 +214,11 @@ message ListBackupTargetsRet {
   map<string, string> reserved = 1000;
 }
 /*
- * message containing all attributes expected in the updateBackupTargetById request
+ * message containing all attributes expected in the updateBackupTargetById1 request
  */
-message UpdateBackupTargetByIdArg {
+message UpdateBackupTargetById1Arg {
   /*
-   * The unique identifier for the domain manager that is to be restored.
+   * A unique identifier for the domain manager.
 
    */
   string domain_manager_ext_id = 31001;
@@ -225,16 +228,16 @@ message UpdateBackupTargetByIdArg {
    */
   string ext_id = 31002;
   /*
-   * Updates the credentials and/or rpo of the given objectstore
+   * Updates the credentials and/or RPO of the given object store.
 
    */
   proto3.prism.v4.management.BackupTarget body = 31003;
 }
 
 /*
- * message containing all attributes expected in the updateBackupTargetById response
+ * message containing all attributes expected in the updateBackupTargetById1 response
  */
-message UpdateBackupTargetByIdRet {
+message UpdateBackupTargetById1Ret {
   /*
    * field containing expected response content
    */

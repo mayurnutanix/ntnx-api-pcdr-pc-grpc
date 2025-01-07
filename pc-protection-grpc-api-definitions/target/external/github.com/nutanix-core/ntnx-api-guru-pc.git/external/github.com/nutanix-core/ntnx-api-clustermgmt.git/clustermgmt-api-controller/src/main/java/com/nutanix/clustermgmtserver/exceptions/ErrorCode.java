@@ -15,7 +15,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ErrorCode {
 
-  CLUSTERMGMT_SERVICE_RPC_ERROR(10001, "Cluster Management service error"),
+  CLUSTERMGMT_SERVICE_ERROR(10001, "Cluster Management service error"),
   CLUSTERMGMT_SERVICE_RETRY(10002,
     "Failed while retrying to reach Cluster Management service"),
   CLUSTERMGMT_IDEMPOTENCY_ERROR(10003, "Empty/invalid request id header"),

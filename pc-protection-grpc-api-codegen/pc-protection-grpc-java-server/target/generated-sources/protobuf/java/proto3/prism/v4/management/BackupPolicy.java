@@ -5,7 +5,7 @@ package proto3.prism.v4.management;
 
 /**
  * <pre>
- * Backup policy for the object store provided defining the rpo etc.
+ * Backup policy for the object store provided.
  * </pre>
  *
  * Protobuf type {@code proto3.prism.v4.management.BackupPolicy}
@@ -261,7 +261,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Backup policy for the object store provided defining the rpo etc.
+   * Backup policy for the object store provided.
    * </pre>
    *
    * Protobuf type {@code proto3.prism.v4.management.BackupPolicy}

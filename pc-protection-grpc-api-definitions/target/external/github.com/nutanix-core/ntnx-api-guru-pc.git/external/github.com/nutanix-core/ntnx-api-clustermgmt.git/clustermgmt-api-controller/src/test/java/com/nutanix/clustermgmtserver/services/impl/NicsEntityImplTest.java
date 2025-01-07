@@ -14,6 +14,7 @@ import dp1.clu.clustermgmt.v4.config.VirtualNic;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -155,6 +156,8 @@ public class NicsEntityImplTest extends ClusterServiceImplTest {
 
   @Test
   public void getAllHostNicsTest() throws Exception {
+    List<String> supportedCapabilitiesList = new ArrayList<>();
+    supportedCapabilitiesList.add("test_supported_capabilities");
     when(entityDbProxy.doExecute(eq(EntityDbProxyImpl.EntityDbRpcName.GET_ENTITIES), any()))
       .thenReturn(HostTestUtils.getHostNicIdfEntityObj(HostTestUtils.HOST_UUID, HostTestUtils.HOST_NICS_UUID));
     when(entityDbProxy.doExecute(eq(EntityDbProxyImpl.EntityDbRpcName.GET_ENTITIES_WITH_METRICS), any()))
@@ -162,6 +165,15 @@ public class NicsEntityImplTest extends ClusterServiceImplTest {
       .thenReturn(HostTestUtils.getNetworkSwitchIntfIdfEntityMetricObj());
     Pair<Integer, List<HostNic>> response = clusterService.getAllHostNics(2, 1, null, "name", null);
     assertEquals(response.right().get(0).getExtId(), HostTestUtils.HOST_NICS_UUID);
+    assertEquals(response.right().get(0).getExtId(), HostTestUtils.HOST_NICS_UUID);
+    assertEquals(response.right().get(0).getClusterUuid(), HostTestUtils.CLUSTER_UUID);
+    assertEquals(response.right().get(0).getNicProfileId(), "test_nic_profile_id");
+    Long linkCapacityInMbps = response.right().get(0).getLinkCapacityInMbps();
+    Long val = Long.valueOf(10);
+    assertEquals(linkCapacityInMbps, val);
+    assertEquals(response.right().get(0).getSupportedCapabilitiesList(), supportedCapabilitiesList);
+    assertEquals(response.right().get(0).getDriverVersion(), "test_driver_version");
+    assertEquals(response.right().get(0).getFirmwareVersion(), "test_firmware_version");
   }
 
   @Test

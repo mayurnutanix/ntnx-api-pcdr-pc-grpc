@@ -9,7 +9,7 @@ public class ClustermgmtServiceUnavailableException extends ClustermgmtServiceEx
 
   @Override
   public int getStandardCode() {
-    return ErrorCode.CLUSTERMGMT_SERVICE_RPC_ERROR.getStandardCode();
+    return ErrorCode.CLUSTERMGMT_SERVICE_ERROR.getStandardCode();
   }
 
   @Override

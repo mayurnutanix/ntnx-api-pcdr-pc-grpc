@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -68,11 +68,11 @@ public class ErrorResponse implements java.io.Serializable, PriObjectTypeTypedOb
 
 
   protected String initialize$fv() {
-    return "v4.r0.b1";
+    return "v4.r0";
   }
 
   @JsonAnySetter
-  private void setUndeserializedFields(String name, String value) {
+  private void setUndeserializedFields(String name, Object value) {
     $unknownFields.put(name, value);
   }
 

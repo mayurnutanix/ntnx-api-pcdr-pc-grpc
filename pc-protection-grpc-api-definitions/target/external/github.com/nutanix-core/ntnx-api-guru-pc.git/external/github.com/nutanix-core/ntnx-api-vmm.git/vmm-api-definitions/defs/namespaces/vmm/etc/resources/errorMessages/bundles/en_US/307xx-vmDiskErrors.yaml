@@ -86,3 +86,24 @@
   arguments:
     - operation
     - vm_uuid
+- code: 30709
+  errorGroup: VG_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}',
+    as the Volume Group with UUID '{{{vg_uuid}}}' is not found.
+  arguments:
+    - operation
+    - vm_uuid
+    - vg_uuid
+- code: 30710
+  errorGroup: ENTITY_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}', because Volume Group 
+    with UUID '{{{vg_uuid}}}' and Volume disk with UUID '{{{volume_disk_uuid}}}' are not associated with each other.
+  arguments:
+    - operation
+    - vm_uuid
+    - volume_disk_uuid
+    - vg_uuid

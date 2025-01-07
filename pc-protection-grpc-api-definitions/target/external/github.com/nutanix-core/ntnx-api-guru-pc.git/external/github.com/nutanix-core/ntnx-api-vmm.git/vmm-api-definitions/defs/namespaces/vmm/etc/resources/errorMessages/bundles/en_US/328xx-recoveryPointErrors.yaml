@@ -29,3 +29,88 @@
   arguments:
     - vm_uuid
     - vm_recovery_point_uuid
+- code: 32804
+  errorGroup: ENTITY_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to revert the VM with UUID '{{{vm_uuid}}}' because the VM recovery
+    point with UUID '{{{vm_recovery_point_uuid}}}' is not associated with
+    the VM.
+  arguments:
+    - vm_uuid
+    - vm_recovery_point_uuid
+- code: 32805
+  errorGroup: ETAG_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM recovery point with UUID '{{{vm_recovery_point_uuid}}}' and
+    If-Match header value passed '{{{request_etag}}}' because it doesn't match
+    the current value in the server '{{{current_etag}}}'.
+  arguments:
+    - vm_recovery_point_uuid
+    - request_etag
+    - current_etag
+- code: 32810
+  errorGroup: VM_RECOVERY_POINT_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM recovery point with UUID '{{{vm_recovery_point_uuid}}}', because
+    it is not found.
+  arguments:
+    - vm_recovery_point_uuid
+- code: 32811
+  errorGroup: INVALID_ARGUMENT
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM recovery point with UUID '{{{vm_recovery_point_uuid}}}', due to
+    an invalid argument with key '{{{argument_key}}}' and value '{{{argument_value}}}'.
+  arguments:
+    - vm_recovery_point_uuid
+    - argument_key
+    - argument_value
+- code: 32812
+  errorGroup: VM_RECOVERY_POINT_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}', 
+    because VM recovery point with UUID '{{{vm_recovery_point_uuid}}}' is not found.
+  arguments:
+    - operation
+    - vm_uuid
+    - vm_recovery_point_uuid
+- code: 32813
+  errorGroup: ENTITY_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}', 
+    because VM disk recovery point with UUID '{{{disk_recovery_point_uuid}}}' and 
+    VM recovery point with UUID '{{{vm_recovery_point_uuid}}}' are not associated with each other.
+  arguments:
+    - operation
+    - vm_uuid
+    - disk_recovery_point_uuid
+    - vm_recovery_point_uuid
+- code: 32814
+  errorGroup: VG_RECOVERY_POINT_NOT_FOUND_ERROR
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}', 
+    because Volume Group recovery point with UUID '{{{vg_recovery_point_uuid}}}' is not found.
+  arguments:
+    - operation
+    - vm_uuid
+    - vg_recovery_point_uuid
+- code: 32815
+  errorGroup: ENTITY_MISMATCH
+  severity: ERROR
+  message: >
+    Failed to perform the operation '{{{operation}}}' on the VM with UUID '{{{vm_uuid}}}', 
+    because Volume disk recovery point with UUID '{{{disk_recovery_point_uuid}}}' and 
+    Volume Group recovery point with UUID '{{{vg_recovery_point_uuid}}}' are not associated with each other.
+  arguments:
+    - operation
+    - vm_uuid
+    - disk_recovery_point_uuid
+    - vg_recovery_point_uuid
+
+

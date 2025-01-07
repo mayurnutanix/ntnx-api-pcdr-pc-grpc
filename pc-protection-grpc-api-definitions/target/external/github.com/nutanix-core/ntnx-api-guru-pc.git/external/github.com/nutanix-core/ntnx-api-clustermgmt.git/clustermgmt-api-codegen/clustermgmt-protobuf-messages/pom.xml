@@ -4,7 +4,7 @@
     <parent>
         <artifactId>clustermgmt-api-codegen</artifactId>
         <groupId>com.nutanix.nutanix-core.ntnx-api.clustermgmt</groupId>
-        <version>16.9.0-SNAPSHOT</version>
+        <version>17.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

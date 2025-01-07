@@ -9,7 +9,7 @@ public interface S3ConfigOrBuilder extends
 
   /**
    * <pre>
-   * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+   * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
    * </pre>
    *
    * <code>string bucket_name = 1000;</code>
@@ -18,7 +18,7 @@ public interface S3ConfigOrBuilder extends
   java.lang.String getBucketName();
   /**
    * <pre>
-   * The bucket name of the object store endpoint where backup data of domain manager is stored. 
+   * The bucket name of the object store endpoint where backup data of domain manager is to be stored. 
    * </pre>
    *
    * <code>string bucket_name = 1000;</code>

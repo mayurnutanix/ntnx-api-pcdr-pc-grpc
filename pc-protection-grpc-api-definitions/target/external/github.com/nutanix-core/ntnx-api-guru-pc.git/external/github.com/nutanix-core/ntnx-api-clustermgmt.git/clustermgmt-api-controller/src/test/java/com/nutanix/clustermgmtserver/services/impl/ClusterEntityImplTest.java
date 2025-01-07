@@ -279,7 +279,7 @@ public class ClusterEntityImplTest extends ClusterServiceImplTest {
             "\"service_list\":[\"AOS\", \"ONE_NODE\"],\"timezone\":[\"UTC\"],\"redundancy_factor\":[2]," +
             "\"clusterArch\":null,\"remoteSupport\":null,\"operationMode\":null,\"isLts\":null,\"clusterProfileExtId\":null," +
             "\"tenantId\":null,\"_cluster_uuid_\":[\"5cafbb40-dfd4-4eaf-ac8d-5ff91a230c7a\"]," +
-            "\"storage_summary\":{\"cluster_fault_tolerant_capacity\":[\"-1\"]," +
+            "\"storage_summary\":{\"cluster_fault_tolerant_capacity\":[\"5234725238178\"]," +
             "\"storagesummary_tenantId\":null,\"extId\":null}}]," +
             "\"filtered_entity_count\":1,\"total_entity_count\":9}";
 
@@ -294,7 +294,7 @@ public class ClusterEntityImplTest extends ClusterServiceImplTest {
             .thenReturn(ClusterTestUtils.buildGetEntitiesWithMetricsRetForManagementServer(ClusterTestUtils.CLUSTER_UUID));
     when(multiClusterZeusConfig.getZeusConfiguration(any())).thenReturn(ClusterTestUtils.buildZeusConfiguration());
     ClusterProjection cluster = (ClusterProjection) clusterService.getClusterEntity(ClusterTestUtils.CLUSTER_UUID, "storageSummary");
-    assertEquals(cluster.getStorageSummaryProjection().getClusterFaultTolerantCapacity(), new Integer(-1));
+    assertEquals(cluster.getStorageSummaryProjection().getClusterFaultTolerantCapacityInBytes(), new Long("5234725238178"));
   }
 
   /* UTs for PUT Update Cluster */
@@ -409,6 +409,14 @@ public class ClusterEntityImplTest extends ClusterServiceImplTest {
     when(cmsProxy.doExecute(eq(CMSProxyImpl.CMSRpcName.CREATE_CLUSTER), any(), any()))
       .thenReturn(ClusterTestUtils.getClusterCreateRet());
     Cluster clusterCreateParams6 = ClusterTestUtils.getClusterCreateParams(false, false, false, false,false, true);
+    clusterService.clusterCreate(clusterCreateParams6, ClusterTestUtils.TASK_UUID,true);
+  }
+
+  @Test(expectedExceptions = ClustermgmtServiceException.class)
+  public void clusterCreateTestInCaseOfValidationExceptions7() throws Exception {
+    when(cmsProxy.doExecute(eq(CMSProxyImpl.CMSRpcName.CREATE_CLUSTER), any(), any()))
+      .thenReturn(ClusterTestUtils.getClusterCreateRet());
+    Cluster clusterCreateParams6 = ClusterTestUtils.getClusterCreateParamsWithNameServerFqdn();
     clusterService.clusterCreate(clusterCreateParams6, ClusterTestUtils.TASK_UUID,true);
   }
   /* UTs for DELETE Destroy Cluster */

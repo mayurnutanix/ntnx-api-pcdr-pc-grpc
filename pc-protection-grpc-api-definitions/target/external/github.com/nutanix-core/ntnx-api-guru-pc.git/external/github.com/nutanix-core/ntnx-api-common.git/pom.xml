@@ -4,11 +4,11 @@
 
   <groupId>com.nutanix.nutanix-core.ntnx-api.common</groupId>
   <artifactId>common</artifactId>
-  <version>16.9.0-SNAPSHOT</version>
+  <version>17.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
-    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
+    <openapi-dev-platform.version>17.0.0.8486-RELEASE</openapi-dev-platform.version>
     <swagger-codegen-version>3.0.10</swagger-codegen-version>
     <swagger-parser-version>2.0.12</swagger-parser-version>
     <api.defs>common-api-definitions</api.defs>
@@ -34,7 +34,7 @@
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>1.18.4</version>
-    </dependency>
+    </dependency>       
   </dependencies>
 
   <modules>

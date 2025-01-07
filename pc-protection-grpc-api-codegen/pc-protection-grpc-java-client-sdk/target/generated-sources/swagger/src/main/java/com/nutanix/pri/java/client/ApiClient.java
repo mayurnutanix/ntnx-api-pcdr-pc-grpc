@@ -59,6 +59,10 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.text.ParseException;
 import java.time.Duration;
 import java.util.*;
@@ -67,6 +71,7 @@ import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.lang.reflect.Method;
 
 import com.nutanix.pri.java.client.auth.Authentication;
 import com.nutanix.pri.java.client.auth.HttpBasicAuth;
@@ -77,7 +82,7 @@ import com.nutanix.pri.java.client.auth.OAuth;
 import javax.net.ssl.SSLContext;
 
 @Slf4j
-@javax.annotation.Generated(value = "com.nutanix.swagger.codegen.generators.JavaClientSDKGenerator", date = "2024-09-12T19:29:24.159+05:30[Asia/Kolkata]")@Component("com.nutanix.pri.java.client.ApiClient")
+@javax.annotation.Generated(value = "com.nutanix.swagger.codegen.generators.JavaClientSDKGenerator", date = "2025-01-06T14:24:28.197+05:30[Asia/Kolkata]")@Component("com.nutanix.pri.java.client.ApiClient")
 public class ApiClient {
     public enum CollectionFormat {
         CSV(","), TSV("\t"), SSV(" "), PIPES("|"), MULTI(null);
@@ -100,16 +105,16 @@ public class ApiClient {
 
     private final long DEFAULT_CONNECT_TIMEOUT = 30000;
 
-    private final long MAX_DEFAULT_TIMEOUT = 1800000;
-    
+    private final long MAX_DEFAULT_TIMEOUT = 10800000;
+
     private boolean debugging = false;
-    
+
     private HttpHeaders defaultHeaders = new HttpHeaders();
 
     private String cookie;
 
     private boolean refreshCookie = true;
-    
+
     private String scheme = "https";
 
     private String host = "localhost";
@@ -133,13 +138,15 @@ public class ApiClient {
     private HttpStatus statusCode;
 
     private MultiValueMap<String, String> responseHeaders;
-    
+
     private DateFormat dateFormat;
 
     private String downloadDirectory = Paths.get("").toAbsolutePath().toString();
 
     private final Set<String> binaryMediaTypes = new HashSet<>(Arrays.asList
         ("application/octet-stream", "application/pdf", "application/zip"));
+    private final Set<String> textMediaTypes = new HashSet<>(Arrays.asList
+        ("text/event-stream", "text/html", "text/xml", "text/csv", "text/javascript", "text/markdown", "text/vcard"));
 
     /**
      * Flag to check if mTLS is configured
@@ -160,7 +167,7 @@ public class ApiClient {
         this.retryTemplate = buildRetryTemplate();
         init();
     }
-    
+
     @Autowired
     public ApiClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -177,7 +184,7 @@ public class ApiClient {
         this.dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         // Set default User-Agent.
-        addDefaultHeader("User-Agent", "Nutanix-pc_protection_pc_client-java-client/0.0.1-SNAPSHOT");
+        addDefaultHeader("User-Agent", "Nutanix-pc_protection_pc_client-java-client/17.0.0-SNAPSHOT");
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications = new HashMap<String, Authentication>();
@@ -527,7 +534,7 @@ public class ApiClient {
         this.dateFormat = dateFormat;
         return this;
     }
-    
+
     /**
      * Parse the given string into Date object.
      * @param str date to parse
@@ -550,6 +557,21 @@ public class ApiClient {
         return dateFormat.format(date);
     }
 
+    /**
+    * Format the given OffsetDateTime object into string.
+    * @param OffsetDateTime dateTime to format
+    * @return String formatted dateTime
+    */
+    public String formatOffsetDateTime(OffsetDateTime dateTime) {
+        DateTimeFormatter ISO_8601_FORMATTER = DateTimeFormatter
+        .ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+        .withZone(ZoneId.of("UTC"));
+        if(dateTime.getOffset().equals(ZoneOffset.UTC)) {
+            return ISO_8601_FORMATTER.format(dateTime);
+        }
+        return dateTime.toString();
+    }
+
         /**
      * Format the given parameter object into string.
      * @param param the object to convert
@@ -558,6 +580,9 @@ public class ApiClient {
     public String parameterToString(Object param) {
         if (param == null) {
             return "";
+        }
+        else if (param instanceof OffsetDateTime) {
+            return formatOffsetDateTime( (OffsetDateTime) param);
         }
         else if (param instanceof Date) {
             return formatDate( (Date) param);
@@ -747,7 +772,7 @@ public class ApiClient {
         if (queryParams != null) {
             builder.queryParams(queryParams);
         }
-        
+
         final BodyBuilder requestBuilder = RequestEntity.method(method, builder.build().toUri());
         if(accept != null && !headerParams.containsKey(HttpHeaders.ACCEPT)) {
             requestBuilder.accept(accept.toArray(new MediaType[accept.size()]));
@@ -788,8 +813,11 @@ public class ApiClient {
         AtomicReference<T> body = new AtomicReference<>();
         retryTemplate.execute(context -> {
             try {
+                restTemplate.getMessageConverters().removeIf(element -> element instanceof CustomTextHttpMessageConverter<?>);
+                restTemplate.getMessageConverters().add(new CustomTextHttpMessageConverter<T>(returnType, textMediaTypes));
                 ResponseEntity<T> responseEntity = restTemplate.exchange(requestEntity, returnType);
                 statusCode = responseEntity.getStatusCode();
+                responseEntity = handleRedirection(responseEntity, requestEntity, returnType, body);
                 if (responseEntity.getBody() instanceof OneOfBinaryResponseWrapper) {
                     OneOfBinaryResponseWrapper responseWrapper = (OneOfBinaryResponseWrapper) responseEntity.getBody();
                     responseWrapper.setResponseEntity(responseEntity);
@@ -809,6 +837,27 @@ public class ApiClient {
         });
 
         return body.get();
+    }
+
+    private <T> ResponseEntity<T> handleRedirection(ResponseEntity<T> responseEntity, RequestEntity<Object> originalRequestEntity, ParameterizedTypeReference<T> returnType, AtomicReference<T> body) {
+        if (statusCode.is3xxRedirection() && responseEntity.getHeaders() != null && responseEntity.getHeaders().getLocation() != null) {
+            String location = responseEntity.getHeaders().getLocation().toString();
+            log.info("Redirecting to {}", location);
+            UriComponentsBuilder builder = UriComponentsBuilder.newInstance().fromPath(location);
+            builder.query(originalRequestEntity.getUrl().getQuery());
+            BodyBuilder requestBuilder = RequestEntity.method(originalRequestEntity.getMethod(), location);
+            requestBuilder.body(originalRequestEntity.getBody());
+            if (responseEntity.getHeaders().containsKey("X-Redirect-Token")) {
+                log.info("Populating X-Redirect-Token header to Cookie");
+                String cookie = responseEntity.getHeaders().get("X-Redirect-Token").toString();
+                requestBuilder.header(HttpHeaders.COOKIE, cookie);
+            }
+            requestBuilder.headers(originalRequestEntity.getHeaders());
+            responseEntity = restTemplate.exchange(requestBuilder.build(), returnType);
+            statusCode = responseEntity.getStatusCode();
+            log.debug("Redirected response status code: {}", statusCode);
+        }
+        return responseEntity;
     }
 
     public Map<String, Object> getFileDownloadResponse(Resource resource, HttpHeaders headers) throws IOException {
@@ -938,7 +987,7 @@ public class ApiClient {
         if (isMTLSConfigured) {
             try {
                 SSLConnectionSocketFactory sslConnectionSocketFactory = mTLSConfig.getSSLConnectionSocket();
-                CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).disableCookieManagement().build();
+                CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).disableCookieManagement().disableRedirectHandling().build();
                 restTemplateBuilder = restTemplateBuilder.requestFactory(() -> new HttpComponentsClientHttpRequestFactory(httpClient));
             } catch (Exception e) {
                 log.error("Failed to configure mTLS settings", e);
@@ -952,7 +1001,7 @@ public class ApiClient {
                                                                    .build();
                 SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslContext,
                                                                                          new NoopHostnameVerifier());
-                CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslSocketFactory).disableCookieManagement().build();
+                CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslSocketFactory).disableCookieManagement().disableRedirectHandling().build();
                 restTemplateBuilder = restTemplateBuilder.requestFactory(() -> new HttpComponentsClientHttpRequestFactory(httpClient));
             } catch (NoSuchAlgorithmException | KeyStoreException | KeyManagementException e) {
                 String message = "Cannot disable SSL Verification, perform setVerifySsl(true) or retry";
@@ -1170,6 +1219,58 @@ public class ApiClient {
         protected void writeInternal(OneOfBinaryResponseWrapper oneOfBinaryResponseWrapper,
                 HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
             // This is without any implementation as this converter is only for GET operations.
+        }
+    }
+
+    public static class CustomTextHttpMessageConverter<T> extends AbstractHttpMessageConverter<T> {
+        private final Class<T> clazz;
+
+        public CustomTextHttpMessageConverter(ParameterizedTypeReference<T> typeRef, Set<String> supportedTextMediaTypes) {
+            // This converter is only for text responses
+            List<MediaType> supportedMediaTypes = supportedTextMediaTypes.stream()
+                .map(type -> MediaType.parseMediaType(type)).collect(Collectors.toList());
+            setSupportedMediaTypes(supportedMediaTypes);
+            this.clazz = (Class<T>) typeRef.getType();
+        }
+
+        @Override
+        protected boolean supports(Class<?> clazz) {
+            return clazz.isAssignableFrom(this.clazz);
+        }
+
+        @Override
+        protected T readInternal(Class<? extends T> clazz, HttpInputMessage inputMessage)
+        throws IOException {
+            try {
+                // Capture the text content from the input stream as byte[]
+                byte[] textData = readBytesFromBody(inputMessage.getBody());
+                T instance = clazz.getDeclaredConstructor().newInstance();
+
+                // Set the "data" field with the raw byte[] content
+                Method setDataMethod = instance.getClass().getMethod("setDataInWrapper", Object.class);
+                setDataMethod.invoke(instance, textData);
+
+                return instance;
+            } catch (Exception e) {
+                throw new IOException("Error reading text data", e);
+            }
+        }
+
+        @Override
+        protected void writeInternal(T t, HttpOutputMessage outputMessage) throws IOException {
+            // Implement for use cases involving writing text data
+        }
+
+        private byte[] readBytesFromBody(InputStream body) throws IOException {
+            try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); InputStream inputStream = body) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    byteArrayOutputStream.write(buffer, 0, bytesRead);
+                }
+                return byteArrayOutputStream.toByteArray();
+            }
         }
     }
 

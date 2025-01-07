@@ -1,0 +1,7 @@
+port: 8888
+backendServices:
+  - name: backupService
+    environments:
+      - platform: pc
+        port: 8555
+        host: localhost

@@ -5,14 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <groupId>com.nutanix.nutanix-core.ntnx-api.pcdr-pc-grpc</groupId>
-  <version>0.0.1-SNAPSHOT</version>
-  <artifactId>pc-grpc</artifactId>
+  <version>17.0.0-SNAPSHOT</version>
+  <artifactId>pcdr-pc-grpc</artifactId>
   <name>PC Protection</name>
 
   <properties>
-    <service-parent.version>16.9.0.2187-RELEASE</service-parent.version>
-    <openapi-dev-platform.version>16.9.0.8055-RELEASE</openapi-dev-platform.version>
-    <platform-tools.version>16.9.0.368-RELEASE</platform-tools.version>
+    <service-parent.version>17.0.0.2313-RELEASE</service-parent.version>
+    <openapi-dev-platform.version>17.0.0.8486-RELEASE</openapi-dev-platform.version>
+    <platform-tools.version>17.0.0.395-RELEASE</platform-tools.version>
     <api.defs>pc-protection-grpc-api-definitions</api.defs>
     <slf4j.test>1.2.0</slf4j.test>
     <java.version>1.8</java.version>

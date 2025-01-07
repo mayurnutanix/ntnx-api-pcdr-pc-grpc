@@ -102,7 +102,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object accessKeyId_;
   /**
    * <pre>
-   * Access key for the object store provided for backup target.
+   * Access key Id for the object store provided for backup target.
    * </pre>
    *
    * <code>string access_key_id = 1000;</code>
@@ -123,7 +123,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Access key for the object store provided for backup target.
+   * Access key Id for the object store provided for backup target.
    * </pre>
    *
    * <code>string access_key_id = 1000;</code>
@@ -148,7 +148,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object secretAccessKey_;
   /**
    * <pre>
-   * Secret access key ID for the object store provided for backup target. 
+   * Secret access key for the object store provided for backup target. 
    * </pre>
    *
    * <code>string secret_access_key = 1001;</code>
@@ -169,7 +169,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * Secret access key ID for the object store provided for backup target. 
+   * Secret access key for the object store provided for backup target. 
    * </pre>
    *
    * <code>string secret_access_key = 1001;</code>
@@ -516,7 +516,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object accessKeyId_ = "";
     /**
      * <pre>
-     * Access key for the object store provided for backup target.
+     * Access key Id for the object store provided for backup target.
      * </pre>
      *
      * <code>string access_key_id = 1000;</code>
@@ -536,7 +536,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Access key for the object store provided for backup target.
+     * Access key Id for the object store provided for backup target.
      * </pre>
      *
      * <code>string access_key_id = 1000;</code>
@@ -557,7 +557,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Access key for the object store provided for backup target.
+     * Access key Id for the object store provided for backup target.
      * </pre>
      *
      * <code>string access_key_id = 1000;</code>
@@ -576,7 +576,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Access key for the object store provided for backup target.
+     * Access key Id for the object store provided for backup target.
      * </pre>
      *
      * <code>string access_key_id = 1000;</code>
@@ -590,7 +590,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Access key for the object store provided for backup target.
+     * Access key Id for the object store provided for backup target.
      * </pre>
      *
      * <code>string access_key_id = 1000;</code>
@@ -612,7 +612,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object secretAccessKey_ = "";
     /**
      * <pre>
-     * Secret access key ID for the object store provided for backup target. 
+     * Secret access key for the object store provided for backup target. 
      * </pre>
      *
      * <code>string secret_access_key = 1001;</code>
@@ -632,7 +632,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Secret access key ID for the object store provided for backup target. 
+     * Secret access key for the object store provided for backup target. 
      * </pre>
      *
      * <code>string secret_access_key = 1001;</code>
@@ -653,7 +653,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Secret access key ID for the object store provided for backup target. 
+     * Secret access key for the object store provided for backup target. 
      * </pre>
      *
      * <code>string secret_access_key = 1001;</code>
@@ -672,7 +672,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Secret access key ID for the object store provided for backup target. 
+     * Secret access key for the object store provided for backup target. 
      * </pre>
      *
      * <code>string secret_access_key = 1001;</code>
@@ -686,7 +686,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     * Secret access key ID for the object store provided for backup target. 
+     * Secret access key for the object store provided for backup target. 
      * </pre>
      *
      * <code>string secret_access_key = 1001;</code>

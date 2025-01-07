@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="maven-antrun-" default="main"  >
 <target name="main">
-  <copy flatten="false" todir="/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/target/pc-protection-grpc-protobuf-services/">
-    <fileset dir="/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/../pc-protection-grpc-protobuf-services/target/generated-sources/swagger/">
+  <copy flatten="false" todir="/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/target/pc-protection-grpc-protobuf-services/">
+    <fileset dir="/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/../pc-protection-grpc-protobuf-services/target/generated-sources/swagger/">
       <include name="**/*.proto"/>
     </fileset>
   </copy>
-  <copy flatten="false" todir="/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/target/pc-protection-grpc-protobuf-services/">
-    <fileset dir="/Users/mayur.ramavat/pcdr_intellij/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/../pc-protection-grpc-protobuf-messages/target/generated-sources/swagger/">
+  <copy flatten="false" todir="/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/target/pc-protection-grpc-protobuf-services/">
+    <fileset dir="/Users/shyam.sodankoor/Nutanix/pcdr/ntnx-api-pcdr-pc-grpc/pc-protection-grpc-api-codegen/pc-protection-grpc-java-server/../pc-protection-grpc-protobuf-messages/target/generated-sources/swagger/">
       <include name="**/*.proto"/>
     </fileset>
   </copy>

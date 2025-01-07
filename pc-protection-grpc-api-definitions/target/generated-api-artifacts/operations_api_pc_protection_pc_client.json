@@ -6,11 +6,11 @@
   "serviceName" : "Prism",
   "associatedEndpointList" : [ {
     "APIVersion" : "V4",
-    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets-new",
     "HttpMethod" : "GET"
   }, {
     "APIVersion" : "V4",
-    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}",
     "HttpMethod" : "GET"
   } ],
   "isInternal" : false,
@@ -25,7 +25,7 @@
   "serviceName" : "Prism",
   "associatedEndpointList" : [ {
     "APIVersion" : "V4",
-    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets-new",
     "HttpMethod" : "POST"
   } ],
   "relatedOperationList" : [ "Clustermgmt:View_Cluster" ],
@@ -41,7 +41,7 @@
   "serviceName" : "Prism",
   "associatedEndpointList" : [ {
     "APIVersion" : "V4",
-    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}",
     "HttpMethod" : "PUT"
   } ],
   "relatedOperationList" : [ "Prism:View_Domain_Manager_Backup_Target" ],
@@ -57,7 +57,7 @@
   "serviceName" : "Prism",
   "associatedEndpointList" : [ {
     "APIVersion" : "V4",
-    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+    "EndpointURL" : "/management/domain-managers/{domainManagerExtId}/backup-targets-new/{extId}",
     "HttpMethod" : "DELETE"
   } ],
   "relatedOperationList" : [ "Prism:View_Domain_Manager_Backup_Target" ],

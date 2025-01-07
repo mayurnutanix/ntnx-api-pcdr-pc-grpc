@@ -1,11 +1,11 @@
 /*
  * Generated file ..
  *
- * Product version: 0.0.1-SNAPSHOT
+ * Product version: 17.0.0-SNAPSHOT
  *
  * Part of the PC Protection PC Client SDK
  *
- * (c) 2024 Nutanix Inc.  All rights reserved
+ * (c) 2025 Nutanix Inc.  All rights reserved
  *
  */
 
@@ -32,7 +32,7 @@ import static com.nutanix.dp1.pri.deserializers.PriDeserializerUtils.*;
 
 
 /**
- * Backup target for the domain manager, either a cluster or object store.
+ * The backup target for the domain manager, which can be either a cluster or an object store.
  * 
  */
 @EqualsAndHashCode(callSuper=true)
@@ -63,7 +63,7 @@ public class BackupTarget extends com.nutanix.dp1.pri.common.v1.response.Externa
 
   @Override 
   protected String initialize$fv() {
-    return "v4.r0.b1";
+    return "v4.r0";
   }
 
 
@@ -114,7 +114,7 @@ configuration data to the backup target. This field is updated every 30 minutes.
     private String backupPauseReason = null;
   
     /**
-     * Specifies a reason why the backup might have paused. Will be empty if isBackupPaused field is false.
+     * Specifies a reason why the backup might have paused. This will be empty if the isBackupPaused field is false.
 
      */
     public void setBackupPauseReason(String backupPauseReason) {

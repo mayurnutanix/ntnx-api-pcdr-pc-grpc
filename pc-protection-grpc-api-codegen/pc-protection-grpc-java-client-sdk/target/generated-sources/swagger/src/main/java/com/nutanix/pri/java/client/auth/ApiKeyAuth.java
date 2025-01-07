@@ -3,7 +3,7 @@ package com.nutanix.pri.java.client.auth;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-@javax.annotation.Generated(value = "com.nutanix.swagger.codegen.generators.JavaClientSDKGenerator", date = "2024-09-12T19:29:24.159+05:30[Asia/Kolkata]")public class ApiKeyAuth implements Authentication {
+@javax.annotation.Generated(value = "com.nutanix.swagger.codegen.generators.JavaClientSDKGenerator", date = "2025-01-06T14:24:28.197+05:30[Asia/Kolkata]")public class ApiKeyAuth implements Authentication {
     private final String location;
     private final String paramName;
 

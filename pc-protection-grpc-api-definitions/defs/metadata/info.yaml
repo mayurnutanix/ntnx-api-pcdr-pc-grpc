@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: "PC Protection PC Client SDK"
   version: ${project.version}
-  x-repo-name: "pc_protection_pc_client"
+  x-repo-name: "pc_protection_grpc_client"
 security:
   - basicAuthScheme: []
   - apiKeyAuthScheme: []

@@ -110,7 +110,7 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getClusterTestInCaseOfException() throws ClustermgmtServiceException, ValidationException {
-    final ErrorCode errorCode = ErrorCode.CLUSTERMGMT_SERVICE_RPC_ERROR;
+    final ErrorCode errorCode = ErrorCode.CLUSTERMGMT_SERVICE_ERROR;
     final String clusterUuid = TestConstantUtils.randomUUIDString();
     when(clusterService.getClusterEntity(any(), any())).
       thenThrow(new ClustermgmtServiceException("unkmnow cluster uuid: " + clusterUuid));
@@ -123,6 +123,8 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
     List<AppMessage> messageList = (List<AppMessage>) errorResponse.getError();
     final AppMessage appMessage = messageList.get(0);
     assertEquals(appMessage.getCode(), "CLU-" + errorCode.getStandardCode());
+    assertEquals(appMessage.getArgumentsMap().size(), 1);
+    assertEquals(appMessage.getErrorGroup(), "CLUSTERMGMT_SERVICE_ERROR");
     assertTrue(responseData.getData() instanceof ErrorResponse);
   }
 
@@ -152,6 +154,8 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
     List<AppMessage> messageList = (List<AppMessage>) errorResponse.getError();
     final AppMessage appMessage = messageList.get(0);
     assertEquals(appMessage.getCode(), "CLU-" + "10006");
+    assertEquals(appMessage.getArgumentsMap().size(), 1);
+    assertEquals(appMessage.getErrorGroup(), "CLUSTERMGMT_INVALID_INPUT");
     assertTrue(responseData.getData() instanceof ErrorResponse);
   }
 
@@ -168,6 +172,8 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
     List<AppMessage> messageList = (List<AppMessage>) errorResponse.getError();
     final AppMessage appMessage = messageList.get(0);
     assertEquals(appMessage.getCode(), "CLU-" + errorCode.getStandardCode());
+    assertEquals(appMessage.getArgumentsMap().size(), 1);
+    assertEquals(appMessage.getErrorGroup(), "CLUSTERMGMT_ZKCONFIG_READ_ERROR");
     assertTrue(responseData.getData() instanceof ErrorResponse);
   }
 
@@ -539,8 +545,8 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getVirtualGpuProfilesTest() throws ClustermgmtServiceException, ValidationException {
-    when(clusterService.listVirtualGpuProfiles(any(), any(), any())).thenReturn(HostTestUtils.getVirtualGpuProfileTest());
-    final List<String> queryStrings = Arrays.asList("$page=0", "$page=-1", "$limit=-1", "$limit=501", "$limit=500");
+    when(clusterService.listVirtualGpuProfiles(any(), any(), any(), any(), any())).thenReturn(HostTestUtils.getVirtualGpuProfileTest());
+    final List<String> queryStrings = Arrays.asList("$page=0", "$page=-1", "$limit=-1", "$limit=501", "$limit=500", "$orderby=deviceId", "$filter=deviceId eq " + HostTestUtils.HOST_VIRTUAL_GPU_DEVICE_ID);
     for(String queryString: queryStrings) {
       ResponseEntity<ListVirtualGpuProfilesApiResponse> getVirtualGpuProfilesResponseResponseEntity =
       testRestTemplate.exchange(CLUSTER_URL + TestConstantUtils.randomUUIDString()
@@ -555,7 +561,7 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getVirtualGpuProfilesTestInCaseOfException() throws ClustermgmtServiceException, ValidationException {
-    when(clusterService.listVirtualGpuProfiles(any(), any(), any())).
+    when(clusterService.listVirtualGpuProfiles(any(), any(), any(), any(), any())).
       thenThrow(new ClustermgmtNotFoundException("some exception"));
     ResponseEntity<ListVirtualGpuProfilesApiResponse> getVirtualGpuProfilesResponseResponseEntity =
     testRestTemplate.exchange(CLUSTER_URL + TestConstantUtils.randomUUIDString()
@@ -567,7 +573,7 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getVirtualGpuProfilesTestInCaseOfValidationException() throws ClustermgmtServiceException, ValidationException {
-    when(clusterService.listVirtualGpuProfiles(any(), any(), any())).
+    when(clusterService.listVirtualGpuProfiles(any(), any(), any(), any(), any())).
       thenThrow(new ValidationException("some exception"));
     ResponseEntity<ListVirtualGpuProfilesApiResponse> getVirtualGpuProfilesResponseResponseEntity =
     testRestTemplate.exchange(CLUSTER_URL + TestConstantUtils.randomUUIDString()
@@ -579,8 +585,8 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getPhysicalGpuProfilesTest() throws ClustermgmtServiceException, ValidationException {
-    when(clusterService.listPhysicalGpuProfiles(any(), any(), any())).thenReturn(HostTestUtils.getPhysicalGpuProfileTest());
-    final List<String> queryStrings = Arrays.asList("$page=0", "$page=-1", "$limit=-1", "$limit=501", "$limit=500");
+    when(clusterService.listPhysicalGpuProfiles(any(), any(), any(), any(), any())).thenReturn(HostTestUtils.getPhysicalGpuProfileTest());
+    final List<String> queryStrings = Arrays.asList("$page=0", "$page=-1", "$limit=-1", "$limit=501", "$limit=500", "$orderby=deviceId", "$filter=deviceId eq " + HostTestUtils.HOST_PHYSICAL_GPU_DEVICE_ID);
     for(String queryString: queryStrings) {
       ResponseEntity<ListPhysicalGpuProfilesApiResponse> getPhysicalGpuProfilesResponseResponseEntity =
         testRestTemplate.exchange(CLUSTER_URL + TestConstantUtils.randomUUIDString()
@@ -595,7 +601,7 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getPhysicalGpuProfilesTestInCaseOfException() throws ClustermgmtServiceException, ValidationException {
-    when(clusterService.listPhysicalGpuProfiles(any(), any(), any())).
+    when(clusterService.listPhysicalGpuProfiles(any(), any(), any(), any(), any())).
       thenThrow(new ClustermgmtNotFoundException("some exception"));
     ResponseEntity<ListPhysicalGpuProfilesApiResponse> getPhysicalGpuProfilesResponseResponseEntity =
       testRestTemplate.exchange(CLUSTER_URL + TestConstantUtils.randomUUIDString()
@@ -607,7 +613,7 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getPhysicalGpuProfilesTestInCaseOfValidationException() throws ClustermgmtServiceException, ValidationException {
-    when(clusterService.listPhysicalGpuProfiles(any(), any(), any())).
+    when(clusterService.listPhysicalGpuProfiles(any(), any(), any(), any(), any())).
       thenThrow(new ValidationException("some exception"));
     ResponseEntity<ListPhysicalGpuProfilesApiResponse> getPhysicalGpuProfilesResponseResponseEntity =
       testRestTemplate.exchange(CLUSTER_URL + TestConstantUtils.randomUUIDString()
@@ -1549,30 +1555,34 @@ public class ClusterApiControllerTest extends AbstractTestNGSpringContextTests {
 
   @Test
   public void getSearchTest() throws ClustermgmtServiceException {
-    when(clusterService.getSearchResponse(any(), any())).thenReturn(new SearchResponse());
-    SearchParams searchParams = new SearchParams();
-    HttpEntity<SearchParams> searchParamsHttpEntity = new HttpEntity<>(
-      searchParams, httpHeaders);
+    when(clusterService.getTaskResponse(any(), any())).thenReturn(new TaskResponse());
     ResponseEntity<FetchTaskApiResponse> searchResponseResponseEntity =
-      testRestTemplate.exchange( "/clustermgmt/v4/config/tasks/" + TestConstantUtils.randomUUIDString() + "/$actions/fetch-task-response",
-        HttpMethod.POST, searchParamsHttpEntity, FetchTaskApiResponse.class);
-    SearchResponse responseData = (SearchResponse) searchResponseResponseEntity.getBody().getData();
+      testRestTemplate.exchange( "/clustermgmt/v4/config/task-response/" + TestConstantUtils.randomUUIDString() + "?taskResponseType=UNCONFIGURED_NODES",
+        HttpMethod.GET, null, FetchTaskApiResponse.class);
+    TaskResponse responseData = (TaskResponse) searchResponseResponseEntity.getBody().getData();
     assertEquals(searchResponseResponseEntity.getStatusCode(), HttpStatus.OK);
   }
 
   @Test
   public void getSearchTestInCaseOfException() throws ClustermgmtServiceException {
-    when(clusterService.getSearchResponse(any(), any())).thenThrow(
+    when(clusterService.getTaskResponse(any(), any())).thenThrow(
       new ClustermgmtServiceException("Unknown task uuid")
     );
-    SearchParams searchParams = new SearchParams();
-    HttpEntity<SearchParams> searchParamsHttpEntity = new HttpEntity<>(
-      searchParams, httpHeaders);
     ResponseEntity<FetchTaskApiResponse> searchResponseResponseEntity =
-      testRestTemplate.exchange( "/clustermgmt/v4/config/tasks/" + TestConstantUtils.randomUUIDString() + "/$actions/fetch-task-response",
-        HttpMethod.POST, searchParamsHttpEntity, FetchTaskApiResponse.class);
+      testRestTemplate.exchange( "/clustermgmt/v4/config/task-response/" + TestConstantUtils.randomUUIDString() + "?taskResponseType=UNCONFIGURED_NODES",
+        HttpMethod.GET, null, FetchTaskApiResponse.class);
     FetchTaskApiResponse responseData = (FetchTaskApiResponse) searchResponseResponseEntity.getBody();
     assertTrue(responseData.getData() instanceof ErrorResponse);
+  }
+
+  @Test
+  public void getSearchTestWhenQueryParamNotPassed() throws ClustermgmtServiceException {
+    when(clusterService.getTaskResponse(any(), any())).thenReturn(new TaskResponse());
+    ResponseEntity<FetchTaskApiResponse> searchResponseResponseEntity =
+      testRestTemplate.exchange( "/clustermgmt/v4/config/task-response/" + TestConstantUtils.randomUUIDString(),
+        HttpMethod.GET, null, FetchTaskApiResponse.class);
+    TaskResponse responseData = (TaskResponse) searchResponseResponseEntity.getBody().getData();
+    assertEquals(searchResponseResponseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
   }
 
   @Test

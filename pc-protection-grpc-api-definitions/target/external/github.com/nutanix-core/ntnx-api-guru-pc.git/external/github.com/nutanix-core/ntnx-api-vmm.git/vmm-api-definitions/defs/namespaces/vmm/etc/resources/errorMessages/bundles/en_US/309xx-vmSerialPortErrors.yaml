@@ -18,3 +18,13 @@
   arguments:
     - vm_uuid
     - serial_port_index
+
+- code: 30902
+  errorGroup: VM_SERIAL_PORT_INDEX_RESERVED
+  severity: ERROR
+  message: >
+    Failed to perform the operation on the VM with UUID '{{{vm_uuid}}}' as the
+    serial port index '{{{serial_port_index}}}' is reserved for internal usage.
+  arguments:
+    - vm_uuid
+    - serial_port_index
